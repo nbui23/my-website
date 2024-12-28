@@ -1,0 +1,225 @@
+\documentclass[letterpaper,10pt]{article}
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+% Page Layout
+\usepackage[top=0.75in, bottom=0.25in, left=0.75in, right=0.75in]{geometry}
+\usepackage{fancyhdr}
+
+% Font and Language
+\usepackage[sfdefault]{noto}
+\usepackage[english]{babel}
+\input{glyphtounicode}
+
+% Formatting and Styling
+\usepackage{titlesec}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{latexsym}
+\usepackage{marvosym}
+\usepackage{verbatim}
+\usepackage[hidelinks]{hyperref}
+
+%----------------------------------------------------------------------------------------
+%	PAGE LAYOUT SETTINGS
+%----------------------------------------------------------------------------------------
+
+% Header and Footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-0.60in}
+\addtolength{\textheight}{1.0in}
+
+% General Settings
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+\pdfgentounicode=1
+
+%----------------------------------------------------------------------------------------
+%	CUSTOM COMMANDS
+%----------------------------------------------------------------------------------------
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-9pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-6pt}]
+
+% Resume Items
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-3.5pt}}
+  }
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+% Resume Headings
+\newcommand{\resumeSubheading}[3]{
+    \item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} $|$ \textit{ #2} & #3 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+% List Environments
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+%----------------------------------------------------------------------------------------
+%	RESUME CONTENT
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+% Header
+\begin{center}
+    {\textbf{\Large NORMAN BUI}} \\ \vspace{1pt}
+    \small Canadian Citizen $|$
+    +1 613-983-3217 $|$
+    \href{mailto:normanbui@cmail.carleton.ca}{normanbui@cmail.carleton.ca} $|$
+    \href{https://www.linkedin.com/in/nbui23/}{{linkedin.com/in/nbui23}} $|$
+    \href{https://github.com/nbui23}{{github.com/nbui23}}
+\end{center}
+
+% Education Section
+\section{\textbf{\Large Education}}
+  \resumeSubHeadingListStart
+  \resumeSubheading
+  {Carleton University}
+  {Bachelor of Computer Science (Honours), \textbf{4.0/4.0 (A+) GPA}}
+  {Expected April 2026}
+      \resumeItemListStart
+        % \resumeItem{Minor in Forensic Psychology}
+        \resumeItem{Awards: Deans' Honour List, President's Scholars, Chalmers Jack Mackenzie, and Henry Marshall Tory Scholarships}
+        \resumeItem{Relevant Coursework: Data Structures \& Algorithms, Discrete Math, Discrete Structures, Operating Systems, OOP, Paradigms, Web Development, Quality Assurance, HCI (UI/UX), Database Management Systems, Statistical Modeling, Linear Algebra, Calculus}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+% Experience Section
+\section{\textbf{\Large Experience}}
+  \resumeSubHeadingListStart
+    \resumeSubheading{Autodesk}{Software Developer Intern $|$ Java, TypeScript, GraphQL}{Jan 2025 - Present}
+        \resumeItemListStart
+            \resumeItem{Working on cloud-based CAD/CAM development for Autodesk's Fusion platform}
+    \resumeItemListEnd
+
+    \resumeSubheading{Public Health Agency of Canada}{Junior Data Scientist $|$ Python, LLM, MDM}{Sep 2024 - Dec 2024}
+      \resumeItemListStart
+        \resumeItem{Developed LLM-powered workflow for epidemiological literature reviews with Imperial College London and the World Health Organization as part of a MDM system to enable standardized research access for global health initiatives}
+        \resumeItem{Conducted comprehensive embedding model evaluation using Ollama to validate existing RAG system performance, confirming optimal configuration and establishing baseline metrics for future improvements}
+        \resumeItem{Researched how to automate academic paper collection using GPT-4o, developing proof-of-concept for scalable PDF retrieval workflow}
+      \resumeItemListEnd
+
+    \resumeSubheading{Kongsberg Geospatial}{Software Engineer Intern $|$ C++, Qt, Python, GIS}{May 2024 - Aug 2024}
+      \resumeItemListStart
+        \resumeItem{Pioneered establishment of Solutions Engineering team as a founding software engineer, developing demos using TerraLens SDK, resulting in successful solution delivery to various major aviation, defence, and government clients}
+        \resumeItem{Integrated LiDAR, WMTS, and S-57 data and optimized render pipeline to achieve \textbf{consistent 60+ FPS} with real-time object tracking, while implementing system monitoring (GPU, CPU, RAM) and modernizing Qt UI/UX}
+        \resumeItem{Developed automated airspace classification framework, removing manual processing and standardizing data categorization}
+        \resumeItem{Automated VFR and terrain data processing workflows, reducing aggregating time by more than \textbf{40\%}}
+      \resumeItemListEnd
+
+    \resumeSubheading{Health Canada}{Data Scientist Intern $|$ Python, ML, NLP, ETL}{Sep 2023 - Dec 2023}
+      \resumeItemListStart
+        \resumeItem{Developed Python solutions for chemical assessment, leading to improved risk data aggregation and analysis}
+        \resumeItem{Built random forest classifiers with pandas, NumPy, SciPy, and scikit-learn to accurately predict chemical toxicity}
+        \resumeItem{Rebuilt organization-wide federated chemical search system using BeautifulSoup4 and lxml, implementing automated fault tolerance and rate limiting that increased query success rate by \textbf{20\%}}
+        \resumeItem{Architected scalable web scraping framework and implemented test-driven development practices using unittest framework, restoring chemical data source integration capability \textbf{by 113\%} and achieving \textbf{100\% test coverage}}
+        \resumeItem{Engineered automated knowledge graph pipeline using Neo4j, CoreNLP, and Stanza to extract semantic triples from medical literature, reducing qualitative data processing time and work}
+      \resumeItemListEnd
+
+    \resumeSubheading{Department of National Defence}{Junior Software Engineer $|$ Python, LLM, RAG}{Jun 2023 - Nov 2023}
+      \resumeItemListStart
+        \resumeItem{Built conversational AI system using GPT-3.5 and Flask, implementing RAG architecture to enable intelligent querying across \textbf{20+ tax documents}}
+        \resumeItem{Developed NLP pipeline using NLTK, integrating tokenization, contextual analysis, and NER to enhance text understanding and information extraction accuracy}
+        \resumeItem{Architected vector search system using FAISS and SQLite3, optimizing embedding storage and retrieval for queries}
+      \resumeItemListEnd
+
+    \resumeSubheading{NAV CANADA}{Software Engineer Intern $|$ C++, Qt, PowerShell, GIS}{May 2023 - Aug 2023}
+      \resumeItemListStart
+        \resumeItem{Developed C++ solutions for various ATC applications, resulting in improved performance and reliability}
+        \resumeItem{Optimized data management algorithm for internal data tool, resulting in a \textbf{60\% decrease} in storage utilization and \textbf{30\% boost} in automated data analysis performance}
+        \resumeItem{Resolved multiple bugs in ATC software, achieving an overall \textbf{improvement of 16\% } in frame rate}
+        \resumeItem{Automated network configurations with PowerShell, reducing manual work and setup time by \textbf{more than 95\%}}
+      \resumeItemListEnd
+
+    \resumeSubheading
+    {Correctional Service Canada}{Junior Software Developer $|$ C\#, .NET, Web Development, QA}{May 2022 - Apr 2023}
+      \resumeItemListStart
+        \resumeItem{Improved web accessibility using the WET framework to ensure WCAG 2.1 Level AA compliance, enhancing UX for \textbf{100+ daily users} in victim services application}
+        % \resumeItem{Resolved document generation errors in Dynamics 365, \textbf{reducing feature downtime}}
+      \resumeItemListEnd
+
+    \resumeSubHeadingListEnd
+
+% Projects Section
+\section{\textbf{\Large Projects}}
+    \resumeSubHeadingListStart
+
+        \resumeSubheading{Obscure Coding Language RAG Systems}{Python, RAG, LangChain, FAISS, Sentence Transformers}{\href{https://github.com/nbui23/factor_assistant}{\includegraphics[height=0.37cm]{logos/github.png}}}
+            \resumeItemListStart
+                \resumeItem{Researched and developed RAG systems to answer obscure programming language queries \textbf{@ Bedarra Corporation}}
+            \resumeItemListEnd
+
+        \resumeSubheading{SocialSaplings}{HTML/SCSS, JavaScript, Bootstrap, Node.js, Express.js, Firebase (Firestore, Auth)}{\href{https://devpost.com/software/socialsaplings}{\includegraphics[height=0.37cm]{logos/devpost.png}}}
+            \resumeItemListStart
+                \resumeItem{Led cross-functional team to build a reforestation platform, resulting in \textbf{1st place @ KuriusHacks} out of 15 teams}
+                % \resumeItem{Implemented a tool using GBIF, SoilGrids, Open-Elevation, and OpenWeatherMap to recommend optimal tree species based on a user's geodata.}
+                \resumeItem{Built tree species recommendation algorithm integrating various APIs to analyze user geodata for optimal planting}
+                \resumeItem{Developed an interactive visualization dashboard using the Google Maps API to display real-time reforestation metrics and global environmental impact data}
+                % \resumeItem{Added profiles, posts, likes, and comments, using Firebase for data management and authentication}
+            \resumeItemListEnd
+
+        % \resumeSubheading{Pomodojo}{HTML/CSS, JavaScript, Bootstrap, Node.js, Express.js, MongoDB, WebRTC}{\href{https://devpost.com/software/pomodorm}{\includegraphics[height=0.37cm]{logos/devpost.png}}}
+        %     \resumeItemListStart
+        %         \resumeItem{Designed a study platform to facilitate productive Pomodoro sessions with gamification elements for motivation \textbf{@ uOttaHack6}}
+        %         \resumeItem{Integrated WebRTC and Agora APIs to enable multi-user video conferencing capabilities, ensuring stable real-time communication for up to \textbf{10 concurrent users} with \textbf{sub-100ms latency}}
+        %         \resumeItem{Developed MongoDB database architecture and RESTful APIs to manage user sessions, study metrics, and platform functionality}
+        %     \resumeItemListEnd
+
+    \resumeSubHeadingListEnd
+
+% Skills Section
+\section{\textbf{\Large Skills}}
+  \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{
+    \item{
+    \textbf{Languages}{: C/C++, Python, Java, C\#, SQL, HTML/CSS, JavaScript, PHP, Gherkin $|$ English, French, Vietnamese} \\
+    \textbf{Frameworks \& Databases}{: Flask, Spring Boot, Express.js, MySQL, SQLite3, PostgreSQL, Firebase, MongoDB, Neo4J, JUnit, Selenium} \\
+    \textbf{Libraries}{: pandas, NumPy, matplotlib, scikit-learn, unittest, spaCy, Sentence Transformers, BS4, lxml, HuggingFace } \\
+    \textbf{Development Tools}{: Git, Node.js, Ubuntu, Qt Creator, Postman, Agile Methodology, SDLC, OOP, TDD, Cucumber} \\
+    }}
+  \end{itemize}
+
+\end{document}
