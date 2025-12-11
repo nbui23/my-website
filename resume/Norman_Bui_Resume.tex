@@ -1,15 +1,21 @@
-\documentclass[letterpaper,10pt]{article}
+\documentclass[letterpaper,10pt]{article}  % FONT SIZE: Change 10pt to 11pt or 12pt for larger text
+                                           % 10pt = tight/more content (current)
+                                           % 11pt = balanced (recommended for readability)
+                                           % 12pt = spacious/less content
 
 %----------------------------------------------------------------------------------------
 %	PACKAGES AND DOCUMENT CONFIGURATIONS
 %----------------------------------------------------------------------------------------
 
 % Page Layout
-\usepackage[top=0.75in, bottom=0.25in, left=0.75in, right=0.75in]{geometry}
+% MARGINS: Adjust these values to control white space around page edges
+% Smaller values = more content, larger values = more white space
+\usepackage[top=0.75in, bottom=0.5in, left=0.75in, right=0.75in]{geometry}
+
 \usepackage{fancyhdr}
 
 % Font and Language
-\usepackage[sfdefault]{noto}
+\usepackage[sfdefault]{noto}  % FONT FAMILY: Uses Noto Sans. Remove [sfdefault] for default LaTeX font
 \usepackage[english]{babel}
 \input{glyphtounicode}
 
@@ -35,12 +41,14 @@
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 
-% Margins
-\addtolength{\oddsidemargin}{-0.5in}
-\addtolength{\evensidemargin}{-0.5in}
-\addtolength{\textwidth}{1in}
-\addtolength{\topmargin}{-0.60in}
-\addtolength{\textheight}{1.0in}
+% ADDITIONAL MARGIN ADJUSTMENTS
+% These fine-tune margins beyond the geometry package settings
+% Adjust these if content is too tight or too loose
+\addtolength{\oddsidemargin}{-0.5in}   % LEFT MARGIN: negative = more left, positive = less left
+\addtolength{\evensidemargin}{-0.5in}  % (for two-sided printing, usually not needed)
+\addtolength{\textwidth}{1in}          % PAGE WIDTH: increase for wider content area
+\addtolength{\topmargin}{-0.60in}      % TOP MARGIN: negative = content higher on page
+\addtolength{\textheight}{1.0in}       % PAGE HEIGHT: increase for taller content area
 
 % General Settings
 \urlstyle{same}
@@ -53,26 +61,32 @@
 %	CUSTOM COMMANDS
 %----------------------------------------------------------------------------------------
 
-% Sections formatting
+% SECTION TITLE FORMATTING
+% \large controls section header size (Education, Experience, etc.)
+% Options: \normalsize < \large < \Large < \LARGE < \huge
+% VERTICAL SPACING: vspace values control space above/below sections
 \titleformat{\section}{
-  \vspace{-9pt}\scshape\raggedright\large
+  \vspace{-9pt}\scshape\raggedright\large  % SECTION FONT SIZE: Change \large to \Large for bigger headers
 }{}{0em}{}[\color{black}\titlerule \vspace{-6pt}]
+% RECOMMENDED: Keep \large, or try \Large if using 11pt+ document font
 
 % Resume Items
+% BULLET POINT TEXT SIZE: \small makes bullet text slightly smaller than body
+% Change \small to \normalsize if text feels too small
 \newcommand{\resumeItem}[1]{
-  \item\small{
-    {#1 \vspace{-3pt}}
+  \item\small{  % BULLET FONT SIZE: \small is current, try \normalsize for larger text
+    {#1 \vspace{-3pt}}  % BULLET SPACING: -3pt controls space between bullets
   }
 }
 
 \newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
 
-% Resume Headings
+% Resume Headings (Job titles, company names)
 \newcommand{\resumeSubheading}[3]{
     \item
     \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
-      \textbf{#1} $|$ \textit{ #2} & #3 \\
-    \end{tabular*}\vspace{-6pt}
+      \textbf{#1} $|$ \textit{ #2} & #3 \\  % COMPANY NAME is \textbf (bold), TITLE is \textit (italic)
+    \end{tabular*}\vspace{-6pt}  % JOB HEADER SPACING: controls space after job title line
 }
 
 \newcommand{\resumeSubSubheading}[2]{
@@ -91,11 +105,13 @@
 
 % List Environments
 \newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+% LEFT MARGIN FOR BULLETS: 0.15in controls indentation. Increase for more indent (e.g., 0.2in)
+
 \newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
 \newcommand{\resumeItemListStart}{\begin{itemize}}
-\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}  % SECTION SPACING: -5pt after each job
 
-\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}  % BULLET SIZE: \tiny makes bullets small
 
 %----------------------------------------------------------------------------------------
 %	RESUME CONTENT
@@ -104,10 +120,12 @@
 \begin{document}
 
 % Header
+% NAME FONT SIZE: \Large controls your name size
+% Options: \large < \Large < \LARGE < \huge < \Huge
 \begin{center}
-    {\textbf{\Large NORMAN BUI}} \\ \vspace{1pt}
-    \small +1 613-983-3217 $|$
-    \href{mailto:normanbui@cmail.carleton.ca}{normanbui@cmail.carleton.ca} $|$
+    {\textbf{\Large NORMAN BUI}} \\ \vspace{1pt}  % NAME SIZE: Change \Large to \LARGE or \huge for bigger name
+    \small +1 613-983-3217 $|$  % CONTACT INFO SIZE: \small keeps it compact
+    \href{mailto:normanbui23@gmail.com}{normanbui23@gmail.com} $|$
     \href{https://www.linkedin.com/in/nbui23/}{{linkedin.com/in/nbui23}} $|$
     \href{https://github.com/nbui23}{{github.com/nbui23}}
 \end{center}
@@ -121,8 +139,8 @@
   {Expected April 2026}
       \resumeItemListStart
         % \resumeItem{Awards: Deans' Honour List, President's Scholars, Chalmers Jack Mackenzie, and Henry Marshall Tory Scholarships}
-        % \resumeItem{Relevant Coursework: Data Structures \& Algorithms, Discrete Math, Discrete Structures, Operating Systems, OOP, Paradigms, Web Development, Quality Assurance, HCI (UI/UX), Database Management Systems, Statistical Modeling, Linear Algebra, Calculus}
-        \resumeItem{Coursework: DSA, Discrete Math \& Structures, OS, OOP, Paradigms, WebDev, QA, HCI (UI/UX), DBMS, Statistical Modeling}
+        % \resumeItem{Coursework: Data Structures \& Algorithms, Discrete Math, Discrete Structures, Operating Systems, OOP, Paradigms, Web Development, Quality Assurance, HCI (UI/UX), Database Management Systems, Statistical Modeling, Linear Algebra, Calculus}
+        \resumeItem{Coursework: DSA II, Discrete Math \& Structures, OS, OOP, Paradigms, WebDev, QA, HCI (UI/UX), DBMS, Statistical Modeling}
       \resumeItemListEnd
   \resumeSubHeadingListEnd
 
@@ -130,35 +148,33 @@
 \section{\textbf{\Large Experience}}
   \resumeSubHeadingListStart
 
-    \resumeSubheading{Electronic Arts (EA)}{Software Developer Intern $|$ AI Agents, AI Automation}{May 2025 - Aug 2025}
+    \resumeSubheading{Electronic Arts (EA)}{Software Engineer Intern $|$ Kotlin, AI Agents, Automated Testing}{May 2025 - Aug 2025}
         \resumeItemListStart
-            \resumeItem{Investigated and analyzed LLM-powered game testing systems by conducting performance testing across multiple AI models and documenting cost optimization patterns, providing technical recommendations for Servo development roadmap}
-            \resumeItem{Enhanced load testing authentication systems by debugging authentication failures and resolving test execution errors, improving overall test infrastructure reliability from \textbf{35\% to 100\%} success rate}
-            \resumeItem{Updated load testing frameworks with new game features by integrating coverage for latest gameplay functionality and implementing fixes for various execution errors, ensuring accurate performance testing under high-traffic conditions}
+            \resumeItem{Analyzed Servo (LLM-powered automated game testing system) by evaluating model performance, reviewing codebase architecture, and providing technical recommendations for system optimization and soak testing workflows}
+            \resumeItem{Debugged authentication failures in CI/CD load testing pipeline and improved test coverage, increasing infrastructure reliability from \textbf{35\% to 100\%} success rate}
+            \resumeItem{Integrated \textbf{10+} new game features into load testing frameworks, implementing automated test coverage and tracking performance metrics to ensure accurate testing under high-traffic conditions}
         \resumeItemListEnd
 
-    \resumeSubheading{Autodesk}{Software Developer Intern $|$ TypeScript, Java, GraphQL}{Jan 2025 - Apr 2025}
+    \resumeSubheading{Autodesk}{Software Engineer Intern $|$ TypeScript, Java, GraphQL}{Jan 2025 - Apr 2025}
         \resumeItemListStart
-            \resumeItem{Worked on Quicksilver, a major project for Autodesk's cloud-based CAD/CAM platform, Fusion}
-            \resumeItem{Architected and implemented a data validation framework, establishing the foundation for all future missing data fixes while creating comprehensive documentation}
+            \resumeItem{Built data validation and repair infrastructure for Fusion platform, establishing foundational framework to prevent missing manufacturing data across cloud workflows}
             \resumeItem{Developed an \textbf{O(n)} algorithm with intelligent concurrency controls to repair missing primary relationships, achieving \textbf{8x} throughput through optimized parallel processing}
-            \resumeItem{Designed and deployed API endpoint integration with manufacturing workflows to automate validation and repair operations when detecting missing data, reducing production failures by proactively addressing data issues without manual intervention}
+            \resumeItem{Designed and deployed API endpoints to automate data validation and repair operations in manufacturing workflows, reducing production failures through proactive issue detection}
             \resumeItem{Implemented permission validation and error handling protocols, eliminating existing security vulnerabilities for sensitive data}
-            \resumeItem{Refactored part number assignment system to handle various edge cases, support configuration-specific assignments, and maintain data persistence during status changes, improving flexibility for users and reducing errors}
-            % \resumeItem{Streamlined shared part number handlers by adding targeted conditional logic for delete and purge operations, eliminating false error logs and improving system efficiency}
+            \resumeItem{Refactored part number assignment system to handle edge cases and configuration-specific assignments, improving data persistence and reducing errors}
             \resumeItem{Maintained \textbf{100\% test coverage} across all code changes using Mocha, Chai, and Sinon, ensuring high code quality standards}
         \resumeItemListEnd
 
-    % \resumeSubheading{Public Health Agency of Canada}{Data Scientist Intern $|$ Python, LLM, MDM}{Sep 2024 - Dec 2024}
-    %   \resumeItemListStart
-    %     \resumeItem{Developed LLM-powered workflow for epidemiological literature reviews with Imperial College London and the World Health Organization as part of a MDM system to enable standardized research access for global health initiatives}
-    %     \resumeItem{Conducted comprehensive embedding model evaluation using Ollama to validate existing RAG system performance, confirming optimal configuration and establishing baseline metrics for future improvements}
-    %     \resumeItem{Researched techniques for academic paper collection using GPT-4o, developing proof-of-concept for scalable PDF retrieval}
-    %   \resumeItemListEnd
+    \resumeSubheading{Public Health Agency of Canada}{Data Scientist Intern $|$ Python, LLM, RAG, MDM}{Sep 2024 - Dec 2024}
+        \resumeItemListStart
+            \resumeItem{Developed LLM-powered literature review workflow for epidemiological research in collaboration with Imperial College London and WHO, building MDM infrastructure to enable standardized global health data access}
+            \resumeItem{Conducted embedding model evaluation using Ollama to validate RAG system performance, confirming optimal model configuration and establishing baseline metrics for future system improvements}
+            \resumeItem{Designed automated academic paper collection pipeline using GPT-4o, developing proof-of-concept for scalable PDF retrieval and metadata extraction}
+        \resumeItemListEnd
 
-    \resumeSubheading{Kongsberg Geospatial}{Software Developer Intern $|$ C++, Qt, Python, GIS}{May 2024 - Aug 2024}
+    \resumeSubheading{Kongsberg Geospatial}{Software Engineer Intern $|$ C++, Qt, Python, GIS}{May 2024 - Aug 2024}
       \resumeItemListStart
-        \resumeItem{Developed demo apps using TerraLens SDK as the sole developer on the Solutions Engineering team, successfully delivering custom solutions to major clients in aviation, defense, and government sectors}
+        \resumeItem{Developed demo apps using TerraLens SDK as the sole engineer on the Solutions Engineering team, successfully delivering custom solutions to major clients in aviation, defense, and government sectors}
         \resumeItem{Integrated LiDAR, WMTS, and S-57 data and optimized render pipeline to achieve \textbf{consistent 60+ FPS} with real-time object tracking, while implementing system monitoring (GPU, CPU, RAM) and modernizing Qt UI/UX}
         \resumeItem{Developed automated airspace classification framework, removing manual processing and standardizing data categorization}
         \resumeItem{Automated VFR and terrain data processing workflows, reducing aggregating time by more than \textbf{40\%}}
@@ -166,32 +182,30 @@
 
     \resumeSubheading{Health Canada}{Data Scientist Intern $|$ Python, ML, NLP, ETL}{Sep 2023 - Dec 2023}
       \resumeItemListStart
-        \resumeItem{Developed Python solutions for chemical assessment, leading to improved risk data aggregation and analysis}
+        \resumeItem{Rebuilt organization-wide federated chemical search system using BS4 and lxml, implementing automated fault tolerance and rate limiting that increased query success rate by \textbf{20\%}}
+        \resumeItem{Architected scalable web scraping framework using TDD practices and unittest, expanding accessible chemical data sources by \textbf{113\%} and achieving \textbf{100\% test coverage}}
         \resumeItem{Built random forest classifiers with pandas, NumPy, SciPy, and scikit-learn to accurately predict chemical toxicity}
-        \resumeItem{Rebuilt organization-wide federated chemical search system using BeautifulSoup4 and lxml, implementing automated fault tolerance and rate limiting that increased query success rate by \textbf{20\%}}
-        \resumeItem{Architected scalable web scraping framework and implemented test-driven development practices using unittest framework, restoring chemical data source integration capability \textbf{by 113\%} and achieving \textbf{100\% test coverage}}
-        \resumeItem{Engineered automated knowledge graph pipeline using Neo4j, CoreNLP, and Stanza to extract semantic triples from medical literature, reducing qualitative data processing time and work}
+        \resumeItem{Engineered automated knowledge graph pipeline using Neo4j, CoreNLP, and Stanza to extract semantic triples from medical literature, streamlining chemical assessment workflows}
       \resumeItemListEnd
 
-    % \resumeSubheading{Department of National Defence}{Software Developer Intern $|$ Python, LLM, RAG}{Jun 2023 - Nov 2023}
+    % \resumeSubheading{Department of National Defence}{Software Engineer Intern $|$ Python, LLM, RAG}{Jun 2023 - Nov 2023}
     %   \resumeItemListStart
     %     \resumeItem{Built chatbot, implementing RAG architecture to enable intelligent querying across \textbf{20+ tax documents}}
     %     \resumeItem{Developed NLP pipeline using NLTK, integrating tokenization, contextual analysis, and NER to enhance text understanding and information extraction accuracy}
     %     \resumeItem{Architected vector search system using FAISS and SQLite3, optimizing embedding storage and retrieval for queries}
     %   \resumeItemListEnd
 
-    \resumeSubheading{NAV CANADA}{Software Developer Intern $|$ C++, Qt, PowerShell, GIS}{May 2023 - Aug 2023}
+    \resumeSubheading{NAV CANADA}{Software Engineer Intern $|$ C++, Qt, PowerShell, GIS}{May 2023 - Aug 2023}
       \resumeItemListStart
-        \resumeItem{Developed C++ solutions for various ATC applications, resulting in improved performance and reliability}
         \resumeItem{Optimized data management algorithm for internal data tool, resulting in a \textbf{60\% decrease} in storage utilization and \textbf{30\% boost} in automated data analysis performance}
         \resumeItem{Resolved multiple bugs in ATC software, achieving an overall \textbf{improvement of 16\% } in frame rate}
         \resumeItem{Automated network configurations with PowerShell, reducing manual work and setup time by \textbf{more than 95\%}}
       \resumeItemListEnd
 
-    % \resumeSubheading
-    % {Correctional Service Canada}{Software Developer Intern $|$ C\#, .NET, Web Development, QA}{May 2022 - Apr 2023}
+    % \resumeSubheading{Correctional Service Canada}{Software Engineer Intern $|$ C\#, .NET, Web Development, QA}{May 2022 - Apr 2023}
     %   \resumeItemListStart
     %     \resumeItem{Improved web accessibility using the WET framework to ensure WCAG 2.1 Level AA compliance, enhancing UX for \textbf{100+ daily users} in victim services application}
+    %     \resumeItem{Developed various ASP.NET solutions to solve UI bugs}
     %   \resumeItemListEnd
 
     \resumeSubHeadingListEnd
@@ -199,18 +213,17 @@
 % Projects Section
 \section{\textbf{\Large Projects}}
     \resumeSubHeadingListStart
-        \resumeSubheading{Obscure Coding Language RAG Systems}{Python, RAG, LangChain, FAISS, Sentence Transformers}{\href{https://github.com/nbui23/factor_assistant}{\includegraphics[height=0.37cm]{logos/github.png}}}
-            \resumeItemListStart
-                \resumeItem{Researched and developed RAG systems to answer obscure programming language queries \textbf{@ Bedarra Corporation}}
-            \resumeItemListEnd
+        % \resumeSubheading{RAG-Based Code Documentation Assistant}{Python, RAG, LangChain, FAISS, Sentence Transformers}{\href{https://github.com/nbui23/factor_assistant}{\includegraphics[height=0.37cm]{logos/github.png}}}
+        %     \resumeItemListStart
+        %         \resumeItem{Researched and developed RAG systems to answer obscure programming language (Factor, K) queries \textbf{@ Bedarra Corporation}}
+        %         \resumeItem{Integrated LangChain orchestration to retrieve relevant code examples and documentation, providing context-aware responses for obscure language queries}
+        %     \resumeItemListEnd
 
         \resumeSubheading{SocialSaplings}{HTML/SCSS, JavaScript, Bootstrap, Node.js, Express.js, Firebase (Firestore, Auth)}{\href{https://devpost.com/software/socialsaplings}{\includegraphics[height=0.37cm]{logos/devpost.png}}}
             \resumeItemListStart
                 \resumeItem{Led cross-functional team to build a reforestation platform, resulting in \textbf{1st place @ KuriusHacks}}
-                % \resumeItem{Implemented a tool using GBIF, SoilGrids, Open-Elevation, and OpenWeatherMap to recommend optimal tree species based on a user's geodata.}
                 \resumeItem{Built tree species recommendation algorithm integrating various APIs to analyze user geodata for optimal planting}
                 \resumeItem{Developed an interactive visualization dashboard using the Google Maps API to display real-time reforestation metrics and global environmental impact data}
-                % \resumeItem{Added profiles, posts, likes, and comments, using Firebase for data management and authentication}
             \resumeItemListEnd
 
         % \resumeSubheading{Pomodojo}{HTML/CSS, JavaScript, Bootstrap, Node.js, Express.js, MongoDB, WebRTC}{\href{https://devpost.com/software/pomodorm}{\includegraphics[height=0.37cm]{logos/devpost.png}}}
@@ -225,11 +238,11 @@
 % Skills Section
 \section{\textbf{\Large Skills}}
   \begin{itemize}[leftmargin=0.15in, label={}]
-    \small{
+    \small{  % SKILLS SECTION FONT: \small for compact, \normalsize for larger
     \item{
-    \textbf{Languages}{: C/C++, Python, Java, C\#, SQL, HTML/CSS, JavaScript, PHP, Gherkin $|$ English, French, Vietnamese} \\
+    \textbf{Languages}{: Python, Java, TypeScript, Kotlin, C++, JavaScript, SQL, C\#, HTML/CSS, PHP $|$ English, French, Vietnamese} \\
     \textbf{Frameworks \& Databases}{: Flask, Spring Boot, Express.js, MySQL, SQLite3, PostgreSQL, Firebase, MongoDB, Neo4J, JUnit, Selenium} \\
-    \textbf{Libraries}{: pandas, NumPy, matplotlib, scikit-learn, unittest, spaCy, Sentence Transformers, BS4, lxml, HuggingFace } \\
+    \textbf{Libraries}{: pandas, NumPy, matplotlib, scikit-learn, unittest, spaCy, Sentence Transformers, BS4, lxml, HuggingFace, Ollama } \\
     \textbf{Development Tools}{: Git, Node.js, Ubuntu, Qt Creator, Postman, Agile Methodology, SDLC, OOP, TDD, Cucumber} \\
     }}
   \end{itemize}

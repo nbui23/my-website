@@ -1,3 +1,3 @@
 # my-website
 
-Minimal website summarizing my experience with software development
+Minimal website summarizing my experience with software development and data science
