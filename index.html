@@ -4,78 +4,506 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Norman Bui - Personal</title>
+    <title>Norman Bui</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
     <div class="container">
-        <!-- Header Section -->
+
         <header class="header">
-            <h1>Norman Bui</h1>
-            <p>Honours Computer Science Student at Carleton University</p>
+            <h1 class="name">norman_bui<span class="cursor">|</span></h1>
+            <p class="tagline">honours cs student at carleton university</p>
             <div class="contact-links">
-                <a href="mailto:normanbui23@gmail.com">Email</a>
-                <a href="https://www.linkedin.com/in/nbui23/" target="_blank">LinkedIn</a>
-                <a href="https://github.com/nbui23" target="_blank">GitHub</a>
-                <a href="resume/Norman_Bui_Resume.pdf" target="_blank">Resume</a>
+                <a href="mailto:normanbui23@gmail.com">email</a>
+                <a href="https://www.linkedin.com/in/nbui23/" target="_blank">linkedin</a>
+                <a href="https://github.com/nbui23" target="_blank">github</a>
+                <a href="resume/Norman_Bui_Resume.pdf" target="_blank">resume</a>
             </div>
         </header>
 
-        <!-- About Section -->
-        <section class="section">
-            <h2 class="section-title">About Me</h2>
-            <div class="card">
-                <p>Currently pursuing a Bachelor of Computer Science with Honours at Carleton University with an
-                    expected graduation in April 2026, with experience across 9 software development and data science
-                    internships
-                </p>
-                </p>
-                <p>Most recently at EA's Maxis Studios, Autodesk, and Public Health Agency of Canada (collaborated with
-                    WHO and Imperial College London). Previously at Bedarra Corporation, Kongsberg Geospatial, Health
-                    Canada, Department of National Defence, NAV CANADA, and Correctional Service Canada.
-                </p>
-            </div>
-        </section>
+        <div class="tab-bar">
+            <button class="tab active" data-tab="experience">experience</button>
+            <button class="tab" data-tab="education">education</button>
+            <button class="tab" data-tab="projects">projects</button>
+            <button class="tab" data-tab="reading">what i'm reading</button>
+            <div class="tab-indicator"></div>
+        </div>
 
-        <!-- Projects Section -->
-        <section class="section">
-            <h2 class="section-title">Projects</h2>
-            <div class="projects-grid">
-                <div class="card project-card">
+        <main class="main">
+
+            <!-- Experience -->
+            <section id="experience" class="tab-content active">
+
+                <div class="entry-card">
+                    <div class="entry-header">
+                        <img class="company-logo" src="images/logos/ea.png" alt="EA">
+                        <div class="entry-header-text">
+                            <h3 class="entry-company">Electronic Arts</h3>
+                            <p class="entry-role">Software Engineer Intern &middot; Kotlin, AI Agents, Automated Testing
+                            </p>
+                        </div>
+                        <div class="entry-meta">
+                            <span class="entry-dates">May 2025 &ndash; Aug 2025</span>
+                            <a class="entry-link" href="https://www.ea.com/games/the-sims" target="_blank">the sims
+                                &rarr;</a>
+                        </div>
+                    </div>
+                    <ul class="entry-bullets">
+                        <li>Analyzed Servo (LLM-powered automated game testing system) by evaluating model performance,
+                            reviewing codebase architecture, and providing technical recommendations for system
+                            optimization and soak testing workflows</li>
+                        <li>Debugged authentication failures in CI/CD load testing pipeline and improved test coverage,
+                            increasing infrastructure reliability from <strong>35% to 100%</strong> success rate</li>
+                        <li>Integrated <strong>10+</strong> new game features into load testing frameworks, implementing
+                            automated test coverage and tracking performance metrics to ensure accurate testing under
+                            high-traffic conditions</li>
+                    </ul>
+                </div>
+
+                <div class="entry-card">
+                    <div class="entry-header">
+                        <img class="company-logo" src="https://logo.clearbit.com/autodesk.com" alt="Autodesk"
+                            onerror="this.src='https://www.google.com/s2/favicons?sz=64&domain=autodesk.com';this.onerror=null">
+                        <div class="entry-header-text">
+                            <h3 class="entry-company">Autodesk</h3>
+                            <p class="entry-role">Software Engineer Intern &middot; TypeScript, Java, GraphQL</p>
+                        </div>
+                        <div class="entry-meta">
+                            <span class="entry-dates">Jan 2025 &ndash; Apr 2025</span>
+                            <a class="entry-link" href="https://www.autodesk.com/ca-en/products/fusion-360/overview"
+                                target="_blank">fusion 360 &rarr;</a>
+                        </div>
+                    </div>
+                    <ul class="entry-bullets">
+                        <li>Built data validation and repair infrastructure for Fusion platform, establishing
+                            foundational framework to prevent missing manufacturing data across cloud workflows</li>
+                        <li>Developed an <strong>O(n)</strong> algorithm with intelligent concurrency controls to repair
+                            missing primary relationships, achieving <strong>8x</strong> throughput through optimized
+                            parallel processing</li>
+                        <li>Designed and deployed API endpoints to automate data validation and repair operations in
+                            manufacturing workflows, reducing production failures through proactive issue detection</li>
+                        <li>Implemented permission validation and error handling protocols, eliminating existing
+                            security vulnerabilities for sensitive data</li>
+                        <li>Maintained <strong>100% test coverage</strong> across all code changes using Mocha, Chai,
+                            and Sinon</li>
+                    </ul>
+                </div>
+
+                <div class="entry-card">
+                    <div class="entry-header">
+                        <img class="company-logo" src="images/logos/phac.png" alt="PHAC">
+                        <div class="entry-header-text">
+                            <h3 class="entry-company">Public Health Agency of Canada</h3>
+                            <p class="entry-role">Data Scientist Intern &middot; Python, LLM, RAG, MDM</p>
+                        </div>
+                        <div class="entry-meta">
+                            <span class="entry-dates">Sep 2024 &ndash; Dec 2024</span>
+                            <a class="entry-link"
+                                href="https://who-collaboratory.github.io/collaboratory-epiparameter-community/#/"
+                                target="_blank">epiparameter community &rarr;</a>
+                        </div>
+                    </div>
+                    <ul class="entry-bullets">
+                        <li>Developed LLM-powered literature review workflow for epidemiological research in
+                            collaboration with Imperial College London and WHO, building MDM infrastructure to enable
+                            standardized global health data access</li>
+                        <li>Conducted embedding model evaluation using Ollama to validate RAG system performance,
+                            confirming optimal model configuration and establishing baseline metrics for future
+                            improvements</li>
+                        <li>Designed automated academic paper collection pipeline using GPT-4o, developing
+                            proof-of-concept for scalable PDF retrieval and metadata extraction</li>
+                    </ul>
+                </div>
+
+                <div class="entry-card">
+                    <div class="entry-header">
+                        <div class="company-logo logo-placeholder">B</div>
+                        <div class="entry-header-text">
+                            <h3 class="entry-company">Bedarra Corporation</h3>
+                            <p class="entry-role">Student Researcher &middot; Python, RAG, LangChain, FAISS, Sentence
+                                Transformers</p>
+                        </div>
+                        <div class="entry-meta">
+                            <span class="entry-dates">Aug 2024 &ndash; Oct 2024</span>
+                            <a class="entry-link" href="https://www.bedarra.com/" target="_blank">bedarra.com &rarr;</a>
+                        </div>
+                    </div>
+                    <ul class="entry-bullets">
+                        <li>Researched and developed RAG systems to answer queries about obscure programming languages
+                            (Factor, K)</li>
+                        <li>Integrated LangChain orchestration to retrieve relevant code examples and documentation,
+                            providing context-aware responses for obscure language queries</li>
+                    </ul>
+                </div>
+
+                <div class="entry-card">
+                    <div class="entry-header">
+                        <img class="company-logo" src="https://logo.clearbit.com/kongsberggeospatial.com"
+                            alt="Kongsberg Geospatial"
+                            onerror="this.src='https://www.google.com/s2/favicons?sz=64&domain=kongsberggeospatial.com';this.onerror=null">
+                        <div class="entry-header-text">
+                            <h3 class="entry-company">Kongsberg Geospatial</h3>
+                            <p class="entry-role">Software Engineer Intern &middot; C++, Qt, Python, GIS</p>
+                        </div>
+                        <div class="entry-meta">
+                            <span class="entry-dates">May 2024 &ndash; Aug 2024</span>
+                            <a class="entry-link" href="https://www.kongsberggeospatial.com/products/terralens"
+                                target="_blank">terralens &rarr;</a>
+                        </div>
+                    </div>
+                    <ul class="entry-bullets">
+                        <li>Developed demo apps using TerraLens SDK as the sole engineer on the Solutions Engineering
+                            team, successfully delivering custom solutions to major clients in aviation, defense, and
+                            government sectors</li>
+                        <li>Integrated LiDAR, WMTS, and S-57 data and optimized render pipeline to achieve
+                            <strong>consistent 60+ FPS</strong> with real-time object tracking, while implementing
+                            system monitoring (GPU, CPU, RAM) and modernizing Qt UI/UX</li>
+                        <li>Developed automated airspace classification framework, removing manual processing and
+                            standardizing data categorization</li>
+                        <li>Automated VFR and terrain data processing workflows, reducing aggregating time by more than
+                            <strong>40%</strong></li>
+                    </ul>
+                </div>
+
+                <div class="entry-card">
+                    <div class="entry-header">
+                        <img class="company-logo" src="images/logos/health-canada.png" alt="Health Canada">
+                        <div class="entry-header-text">
+                            <h3 class="entry-company">Health Canada</h3>
+                            <p class="entry-role">Data Scientist Intern &middot; Python, ML, NLP, ETL</p>
+                        </div>
+                        <div class="entry-meta">
+                            <span class="entry-dates">Sep 2023 &ndash; Dec 2023</span>
+                            <a class="entry-link"
+                                href="https://www.canada.ca/en/health-canada/services/chemical-substances/fact-sheets/use-new-approach-methods-risk-assessment.html"
+                                target="_blank">new approach methods &rarr;</a>
+                        </div>
+                    </div>
+                    <ul class="entry-bullets">
+                        <li>Rebuilt organization-wide federated chemical search system using BS4 and lxml, implementing
+                            automated fault tolerance and rate limiting that increased query success rate by
+                            <strong>20%</strong></li>
+                        <li>Architected scalable web scraping framework using TDD practices and unittest, expanding
+                            accessible chemical data sources by <strong>113%</strong> and achieving <strong>100% test
+                                coverage</strong></li>
+                        <li>Built random forest classifiers with pandas, NumPy, SciPy, and scikit-learn to accurately
+                            predict chemical toxicity</li>
+                        <li>Engineered automated knowledge graph pipeline using Neo4j, CoreNLP, and Stanza to extract
+                            semantic triples from medical literature, streamlining chemical assessment workflows</li>
+                    </ul>
+                </div>
+
+                <div class="entry-card">
+                    <div class="entry-header">
+                        <img class="company-logo" src="images/logos/dnd.png" alt="DND">
+                        <div class="entry-header-text">
+                            <h3 class="entry-company">Department of National Defence</h3>
+                            <p class="entry-role">Software Engineer Intern &middot; Python, LLM, RAG, NLP</p>
+                        </div>
+                        <div class="entry-meta">
+                            <span class="entry-dates">Jun 2023 &ndash; Nov 2023</span>
+                            <a class="entry-link"
+                                href="https://research.ibm.com/blog/retrieval-augmented-generation-RAG"
+                                target="_blank">what is RAG? &rarr;</a>
+                        </div>
+                    </div>
+                    <ul class="entry-bullets">
+                        <li>Built chatbot implementing RAG architecture to enable intelligent querying across
+                            <strong>20+</strong> tax documents</li>
+                        <li>Developed NLP pipeline using NLTK, integrating tokenization, contextual analysis, and NER to
+                            enhance text understanding and information extraction accuracy</li>
+                        <li>Architected vector search system using FAISS and SQLite3, optimizing embedding storage and
+                            retrieval for queries</li>
+                    </ul>
+                </div>
+
+                <div class="entry-card">
+                    <div class="entry-header">
+                        <img class="company-logo" src="https://logo.clearbit.com/navcanada.ca" alt="NAV CANADA"
+                            onerror="this.src='https://www.google.com/s2/favicons?sz=64&domain=navcanada.ca';this.onerror=null">
+                        <div class="entry-header-text">
+                            <h3 class="entry-company">NAV CANADA</h3>
+                            <p class="entry-role">Software Engineer Intern &middot; C++, Qt, PowerShell, GIS</p>
+                        </div>
+                        <div class="entry-meta">
+                            <span class="entry-dates">May 2023 &ndash; Aug 2023</span>
+                            <a class="entry-link"
+                                href="https://www.aviationtoday.com/2015/12/23/nav-canada-launches-project-to-modernize-airport-radar-systems/"
+                                target="_blank">radar modernization &rarr;</a>
+                        </div>
+                    </div>
+                    <ul class="entry-bullets">
+                        <li>Optimized data management algorithm for internal data tool, resulting in a <strong>60%
+                                decrease</strong> in storage utilization and <strong>30% boost</strong> in automated
+                            data analysis performance</li>
+                        <li>Resolved multiple bugs in ATC software, achieving an overall <strong>16%
+                                improvement</strong> in frame rate</li>
+                        <li>Automated network configurations with PowerShell, reducing manual work and setup time by
+                            more than <strong>95%</strong></li>
+                    </ul>
+                </div>
+
+                <div class="entry-card">
+                    <div class="entry-header">
+                        <img class="company-logo" src="images/logos/csc.png" alt="CSC">
+                        <div class="entry-header-text">
+                            <h3 class="entry-company">Correctional Service Canada</h3>
+                            <p class="entry-role">Software Engineer Intern &middot; C#, .NET, JavaScript, ASP.NET</p>
+                        </div>
+                        <div class="entry-meta">
+                            <span class="entry-dates">May 2022 &ndash; Apr 2023</span>
+                            <a class="entry-link" href="https://victimsportal-portailvictimes.csc-scc.gc.ca/Main/Home"
+                                target="_blank">victims portal &rarr;</a>
+                        </div>
+                    </div>
+                    <ul class="entry-bullets">
+                        <li>Improved web accessibility using the WET framework to ensure WCAG 2.1 Level AA compliance,
+                            enhancing UX for <strong>100+ daily users</strong> in victim services application</li>
+                        <li>Developed ASP.NET solutions to resolve UI bugs and implement frontend improvements for
+                            victim info delivery application</li>
+                    </ul>
+                </div>
+
+            </section>
+
+            <!-- Education -->
+            <section id="education" class="tab-content">
+
+                <div class="entry-card">
+                    <div class="entry-header">
+                        <img class="company-logo" src="https://logo.clearbit.com/carleton.ca" alt="Carleton University"
+                            onerror="this.src='https://www.google.com/s2/favicons?sz=64&domain=carleton.ca';this.onerror=null">
+                        <div class="entry-header-text">
+                            <h3 class="entry-company">Carleton University</h3>
+                            <p class="entry-role">Bachelor of Computer Science (Honours) &middot; 4.0/4.0 GPA</p>
+                        </div>
+                        <div class="entry-meta">
+                            <span class="entry-dates">Expected April 2026</span>
+                            <a class="entry-link" href="https://admissions.carleton.ca/programs/computer-science/" target="_blank">program &rarr;</a>
+                        </div>
+                    </div>
+                    <ul class="entry-bullets">
+                        <li><strong>Relevant coursework:</strong>
+                            <ul style="margin-top:0.35rem;padding-left:1.1rem;">
+                                <li>Algorithms I &amp; II</li>
+                                <li>Applied Cryptography</li>
+                                <li>Calculus I &amp; II</li>
+                                <li>Data Structures</li>
+                                <li>Database Management Systems</li>
+                                <li>Discrete Structures I &amp; II</li>
+                                <li>Graph Analytics</li>
+                                <li>HCI (UI/UX)</li>
+                                <li>Linear Algebra</li>
+                                <li>OOP</li>
+                                <li>Operating Systems</li>
+                                <li>Programming Paradigms</li>
+                                <li>Software Engineering</li>
+                                <li>Software Quality Assurance</li>
+                                <li>Statistical Modeling</li>
+                                <li>Systems Programming</li>
+                                <li>Web Development</li>
+                            </ul>
+                        </li>
+                        <li><strong>Awards:</strong> President's Scholarship, Henry Marshall Tory Scholarship, Chalmers
+                            Jack MacKenzie Scholarship, Harry S. Southam Scholarship, Dean's Honour List (2022, 2023,
+                            2024, 2025)</li>
+                    </ul>
+                </div>
+
+            </section>
+
+            <!-- Projects -->
+            <section id="projects" class="tab-content">
+
+                <div class="entry-card project-card">
+                    <div class="entry-header">
+                        <div class="entry-header-text">
+                            <h3 class="entry-company">SocialSaplings</h3>
+                            <p class="entry-role">HTML/SCSS, JavaScript, Bootstrap, Node.js, Express.js, Firebase</p>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://devpost.com/software/socialsaplings" target="_blank">devpost &rarr;</a>
+                            <a href="https://github.com/nbui23/socialsaplings" target="_blank">github &rarr;</a>
+                        </div>
+                    </div>
                     <div class="project-image">
                         <img src="images/socialsaplings.png" alt="SocialSaplings Screenshot">
                     </div>
-                    <div class="project-content">
-                        <h3 class="card-title">SocialSaplings</h3>
-                        <p>🏆 1st Place @ KuriusHacks - A reforestation platform with tree species recommendations and
-                            interactive global impact visualization</p>
-                        <div class="project-links">
-                            <a href="https://devpost.com/software/socialsaplings" class="project-link">Devpost →</a>
-                            <a href="https://github.com/nbui23/socialsaplings" class="project-link">GitHub →</a>
-                        </div>
-                    </div>
+                    <ul class="entry-bullets">
+                        <li>&#127942; 1st place @ KuriusHacks &mdash; led cross-functional team to build a reforestation
+                            platform</li>
+                        <li>Built tree species recommendation algorithm integrating various APIs to analyze user geodata
+                            for optimal planting</li>
+                        <li>Developed an interactive visualization dashboard using the Google Maps API to display
+                            real-time reforestation metrics and global environmental impact data</li>
+                    </ul>
                 </div>
-                <div class="card project-card">
-                    <div class="project-image">
-                        <img src="images/COMP3804.png" alt="COMP3804 Website Screenshot">
-                    </div>
-                    <div class="project-content">
-                        <h3 class="card-title">COMP3804 Website</h3>
-                        <p>Work in progress resource for COMP3804</p>
-                        <div class="project-links">
-                            <a href="https://nbui23.github.io/dsa-website/" class="project-link">View Project →</a>
-                            <a href="https://github.com/nbui23/dsa-website" class="project-link">GitHub →</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+
+            </section>
+
+            <!-- Reading -->
+            <section id="reading" class="tab-content">
+                <p class="reading-intro"><a href="https://www.goodreads.com/user/show/166643433-norman"
+                        target="_blank">judge my taste in books &rarr;</a></p>
+                <div class="reading-stats" id="reading-stats"></div>
+                <div class="reading-chart" id="reading-chart"></div>
+                <div class="books-grid" id="books-grid"></div>
+            </section>
+
+        </main>
 
         <footer class="footer">
-            Last updated: December 2025
+            last updated: march 2026
         </footer>
+
     </div>
+
+    <script>
+        // Tab switching with sliding indicator
+        const tabs = document.querySelectorAll('.tab');
+        const contents = document.querySelectorAll('.tab-content');
+        const indicator = document.querySelector('.tab-indicator');
+
+        function setActiveTab(tab) {
+            tabs.forEach(t => t.classList.remove('active'));
+            contents.forEach(c => c.classList.remove('active'));
+            tab.classList.add('active');
+            document.getElementById(tab.dataset.tab).classList.add('active');
+            indicator.style.left = tab.offsetLeft + 'px';
+            indicator.style.width = tab.offsetWidth + 'px';
+        }
+
+        tabs.forEach(tab => tab.addEventListener('click', () => setActiveTab(tab)));
+
+        window.addEventListener('load', () => {
+            const activeTab = document.querySelector('.tab.active');
+            if (activeTab) setActiveTab(activeTab);
+        });
+
+        // Load books from Goodreads RSS
+        (async function loadBooks() {
+            const PROXIES = [
+                'https://corsproxy.io/?url=',
+                'https://api.allorigins.win/raw?url='
+            ];
+            const USER_ID = '166643433';
+            const PROFILE_URL = 'https://www.goodreads.com/user/show/166643433-norman';
+            const MAX_BOOKS = 5;
+
+            function esc(str) {
+                return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g,
+                    '&quot;');
+            }
+
+            async function fetchRSS(url) {
+                for (const proxy of PROXIES) {
+                    try {
+                        const res = await fetch(proxy + encodeURIComponent(url));
+                        if (res.ok) return await res.text();
+                    } catch (_) {}
+                }
+                throw new Error('All proxies failed');
+            }
+
+            function getTag(item, name) {
+                const el = item.getElementsByTagName(name)[0];
+                return el ? el.textContent.trim() : '';
+            }
+
+            function improveImageUrl(url) {
+                return url.replace(/\._S[XY]\d+_(?=\.jpg)/i, '');
+            }
+
+            function parseItems(xmlDoc, status) {
+                return Array.from(xmlDoc.getElementsByTagName('item')).map(item => ({
+                    title: getTag(item, 'title'),
+                    author: getTag(item, 'author_name'),
+                    cover: improveImageUrl(getTag(item, 'book_image_url')),
+                    pages: parseInt(getTag(item, 'num_pages')) || 0,
+                    rating: parseInt(getTag(item, 'user_rating')) || 0,
+                    readAt: getTag(item, 'user_read_at'),
+                    status
+                }));
+            }
+
+            try {
+                const [xml1, xml2] = await Promise.all([
+                    fetchRSS('https://www.goodreads.com/review/list_rss/' + USER_ID +
+                        '?shelf=currently-reading'),
+                    fetchRSS('https://www.goodreads.com/review/list_rss/' + USER_ID +
+                        '?shelf=read&sort=date_read&order=d')
+                ]);
+
+                const parser = new DOMParser();
+                const readingBooks = parseItems(parser.parseFromString(xml1, 'text/xml'), 'reading');
+                const readBooks = parseItems(parser.parseFromString(xml2, 'text/xml'), 'read');
+
+                const currentYear = new Date().getFullYear();
+                const thisYearBooks = readBooks.filter(b => b.readAt && new Date(b.readAt).getFullYear() === currentYear);
+                const thisYearPages = thisYearBooks.reduce((sum, b) => sum + b.pages, 0);
+                const ratedBooks = thisYearBooks.filter(b => b.rating > 0);
+                const avgRating = ratedBooks.length
+                    ? (ratedBooks.reduce((s, b) => s + b.rating, 0) / ratedBooks.length).toFixed(1)
+                    : null;
+
+                const statsEl = document.getElementById('reading-stats');
+                statsEl.innerHTML = [
+                    { value: thisYearBooks.length, label: 'books in ' + currentYear },
+                    thisYearPages > 0 ? { value: thisYearPages.toLocaleString(), label: 'pages in ' + currentYear } : null,
+                    avgRating ? { value: avgRating + ' / 5', label: 'avg rating' } : null
+                ].filter(Boolean).map(s => `
+                    <div class="stat-item">
+                        <span class="stat-value">${s.value}</span>
+                        <span class="stat-label">${s.label}</span>
+                    </div>
+                `).join('');
+
+                const MONTH_NAMES = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
+                const monthlyCounts = new Array(12).fill(0);
+                thisYearBooks.forEach(b => {
+                    const m = new Date(b.readAt).getMonth();
+                    if (!isNaN(m)) monthlyCounts[m]++;
+                });
+                const maxCount = Math.max(...monthlyCounts, 1);
+                const currentMonth = new Date().getMonth();
+
+                document.getElementById('reading-chart').innerHTML = `
+                    <div class="chart-title">books read by month — ${currentYear}</div>
+                    <div class="chart-bars">
+                        ${monthlyCounts.map((count, i) => `
+                            <div class="chart-col${i > currentMonth ? ' chart-future' : ''}">
+                                <div class="chart-bar-wrap">
+                                    <div class="chart-bar" style="height:${(count / maxCount) * 100}%"></div>
+                                </div>
+                                <div class="chart-count">${count || ''}</div>
+                                <div class="chart-month">${MONTH_NAMES[i]}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+
+                const books = [...readingBooks, ...readBooks].slice(0, MAX_BOOKS);
+                const grid = document.getElementById('books-grid');
+                if (!books.length) return;
+
+                grid.innerHTML = books.map(b => `
+                    <a href="${PROFILE_URL}" target="_blank" class="book-card">
+                        <div class="book-cover">
+                            <img src="${esc(b.cover)}" alt="${esc(b.title)}" loading="lazy">
+                        </div>
+                        <div class="book-info">
+                            <span class="book-status ${b.status}">${b.status}</span>
+                            <p class="book-title">${esc(b.title)}</p>
+                            <p class="book-author">${esc(b.author)}</p>
+                        </div>
+                    </a>
+                `).join('');
+            } catch (e) {
+                console.error('Failed to load books from Goodreads:', e);
+            }
+        })();
+    </script>
 </body>
 
 </html>

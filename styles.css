@@ -1,170 +1,484 @@
-/* Base styles */
+/* Base */
 :root {
-    --primary-color: #1a73e8;
-    --text-color: #333333;
-    --background-color: #f5f5f5;
-    --card-background: #ffffff;
-    --border-radius: 8px;
-    --spacing-unit: 1rem;
+    --accent: #1976d2;
+    --text: #1a1a1a;
+    --muted: #666;
+    --border: #e0e0e0;
+    --card-bg: #ffffff;
+    --bg: #f9f9f9;
 }
 
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    line-height: 1.6;
-    color: var(--text-color);
-    background-color: var(--background-color);
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+body {
+    font-family: Georgia, 'Times New Roman', serif;
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+}
+
 .container {
-    max-width: 1024px;
+    max-width: 860px;
     margin: 0 auto;
-    padding: 2rem 1rem;
+    padding: 0 1.5rem 4rem;
 }
 
-/* Header styles */
+/* Header */
 .header {
-    text-align: center;
-    margin-bottom: 3rem;
+    padding: 3.5rem 0 2.5rem;
 }
 
-.header h1 {
-    font-size: 2.5rem;
+.name {
+    font-size: 1.6rem;
+    font-weight: normal;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.4rem;
+    text-transform: lowercase;
+}
+
+.cursor {
+    color: var(--accent);
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.tagline {
+    font-size: 0.95rem;
+    color: var(--muted);
     margin-bottom: 1rem;
-}
-
-.header p {
-    font-size: 1.25rem;
-    color: #666;
+    text-transform: lowercase;
 }
 
 .contact-links {
     display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 1rem;
+    gap: 1.25rem;
 }
 
 .contact-links a {
-    color: var(--primary-color);
+    color: var(--accent);
     text-decoration: none;
+    font-size: 0.9rem;
+    text-transform: lowercase;
 }
 
 .contact-links a:hover {
     text-decoration: underline;
 }
 
-/* Section styles */
-.section {
-    margin-bottom: 3rem;
+/* Tab bar */
+.tab-bar {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    margin-bottom: 2rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
 }
 
-.section-title {
-    font-size: 1.75rem;
-    font-weight: bold;
-    margin-bottom: 1.5rem;
+.tab-bar::-webkit-scrollbar {
+    display: none;
 }
 
-/* Card styles */
-.card {
-    background-color: var(--card-background);
-    border-radius: var(--border-radius);
-    padding: 1.5rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 1rem;
+.tab {
+    background: none;
+    border: none;
+    padding: 0.7rem 1.1rem;
+    cursor: pointer;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 0.9rem;
+    color: var(--muted);
+    text-transform: lowercase;
+    white-space: nowrap;
+    transition: color 0.15s;
+    flex-shrink: 0;
 }
 
-.card-title {
-    font-size: 1.25rem;
+.tab:hover {
+    color: var(--text);
+}
+
+.tab.active {
+    color: var(--text);
+}
+
+.tab-indicator {
+    position: absolute;
+    bottom: -1px;
+    height: 2px;
+    background-color: var(--accent);
+    transition: left 0.2s ease, width 0.2s ease;
+}
+
+/* Tab content */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Entry cards */
+.entry-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.entry-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.company-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    object-fit: contain;
+    background-color: #fff;
+    flex-shrink: 0;
+    padding: 3px;
+}
+
+.logo-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    font-weight: 700;
+    font-family: system-ui, sans-serif;
+    font-style: normal;
+    color: var(--accent);
+    background-color: #e8f0fe;
+}
+
+.entry-header-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.entry-company {
+    font-size: 0.95rem;
     font-weight: 600;
-    margin-bottom: 0.5rem;
+    text-transform: lowercase;
+    margin-bottom: 0.2rem;
 }
 
-.card-subtitle {
-    color: #666;
-    margin-bottom: 1rem;
+.entry-role {
+    font-size: 0.82rem;
+    color: var(--muted);
+    font-style: italic;
 }
 
-/* Projects section */
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
+.entry-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
+    flex-shrink: 0;
 }
 
-.project-card {
+.entry-dates {
+    font-size: 0.8rem;
+    color: var(--muted);
+    white-space: nowrap;
+}
+
+.entry-link {
+    font-size: 0.75rem;
+    color: var(--accent);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.entry-link:hover {
+    text-decoration: underline;
+}
+
+.entry-bullets {
+    margin-top: 0.75rem;
+    padding-left: 1.1rem;
+}
+
+.entry-bullets li {
+    font-size: 0.85rem;
+    color: #444;
+    margin-bottom: 0.35rem;
+    line-height: 1.55;
+}
+
+/* Project card extras */
+.project-card .project-image {
+    margin: 1rem -1.5rem;
+    height: 220px;
     overflow: hidden;
-    transition: transform 0.2s ease;
+    background-color: #eee;
 }
 
-.project-card:hover {
-    transform: translateY(-4px);
-}
-
-.project-image {
-    margin: -1.5rem -1.5rem 1.5rem -1.5rem; /* Negative margin to stretch image to edges */
-    height: 200px;
-    overflow: hidden;
-    background-color: #f5f5f5;
-}
-
-.project-image img {
+.project-card .project-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
     transition: transform 0.3s ease;
 }
 
 .project-card:hover .project-image img {
-    transform: scale(1.05);
-}
-
-.project-content {
-    padding: 0;
+    transform: scale(1.03);
 }
 
 .project-links {
     display: flex;
     gap: 1rem;
-    margin-top: 1rem;
+    flex-shrink: 0;
 }
 
-.project-link {
-    color: var(--primary-color);
+.project-links a {
+    color: var(--accent);
     text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    transition: color 0.2s ease;
+    font-size: 0.82rem;
+    white-space: nowrap;
 }
 
-.project-link:hover {
+.project-links a:hover {
     text-decoration: underline;
 }
 
-/* Footer styles */
-.footer {
-    text-align: center;
-    color: #666;
-    font-size: 0.875rem;
-    margin-top: 3rem;
+/* Reading section intro link */
+.reading-intro {
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
 }
 
-/* Responsive adjustments */
+.reading-intro a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.reading-intro a:hover {
+    text-decoration: underline;
+}
+
+/* Reading stats */
+.reading-stats {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: lowercase;
+}
+
+/* Monthly reading chart */
+.reading-chart {
+    margin-bottom: 1.5rem;
+}
+
+.chart-title {
+    font-size: 0.78rem;
+    color: var(--muted);
+    text-transform: lowercase;
+    margin-bottom: 0.6rem;
+}
+
+.chart-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.35rem;
+    height: 80px;
+}
+
+.chart-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    gap: 0.15rem;
+}
+
+.chart-bar-wrap {
+    width: 100%;
+    height: 55px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.chart-bar {
+    width: 100%;
+    background-color: var(--accent);
+    border-radius: 2px 2px 0 0;
+    min-height: 0;
+    transition: height 0.3s ease;
+}
+
+.chart-future .chart-bar {
+    background-color: var(--border);
+}
+
+.chart-count {
+    font-size: 0.65rem;
+    color: var(--muted);
+    height: 0.8rem;
+    line-height: 1;
+}
+
+.chart-month {
+    font-size: 0.65rem;
+    color: var(--muted);
+    text-transform: lowercase;
+}
+
+/* Books grid */
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+}
+
+.book-card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--text);
+    transition: transform 0.2s ease;
+}
+
+.book-card:hover {
+    transform: translateY(-3px);
+}
+
+.book-cover {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    overflow: hidden;
+    background-color: #e8e8e8;
+}
+
+.book-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    display: block;
+}
+
+.book-card:hover .book-cover img {
+    transform: scale(1.05);
+}
+
+.book-info {
+    padding: 0.65rem 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    flex: 1;
+}
+
+.book-status {
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: lowercase;
+    letter-spacing: 0.05em;
+    padding: 0.1rem 0.4rem;
+    border-radius: 3px;
+    align-self: flex-start;
+}
+
+.book-status.reading {
+    background-color: #e8f0fe;
+    color: var(--accent);
+}
+
+.book-status.read {
+    background-color: #e6f4ea;
+    color: #1e8e3e;
+}
+
+.book-title {
+    font-size: 0.78rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.book-author {
+    font-size: 0.73rem;
+    color: var(--muted);
+    font-style: italic;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.8rem;
+    margin-top: 3rem;
+    text-transform: lowercase;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
-    .container {
-        padding: 1rem;
+    .books-grid {
+        grid-template-columns: repeat(3, 1fr);
     }
 
-    .header h1 {
-        font-size: 2rem;
+    .entry-header {
+        flex-direction: column;
+        gap: 0.25rem;
     }
 
-    .section-title {
-        font-size: 1.5rem;
+    .entry-dates {
+        color: var(--muted);
     }
 
-    .projects-grid {
-        grid-template-columns: 1fr;
+    .project-card .entry-header {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 480px) {
+    .books-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .header {
+        padding: 2rem 0 1.5rem;
+    }
+
+    .name {
+        font-size: 1.3rem;
     }
 }
