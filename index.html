@@ -12,7 +12,7 @@
     <div class="container">
 
         <header class="header">
-            <h1 class="name">norman_bui<span class="cursor">|</span></h1>
+            <h1 class="name">Norman Bui</h1>
             <p class="tagline">honours cs student at carleton university</p>
             <div class="contact-links">
                 <a href="mailto:normanbui23@gmail.com">email</a>
@@ -280,7 +280,8 @@
                         </div>
                         <div class="entry-meta">
                             <span class="entry-dates">Expected April 2026</span>
-                            <a class="entry-link" href="https://admissions.carleton.ca/programs/computer-science/" target="_blank">program &rarr;</a>
+                            <a class="entry-link" href="https://admissions.carleton.ca/programs/computer-science/"
+                                target="_blank">program &rarr;</a>
                         </div>
                     </div>
                     <ul class="entry-bullets">
@@ -391,7 +392,9 @@
             const PROFILE_URL = 'https://www.goodreads.com/user/show/166643433-norman';
             const MAX_BOOKS = 5;
             const MAX_RECENT_PAGE_BOOKS = 6;
-            const MONTH_NAMES = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+            const MONTH_NAMES = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov',
+                'dec'
+            ];
             const parser = new DOMParser();
 
             function esc(str) {
@@ -472,6 +475,7 @@
                 valueFormatter = value => value,
                 wide = false,
                 rowClass = '',
+                linkRows = false,
                 emptyMessage = 'no data yet.'
             }) {
                 const maxValue = Math.max(...items.map(item => item.value), 1);
@@ -482,15 +486,23 @@
                         ${items.length ? `
                             <div class="horizontal-bars">
                                 ${items.map(item => {
+                                    const isLink = linkRows && item.url;
                                     const width = item.value ? Math.max((item.value / maxValue) * 100, 6) : 0;
+                                    const rowTag = isLink ? 'a' : 'div';
+                                    const rowClasses = ['horizontal-row', rowClass, isLink ? 'horizontal-row-link' : '']
+                                        .filter(Boolean)
+                                        .join(' ');
+                                    const rowAttributes = isLink
+                                        ? ` href="${esc(item.url)}" target="_blank" rel="noopener noreferrer"`
+                                        : '';
                                     return `
-                                        <div class="horizontal-row ${rowClass}">
+                                        <${rowTag} class="${rowClasses}"${rowAttributes}>
                                             <div class="horizontal-label" title="${esc(item.label)}">${esc(item.label)}</div>
                                             <div class="horizontal-track">
                                                 <div class="horizontal-fill" style="width:${width}%"></div>
                                             </div>
                                             <div class="horizontal-value">${esc(valueFormatter(item.value, item))}</div>
-                                        </div>
+                                        </${rowTag}>
                                     `;
                                 }).join('')}
                             </div>
@@ -526,18 +538,27 @@
                 const readBooks = parseItems(parser.parseFromString(xml2, 'text/xml'), 'read');
 
                 const currentYear = new Date().getFullYear();
-                const thisYearBooks = readBooks.filter(b => b.readAt && new Date(b.readAt).getFullYear() === currentYear);
+                const thisYearBooks = readBooks.filter(b => b.readAt && new Date(b.readAt).getFullYear() ===
+                    currentYear);
                 const thisYearPages = thisYearBooks.reduce((sum, b) => sum + b.pages, 0);
                 const ratedBooks = thisYearBooks.filter(b => b.rating > 0);
-                const avgRating = ratedBooks.length
-                    ? (ratedBooks.reduce((s, b) => s + b.rating, 0) / ratedBooks.length).toFixed(1)
-                    : null;
+                const avgRating = ratedBooks.length ?
+                    (ratedBooks.reduce((s, b) => s + b.rating, 0) / ratedBooks.length).toFixed(1) :
+                    null;
 
                 const statsEl = document.getElementById('reading-stats');
-                statsEl.innerHTML = [
-                    { value: thisYearBooks.length, label: 'books in ' + currentYear },
-                    thisYearPages > 0 ? { value: thisYearPages.toLocaleString(), label: 'pages in ' + currentYear } : null,
-                    avgRating ? { value: avgRating + ' / 5', label: 'avg rating' } : null
+                statsEl.innerHTML = [{
+                        value: thisYearBooks.length,
+                        label: 'books in ' + currentYear
+                    },
+                    thisYearPages > 0 ? {
+                        value: thisYearPages.toLocaleString(),
+                        label: 'pages in ' + currentYear
+                    } : null,
+                    avgRating ? {
+                        value: avgRating + ' / 5',
+                        label: 'avg rating'
+                    } : null
                 ].filter(Boolean).map(s => `
                     <div class="stat-item">
                         <span class="stat-value">${s.value}</span>
@@ -553,21 +574,21 @@
                 const currentMonth = new Date().getMonth();
 
                 const ratedAllTime = readBooks.filter(b => b.rating > 0);
-                const ratingDistribution = ratedAllTime.length
-                    ? [5, 4, 3, 2, 1].map(stars => ({
+                const ratingDistribution = ratedAllTime.length ?
+                    [5, 4, 3, 2, 1].map(stars => ({
                         label: `${stars}★`,
                         value: ratedAllTime.filter(book => book.rating === stars).length
-                    }))
-                    : [];
+                    })) :
+                    [];
 
                 const publicationDecades = Object.entries(
-                    dedupeBooks([...readingBooks, ...readBooks]).reduce((counts, book) => {
-                        if (!book.publishedYear) return counts;
-                        const decade = Math.floor(book.publishedYear / 10) * 10;
-                        counts[decade] = (counts[decade] || 0) + 1;
-                        return counts;
-                    }, {})
-                ).sort((a, b) => Number(a[0]) - Number(b[0]))
+                        dedupeBooks([...readingBooks, ...readBooks]).reduce((counts, book) => {
+                            if (!book.publishedYear) return counts;
+                            const decade = Math.floor(book.publishedYear / 10) * 10;
+                            counts[decade] = (counts[decade] || 0) + 1;
+                            return counts;
+                        }, {})
+                    ).sort((a, b) => Number(a[0]) - Number(b[0]))
                     .map(([decade, count]) => ({
                         label: `${decade}s`,
                         value: count
@@ -578,7 +599,8 @@
                     .slice(0, MAX_RECENT_PAGE_BOOKS)
                     .map(book => ({
                         label: book.title,
-                        value: book.pages
+                        value: book.pages,
+                        url: book.url
                     }));
 
                 document.getElementById('reading-charts').innerHTML = [
@@ -596,6 +618,7 @@
                         items: recentPageBooks,
                         valueFormatter: value => `${value.toLocaleString()} pp`,
                         wide: true,
+                        linkRows: true,
                         rowClass: 'book-row'
                     })
                 ].join('');
