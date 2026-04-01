@@ -275,6 +275,7 @@ body {
 /* Reading stats */
 .reading-stats {
     display: flex;
+    flex-wrap: wrap;
     gap: 2rem;
     margin-bottom: 1.5rem;
 }
@@ -298,9 +299,24 @@ body {
     text-transform: lowercase;
 }
 
-/* Monthly reading chart */
-.reading-chart {
+/* Reading charts */
+.reading-charts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
     margin-bottom: 1.5rem;
+}
+
+.chart-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1rem;
+    min-width: 0;
+}
+
+.chart-card-wide {
+    grid-column: 1 / -1;
 }
 
 .chart-title {
@@ -314,7 +330,7 @@ body {
     display: flex;
     align-items: flex-end;
     gap: 0.35rem;
-    height: 80px;
+    height: 94px;
 }
 
 .chart-col {
@@ -327,7 +343,7 @@ body {
 
 .chart-bar-wrap {
     width: 100%;
-    height: 55px;
+    height: 68px;
     display: flex;
     align-items: flex-end;
 }
@@ -355,6 +371,57 @@ body {
     font-size: 0.65rem;
     color: var(--muted);
     text-transform: lowercase;
+}
+
+.horizontal-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+.horizontal-row {
+    display: grid;
+    grid-template-columns: minmax(0, 4.25rem) minmax(0, 1fr) auto;
+    gap: 0.65rem;
+    align-items: center;
+}
+
+.horizontal-row.book-row {
+    grid-template-columns: minmax(0, 12rem) minmax(0, 1fr) auto;
+}
+
+.horizontal-label {
+    font-size: 0.74rem;
+    color: var(--text);
+    line-height: 1.25;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.horizontal-track {
+    width: 100%;
+    height: 0.75rem;
+    background-color: #eef2f5;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.horizontal-fill {
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #1976d2 0%, #63a4ff 100%);
+}
+
+.horizontal-value {
+    font-size: 0.72rem;
+    color: var(--muted);
+    white-space: nowrap;
+}
+
+.chart-empty {
+    font-size: 0.74rem;
+    color: var(--muted);
 }
 
 /* Books grid */
@@ -450,6 +517,18 @@ body {
 
 /* Responsive */
 @media (max-width: 768px) {
+    .reading-charts {
+        grid-template-columns: 1fr;
+    }
+
+    .chart-card-wide {
+        grid-column: auto;
+    }
+
+    .horizontal-row.book-row {
+        grid-template-columns: minmax(0, 8rem) minmax(0, 1fr) auto;
+    }
+
     .books-grid {
         grid-template-columns: repeat(3, 1fr);
     }
@@ -470,6 +549,14 @@ body {
 }
 
 @media (max-width: 480px) {
+    .horizontal-row {
+        grid-template-columns: minmax(0, 3.5rem) minmax(0, 1fr) auto;
+    }
+
+    .horizontal-row.book-row {
+        grid-template-columns: minmax(0, 6rem) minmax(0, 1fr) auto;
+    }
+
     .books-grid {
         grid-template-columns: repeat(2, 1fr);
     }

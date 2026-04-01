@@ -347,7 +347,7 @@
                 <p class="reading-intro"><a href="https://www.goodreads.com/user/show/166643433-norman"
                         target="_blank">judge my taste in books &rarr;</a></p>
                 <div class="reading-stats" id="reading-stats"></div>
-                <div class="reading-chart" id="reading-chart"></div>
+                <div class="reading-charts" id="reading-charts"></div>
                 <div class="books-grid" id="books-grid"></div>
             </section>
 
@@ -390,10 +390,16 @@
             const USER_ID = '166643433';
             const PROFILE_URL = 'https://www.goodreads.com/user/show/166643433-norman';
             const MAX_BOOKS = 5;
+            const MAX_RECENT_PAGE_BOOKS = 6;
+            const MONTH_NAMES = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+            const parser = new DOMParser();
 
             function esc(str) {
-                return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g,
-                    '&quot;');
+                return String(str)
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;');
             }
 
             async function fetchRSS(url) {
@@ -415,13 +421,94 @@
                 return url.replace(/\._S[XY]\d+_(?=\.jpg)/i, '');
             }
 
+            function getBookUrl(item) {
+                const description = getTag(item, 'description');
+                if (description) {
+                    const htmlDoc = parser.parseFromString(description, 'text/html');
+                    const link = htmlDoc.querySelector('a[href]');
+                    if (link && link.href) return link.href;
+                }
+
+                const bookId = getTag(item, 'book_id');
+                return bookId ? `https://www.goodreads.com/book/show/${bookId}` : PROFILE_URL;
+            }
+
+            function dedupeBooks(books) {
+                const uniqueBooks = new Map();
+                books.forEach(book => {
+                    const key = book.bookId || `${book.title}::${book.author}`;
+                    if (!uniqueBooks.has(key)) uniqueBooks.set(key, book);
+                });
+                return Array.from(uniqueBooks.values());
+            }
+
+            function renderMonthlyChart(monthlyCounts, currentYear, currentMonth) {
+                const maxCount = Math.max(...monthlyCounts, 1);
+
+                return `
+                    <section class="chart-card chart-card-wide">
+                        <div class="chart-title">books read by month — ${currentYear}</div>
+                        <div class="chart-bars">
+                            ${monthlyCounts.map((count, i) => {
+                                const height = count ? Math.max((count / maxCount) * 100, 6) : 0;
+                                return `
+                                    <div class="chart-col${i > currentMonth ? ' chart-future' : ''}">
+                                        <div class="chart-bar-wrap">
+                                            <div class="chart-bar" style="height:${height}%"></div>
+                                        </div>
+                                        <div class="chart-count">${count || ''}</div>
+                                        <div class="chart-month">${MONTH_NAMES[i]}</div>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </section>
+                `;
+            }
+
+            function renderHorizontalBarChart({
+                title,
+                items,
+                valueFormatter = value => value,
+                wide = false,
+                rowClass = '',
+                emptyMessage = 'no data yet.'
+            }) {
+                const maxValue = Math.max(...items.map(item => item.value), 1);
+
+                return `
+                    <section class="chart-card${wide ? ' chart-card-wide' : ''}">
+                        <div class="chart-title">${title}</div>
+                        ${items.length ? `
+                            <div class="horizontal-bars">
+                                ${items.map(item => {
+                                    const width = item.value ? Math.max((item.value / maxValue) * 100, 6) : 0;
+                                    return `
+                                        <div class="horizontal-row ${rowClass}">
+                                            <div class="horizontal-label" title="${esc(item.label)}">${esc(item.label)}</div>
+                                            <div class="horizontal-track">
+                                                <div class="horizontal-fill" style="width:${width}%"></div>
+                                            </div>
+                                            <div class="horizontal-value">${esc(valueFormatter(item.value, item))}</div>
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>
+                        ` : `<div class="chart-empty">${emptyMessage}</div>`}
+                    </section>
+                `;
+            }
+
             function parseItems(xmlDoc, status) {
                 return Array.from(xmlDoc.getElementsByTagName('item')).map(item => ({
+                    bookId: getTag(item, 'book_id'),
                     title: getTag(item, 'title'),
                     author: getTag(item, 'author_name'),
                     cover: improveImageUrl(getTag(item, 'book_image_url')),
+                    url: getBookUrl(item),
                     pages: parseInt(getTag(item, 'num_pages')) || 0,
                     rating: parseInt(getTag(item, 'user_rating')) || 0,
+                    publishedYear: parseInt(getTag(item, 'book_published')) || null,
                     readAt: getTag(item, 'user_read_at'),
                     status
                 }));
@@ -435,7 +522,6 @@
                         '?shelf=read&sort=date_read&order=d')
                 ]);
 
-                const parser = new DOMParser();
                 const readingBooks = parseItems(parser.parseFromString(xml1, 'text/xml'), 'reading');
                 const readBooks = parseItems(parser.parseFromString(xml2, 'text/xml'), 'read');
 
@@ -459,36 +545,67 @@
                     </div>
                 `).join('');
 
-                const MONTH_NAMES = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
                 const monthlyCounts = new Array(12).fill(0);
                 thisYearBooks.forEach(b => {
                     const m = new Date(b.readAt).getMonth();
                     if (!isNaN(m)) monthlyCounts[m]++;
                 });
-                const maxCount = Math.max(...monthlyCounts, 1);
                 const currentMonth = new Date().getMonth();
 
-                document.getElementById('reading-chart').innerHTML = `
-                    <div class="chart-title">books read by month — ${currentYear}</div>
-                    <div class="chart-bars">
-                        ${monthlyCounts.map((count, i) => `
-                            <div class="chart-col${i > currentMonth ? ' chart-future' : ''}">
-                                <div class="chart-bar-wrap">
-                                    <div class="chart-bar" style="height:${(count / maxCount) * 100}%"></div>
-                                </div>
-                                <div class="chart-count">${count || ''}</div>
-                                <div class="chart-month">${MONTH_NAMES[i]}</div>
-                            </div>
-                        `).join('')}
-                    </div>
-                `;
+                const ratedAllTime = readBooks.filter(b => b.rating > 0);
+                const ratingDistribution = ratedAllTime.length
+                    ? [5, 4, 3, 2, 1].map(stars => ({
+                        label: `${stars}★`,
+                        value: ratedAllTime.filter(book => book.rating === stars).length
+                    }))
+                    : [];
+
+                const publicationDecades = Object.entries(
+                    dedupeBooks([...readingBooks, ...readBooks]).reduce((counts, book) => {
+                        if (!book.publishedYear) return counts;
+                        const decade = Math.floor(book.publishedYear / 10) * 10;
+                        counts[decade] = (counts[decade] || 0) + 1;
+                        return counts;
+                    }, {})
+                ).sort((a, b) => Number(a[0]) - Number(b[0]))
+                    .map(([decade, count]) => ({
+                        label: `${decade}s`,
+                        value: count
+                    }));
+
+                const recentPageBooks = readBooks
+                    .filter(book => book.pages > 0)
+                    .slice(0, MAX_RECENT_PAGE_BOOKS)
+                    .map(book => ({
+                        label: book.title,
+                        value: book.pages
+                    }));
+
+                document.getElementById('reading-charts').innerHTML = [
+                    renderMonthlyChart(monthlyCounts, currentYear, currentMonth),
+                    renderHorizontalBarChart({
+                        title: 'rating distribution — all-time',
+                        items: ratingDistribution
+                    }),
+                    renderHorizontalBarChart({
+                        title: 'publication decade',
+                        items: publicationDecades
+                    }),
+                    renderHorizontalBarChart({
+                        title: `pages per recent read${recentPageBooks.length ? ` — last ${recentPageBooks.length}` : ''}`,
+                        items: recentPageBooks,
+                        valueFormatter: value => `${value.toLocaleString()} pp`,
+                        wide: true,
+                        rowClass: 'book-row'
+                    })
+                ].join('');
 
                 const books = [...readingBooks, ...readBooks].slice(0, MAX_BOOKS);
                 const grid = document.getElementById('books-grid');
                 if (!books.length) return;
 
                 grid.innerHTML = books.map(b => `
-                    <a href="${PROFILE_URL}" target="_blank" class="book-card">
+                    <a href="${esc(b.url)}" target="_blank" rel="noopener noreferrer" class="book-card">
                         <div class="book-cover">
                             <img src="${esc(b.cover)}" alt="${esc(b.title)}" loading="lazy">
                         </div>
