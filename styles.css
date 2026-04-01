@@ -73,6 +73,19 @@ body {
     text-decoration: underline;
 }
 
+.header-note {
+    max-width: 42rem;
+    margin-top: 1rem;
+    padding: 0.8rem 0.95rem;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    background-color: var(--card-bg);
+    font-size: 0.86rem;
+    color: #444;
+    line-height: 1.6;
+    text-transform: lowercase;
+}
+
 /* Tab bar */
 .tab-bar {
     display: flex;
