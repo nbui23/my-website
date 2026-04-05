@@ -51,20 +51,9 @@ body {
     text-transform: lowercase;
 }
 
-.cursor {
-    color: var(--accent);
-    animation: blink 1s step-end infinite;
-}
-
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-}
-
 .tagline {
     font-size: 0.95rem;
     color: var(--muted);
-    margin-bottom: 0;
     text-transform: lowercase;
 }
 
@@ -74,14 +63,23 @@ body {
     gap: 1.25rem;
 }
 
-.contact-links a {
+.contact-links a,
+.entry-link,
+.project-links a,
+.reading-intro a {
     color: var(--accent);
     text-decoration: none;
+}
+
+.contact-links a {
     font-size: 0.9rem;
     text-transform: lowercase;
 }
 
-.contact-links a:hover {
+.contact-links a:hover,
+.entry-link:hover,
+.project-links a:hover,
+.reading-intro a:hover {
     text-decoration: underline;
 }
 
@@ -164,10 +162,15 @@ body {
 }
 
 /* Entry cards */
-.entry-card {
+.entry-card,
+.chart-card,
+.book-card {
     background-color: var(--card-bg);
     border: 1px solid var(--border);
     border-radius: 4px;
+}
+
+.entry-card {
     padding: 1.25rem 1.5rem;
     margin-bottom: 0.75rem;
 }
@@ -189,14 +192,13 @@ body {
     padding: 3px;
 }
 
-.logo-placeholder {
+.company-logo-fallback {
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 0.95rem;
     font-weight: 700;
     font-family: system-ui, sans-serif;
-    font-style: normal;
     color: var(--accent);
     background-color: #e8f0fe;
 }
@@ -235,17 +237,16 @@ body {
 
 .entry-link {
     font-size: 0.75rem;
-    color: var(--accent);
-    text-decoration: none;
     white-space: nowrap;
-}
-
-.entry-link:hover {
-    text-decoration: underline;
 }
 
 .entry-bullets {
     margin-top: 0.75rem;
+    padding-left: 1.1rem;
+}
+
+.course-list {
+    margin-top: 0.35rem;
     padding-left: 1.1rem;
 }
 
@@ -264,7 +265,8 @@ body {
     background-color: #eee;
 }
 
-.project-card .project-image img {
+.project-card .project-image img,
+.book-cover img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -281,31 +283,15 @@ body {
     gap: 1rem;
     flex-shrink: 0;
 }
-
 .project-links a {
-    color: var(--accent);
-    text-decoration: none;
     font-size: 0.82rem;
     white-space: nowrap;
-}
-
-.project-links a:hover {
-    text-decoration: underline;
 }
 
 /* Reading section intro link */
 .reading-intro {
     font-size: 0.85rem;
     margin-bottom: 1rem;
-}
-
-.reading-intro a {
-    color: var(--accent);
-    text-decoration: none;
-}
-
-.reading-intro a:hover {
-    text-decoration: underline;
 }
 
 /* Reading stats */
@@ -344,9 +330,6 @@ body {
 }
 
 .chart-card {
-    background-color: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 4px;
     padding: 1rem;
     min-width: 0;
 }
@@ -497,9 +480,6 @@ body {
 .book-card {
     display: flex;
     flex-direction: column;
-    background-color: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 4px;
     overflow: hidden;
     text-decoration: none;
     color: var(--text);
@@ -515,14 +495,6 @@ body {
     aspect-ratio: 2 / 3;
     overflow: hidden;
     background-color: #e8e8e8;
-}
-
-.book-cover img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-    display: block;
 }
 
 .book-card:hover .book-cover img {
@@ -609,13 +581,8 @@ body {
         gap: 0.25rem;
     }
 
-    .entry-dates {
-        color: var(--muted);
-    }
-
     .project-card .entry-header {
         flex-direction: row;
-        align-items: flex-start;
     }
 }
 
