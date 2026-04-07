@@ -221,6 +221,20 @@ body {
     font-style: italic;
 }
 
+.entry-title {
+    font-size: 0.78rem;
+    color: #444;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: lowercase;
+}
+
+.entry-summary {
+    font-size: 0.82rem;
+    color: var(--muted);
+    font-style: italic;
+}
+
 .entry-meta {
     display: flex;
     flex-direction: column;
