@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="640" viewBox="0 0 560 640" role="img"
+    aria-labelledby="title desc">
+    <title id="title">Latch focus session screenshot</title>
+    <desc id="desc">The Latch macOS app showing a focus-session setup screen with block list and duration options.</desc>
+
+    <defs>
+        <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#151515" />
+            <stop offset="100%" stop-color="#111111" />
+        </linearGradient>
+        <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="10" stdDeviation="18" flood-color="#000000" flood-opacity="0.35" />
+        </filter>
+    </defs>
+
+    <rect x="0" y="0" width="560" height="640" rx="28" fill="#0e0e0e" />
+    <rect x="0" y="0" width="560" height="76" fill="#111111" />
+    <rect x="20" y="22" width="30" height="30" rx="9" fill="#182133" />
+    <rect x="30" y="30" width="4" height="14" rx="2" fill="#f8fafc" />
+    <rect x="30" y="40" width="12" height="4" rx="2" fill="#f8fafc" />
+    <text x="62" y="36" font-size="20" font-weight="700" fill="#e5e5e5"
+        font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">Latch</text>
+    <text x="62" y="54" font-size="12" fill="#666666"
+        font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">Free, open-source macOS focus blocker</text>
+    <rect x="0" y="76" width="560" height="46" fill="#1a1a1a" />
+
+    <text x="22" y="104" font-size="14" font-weight="600" fill="#e5e5e5"
+        font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">Focus</text>
+    <rect x="20" y="112" width="74" height="2" rx="1" fill="#3b82f6" />
+    <text x="132" y="104" font-size="14" font-weight="400" fill="#666666"
+        font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">Block List</text>
+    <text x="242" y="104" font-size="14" font-weight="400" fill="#666666"
+        font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">Setup</text>
+    <text x="20" y="160" font-size="18" font-weight="600" fill="#e5e5e5"
+        font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">Start a Focus Session</text>
+    <text x="20" y="192" font-size="13" fill="#888888"
+        font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">Block list</text>
+    <rect x="20" y="202" width="520" height="42" rx="8" fill="#1a1a1a" stroke="#2c2c2c" />
+    <text x="34" y="228" font-size="14" fill="#e5e5e5"
+        font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">Default (3 sites)</text>
+    <text x="20" y="274" font-size="13" fill="#888888"
+        font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">Duration</text>
+    <rect x="20" y="286" width="160" height="42" rx="8" fill="#1e2a3a" stroke="#3b82f6" stroke-width="2" />
+    <text x="77" y="313" font-size="13" font-weight="600" fill="#3b82f6"
+        font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">1 hour</text>
+    <rect x="200" y="286" width="160" height="42" rx="8" fill="#1a1a1a" stroke="#2c2c2c" />
+    <text x="255" y="313" font-size="13" fill="#888888"
+        font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">2 hours</text>
+    <rect x="380" y="286" width="160" height="42" rx="8" fill="#1a1a1a" stroke="#2c2c2c" />
+    <text x="437" y="313" font-size="13" fill="#888888"
+        font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">4 hours</text>
+    <rect x="20" y="370" width="520" height="50" rx="10" fill="#2563eb" filter="url(#shadow)" />
+    <text x="193" y="401" font-size="16" font-weight="700" fill="#ffffff"
+        font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">&#9654; Start Focus Session</text>
+    <text x="20" y="462" font-size="12" fill="#666666"
+        font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">Sites on your block list are blocked across Chromium browsers.</text>
+</svg>

@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parent.parent
 INDEX = ROOT / "index.html"
 EXPECTED_TABS = ["experience", "education", "projects", "reading"]
 EXPECTED_SECTION_IDS = {"experience", "education", "projects", "reading"}
-EXPECTED_ENTRY_CARD_COUNT = 12
+EXPECTED_ENTRY_CARD_COUNT = 13
 EXPECTED_DYNAMIC_IDS = {"reading-stats", "reading-charts", "books-grid"}
 
 
