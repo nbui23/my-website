@@ -275,21 +275,34 @@ body {
 .project-card .project-image {
     margin: 1rem -1.5rem;
     height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 1.25rem;
+    box-sizing: border-box;
     overflow: hidden;
-    background-color: #eee;
+    background: linear-gradient(180deg, #f6f8fb 0%, #eef2f7 100%);
 }
 
-.project-card .project-image img,
-.book-cover img {
+.project-card .project-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    object-position: center;
     display: block;
     transition: transform 0.3s ease;
 }
 
 .project-card:hover .project-image img {
     transform: scale(1.03);
+}
+
+.book-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
 }
 
 .project-links {
