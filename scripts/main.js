@@ -10,7 +10,7 @@ const GOODREADS_USER_ID = '166643433';
 const GOODREADS_PROFILE_URL = 'https://www.goodreads.com/user/show/166643433-norman';
 const BOOKS_TO_SHOW = 5;
 const RECENT_PAGE_BOOKS_TO_SHOW = 6;
-const MONTH_NAMES = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+const MONTH_NAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const domParser = new DOMParser();
 
 function getShelfUrl(shelf) {
@@ -111,7 +111,7 @@ function renderMonthlyChart(monthlyCounts, currentYear, currentMonth) {
 
     return `
         <section class="chart-card chart-card-wide">
-            <div class="chart-title">books read by month — ${currentYear}</div>
+            <div class="chart-title">Books Read by Month — ${currentYear}</div>
             <div class="chart-bars">
                 ${monthlyCounts.map((count, index) => {
                     const height = count ? Math.max((count / maxCount) * 100, 6) : 0;
@@ -139,7 +139,7 @@ function renderHorizontalBarChart({
     wide = false,
     rowClass = '',
     linkRows = false,
-    emptyMessage = 'no data yet.'
+    emptyMessage = 'No data yet.'
 }) {
     const maxValue = Math.max(...items.map(item => item.value), 1);
 
@@ -192,9 +192,9 @@ function parseFeedItems(xmlDocument, status) {
 
 function renderReadingStats(statsElement, currentYearBooks, currentYear, currentYearPages, averageRating) {
     statsElement.innerHTML = [
-        { value: currentYearBooks.length, label: `books in ${currentYear}` },
-        currentYearPages > 0 ? { value: currentYearPages.toLocaleString(), label: `pages in ${currentYear}` } : null,
-        averageRating ? { value: `${averageRating} / 5`, label: 'avg rating' } : null
+        { value: currentYearBooks.length, label: `Books in ${currentYear}` },
+        currentYearPages > 0 ? { value: currentYearPages.toLocaleString(), label: `Pages in ${currentYear}` } : null,
+        averageRating ? { value: `${averageRating} / 5`, label: 'Avg. Rating' } : null
     ]
         .filter(Boolean)
         .map(stat => `
@@ -273,15 +273,15 @@ async function loadBooks() {
         chartsElement.innerHTML = [
             renderMonthlyChart(monthlyCounts, currentYear, currentMonth),
             renderHorizontalBarChart({
-                title: 'rating distribution — all-time',
+                title: 'Rating Distribution — All Time',
                 items: ratingDistribution
             }),
             renderHorizontalBarChart({
-                title: 'publication decade',
+                title: 'Publication Decade',
                 items: publicationDecades
             }),
             renderHorizontalBarChart({
-                title: `pages per recent read${recentPageBooks.length ? ` — last ${recentPageBooks.length}` : ''}`,
+                title: `Pages per Recent Read${recentPageBooks.length ? ` — Last ${recentPageBooks.length}` : ''}`,
                 items: recentPageBooks,
                 valueFormatter: value => `${value.toLocaleString()} pp`,
                 wide: true,
@@ -299,7 +299,7 @@ async function loadBooks() {
                     <img src="${escapeHtml(book.cover)}" alt="${escapeHtml(book.title)}" loading="lazy">
                 </div>
                 <div class="book-info">
-                    <span class="book-status ${book.status}">${book.status}</span>
+                    <span class="book-status ${book.status}">${book.status === 'reading' ? 'Reading' : 'Read'}</span>
                     <p class="book-title">${escapeHtml(book.title)}</p>
                     <p class="book-author">${escapeHtml(book.author)}</p>
                 </div>

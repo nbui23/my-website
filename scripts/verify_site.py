@@ -11,6 +11,18 @@ EXPECTED_TABS = ["experience", "education", "projects", "reading"]
 EXPECTED_SECTION_IDS = {"experience", "education", "projects", "reading"}
 EXPECTED_ENTRY_CARD_COUNT = 13
 EXPECTED_DYNAMIC_IDS = {"reading-stats", "reading-charts", "books-grid"}
+EXPECTED_EDUCATION_SNIPPETS = [
+    '<dt>Theory &amp; Algorithms</dt>',
+    '<dd>Algorithms I &amp; II, Discrete Structures I &amp; II, Graph Analytics</dd>',
+    '<dt>Systems &amp; Security</dt>',
+    '<dd>Operating Systems, Systems Programming, Applied Cryptography</dd>',
+    '<dt>Software Engineering</dt>',
+    'Software Engineering, Object-Oriented Programming, Software Quality Assurance,',
+    '<dt>Data &amp; Applications</dt>',
+    '<dd>Database Management Systems, Web Development, Mobile Multimedia</dd>',
+    '<dt>Math &amp; Stats</dt>',
+    "<strong>Awards:</strong> President's Scholarship, Henry Marshall Tory Scholarship, Chalmers",
+]
 
 
 class SiteParser(HTMLParser):
@@ -62,8 +74,9 @@ class SiteParser(HTMLParser):
 
 
 def main() -> None:
+    html = INDEX.read_text(encoding="utf-8")
     parser = SiteParser()
-    parser.feed(INDEX.read_text(encoding="utf-8"))
+    parser.feed(html)
 
     if parser.tab_ids != EXPECTED_TABS:
         raise SystemExit(f"Unexpected tab order: {parser.tab_ids}")
@@ -102,6 +115,15 @@ def main() -> None:
         raise SystemExit(
             "Found inline onerror fallbacks: "
             f"{parser.inline_onerror_sources}"
+        )
+
+    missing_education_snippets = [
+        snippet for snippet in EXPECTED_EDUCATION_SNIPPETS if snippet not in html
+    ]
+    if missing_education_snippets:
+        raise SystemExit(
+            "Education section is missing expected grouped-course content: "
+            f"{missing_education_snippets}"
         )
 
     print("Site structure OK")
