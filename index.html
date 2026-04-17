@@ -16,7 +16,28 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=5cbbbae2">
+    <link rel="stylesheet" href="styles.css?v=bbde9c0d">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Norman Bui",
+        "url": "https://nbui23.github.io/my-website/",
+        "image": "https://nbui23.github.io/my-website/images/logos/baby.jpeg",
+        "jobTitle": "Software Engineer",
+        "alumniOf": {
+            "@type": "CollegeOrUniversity",
+            "name": "Carleton University",
+            "url": "https://carleton.ca"
+        },
+        "email": "normanbui23@gmail.com",
+        "sameAs": [
+            "https://www.linkedin.com/in/nbui23/",
+            "https://github.com/nbui23",
+            "https://www.goodreads.com/user/show/166643433-norman"
+        ]
+    }
+    </script>
 </head>
 
 <body>
@@ -28,8 +49,17 @@
                 <div class="header-main">
                     <h1 class="name">Norman Bui</h1>
                     <p class="tagline">Honours CS Student at Carleton University</p>
+                    <div class="status-strip" role="note" aria-label="Job search status">
+                        <span class="status-dot" aria-hidden="true"></span>
+                        <strong>Available June 2026</strong>
+                        <span class="status-sep" aria-hidden="true">&middot;</span>
+                        <span>Ottawa or Toronto</span>
+                        <span class="status-sep" aria-hidden="true">&middot;</span>
+                        <span>Open to remote / hybrid</span>
+                    </div>
                 </div>
             </div>
+
             <div class="contact-links">
                 <a href="mailto:normanbui23@gmail.com">Email</a>
                 <a href="https://www.linkedin.com/in/nbui23/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
@@ -39,13 +69,11 @@
 
             <p class="header-note">Hello, I am a CS student who has built backend systems, data tools, and AI-powered
                 workflows across gaming, design software, government, and research teams.</p>
-
-            <p class="header-note">I am looking for new grad software positions starting after my graduation in April
-                2026.</p>
         </header>
 
         <div class="tab-bar">
             <button class="tab active" type="button" data-tab="experience">Experience</button>
+            <button class="tab" type="button" data-tab="skills">Skills</button>
             <button class="tab" type="button" data-tab="education">Education</button>
             <button class="tab" type="button" data-tab="projects">Projects</button>
             <button class="tab" type="button" data-tab="reading">What I'm Reading</button>
@@ -344,6 +372,82 @@
                         <li>Developed ASP.NET solutions to resolve UI bugs and implement frontend improvements for
                             victim info delivery application</li>
                     </ul>
+                </div>
+
+            </section>
+
+            <section id="skills" class="tab-content">
+
+                <div class="entry-card">
+                    <div class="skills-group">
+                        <h3 class="skills-category">Languages</h3>
+                        <ul class="project-tags skills-tags" aria-label="Languages">
+                            <li>Python</li>
+                            <li>TypeScript</li>
+                            <li>JavaScript</li>
+                            <li>C++</li>
+                            <li>C#</li>
+                            <li>Kotlin</li>
+                            <li>Java</li>
+                        </ul>
+                    </div>
+
+                    <div class="skills-group">
+                        <h3 class="skills-category">Frameworks &amp; Runtimes</h3>
+                        <ul class="project-tags skills-tags" aria-label="Frameworks and runtimes">
+                            <li>Next.js</li>
+                            <li>Node.js</li>
+                            <li>Express.js</li>
+                            <li>React Native</li>
+                            <li>Expo</li>
+                            <li>Electron</li>
+                            <li>Qt</li>
+                            <li>.NET</li>
+                            <li>ASP.NET</li>
+                        </ul>
+                    </div>
+
+                    <div class="skills-group">
+                        <h3 class="skills-category">AI / ML / Data</h3>
+                        <ul class="project-tags skills-tags" aria-label="AI, ML, and data">
+                            <li>LLMs</li>
+                            <li>RAG</li>
+                            <li>LangChain</li>
+                            <li>FAISS</li>
+                            <li>Ollama</li>
+                            <li>Sentence Transformers</li>
+                            <li>scikit-learn</li>
+                            <li>pandas</li>
+                            <li>NumPy</li>
+                            <li>NLTK</li>
+                        </ul>
+                    </div>
+
+                    <div class="skills-group">
+                        <h3 class="skills-category">Databases &amp; APIs</h3>
+                        <ul class="project-tags skills-tags" aria-label="Databases and APIs">
+                            <li>SQLite</li>
+                            <li>Prisma</li>
+                            <li>Neo4j</li>
+                            <li>Firebase</li>
+                            <li>GraphQL</li>
+                        </ul>
+                    </div>
+
+                    <div class="skills-group">
+                        <h3 class="skills-category">Tools &amp; Practices</h3>
+                        <ul class="project-tags skills-tags" aria-label="Tools and practices">
+                            <li>CI/CD</li>
+                            <li>TDD</li>
+                            <li>Mocha</li>
+                            <li>Chai</li>
+                            <li>Sinon</li>
+                            <li>unittest</li>
+                            <li>WCAG 2.1</li>
+                            <li>Cloudflare Workers</li>
+                            <li>PowerShell</li>
+                        </ul>
+                    </div>
                 </div>
 
             </section>

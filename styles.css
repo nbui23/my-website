@@ -123,6 +123,39 @@ dd {
     line-height: 1.75;
 }
 
+.status-strip {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.6rem;
+    margin-top: 0.7rem;
+    padding: 0.4rem 0.85rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background-color: var(--card-bg);
+    font-size: 0.9rem;
+    color: var(--text-soft);
+    line-height: 1.4;
+}
+
+.status-strip strong {
+    color: var(--text);
+    font-weight: 600;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #22a06b;
+    box-shadow: 0 0 0 3px rgba(34, 160, 107, 0.18);
+    flex-shrink: 0;
+}
+
+.status-sep {
+    color: var(--muted);
+}
+
 .header-photo {
     width: 110px;
     aspect-ratio: 1;
@@ -419,6 +452,25 @@ dd {
     color: #345;
     font-size: 0.92rem;
     line-height: 1.2;
+}
+
+.skills-tags {
+    margin-top: 0;
+}
+
+.skills-group + .skills-group {
+    margin-top: 1.4rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border);
+}
+
+.skills-category {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.7rem;
 }
 
 /* Reading section intro link */

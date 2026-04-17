@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import re
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlparse
@@ -7,9 +8,9 @@ from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parent.parent
 INDEX = ROOT / "index.html"
-EXPECTED_TABS = ["experience", "education", "projects", "reading"]
-EXPECTED_SECTION_IDS = {"experience", "education", "projects", "reading"}
-EXPECTED_ENTRY_CARD_COUNT = 13
+EXPECTED_TABS = ["experience", "skills", "education", "projects", "reading"]
+EXPECTED_SECTION_IDS = {"experience", "skills", "education", "projects", "reading"}
+EXPECTED_ENTRY_CARD_COUNT = 14
 EXPECTED_DYNAMIC_IDS = {"reading-stats", "reading-charts", "books-grid"}
 EXPECTED_EDUCATION_SNIPPETS = [
     '<dt>Theory &amp; Algorithms</dt>',
@@ -117,8 +118,10 @@ def main() -> None:
             f"{parser.inline_onerror_sources}"
         )
 
+    normalized_html = re.sub(r"\s+", " ", html)
     missing_education_snippets = [
-        snippet for snippet in EXPECTED_EDUCATION_SNIPPETS if snippet not in html
+        snippet for snippet in EXPECTED_EDUCATION_SNIPPETS
+        if re.sub(r"\s+", " ", snippet) not in normalized_html
     ]
     if missing_education_snippets:
         raise SystemExit(
