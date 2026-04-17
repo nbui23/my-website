@@ -3,6 +3,7 @@ const tabContents = [...document.querySelectorAll('.tab-content')];
 const tabIndicator = document.querySelector('.tab-indicator');
 
 const BOOK_PROXY_PREFIXES = [
+    'https://cold-flower-83d6.normanbui23.workers.dev/?url=',
     'https://corsproxy.io/?url=',
     'https://api.allorigins.win/raw?url='
 ];
@@ -23,7 +24,9 @@ function updateTabIndicator(activeTab) {
     tabIndicator.style.width = `${activeTab.offsetWidth}px`;
 }
 
-function setActiveTab(tab) {
+let booksLoaded = false;
+
+function setActiveTab(tab, pushState = false) {
     const targetSection = document.getElementById(tab.dataset.tab);
     if (!targetSection) return;
 
@@ -33,19 +36,39 @@ function setActiveTab(tab) {
     tab.classList.add('active');
     targetSection.classList.add('active');
     updateTabIndicator(tab);
+
+    const hash = `#${tab.dataset.tab}`;
+    if (pushState) {
+        history.pushState(null, '', hash);
+    } else {
+        history.replaceState(null, '', hash);
+    }
+
+    if (tab.dataset.tab === 'reading' && !booksLoaded) {
+        booksLoaded = true;
+        loadBooks();
+    }
+}
+
+function getTabByHash() {
+    const hash = window.location.hash.slice(1);
+    return tabs.find(t => t.dataset.tab === hash) || null;
 }
 
 function initTabs() {
     if (!tabs.length || !tabIndicator) return;
 
     tabs.forEach(tab => {
-        tab.addEventListener('click', () => setActiveTab(tab));
+        tab.addEventListener('click', () => setActiveTab(tab, true));
     });
 
-    const activeTab = document.querySelector('.tab.active') || tabs[0];
-    if (activeTab) {
-        setActiveTab(activeTab);
-    }
+    const activeTab = getTabByHash() || document.querySelector('.tab.active') || tabs[0];
+    if (activeTab) setActiveTab(activeTab);
+
+    window.addEventListener('hashchange', () => {
+        const tab = getTabByHash();
+        if (tab) setActiveTab(tab);
+    });
 
     window.addEventListener('resize', () => {
         const currentTab = document.querySelector('.tab.active');
@@ -213,6 +236,8 @@ async function loadBooks() {
 
     if (!statsElement || !chartsElement || !booksGrid) return;
 
+    booksGrid.innerHTML = '<p class="reading-loading">Loading books\u2026</p>';
+
     try {
         const [currentlyReadingXml, readShelfXml] = await Promise.all([
             fetchRssFeed(getShelfUrl('currently-reading')),
@@ -307,10 +332,10 @@ async function loadBooks() {
         `).join('');
     } catch (error) {
         console.error('Failed to load books from Goodreads:', error);
+        booksGrid.innerHTML = `<p class="reading-error">Could not load reading data. <a href="${GOODREADS_PROFILE_URL}" target="_blank" rel="noopener noreferrer">View on Goodreads \u2192</a></p>`;
     }
 }
 
 window.addEventListener('load', () => {
     initTabs();
-    loadBooks();
 });
