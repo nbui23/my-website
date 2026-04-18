@@ -20,31 +20,38 @@ function getShelfUrl(shelf) {
 
 function updateTabIndicator(activeTab) {
     if (!tabIndicator) return;
+    if (!activeTab || activeTab.offsetWidth === 0) {
+        tabIndicator.style.width = '0px';
+        return;
+    }
     tabIndicator.style.left = `${activeTab.offsetLeft}px`;
     tabIndicator.style.width = `${activeTab.offsetWidth}px`;
 }
 
 let booksLoaded = false;
 
-function setActiveTab(tab, pushState = false) {
-    const targetSection = document.getElementById(tab.dataset.tab);
+function setActiveSection(sectionId, pushState = false) {
+    const targetSection = document.getElementById(sectionId);
     if (!targetSection) return;
+    const activeTab = tabs.find(tab => tab.dataset.tab === sectionId) || null;
 
     tabs.forEach(button => button.classList.remove('active'));
     tabContents.forEach(section => section.classList.remove('active'));
 
-    tab.classList.add('active');
+    if (activeTab) {
+        activeTab.classList.add('active');
+    }
     targetSection.classList.add('active');
-    updateTabIndicator(tab);
+    updateTabIndicator(activeTab);
 
-    const hash = `#${tab.dataset.tab}`;
+    const hash = `#${sectionId}`;
     if (pushState) {
         history.pushState(null, '', hash);
     } else {
         history.replaceState(null, '', hash);
     }
 
-    if (tab.dataset.tab === 'reading' && !booksLoaded) {
+    if (sectionId === 'reading' && !booksLoaded) {
         booksLoaded = true;
         loadBooks();
     }
@@ -59,15 +66,22 @@ function initTabs() {
     if (!tabs.length || !tabIndicator) return;
 
     tabs.forEach(tab => {
-        tab.addEventListener('click', () => setActiveTab(tab, true));
+        tab.addEventListener('click', () => setActiveSection(tab.dataset.tab, true));
     });
 
     const activeTab = getTabByHash() || document.querySelector('.tab.active') || tabs[0];
-    if (activeTab) setActiveTab(activeTab);
+    const activeSection = window.location.hash.slice(1) || activeTab?.dataset.tab;
+    if (activeSection && document.getElementById(activeSection)) {
+        setActiveSection(activeSection);
+    } else if (activeTab) {
+        setActiveSection(activeTab.dataset.tab);
+    }
 
     window.addEventListener('hashchange', () => {
-        const tab = getTabByHash();
-        if (tab) setActiveTab(tab);
+        const activeSectionId = window.location.hash.slice(1);
+        if (activeSectionId && document.getElementById(activeSectionId)) {
+            setActiveSection(activeSectionId);
+        }
     });
 
     window.addEventListener('resize', () => {
@@ -336,6 +350,51 @@ async function loadBooks() {
     }
 }
 
+function initThemeToggle() {
+    const btn = document.querySelector('.theme-toggle');
+    if (!btn) return;
+
+    const root = document.documentElement;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    function getTheme() {
+        return root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    }
+
+    function syncThemeButton(theme) {
+        const nextTheme = theme === 'light' ? 'dark' : 'light';
+        const label = `Switch to ${nextTheme} mode`;
+        btn.setAttribute('aria-label', label);
+        btn.setAttribute('title', label);
+        btn.setAttribute('aria-pressed', String(theme === 'light'));
+    }
+
+    function commitTheme(theme) {
+        root.setAttribute('data-theme', theme);
+        syncThemeButton(theme);
+        try {
+            localStorage.setItem('theme', theme);
+        } catch (e) { /* storage disabled */ }
+    }
+
+    syncThemeButton(getTheme());
+
+    btn.addEventListener('click', () => {
+        const current = getTheme();
+        const next = current === 'light' ? 'dark' : 'light';
+
+        if (!document.startViewTransition || prefersReducedMotion.matches) {
+            commitTheme(next);
+            return;
+        }
+
+        document.startViewTransition(() => {
+            commitTheme(next);
+        });
+    });
+}
+
 window.addEventListener('load', () => {
     initTabs();
+    initThemeToggle();
 });

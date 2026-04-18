@@ -8,9 +8,9 @@ from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parent.parent
 INDEX = ROOT / "index.html"
-EXPECTED_TABS = ["experience", "skills", "education", "projects", "reading"]
-EXPECTED_SECTION_IDS = {"experience", "skills", "education", "projects", "reading"}
-EXPECTED_ENTRY_CARD_COUNT = 14
+EXPECTED_TABS = ["overview", "projects", "experience", "skills", "education", "reading"]
+EXPECTED_SECTION_IDS = {"overview", "projects", "experience", "skills", "education", "reading"}
+EXPECTED_ENTRY_CARD_COUNT = 19
 EXPECTED_DYNAMIC_IDS = {"reading-stats", "reading-charts", "books-grid"}
 EXPECTED_EDUCATION_SNIPPETS = [
     '<dt>Theory &amp; Algorithms</dt>',

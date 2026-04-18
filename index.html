@@ -1,9 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        (function () {
+            try {
+                var stored = localStorage.getItem('theme');
+                var theme = stored === 'light' || stored === 'dark' ? stored : 'dark';
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
     <title>Norman Bui</title>
     <meta name="description" content="Norman Bui — Honours CS student at Carleton University. Backend systems, data tools, and AI-powered workflows across gaming, design software, government, and research.">
     <meta property="og:title" content="Norman Bui">
@@ -16,7 +27,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=ab1c344a">
+    <link rel="stylesheet" href="styles.css?v=20260417-latch-case-study">
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -41,6 +52,15 @@
 </head>
 
 <body>
+    <button class="theme-toggle" type="button" aria-label="Toggle color theme" title="Toggle theme">
+        <svg class="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+        </svg>
+        <svg class="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+    </button>
     <div class="container">
 
         <header class="header">
@@ -48,15 +68,7 @@
                 <img class="header-photo" src="images/logos/baby.jpeg" alt="Baby photo of Norman Bui">
                 <div class="header-main">
                     <h1 class="name">Norman Bui</h1>
-                    <p class="tagline">Honours CS Student at Carleton University</p>
-                    <div class="status-strip" role="note" aria-label="Job search status">
-                        <span class="status-item status-item-primary">
-                            <span class="status-dot" aria-hidden="true"></span>
-                            <strong>Available June 2026</strong>
-                        </span>
-                        <span class="status-item">Ottawa or Toronto</span>
-                        <span class="status-item">Open to remote / hybrid</span>
-                    </div>
+                    <p class="tagline">Computer Science student finishing my degree at Carleton University</p>
                 </div>
             </div>
 
@@ -67,21 +79,147 @@
                 <a href="resume/Norman_Bui_Resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
             </div>
 
-            <p class="header-note">Hello, I am a CS student who has built backend systems, data tools, and AI-powered
-                workflows across gaming, design software, government, and research teams.</p>
+            <p class="header-note">Seeking new grad software roles. I have worked across <strong>9 software
+                    teams</strong> building backend systems, AI tooling, data workflows, and developer productivity software
+                across games, design software, health, geospatial, and public-sector environments.</p>
+
+            <div class="status-strip" role="note" aria-label="Job search status">
+                <span class="status-item status-item-primary">
+                    <span class="status-dot" aria-hidden="true"></span>
+                    <strong>Available June 2026</strong>
+                </span>
+                <p class="status-meta">Based in Ottawa or Toronto, open to remote or hybrid new grad roles</p>
+            </div>
         </header>
 
         <div class="tab-bar">
-            <button class="tab active" type="button" data-tab="experience">Experience</button>
+            <button class="tab active" type="button" data-tab="overview">Overview</button>
+            <button class="tab" type="button" data-tab="projects">Projects</button>
+            <button class="tab" type="button" data-tab="experience">Experience</button>
             <button class="tab" type="button" data-tab="skills">Skills</button>
             <button class="tab" type="button" data-tab="education">Education</button>
-            <button class="tab" type="button" data-tab="projects">Projects</button>
-            <button class="tab" type="button" data-tab="reading">What I'm Reading</button>
+            <button class="tab" type="button" data-tab="reading">Goodreads</button>
             <div class="tab-indicator"></div>
         </div>
 
         <main>
-            <section id="experience" class="tab-content active">
+            <section id="overview" class="tab-content active">
+                <div class="entry-card overview-card">
+                    <p class="overview-kicker">New Grad Software Engineering</p>
+                    <h2 class="overview-title">Backend systems, AI tooling, and developer workflows with real delivery
+                        across product, platform, and public-sector teams.</h2>
+                    <p class="overview-summary">Best fit for backend, developer tooling, applied AI, and systems-facing
+                        software roles. Strongest recent proof: foundation for repair workflows at Autodesk,
+                        infrastructure reliability at EA, and product work spanning
+                        Electron, mobile + web, GIS, and data pipelines.</p>
+
+                    <div class="proof-strip" aria-label="Recruiter quick facts">
+                        <div class="proof-item">
+                            <span class="proof-value">9</span>
+                            <span class="proof-label">total roles</span>
+                        </div>
+                        <div class="proof-item">
+                            <span class="proof-value">6</span>
+                            <span class="proof-label">internships</span>
+                        </div>
+                        <div class="proof-item">
+                            <span class="proof-value">3</span>
+                            <span class="proof-label">part-time roles</span>
+                        </div>
+                        <div class="proof-item">
+                            <span class="proof-value">4.0</span>
+                            <span class="proof-label">GPA</span>
+                        </div>
+                        <div class="proof-item">
+                            <span class="proof-value">EA + Autodesk</span>
+                            <span class="proof-label">most recent teams</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="overview-grid">
+                    <article class="entry-card spotlight-card">
+                        <p class="spotlight-label">Role Fit</p>
+                        <h3 class="spotlight-title">Teams that would likely get the most out of me</h3>
+                        <ul class="project-tags" aria-label="Best-fit roles and domains">
+                            <li>Backend Engineering</li>
+                            <li>Developer Tools</li>
+                            <li>Applied AI</li>
+                            <li>Data Infrastructure</li>
+                        </ul>
+                        <p class="spotlight-copy">I ramp quickly in technical domains, write production code across
+                            stacks, and tend to do best on teams where reliability, tooling, and thoughtful systems
+                            design matter.</p>
+                    </article>
+
+                    <article class="entry-card spotlight-card">
+                        <p class="spotlight-label">Recent Wins</p>
+                        <h3 class="spotlight-title">Achievements I'm proud of</h3>
+                        <ul class="spotlight-list">
+                            <li><strong>Autodesk:</strong> built repair workflows for Fusion manufacturing data</li>
+                            <li><strong>Electronic Arts:</strong> fixed CI/load-testing auth failures and worked on agentic quality assurance</li>
+                            <li><strong>Kongsberg Geospatial:</strong> delivered real-time geospatial apps with 60+ FPS rendering and automated airspace workflows</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <div class="overview-section">
+                    <div class="section-lead">
+                        <h2 class="section-title">Featured Projects</h2>
+                        <p class="section-copy">Best places to evaluate product thinking, systems depth, and execution
+                            quality beyond resume bullets.</p>
+                    </div>
+
+                    <div class="overview-grid">
+                        <article class="entry-card spotlight-card">
+                            <p class="spotlight-label">Flagship Project</p>
+                            <h3 class="spotlight-title">Latch</h3>
+                            <p class="spotlight-copy">Local-first macOS focus blocker with system-level site blocking,
+                                crash recovery, and bundled desktop + extension distribution.</p>
+                            <div class="overview-project-image">
+                                <img src="images/latch-case-study-focus.svg"
+                                    alt="Latch focus session screen showing timer, active blocklist, and session controls">
+                            </div>
+                            <ul class="project-tags" aria-label="Latch overview tags">
+                                <li>Electron</li>
+                                <li>TypeScript</li>
+                                <li>macOS</li>
+                                <li>Native Helper</li>
+                            </ul>
+                            <div class="project-links overview-links">
+                                <a href="latch-case-study.html">Case Study &rarr;</a>
+                                <a href="https://github.com/nbui23/latch" target="_blank"
+                                    rel="noopener noreferrer">GitHub &rarr;</a>
+                                <a href="https://github.com/nbui23/latch/releases" target="_blank"
+                                    rel="noopener noreferrer">Download &rarr;</a>
+                            </div>
+                        </article>
+
+                        <article class="entry-card spotlight-card">
+                            <p class="spotlight-label">Full-Stack Project</p>
+                            <h3 class="spotlight-title">CruxOS</h3>
+                            <p class="spotlight-copy">Mobile + web training system that turns climbing and recovery
+                                logs into deterministic, explainable weekly decisions.</p>
+                            <div class="overview-project-image">
+                                <img src="images/cruxos.svg"
+                                    alt="CruxOS product card showing web analysis and mobile logging">
+                            </div>
+                            <ul class="project-tags" aria-label="CruxOS overview tags">
+                                <li>Next.js</li>
+                                <li>TypeScript</li>
+                                <li>Prisma</li>
+                                <li>SQLite</li>
+                            </ul>
+                            <div class="project-links overview-links">
+                                <a href="https://github.com/nbui23/cruxos" target="_blank"
+                                    rel="noopener noreferrer">GitHub &rarr;</a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section id="experience" class="tab-content">
 
                 <div class="entry-card">
                     <div class="entry-header">
@@ -515,6 +653,7 @@
                             <p class="entry-role">Local-first macOS focus blocker</p>
                         </div>
                         <div class="project-links">
+                            <a href="latch-case-study.html">Case Study &rarr;</a>
                             <a href="https://github.com/nbui23/latch" target="_blank" rel="noopener noreferrer">GitHub
                                 &rarr;</a>
                             <a href="https://github.com/nbui23/latch/releases" target="_blank"
@@ -533,8 +672,8 @@
                         <li>Chromium extension</li>
                     </ul>
                     <div class="project-image">
-                        <img src="images/latch-logo.svg"
-                            alt="Minimal Latch logo card with a stylized L on a dark background">
+                        <img src="images/latch-case-study-focus.svg"
+                            alt="Latch focus session screen showing timer, active blocklist, and session controls">
                     </div>
                     <ul class="entry-bullets">
                         <li><strong>Local-first architecture:</strong> Kept blocklists and session state on-device with
@@ -639,7 +778,7 @@
 
     </div>
 
-    <script src="scripts/main.js?v=29e6bc7e" defer></script>
+    <script src="scripts/main.js?v=20260417-goodreads-link" defer></script>
 
 </body>
 

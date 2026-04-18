@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        (function () {
+            try {
+                var stored = localStorage.getItem('theme');
+                var theme = stored === 'light' || stored === 'dark' ? stored : 'dark';
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+    <title>Latch Case Study — Norman Bui</title>
+    <meta name="description" content="Latch case study — a local-first macOS focus blocker built with Electron, a privileged helper, and a Chromium extension for reliable distraction blocking.">
+    <meta property="og:title" content="Latch Case Study — Norman Bui">
+    <meta property="og:description" content="How I designed a local-first macOS focus blocker with system-level enforcement, crash recovery, and bundled distribution.">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Latch Case Study — Norman Bui">
+    <meta name="twitter:description" content="Designing a local-first macOS focus blocker with Electron, a privileged helper, and friendly blocked-page UX.">
+    <link rel="icon" type="image/jpeg" href="images/logos/baby.jpeg?v=41bb1200">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=20260417-latch-case-study">
+</head>
+
+<body>
+    <button class="theme-toggle" type="button" aria-label="Toggle color theme" title="Toggle theme">
+        <svg class="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+        </svg>
+        <svg class="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+    </button>
+
+    <div class="container case-study-page">
+        <a class="case-study-back" href="index.html#projects">&larr; Back to portfolio</a>
+
+        <main class="case-study-content">
+            <section class="entry-card case-study-hero">
+                <div class="case-study-hero-copy">
+                    <p class="overview-kicker">Project Case Study</p>
+                    <h1 class="case-study-title">Latch</h1>
+                    <p class="case-study-subtitle">A local-first macOS focus blocker built for reliable enforcement, not just good intentions.</p>
+                    <p class="case-study-lede">Most focus apps are easy to bypass because they live entirely at the UI layer. Latch started from a different goal: if a user starts a focus session, the blocking should survive browser restarts, crashes, and ordinary attempts to work around the app, while still feeling clean and approachable.</p>
+                    <p class="case-study-lede">I built Latch as an Electron desktop app paired with a one-time privileged helper, an optional Chromium extension, and a bundled native messaging flow. Under the hood, that meant a six-state session machine, explicit crash-recovery logic, schema-validated trust boundaries, and a packaged macOS release that shipped the app, helper, extension bundle, and native messaging binary together.</p>
+                    <ul class="project-tags" aria-label="Latch technologies and themes">
+                        <li>Electron</li>
+                        <li>TypeScript</li>
+                        <li>macOS</li>
+                        <li>Native Helper</li>
+                        <li>Chromium Extension</li>
+                        <li>Local-first</li>
+                    </ul>
+                    <div class="project-links overview-links">
+                        <a href="https://github.com/nbui23/latch" target="_blank" rel="noopener noreferrer">GitHub &rarr;</a>
+                        <a href="https://github.com/nbui23/latch/releases" target="_blank" rel="noopener noreferrer">Download &rarr;</a>
+                        <a href="index.html#projects">Portfolio Overview &rarr;</a>
+                    </div>
+                </div>
+                <div class="case-study-hero-visual">
+                    <div class="case-study-image-shell">
+                        <img src="images/latch-case-study-focus.svg" alt="Latch focus session screen showing timer, active blocklist, and session controls">
+                    </div>
+                </div>
+            </section>
+
+            <section class="proof-strip case-study-proof" aria-label="Latch outcomes and qualities">
+                <div class="proof-item">
+                    <span class="proof-value">Local-first</span>
+                    <span class="proof-label">No account system or cloud dependency for blocklists and session state</span>
+                </div>
+                <div class="proof-item">
+                    <span class="proof-value">System-level</span>
+                    <span class="proof-label">Privileged helper designed to enforce blocking beyond the desktop UI</span>
+                </div>
+                <div class="proof-item">
+                    <span class="proof-value">Reliable sessions</span>
+                    <span class="proof-label">Timed sessions, always-on blocking, and crash recovery for active focus windows</span>
+                </div>
+                <div class="proof-item">
+                    <span class="proof-value">Bundled release</span>
+                    <span class="proof-label">Desktop app, helper, extension bundle, and native messaging host shipped together</span>
+                </div>
+            </section>
+
+            <section class="entry-card case-study-section">
+                <div class="section-lead">
+                    <h2 class="section-title">Problem</h2>
+                    <p class="section-copy">The product problem was straightforward: build a distraction blocker that users could trust during a real focus session. That meant more than a nice timer. It meant enforcement that was difficult to bypass accidentally, state that stayed consistent when the app restarted, and a user experience that still felt friendlier than editing system files by hand.</p>
+                </div>
+                <div class="case-study-grid">
+                    <article class="case-study-note">
+                        <h3>What users needed</h3>
+                        <p>Start a session quickly, keep blocklists private, and trust that active sessions would remain in effect even if the browser or app stopped unexpectedly.</p>
+                    </article>
+                    <article class="case-study-note">
+                        <h3>Why existing approaches felt weak</h3>
+                        <p>Pure browser-side blockers are easy to disable. Pure system-side approaches often feel hostile, opaque, or difficult to package into a clean product experience.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="entry-card case-study-section">
+                <div class="section-lead">
+                    <h2 class="section-title">Core Constraints</h2>
+                    <p class="section-copy">Latch was shaped by a few hard product and engineering constraints. These constraints were what made the project interesting.</p>
+                </div>
+                <ul class="case-study-list">
+                    <li><strong>Local-first by design:</strong> Blocklists and session state had to stay on-device. No account system, no cloud sync requirement, and no dependence on a hosted control plane.</li>
+                    <li><strong>Real enforcement on macOS:</strong> The app needed more than a friendly front-end. It needed a one-time privileged path capable of enforcing focus decisions across Chromium browsers.</li>
+                    <li><strong>Friendly blocked-page UX:</strong> Hard blocking is useful, but abrupt failures can feel broken. The extension path existed to provide a clearer blocked-page experience where possible.</li>
+                    <li><strong>Operational simplicity:</strong> Installation, updates, and release packaging had to feel like one product, not four loosely related components.</li>
+                </ul>
+            </section>
+
+            <section class="entry-card case-study-section">
+                <div class="section-lead">
+                    <h2 class="section-title">Architecture</h2>
+                    <p class="section-copy">I structured Latch as a product with explicit responsibilities across components instead of pushing everything into the Electron app. The implementation detail I cared about most was keeping privileged work narrow and explicit.</p>
+                </div>
+                <div class="case-study-grid case-study-grid-wide">
+                    <article class="case-study-note">
+                        <h3>Electron desktop app</h3>
+                        <p>The main application owned session control, blocklist management, and user-facing workflows. Session execution lived in a six-state machine with explicit transitions for <code>idle</code>, <code>starting</code>, <code>active</code>, <code>stopping</code>, <code>recovering</code>, and <code>helper_unavailable</code>.</p>
+                    </article>
+                    <article class="case-study-note">
+                        <h3>Privileged helper</h3>
+                        <p>A one-time privileged helper handled the system-level enforcement path. Electron stayed unprivileged and talked to the helper through a local socket at <code>/var/run/latch.sock</code>, keeping the privileged surface small and deliberate.</p>
+                    </article>
+                    <article class="case-study-note">
+                        <h3>Chromium extension</h3>
+                        <p>The extension existed for a friendlier blocked-page experience. Instead of leaving users with a vague browser failure, Latch could present an intentional interruption and keep blocked-tab state synchronized with session changes.</p>
+                    </article>
+                    <article class="case-study-note">
+                        <h3>Native messaging host</h3>
+                        <p>Native messaging tied the browser-facing experience back into the broader system, and the desktop app repaired the Chrome native messaging manifest automatically when it was missing or mismatched.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="entry-card case-study-section">
+                <div class="section-lead">
+                    <h2 class="section-title">Reliability Decisions</h2>
+                    <p class="section-copy">The most important engineering work in Latch was about trust. A focus blocker that silently stops working teaches users not to rely on it.</p>
+                </div>
+                <ul class="case-study-list">
+                    <li><strong>Write-ahead session ordering:</strong> starting a session wrote <code>session.json</code> with intent first, then called the helper, then marked the session active. Stopping followed the same pattern in reverse. That ordering made crash recovery mechanically understandable instead of heuristic guesswork.</li>
+                    <li><strong>Crash recovery with explicit policy:</strong> I implemented recovery as a policy table over session state plus hosts-file markers, including all four crash windows around writes and removals. The unit tests cover the full seven-row recovery table rather than just one or two happy paths.</li>
+                    <li><strong>Hosts ownership markers:</strong> Latch wrapped its <code>/etc/hosts</code> edits in explicit start/end markers so it could detect whether a block was still active and clean up only its own changes.</li>
+                    <li><strong>Helper transport hardening:</strong> the Swift helper read newline-terminated JSON with a size cap and socket receive timeout so a stalled or malformed client could not pin the single-threaded accept loop indefinitely.</li>
+                </ul>
+            </section>
+
+            <section class="entry-card case-study-section">
+                <div class="section-lead">
+                    <h2 class="section-title">Technical Details I Am Proud Of</h2>
+                    <p class="section-copy">These are the kinds of implementation details that usually do not fit on a resume, but they are exactly the work that made the system feel solid.</p>
+                </div>
+                <ul class="case-study-list">
+                    <li><strong>Shared schema boundaries:</strong> I used shared Zod schemas across IPC, helper responses, native messaging, and app config so malformed payloads were rejected at every trust boundary instead of leaking deeper into the runtime.</li>
+                    <li><strong>Native messaging self-repair:</strong> the desktop app validates the Chrome native messaging manifest for name, description, binary path, type, and allowed origins, then repairs it if any field drifts out of sync.</li>
+                    <li><strong>Extension-aware session logic:</strong> the extension background logic distinguishes between syncing blocked tabs and restoring them, preventing redundant redirects and keeping blocked-page behavior intentional.</li>
+                    <li><strong>Packaging as a systems problem:</strong> the Electron build bundles the helper resources, the unpacked Chromium extension, and the native messaging host as <code>extraResources</code>, so the release artifact behaves like one product rather than a loose stack of manual install steps.</li>
+                </ul>
+            </section>
+
+            <section class="entry-card case-study-section">
+                <div class="section-lead">
+                    <h2 class="section-title">Distribution Challenge</h2>
+                    <p class="section-copy">One of the most practical parts of the project was distribution. Latch was not just an Electron app. It also involved a helper, an extension bundle, and a native messaging host. Shipping that cleanly mattered as much as implementing it.</p>
+                </div>
+                <div class="case-study-callout">
+                    <p><strong>What made this interesting:</strong> the release problem was really a product integration problem. The goal was to make installation and usage feel like one application, even though the system was made of several components with different trust boundaries and setup requirements. In the packaged app, the helper resources, Chrome extension bundle, and native messaging host all travel together.</p>
+                </div>
+                <p class="section-copy">That packaging work is important recruiter signal because it moves beyond feature implementation. It shows ownership across developer experience, platform constraints, and operational polish.</p>
+            </section>
+
+            <section class="entry-card case-study-section">
+                <div class="section-lead">
+                    <h2 class="section-title">What This Project Demonstrates</h2>
+                    <p class="section-copy">Latch is the project on my portfolio that best captures how I like to build systems.</p>
+                </div>
+                <div class="case-study-grid">
+                    <article class="case-study-note">
+                        <h3>Systems thinking</h3>
+                        <p>I designed around trust boundaries, failure modes, component responsibilities, and packaging boundaries instead of treating the app as only a front-end problem.</p>
+                    </article>
+                    <article class="case-study-note">
+                        <h3>Product judgment</h3>
+                        <p>The extension and blocked-page experience existed because enforcement alone was not enough; the product also needed to feel understandable and intentional to users.</p>
+                    </article>
+                    <article class="case-study-note">
+                        <h3>Ownership beyond code</h3>
+                        <p>I worked through packaging, manifest registration, installation state, and release concerns so the system could be distributed as a real product rather than a prototype with manual setup steps.</p>
+                    </article>
+                    <article class="case-study-note">
+                        <h3>Bias toward robustness</h3>
+                        <p>Focus-session reliability, crash recovery, transport hardening, and on-device state persistence were first-class concerns, not cleanup tasks added afterward.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="entry-card case-study-section">
+                <div class="section-lead">
+                    <h2 class="section-title">What I Would Improve Next</h2>
+                    <p class="section-copy">If I continued pushing Latch forward, I would invest in three areas:</p>
+                </div>
+                <ul class="case-study-list">
+                    <li><strong>More visible observability:</strong> clearer debugging and health surfaces for installation state, extension connectivity, and enforcement status.</li>
+                    <li><strong>Richer focus analytics:</strong> better local insight into session history and blocking outcomes without breaking the local-first model.</li>
+                    <li><strong>Broader browser/platform coverage:</strong> extend the same level of reliability and friendliness beyond the initial Chromium and macOS-focused scope.</li>
+                </ul>
+            </section>
+        </main>
+    </div>
+
+    <script src="scripts/main.js?v=20260417-goodreads-link" defer></script>
+</body>
+
+</html>
