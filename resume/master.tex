@@ -196,14 +196,14 @@
       \resumeItemListEnd
     \fi
 
-    \ifdefined\flagAIML\else
+    \ifdefined\flagAIML\else\ifdefined\flagQA\else
     \resumeSubheading{NAV CANADA}{Software Developer Intern}{May 2023 - Aug 2023}
       \resumeItemListStart
         \resumeItem{Optimized internal C++ and Qt GIS data tool, reducing geospatial data storage usage by \textbf{60\%} and boosting analysis workflow speed \textbf{30\%}}
         \resumeItem{Fixed air traffic control rendering bugs, improving frame rate by \textbf{16\%}}
         \resumeItem{Automated network setup with PowerShell, reducing manual configuration by more than \textbf{95\%}}
       \resumeItemListEnd
-    \fi
+    \fi\fi
 
     \ifdefined\flagQA
       \resumeSubheading{Correctional Service Canada}{Software Developer Intern}{May 2022 - Apr 2023}
@@ -226,6 +226,9 @@
                   \resumeItem{Built Latch, a local-first macOS focus blocker with Electron, TypeScript, a privileged helper, Chromium extension, and bundled native messaging release flow}
                   \resumeItem{Designed reliable focus sessions with a six-state session machine, write-ahead crash recovery, hosts-file ownership markers, and schema-validated IPC/helper boundaries}
                   \resumeItem{Packaged the desktop app, helper resources, browser extension, and native messaging host into a unified macOS release artifact}
+                  \ifdefined\flagQA
+                  \resumeItem{Wrote integration tests covering all six session state transitions and schema-validated IPC boundaries, verifying crash recovery and hosts-file ownership invariants}
+                  \fi
               \resumeItemListEnd
         \fi
 
@@ -254,6 +257,7 @@
                   \resumeItem{Built CruxOS, a bouldering performance product with Expo session capture and Next.js analysis dashboard}
                   \resumeItem{Implemented deterministic insight engine translating training, recovery, and workload signals into weekly recommendations}
                   \resumeItem{Designed shared auth, Next.js API routes, and Prisma/SQLite persistence for mobile and web workflows}
+                  \resumeItem{Wrote unit tests for the deterministic insight engine and API route integration tests covering auth flows and Prisma/SQLite persistence}
               \resumeItemListEnd
         \fi\fi
 
