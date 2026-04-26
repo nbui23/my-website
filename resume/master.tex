@@ -155,7 +155,7 @@
     \fi\fi
 
     \ifdefined\flagAIML
-    \resumeSubheading{Bedarra Corporation}{Research Intern}{Aug 2024 - Oct 2024}
+    \resumeSubheading{Bedarra Corporation}{Student Researcher}{Aug 2024 - Oct 2024}
         \resumeItemListStart
             \resumeItem{Researched and developed RAG systems to answer queries about obscure programming languages (Factor, K)}
             \resumeItem{Integrated LangChain orchestration to retrieve relevant code examples and documentation, providing context-aware responses for obscure language queries}
@@ -163,6 +163,7 @@
         \resumeItemListEnd
     \fi
 
+    \ifdefined\flagAIML\else
     \resumeSubheading{Kongsberg Geospatial}{Software Developer Intern}{May 2024 - Aug 2024}
       \resumeItemListStart
         \resumeItem{Built client-facing C++ and Qt geospatial demos as sole developer on Solutions Engineering for aviation, defense, and government use cases}
@@ -170,6 +171,7 @@
         \resumeItem{Developed automated airspace classification framework, removing manual processing and standardizing data categorization}
         \resumeItem{Optimized render pipeline to \textbf{consistent 60+ FPS} and automated terrain processing by more than \textbf{40\%}}
       \resumeItemListEnd
+    \fi
 
     \resumeSubheading{Health Canada}{Data Scientist Intern}{Sep 2023 - Dec 2023}
       \resumeItemListStart
@@ -184,6 +186,15 @@
           \resumeItem{Built a Neo4j knowledge-graph pipeline to extract chemicals, diseases, and relationships from medical literature using CoreNLP and Stanza}
         \fi
       \resumeItemListEnd
+
+    \ifdefined\flagAIML
+    \resumeSubheading{Department of National Defence}{Data Scientist Intern}{Jun 2023 - Nov 2023}
+      \resumeItemListStart
+        \resumeItem{Built RAG system using GPT-3.5 and Flask for intelligent querying across \textbf{20+} government tax documents}
+        \resumeItem{Engineered vector search pipeline with FAISS and SQLite for embedding storage and real-time retrieval}
+        \resumeItem{Developed NLP pipeline with NLTK integrating tokenization, NER, and contextual analysis for information extraction}
+      \resumeItemListEnd
+    \fi
 
     \ifdefined\flagAIML\else
     \resumeSubheading{NAV CANADA}{Software Developer Intern}{May 2023 - Aug 2023}
