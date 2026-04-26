@@ -2,6 +2,13 @@
 
 Minimal website summarizing my experience
 
+## Agent guidance
+
+Codex should follow the project-local `AGENTS.md` guidance. The repo also
+includes `.codex/skills/karpathy-guidelines/SKILL.md` and a repo-local Codex
+plugin at `plugins/andrej-karpathy-skills`, adapted from
+`forrestchang/andrej-karpathy-skills`.
+
 ## Local dev server
 
 Use the repo-local live-reload server when OMX is running:

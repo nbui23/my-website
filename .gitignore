@@ -7,3 +7,8 @@ resume/Norman_Bui_Resume.synctex.gz
 .claude/
 .omx/
 .omc/
+.agents/
+.codex/
+AGENTS.md
+plugins/
+tempCodeRunnerFile.py

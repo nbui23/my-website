@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        (function () {
+            try {
+                var stored = localStorage.getItem('theme');
+                var theme = stored === 'light' || stored === 'dark' ? stored : 'dark';
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+    <title>Riverbreak Case Study — Norman Bui</title>
+    <meta name="description" content="Riverbreak case study — a typographic river detector combining a browser line-breaking demo, synthetic data, a small U-Net, annotated evaluation, and detector-guided reranking.">
+    <meta property="og:title" content="Riverbreak Case Study — Norman Bui">
+    <meta property="og:description" content="How I built a browser-first typography and ML project for detecting whitespace rivers in justified text.">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Riverbreak Case Study — Norman Bui">
+    <meta name="twitter:description" content="A case study on layout algorithms, weak-label training, ONNX browser inference, and detector-guided line-breaking.">
+    <link rel="icon" type="image/jpeg" href="images/logos/baby.jpeg?v=41bb1200">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=b29ac0d3">
+</head>
+
+<body>
+    <button class="theme-toggle" type="button" aria-label="Toggle color theme" title="Toggle theme">
+        <svg class="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path
+                d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41">
+            </path>
+        </svg>
+        <svg class="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+    </button>
+
+    <div class="container case-study-page">
+        <a class="case-study-back" href="index.html#projects">&larr; Back to portfolio</a>
+
+        <main class="case-study-content">
+            <section class="entry-card case-study-hero">
+                <div class="case-study-hero-copy">
+                    <p class="overview-kicker">Project Case Study</p>
+                    <h1 class="case-study-title">Riverbreak</h1>
+                    <p class="case-study-subtitle">A browser-first system for finding typographic rivers in justified
+                        text, then using those detections to compare better line breaks.</p>
+                    <p class="case-study-lede">Typographic rivers are the vertical or diagonal whitespace channels that
+                        appear when justified text stretches gaps into accidental paths. They are easy for a reader to
+                        notice and hard for a layout engine to reason about because they emerge across lines, not inside
+                        a single word or sentence.</p>
+                    <p class="case-study-lede">I built Riverbreak as a complete research-to-demo loop: a
+                        Knuth-Plass-style browser line breaker, a real-time geometric detector, synthetic weak-label
+                        data generation, a small U-Net segmentation model, hand-labeled validation and test sets, ONNX
+                        browser inference, and a detector-guided reranker that compares baseline and optimized
+                        paragraph layouts.</p>
+                    <ul class="project-tags" aria-label="Riverbreak technologies and themes">
+                        <li>Python</li>
+                        <li>PyTorch</li>
+                        <li>Small U-Net</li>
+                        <li>ONNX Runtime</li>
+                        <li>JavaScript</li>
+                        <li>HTML Canvas</li>
+                    </ul>
+                    <div class="project-links overview-links">
+                        <a href="https://nbui23.github.io/riverbreak/" target="_blank" rel="noopener noreferrer">Demo
+                            &rarr;</a>
+                        <a href="https://github.com/nbui23/riverbreak" target="_blank" rel="noopener noreferrer">GitHub
+                            &rarr;</a>
+                        <a href="index.html#projects">Portfolio Overview &rarr;</a>
+                    </div>
+                </div>
+                <div class="case-study-hero-visual">
+                    <div class="case-study-image-shell">
+                        <img src="images/riverbreak.png"
+                            alt="Riverbreak project card showing justified text with detected whitespace rivers">
+                    </div>
+                </div>
+            </section>
+
+            <section class="proof-strip case-study-proof" aria-label="Riverbreak outcomes and qualities">
+                <div class="proof-item">
+                    <span class="proof-value">0.5018</span>
+                    <span class="proof-label">Test Dice for the focal-loss SmallUNet, up from 0.4182 for the heuristic
+                        baseline</span>
+                </div>
+                <div class="proof-item">
+                    <span class="proof-value">24 + 24</span>
+                    <span class="proof-label">Hand-labeled validation and test images kept separate from synthetic
+                        weak-label training data</span>
+                </div>
+                <div class="proof-item">
+                    <span class="proof-value">ONNX</span>
+                    <span class="proof-label">Local browser model runs live neural overlays on the rendered paragraph
+                        canvas</span>
+                </div>
+                <div class="proof-item">
+                    <span class="proof-value">Reranker</span>
+                    <span class="proof-label">Candidate layouts are scored by classical demerits plus river severity</span>
+                </div>
+            </section>
+
+            <section class="entry-card case-study-section">
+                <div class="section-lead">
+                    <h2 class="section-title">Problem</h2>
+                    <p class="section-copy">Justified text layout is usually optimized around line badness: avoid
+                        awkward spacing, avoid extreme stretch, and choose a visually balanced set of line breaks. That
+                        misses a cross-line failure mode. A paragraph can look acceptable line by line while repeated
+                        whitespace gaps align into a visible river.</p>
+                    <p class="section-copy">Riverbreak asks a practical question: can a detector make this failure mode
+                        inspectable enough to influence layout decisions? The project is not only a model. It is a
+                        toolchain for rendering paragraphs, detecting rivers, comparing detectors, and feeding the signal
+                        back into line-breaking choices.</p>
+                </div>
+                <div class="case-study-grid">
+                    <article class="case-study-note">
+                        <h3>Product goal</h3>
+                        <p>Give a user an interactive way to see where rivers form, adjust layout settings, and compare
+                            baseline text against river-aware alternatives.</p>
+                    </article>
+                    <article class="case-study-note">
+                        <h3>Engineering goal</h3>
+                        <p>Connect classic layout logic, computer vision, annotated evaluation, and browser inference
+                            without hiding which parts are proven and which parts are still prototype-grade.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="entry-card case-study-section">
+                <div class="section-lead">
+                    <h2 class="section-title">System Shape</h2>
+                    <p class="section-copy">I split the project into four surfaces so each part could be tested and
+                        explained independently: the browser layout demo, the heuristic detector, the neural detector,
+                        and the reranking prototype.</p>
+                </div>
+                <div class="case-study-grid">
+                    <article class="case-study-note">
+                        <h3>Browser line breaker</h3>
+                        <p>The demo implements a Knuth-Plass-style paragraph layout simulator with beam search. It
+                            renders justified lines with explicit per-line spacing, which makes gap geometry available
+                            for inspection instead of leaving it implicit in browser text layout.</p>
+                    </article>
+                    <article class="case-study-note">
+                        <h3>Heuristic detector</h3>
+                        <p>The first detector traces inter-line whitespace corridors using gap-center alignment,
+                            diagonal drift tolerance, chain length, and confidence scoring. It is fast enough to update
+                            interactively while users change width, tolerance, and river-weight settings.</p>
+                    </article>
+                    <article class="case-study-note">
+                        <h3>Neural detector</h3>
+                        <p>The ML path uses a small U-Net trained as a binary segmentation model. It takes a 256 x 256
+                            grayscale paragraph image and returns a per-pixel probability map for river-like regions.</p>
+                    </article>
+                    <article class="case-study-note">
+                        <h3>Detector-guided reranker</h3>
+                        <p>The reranker generates bounded candidate layouts, scores each one with a combined classical
+                            and river-severity objective, then shows baseline and optimized paragraphs side by side.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="entry-card case-study-section">
+                <div class="section-lead">
+                    <h2 class="section-title">Heuristic First</h2>
+                    <p class="section-copy">I started with geometry because the browser demo needed instant feedback.
+                        A model that takes a second to run is useful for analysis, but it is the wrong default for
+                        dragging a slider. The heuristic detector gave the project a fast baseline and a way to generate
+                        weak labels for early model training.</p>
+                </div>
+                <ul class="case-study-list">
+                    <li><strong>Rendered layout as data:</strong> the line breaker knows where every word and expanded
+                        space sits, so river detection can operate on explicit gap positions instead of screenshots
+                        alone.</li>
+                    <li><strong>Corridor-style matching:</strong> the detector looks for gap chains that stay aligned
+                        vertically or diagonally across neighboring lines, then assigns severity based on chain strength
+                        and count.</li>
+                    <li><strong>Fast interaction loop:</strong> heuristic overlays update in real time, so users can
+                        explore how paragraph width and line-breaking penalties affect river formation.</li>
+                    <li><strong>Honest baseline:</strong> the heuristic is kept in the demo and benchmark reports even
+                        after adding the neural model, making progress visible instead of replacing the baseline
+                        silently.</li>
+                </ul>
+            </section>
+
+            <section class="entry-card case-study-section">
+                <div class="section-lead">
+                    <h2 class="section-title">Training Pipeline</h2>
+                    <p class="section-copy">The neural detector is intentionally small and reproducible. I trained a
+                        focal-loss SmallUNet on 128 synthetic weak-label paragraphs, then evaluated it against separate
+                        hand-labeled validation and test images. The training signal is imperfect by design, so the
+                        annotated split is the evidence that matters.</p>
+                </div>
+                <div class="case-study-grid">
+                    <article class="case-study-note">
+                        <h3>Input and target</h3>
+                        <p>Each sample is normalized to a 256 x 256 grayscale paragraph render. The model outputs a
+                            probability map, allowing overlay visualization and pixel-level comparison against masks.</p>
+                    </article>
+                    <article class="case-study-note">
+                        <h3>Loss choice</h3>
+                        <p>Focal loss fits the task because positive river pixels are sparse. The model needs pressure
+                            on the difficult minority class instead of optimizing mostly for background.</p>
+                    </article>
+                    <article class="case-study-note">
+                        <h3>Data boundary</h3>
+                        <p>Synthetic weak labels are used for training. Hand-labeled validation and test sets are kept
+                            separate so evaluation is not just measuring agreement with the heuristic label generator.</p>
+                    </article>
+                    <article class="case-study-note">
+                        <h3>Tracked artifacts</h3>
+                        <p>The repo tracks annotations, the selected benchmark report, browser samples, and the ONNX
+                            model. Large PyTorch checkpoints and generated synthetic data are regenerated locally.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="entry-card case-study-section">
+                <div class="section-lead">
+                    <h2 class="section-title">Evaluation</h2>
+                    <p class="section-copy">The current best checkpoint is a focal-loss SmallUNet trained on synthetic
+                        weak labels. Threshold selection is done on validation data and then applied unchanged to the
+                        test split, so the test numbers are not tuned after the fact.</p>
+                </div>
+                <div class="case-study-callout">
+                    <p><strong>Best test result:</strong> neural focal model Dice 0.5018 and IoU 0.3349, compared with
+                        heuristic baseline Dice 0.4182 and IoU 0.2644. On the same test split, neural precision is
+                        0.4177 and recall is 0.6282.</p>
+                </div>
+                <ul class="case-study-list">
+                    <li><strong>Validation split:</strong> heuristic Dice 0.4150 and IoU 0.2618; neural Dice 0.5069 and
+                        IoU 0.3395.</li>
+                    <li><strong>Test split:</strong> heuristic Dice 0.4182 and IoU 0.2644; neural Dice 0.5018 and IoU
+                        0.3349.</li>
+                    <li><strong>Interpretation:</strong> the benchmark is deliberately small, so I treat the numbers as
+                        directional evidence and failure-analysis support rather than a final statistical claim.</li>
+                    <li><strong>Practical value:</strong> the model improves agreement with human labels while keeping
+                        qualitative outputs inspectable through overlays and contact sheets.</li>
+                </ul>
+            </section>
+
+            <section class="entry-card case-study-section">
+                <div class="section-lead">
+                    <h2 class="section-title">Browser Inference</h2>
+                    <p class="section-copy">I exported the focal checkpoint to a single ONNX model and wired it into the
+                        browser as an optional live neural overlay. The goal was not to replace the heuristic toggle. It
+                        was to make the model inspectable on the exact paragraph the user is viewing.</p>
+                </div>
+                <ul class="case-study-list">
+                    <li><strong>Lazy runtime loading:</strong> the demo loads ONNX Runtime Web from a CDN only when the
+                        user turns on the live neural toggle, keeping the default demo lightweight.</li>
+                    <li><strong>Local model execution:</strong> the browser fetches the local
+                        <code>web/models/river_detector.onnx</code> model and runs CPU WASM inference against a rasterized
+                        256 x 256 paragraph canvas.</li>
+                    <li><strong>Fresh overlays:</strong> each layout change can trigger a new forward pass, and the
+                        returned probability map is painted as a pink overlay on top of the rendered paragraph.</li>
+                    <li><strong>Tradeoff made visible:</strong> the model file is roughly 30 MB and recurring inference
+                        can take hundreds of milliseconds to seconds, so live neural remains opt-in while heuristic
+                        overlays stay instant.</li>
+                </ul>
+            </section>
+
+            <section class="entry-card case-study-section">
+                <div class="section-lead">
+                    <h2 class="section-title">Reranking</h2>
+                    <p class="section-copy">The most interesting product step was turning detection into action. The
+                        reranker does not rewrite the line breaker. It generates a small set of bounded candidate
+                        layouts around the current settings, scores them, and picks the best candidate for side-by-side
+                        comparison.</p>
+                </div>
+                <div class="case-study-callout">
+                    <p><strong>Scoring objective:</strong> <code>classical_demerits + alpha * river_severity</code>.
+                        Classical demerits come from the line breaker. River severity currently comes from the geometry
+                        detector, not from a live U-Net call.</p>
+                </div>
+                <ul class="case-study-list">
+                    <li><strong>Candidate generation:</strong> variants include classical, light, current, firm,
+                        aggressive, and deeper-lookback settings so the comparison stays fast and understandable.</li>
+                    <li><strong>Delta-focused UI:</strong> the demo shows baseline and optimized layouts side by side,
+                        with changed lines flagged so the user can inspect what the detector actually influenced.</li>
+                    <li><strong>Why a surrogate:</strong> running six live U-Net forward passes per rerank would make the
+                        browser interaction sluggish. The geometry surrogate is cheap and aligned with the same
+                        river-chain structures used for weak-label training.</li>
+                    <li><strong>Migration path:</strong> the scoring function is isolated so future work can replace the
+                        surrogate with a rasterize-and-run-ONNX path without redesigning the UI.</li>
+                </ul>
+            </section>
+
+            <section class="entry-card case-study-section">
+                <div class="section-lead">
+                    <h2 class="section-title">What This Project Shows</h2>
+                    <p class="section-copy">Riverbreak is the project on my portfolio that best shows how I connect
+                        product demos, algorithms, and ML evaluation without treating any one layer as the whole system.</p>
+                </div>
+                <div class="case-study-grid">
+                    <article class="case-study-note">
+                        <h3>Algorithmic systems</h3>
+                        <p>The line-breaking simulator, beam search, layout demerits, and candidate reranking show
+                            comfort working with algorithmic product behavior, not only UI presentation.</p>
+                    </article>
+                    <article class="case-study-note">
+                        <h3>Applied ML judgment</h3>
+                        <p>The model is scoped to a concrete inspection task, measured against hand-labeled data, and
+                            documented with caveats instead of oversized claims.</p>
+                    </article>
+                    <article class="case-study-note">
+                        <h3>Browser delivery</h3>
+                        <p>ONNX export, lazy runtime loading, canvas rasterization, and local overlays turn the model
+                            into something a user can actually try in a browser.</p>
+                    </article>
+                    <article class="case-study-note">
+                        <h3>Research hygiene</h3>
+                        <p>The repo separates tracked evidence from regenerable artifacts, documents benchmark limits,
+                            and keeps lightweight verification checks for published files.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="entry-card case-study-section">
+                <div class="section-lead">
+                    <h2 class="section-title">Limitations and Next Work</h2>
+                    <p class="section-copy">The project is intentionally transparent about what is done and what still
+                        needs work. That matters because typography quality is subjective, and the current benchmark is
+                        small.</p>
+                </div>
+                <ul class="case-study-list">
+                    <li><strong>Expand annotation:</strong> increase the hand-labeled validation and test sets before
+                        treating the metrics as strong statistical evidence.</li>
+                    <li><strong>Quantize the browser model:</strong> reduce the roughly 30 MB ONNX payload so live neural
+                        inference feels less expensive on first use.</li>
+                    <li><strong>Use neural scoring in reranking:</strong> replace the geometry surrogate with live model
+                        probability mass once performance is good enough for multiple candidates.</li>
+                    <li><strong>Broaden typography coverage:</strong> evaluate more fonts, widths, paragraph lengths,
+                        and browser rendering differences so the detector is less tied to the synthetic training
+                        distribution.</li>
+                </ul>
+            </section>
+        </main>
+    </div>
+
+    <script src="scripts/main.js?v=20260417-goodreads-link" defer></script>
+</body>
+
+</html>

@@ -30,7 +30,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=20260420-overview-refresh">
+    <link rel="stylesheet" href="styles.css?v=b29ac0d3">
     <script type="application/ld+json">
         {
             "@context": "https://schema.org",
@@ -120,7 +120,8 @@
                                 teams that care about shipping well.</h2>
                             <p class="overview-summary">Best fit for backend, developer tooling, and applied AI roles.
                                 Recent work spans Autodesk repair workflows, EA infrastructure reliability, and
-                                hands-on product builds across desktop, web, and data systems.</p>
+                                Riverbreak's text-layout detection pipeline across browser ML, evaluation data, and
+                                interactive visualization.</p>
                         </div>
 
                         <div class="showcase-panel showcase-panel-projects">
@@ -136,15 +137,14 @@
                                         <span>Desktop focus blocker with system-level enforcement</span>
                                     </span>
                                 </a>
-                                <a class="showcase-project" href="https://github.com/nbui23/cruxos"
-                                    target="_blank" rel="noopener noreferrer">
+                                <a class="showcase-project" href="riverbreak-case-study.html">
                                     <span class="showcase-project-image">
-                                        <img src="images/cruxos.svg"
-                                            alt="CruxOS product card showing web analysis and mobile logging">
+                                        <img src="images/riverbreak.png"
+                                            alt="Riverbreak project card showing justified text with detected whitespace rivers">
                                     </span>
                                     <span class="showcase-project-copy">
-                                        <strong>CruxOS</strong>
-                                        <span>Full-stack training system with deterministic coaching logic</span>
+                                        <strong>Riverbreak</strong>
+                                        <span>Typographic river detector with browser ML and layout scoring</span>
                                     </span>
                                 </a>
                             </div>
@@ -172,10 +172,8 @@
                         <div class="showcase-panel showcase-panel-teams">
                             <p class="showcase-label">Recent Teams</p>
                             <div class="showcase-logo-row" aria-label="Recent employers">
-                                <span class="showcase-logo"><img src="images/logos/ea.png"
-                                        alt="Electronic Arts"></span>
-                                <span class="showcase-logo"><img src="images/logos/autodesk.png"
-                                        alt="Autodesk"></span>
+                                <span class="showcase-logo"><img src="images/logos/ea.png" alt="Electronic Arts"></span>
+                                <span class="showcase-logo"><img src="images/logos/autodesk.png" alt="Autodesk"></span>
                                 <span class="showcase-logo"><img src="images/logos/kongsberg.png"
                                         alt="Kongsberg Geospatial"></span>
                             </div>
@@ -651,15 +649,55 @@
                 <div class="entry-card project-card project-card-featured">
                     <div class="entry-header">
                         <div class="entry-header-text">
+                            <h3 class="entry-company">Riverbreak</h3>
+                            <p class="entry-role">Typographic river detection and layout demo</p>
+                        </div>
+                        <div class="project-links">
+                            <a href="riverbreak-case-study.html">Case Study &rarr;</a>
+                            <a href="https://nbui23.github.io/riverbreak/" target="_blank"
+                                rel="noopener noreferrer">Demo &rarr;</a>
+                            <a href="https://github.com/nbui23/riverbreak" target="_blank"
+                                rel="noopener noreferrer">GitHub &rarr;</a>
+                        </div>
+                    </div>
+                    <p class="project-summary">Riverbreak detects typographic rivers in justified text and compares
+                        heuristic detection with a small U-Net segmentation model. The project combines a browser
+                        line-breaking demo, synthetic data generation, hand-labeled evaluation data, and a prototype
+                        reranker that scores layouts by river severity.</p>
+                    <ul class="project-tags" aria-label="Riverbreak tech stack and product highlights">
+                        <li>Python</li>
+                        <li>PyTorch</li>
+                        <li>U-Net</li>
+                        <li>ONNX Runtime</li>
+                        <li>JavaScript</li>
+                        <li>HTML Canvas</li>
+                    </ul>
+                    <div class="project-image">
+                        <img src="images/riverbreak.png"
+                            alt="Riverbreak project card showing justified text with detected whitespace rivers">
+                    </div>
+                    <ul class="entry-bullets">
+                        <li><strong>Browser-first demo:</strong> Built an inspectable text layout simulator with
+                            real-time heuristic overlays and detector-guided line-break comparison</li>
+                        <li><strong>ML benchmark:</strong> Trained a small U-Net on synthetic weak labels, then compared
+                            it against the heuristic baseline on hand-labeled validation and test samples</li>
+                        <li><strong>End-to-end artifacts:</strong> Shipped the ONNX browser model, precomputed sample
+                            overlays, benchmark reports, and reproducible repository checks</li>
+                    </ul>
+                </div>
+
+                <div class="entry-card project-card">
+                    <div class="entry-header">
+                        <div class="entry-header-text">
                             <h3 class="entry-company">Latch</h3>
                             <p class="entry-role">Local-first macOS focus blocker</p>
                         </div>
                         <div class="project-links">
                             <a href="latch-case-study.html">Case Study &rarr;</a>
-                            <a href="https://github.com/nbui23/latch" target="_blank" rel="noopener noreferrer">GitHub
-                                &rarr;</a>
                             <a href="https://github.com/nbui23/latch/releases" target="_blank"
                                 rel="noopener noreferrer">Download &rarr;</a>
+                            <a href="https://github.com/nbui23/latch" target="_blank" rel="noopener noreferrer">GitHub
+                                &rarr;</a>
                         </div>
                     </div>
                     <p class="project-summary">Latch is a local-first macOS focus blocker built with Electron. It
@@ -723,6 +761,8 @@
                             richer review and trend analysis on the web to support the full training loop</li>
                         <li><strong>Deterministic insight engine:</strong> Translated training, recovery, and workload
                             signals into clear weekly recommendations instead of opaque black-box outputs</li>
+                        <li><strong>Typed data model:</strong> Used Prisma and SQLite to keep sessions, recovery signals,
+                            and reports consistent across mobile capture and web review</li>
                         <li><strong>Real-world usefulness:</strong> Built for intermediate climbers who need help
                             deciding when to push, recover, or adjust training to improve performance</li>
                     </ul>

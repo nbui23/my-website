@@ -27,7 +27,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=20260417-latch-case-study">
+    <link rel="stylesheet" href="styles.css?v=b29ac0d3">
 </head>
 
 <body>
@@ -127,7 +127,7 @@
                     <h2 class="section-title">Architecture</h2>
                     <p class="section-copy">I structured Latch as a product with explicit responsibilities across components instead of pushing everything into the Electron app. The implementation detail I cared about most was keeping privileged work narrow and explicit.</p>
                 </div>
-                <div class="case-study-grid case-study-grid-wide">
+                <div class="case-study-grid">
                     <article class="case-study-note">
                         <h3>Electron desktop app</h3>
                         <p>The main application owned session control, blocklist management, and user-facing workflows. Session execution lived in a six-state machine with explicit transitions for <code>idle</code>, <code>starting</code>, <code>active</code>, <code>stopping</code>, <code>recovering</code>, and <code>helper_unavailable</code>.</p>
