@@ -53,7 +53,7 @@
 }{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
 
 \newcommand{\resumeItem}[1]{
-  \item\small{
+  \item\normalsize{
     {#1 \vspace{0pt}}
   }
 }
@@ -77,7 +77,7 @@
 \newcommand{\resumeProjectHeading}[2]{
     \item
     \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
-      \small#1 & #2 \\
+      #1 & #2 \\
     \end{tabular*}\vspace{-7pt}
 }
 
@@ -96,7 +96,7 @@
 
 \begin{center}
     {\textbf{\Large NORMAN BUI}} \\ \vspace{1pt}
-    \small Ottawa, ON $|$ +1 613-983-3217 $|$
+    Ottawa, ON $|$ +1 613-983-3217 $|$
     \href{mailto:normanbui23@gmail.com}{normanbui23@gmail.com} $|$
     \href{https://www.linkedin.com/in/nbui23/}{{linkedin.com/in/nbui23}} $|$
     \href{https://github.com/nbui23}{{github.com/nbui23}}
@@ -111,9 +111,9 @@
       {Graduated Spring 2026}
           \resumeItemListStart
             \ifdefined\flagQA
-              \resumeItem{Coursework: Quality Assurance, Operating Systems, Data Structures \& Algorithms, Database Management Systems, Web Development, Human-Computer Interaction}
+              \resumeItem{Coursework: Quality Assurance, Operating Systems, Data Structures \& Algorithms, Database Management Systems, Web Development}
             \else\ifdefined\flagAIML
-              \resumeItem{Coursework: Statistical Modeling, Data Structures \& Algorithms, Database Management Systems, Linear Algebra, Calculus}
+              \resumeItem{Coursework: Statistical Modeling, Data Structures \& Algorithms, Database Management Systems, Linear Algebra}
             \else
               \resumeItem{Coursework: Data Structures \& Algorithms, Operating Systems, OOP, Programming Paradigms, DBMS, Web Development}
             \fi\fi
@@ -126,82 +126,124 @@
 
     \resumeSubheading{Electronic Arts (EA)}{Software Developer Intern}{May 2025 - Aug 2025}
         \resumeItemListStart
-            \resumeItem{Improved CI/CD and load-test reliability from \textbf{35\% to 100\%} by fixing authentication failures and stabilizing load-test workflows}
-            \resumeItem{Analyzed LLM-powered QA system by reviewing model behavior, architecture, and load/soak testing workflows}
-            \resumeItem{Integrated \textbf{10+} game features into load tests, ensuring accurate test coverage under high-traffic conditions}
-            \ifdefined\flagQA
-            \resumeItem{Developed end-to-end test plans covering load, soak, and regression scenarios for live game services, coordinating coverage across multiple feature integrations}
+            \resumeItem{Improved CI/CD load-test reliability from \textbf{35\% to 100\%} by fixing auth failures and unstable workflows}
+            \ifdefined\flagSWE
+            \resumeItem{Integrated \textbf{10+} game features into load tests to keep high-traffic performance coverage accurate}
+            \resumeItem{Debugged service auth and environment setup failures across CI runners and load-test infrastructure}
+            \resumeItem{Reviewed automated game-testing architecture and recommended soak-test reliability improvements}
+            \else
+              \ifdefined\flagAIML
+              \resumeItem{Analyzed LLM-powered QA system by reviewing model behavior, architecture, and load/soak workflows}
+              \resumeItem{Evaluated automated playtesting failure modes to guide QA workflow and model-behavior improvements}
+              \else\ifdefined\flagQA
+              \resumeItem{Developed load, soak, and regression plans for live game services across \textbf{10+} feature integrations}
+              \resumeItem{Triaged load-test failures by isolating auth, environment, and feature regressions in CI}
+              \resumeItem{Documented reproducible failure cases and validation notes for automated playtesting workflows}
+              \else
+              \resumeItem{Integrated \textbf{10+} game features into load tests for high-traffic performance coverage}
+              \resumeItem{Reviewed automated game-testing architecture and recommended soak-test reliability improvements}
+              \fi\fi
             \fi
         \resumeItemListEnd
 
     \resumeSubheading{Autodesk}{Software Developer Intern}{Jan 2025 - Apr 2025}
         \resumeItemListStart
-            \resumeItem{Built TypeScript and Java validation/repair infrastructure for Fusion manufacturing data workflows, including an \textbf{O(n)} repair algorithm with concurrency controls that improved throughput \textbf{8x}}
+            \resumeItem{Built TypeScript/Java validation and repair infrastructure for Fusion manufacturing data, including an \textbf{O(n)} repair algorithm that improved throughput \textbf{8x}}
+            \ifdefined\flagSWE
             \resumeItem{Deployed GraphQL validation and repair endpoints with \textbf{100\%} Mocha, Chai, and Sinon coverage}
-            \resumeItem{Fixed permission and error-handling gaps, eliminating security vulnerabilities in sensitive manufacturing data}
-            \resumeItem{Refactored part number assignment for edge cases and configuration-specific persistence}
+            \resumeItem{Fixed permission and error-handling gaps in sensitive manufacturing data workflows}
+            \resumeItem{Refactored part-number assignment for edge cases and configuration persistence}
+            \else\ifdefined\flagQA
+            \resumeItem{Deployed GraphQL validation and repair endpoints with \textbf{100\%} Mocha, Chai, and Sinon coverage}
+            \resumeItem{Fixed permission and error-handling gaps in sensitive manufacturing data workflows}
+            \resumeItem{Expanded endpoint test cases for malformed inputs, authorization failures, and repair edge cases}
+            \else
+              \ifdefined\flagAIML
+              \resumeItem{Designed deterministic validation logic for manufacturing data repair workflows}
+              \fi
+            \resumeItem{Deployed GraphQL validation and repair endpoints with \textbf{100\%} Mocha, Chai, and Sinon coverage}
+              \ifdefined\flagAIML\else
+              \resumeItem{Fixed permission and error-handling gaps in sensitive manufacturing data workflows}
+              \fi
+            \fi\fi
         \resumeItemListEnd
 
-    \ifdefined\flagSWE\else\ifdefined\flagQA\else
+    \ifdefined\flagAIML
     \resumeSubheading{Public Health Agency of Canada}{Data Scientist Intern}{Sep 2024 - Dec 2024}
         \resumeItemListStart
-            \resumeItem{Built LLM-assisted literature review and Master Data Management workflows to standardize global health data access with Imperial College London and WHO}
-            \resumeItem{Evaluated Ollama embeddings for RAG retrieval quality and established baseline metrics for system tuning}
-            \resumeItem{Prototyped GPT-4o paper collection pipeline for scalable PDF retrieval and metadata extraction}
-            \ifdefined\flagAIML
-            \resumeItem{Designed reproducible evaluation framework to benchmark LLM summarization quality across multilingual health literature for model selection}
-            \fi
+            \resumeItem{Built LLM-assisted literature review and MDM workflows for global health data with Imperial College London and WHO}
+            \resumeItem{Evaluated Ollama embeddings for RAG retrieval quality and baseline system-tuning metrics}
+            \resumeItem{Prototyped GPT-4o paper collection for scalable PDF retrieval and metadata extraction}
         \resumeItemListEnd
-    \fi\fi
+    \fi
 
     \ifdefined\flagAIML
     \resumeSubheading{Bedarra Corporation}{Student Researcher}{Aug 2024 - Oct 2024}
         \resumeItemListStart
             \resumeItem{Researched and developed RAG systems to answer queries about obscure programming languages (Factor, K)}
-            \resumeItem{Integrated LangChain orchestration to retrieve relevant code examples and documentation, providing context-aware responses for obscure language queries}
-            \resumeItem{Benchmarked retrieval quality across embedding models and chunking strategies to identify the optimal configuration for low-resource language corpora}
+            \resumeItem{Benchmarked embedding models and chunking strategies for low-resource language corpora}
+            \resumeItem{Integrated LangChain retrieval over code examples and docs for context-aware query responses}
         \resumeItemListEnd
     \fi
 
     \ifdefined\flagAIML\else
     \resumeSubheading{Kongsberg Geospatial}{Software Developer Intern}{May 2024 - Aug 2024}
       \resumeItemListStart
-        \resumeItem{Built client-facing C++ and Qt geospatial demos as sole developer on Solutions Engineering for aviation, defense, and government use cases}
-        \resumeItem{Integrated LiDAR, WMTS, and S-57 GIS data into real-time mapping workflows with object tracking and system monitoring}
-        \resumeItem{Developed automated airspace classification framework, removing manual processing and standardizing data categorization}
+        \resumeItem{Built client-facing C++/Qt geospatial demos for aviation, defense, and government use cases}
+        \resumeItem{Integrated LiDAR, WMTS, and S-57 GIS data into real-time mapping and tracking workflows}
+        \ifdefined\flagSWE
+        \resumeItem{Developed automated airspace classification framework, removing manual data categorization}
         \resumeItem{Optimized render pipeline to \textbf{consistent 60+ FPS} and automated terrain processing by more than \textbf{40\%}}
+        \else\ifdefined\flagQA
+        \resumeItem{Validated geospatial ingestion/rendering edge cases across LiDAR, WMTS, and S-57 demos}
+        \resumeItem{Created repeatable demo checks for map-layer loading, object tracking, and rendering performance}
+        \else
+        \resumeItem{Developed automated airspace classification framework, removing manual data categorization}
+        \fi
+        \fi
       \resumeItemListEnd
     \fi
 
+    \ifdefined\flagAIML
     \resumeSubheading{Health Canada}{Data Scientist Intern}{Sep 2023 - Dec 2023}
       \resumeItemListStart
-        \ifdefined\flagQA
-          \resumeItem{Architected TDD scraping framework with unittest, expanding data sources by \textbf{113\%} with \textbf{100\%} coverage}
-          \resumeItem{Rebuilt organization-wide Python chemical search using BS4 and lxml with fault tolerance, raising query success by \textbf{20\%}}
-          \resumeItem{Validated scraper reliability with regression tests across source schema changes, maintaining zero-failure data collection pipelines}
-        \else
-          \resumeItem{Rebuilt organization-wide Python chemical search using BS4 and lxml with fault tolerance, raising query success by \textbf{20\%}}
-          \resumeItem{Architected TDD scraping framework with unittest, expanding data sources by \textbf{113\%} with \textbf{100\%} coverage}
-          \resumeItem{Developed toxicity classifiers with pandas, NumPy, SciPy, and scikit-learn for chemical risk assessment}
-          \resumeItem{Built a Neo4j knowledge-graph pipeline to extract chemicals, diseases, and relationships from medical literature using CoreNLP and Stanza}
-        \fi
+        \resumeItem{Developed toxicity classifiers with pandas, NumPy, SciPy, and scikit-learn}
+        \resumeItem{Built Neo4j knowledge-graph pipeline extracting chemicals, diseases, and literature relationships}
+        \resumeItem{Architected TDD scraping framework with unittest, expanding data sources by \textbf{113\%} with \textbf{100\%} coverage}
       \resumeItemListEnd
+    \else\ifdefined\flagQA
+    \resumeSubheading{Health Canada}{Data Scientist Intern}{Sep 2023 - Dec 2023}
+      \resumeItemListStart
+        \resumeItem{Architected TDD scraping framework with unittest, expanding sources by \textbf{113\%} with \textbf{100\%} coverage}
+        \resumeItem{Validated scraper reliability across schema changes and fault-tolerant parsing paths}
+        \resumeItem{Rebuilt chemical search with BS4/lxml error handling, raising query success by \textbf{20\%}}
+      \resumeItemListEnd
+    \else\ifdefined\flagSWE\else
+    \resumeSubheading{Health Canada}{Data Scientist Intern}{Sep 2023 - Dec 2023}
+      \resumeItemListStart
+        \resumeItem{Architected TDD scraping framework with unittest, expanding sources by \textbf{113\%} with \textbf{100\%} coverage}
+        \resumeItem{Developed toxicity classifiers with pandas, NumPy, SciPy, and scikit-learn}
+        \resumeItem{Rebuilt chemical search with BS4/lxml error handling, raising query success by \textbf{20\%}}
+      \resumeItemListEnd
+    \fi
+    \fi\fi
 
     \ifdefined\flagAIML
     \resumeSubheading{Department of National Defence}{Data Scientist Intern}{Jun 2023 - Nov 2023}
       \resumeItemListStart
-        \resumeItem{Built RAG system using GPT-3.5 and Flask for intelligent querying across \textbf{20+} government tax documents}
+        \resumeItem{Built GPT-3.5 and Flask RAG system for querying \textbf{20+} government tax documents}
         \resumeItem{Engineered vector search pipeline with FAISS and SQLite for embedding storage and real-time retrieval}
-        \resumeItem{Developed NLP pipeline with NLTK integrating tokenization, NER, and contextual analysis for information extraction}
+        \resumeItem{Developed NLTK pipeline for tokenization, NER, and contextual information extraction}
       \resumeItemListEnd
     \fi
 
     \ifdefined\flagAIML\else\ifdefined\flagQA\else
     \resumeSubheading{NAV CANADA}{Software Developer Intern}{May 2023 - Aug 2023}
       \resumeItemListStart
-        \resumeItem{Optimized internal C++ and Qt GIS data tool, reducing geospatial data storage usage by \textbf{60\%} and boosting analysis workflow speed \textbf{30\%}}
+        \resumeItem{Optimized C++/Qt GIS tool, reducing storage \textbf{60\%} and improving analysis speed \textbf{30\%}}
         \resumeItem{Fixed air traffic control rendering bugs, improving frame rate by \textbf{16\%}}
-        \resumeItem{Automated network setup with PowerShell, reducing manual configuration by more than \textbf{95\%}}
+        \resumeItem{Automated network setup with PowerShell, reducing manual configuration by \textbf{95\%+}}
+        \resumeItem{Improved geospatial data import and validation workflows for internal air-traffic tooling}
       \resumeItemListEnd
     \fi\fi
 
@@ -209,8 +251,9 @@
       \resumeSubheading{Correctional Service Canada}{Software Developer Intern}{May 2022 - Apr 2023}
         \resumeItemListStart
           \resumeItem{Improved C\# and .NET WET accessibility for WCAG 2.1 Level AA compliance}
-          \resumeItem{Resolved ASP.NET UI defects in victim services app used by \textbf{100+} daily users}
+          \resumeItem{Resolved ASP.NET UI defects in victim services app for \textbf{100+} daily users}
           \resumeItem{Supported QA validation for accessible government web workflows}
+          \resumeItem{Verified keyboard navigation, screen-reader labels, and responsive UI behavior after fixes}
         \resumeItemListEnd
     \fi
 
@@ -220,56 +263,71 @@
 \section{Projects}
     \resumeSubHeadingListStart
 
+        \ifdefined\flagSWE
+          \resumeSubheading{Latch}{Electron, TypeScript, Swift, Chrome Extension, Native Messaging}{\href{https://github.com/nbui23/latch}{\footnotesize github.com/nbui23/latch}}
+              \resumeItemListStart
+                  \resumeItem{Built local-first macOS focus blocker with Electron UI, privileged helper, Chromium extension, and native messaging}
+                  \resumeItem{Implemented six-state session machine, crash recovery, hosts markers, and helper availability handling}
+                  \resumeItem{Packaged app, helper, extension bundle, and native messaging host into a signed macOS release flow}
+                  \resumeItem{Validated native messaging manifest repair, helper install state, and blocked-page synchronization paths}
+              \resumeItemListEnd
+
+          \resumeSubheading{CruxOS}{Next.js, TypeScript, Prisma, SQLite, Expo, React Native}{\href{https://github.com/nbui23/cruxos}{\footnotesize github.com/nbui23/cruxos}}
+              \resumeItemListStart
+                  \resumeItem{Built bouldering product with Expo session capture, Next.js analysis dashboard, and shared TypeScript logic}
+                  \resumeItem{Implemented deterministic insight engine translating training and recovery signals into weekly recommendations}
+                  \resumeItem{Designed shared auth, Next.js API routes, and Prisma/SQLite persistence for mobile and web workflows}
+                  \resumeItem{Wrote tests around insight logic and API flows to protect mobile/web data contracts}
+              \resumeItemListEnd
+        \else
         \resumeSubheading{Orbital Refueling Telemetry}{Python, Streamlit, scikit-learn, pytest}{\href{https://github.com/nbui23/orbital-refueling-telemetry-simulator}{\footnotesize github.com/nbui23/orbital-refueling}}
             \resumeItemListStart
-                \resumeItem{Built a synthetic spacecraft refueling telemetry simulator with a 410-second mission timeline, nine mission phases, and six injected anomaly scenarios}
-                \resumeItem{Designed hybrid anomaly monitoring with deterministic engineering rules for hard-limit alerts and phase-aware IsolationForest models for advisory multivariate drift detection}
-                \resumeItem{Added perturbation-based feature attribution and a Streamlit dashboard for scenario exploration, signal glossary, and plain-English chart explanations}
+                \resumeItem{Modeled spacecraft refueling telemetry with \textbf{9} phases, \textbf{6} anomaly classes, and deterministic generation}
+                \resumeItem{Separated hard-limit engineering rules from phase-aware IsolationForest drift detection}
                 \ifdefined\flagQA
-                \resumeItem{Wrote pytest regression coverage for telemetry generation, rule logic, anomaly scoring, and explanation behavior, plus scenario validation outputs for repeatable checks}
-                \fi
+                \resumeItem{Wrote pytest coverage for telemetry generation, rule logic, anomaly scoring, and scenario validation}
+                \else\ifdefined\flagAIML
+                \resumeItem{Benchmarked deterministic rule alerts against advisory ML drift scores across anomaly scenarios}
+                \else
+                \resumeItem{Implemented perturbation-based attribution to identify telemetry channels driving each alert}
+                \fi\fi
             \resumeItemListEnd
 
         \ifdefined\flagQA\else
         \resumeSubheading{Riverbreak}{Python, PyTorch, U-Net, ONNX Runtime, JavaScript, HTML Canvas}{\href{https://github.com/nbui23/riverbreak}{\footnotesize github.com/nbui23/riverbreak}}
             \resumeItemListStart
-                \resumeItem{Built Riverbreak, a browser-first typographic river detector combining a Knuth-Plass-style line breaker, heuristic whitespace-corridor detection, and detector-guided layout reranking}
-                \resumeItem{Trained a focal-loss Small U-Net on synthetic weak-label paragraph data and evaluated it against separate hand-labeled validation/test sets, improving test Dice from \textbf{0.4182 to 0.5018} over the heuristic baseline}
-                \resumeItem{Exported the model to ONNX Runtime Web for local browser inference with live canvas overlays on rendered paragraph layouts}
+                \resumeItem{Built browser-first typographic river detector combining line breaking, whitespace-corridor detection, and layout reranking}
+                \resumeItem{Trained focal-loss Small U-Net on weak labels, improving test Dice from \textbf{0.4182 to 0.5018} over heuristic baseline}
                 \ifdefined\flagAIML
-                \resumeItem{Designed synthetic weak-label data generation pipeline with programmatic river injection, enabling large-scale annotation-free training data at scale}
+                \resumeItem{Designed weak-label data pipeline with programmatic river injection for annotation-free training data}
+                \else
+                \resumeItem{Exported ONNX model for local browser inference over rendered paragraph layouts}
                 \fi
             \resumeItemListEnd
         \fi
 
-        \ifdefined\flagSWE
+        \ifdefined\flagQA
           \resumeSubheading{CruxOS}{Next.js, TypeScript, Prisma, SQLite, Expo, React Native}{\href{https://github.com/nbui23/cruxos}{\footnotesize github.com/nbui23/cruxos}}
               \resumeItemListStart
-                  \resumeItem{Built CruxOS, a bouldering performance product with Expo session capture and Next.js analysis dashboard}
-                  \resumeItem{Implemented deterministic insight engine translating training, recovery, and workload signals into weekly recommendations}
-                  \resumeItem{Designed shared auth, Next.js API routes, and Prisma/SQLite persistence for mobile and web workflows}
+                  \resumeItem{Built CruxOS bouldering app with Expo session capture and Next.js analysis dashboard}
+                  \resumeItem{Implemented deterministic insight engine for training and recovery recommendations}
+                  \resumeItem{Wrote unit and API integration tests for insight logic, auth flows, and Prisma/SQLite persistence}
+                  \resumeItem{Covered typed data contracts across mobile capture, web review, and SQLite persistence}
               \resumeItemListEnd
-        \else\ifdefined\flagQA
-          \resumeSubheading{CruxOS}{Next.js, TypeScript, Prisma, SQLite, Expo, React Native}{\href{https://github.com/nbui23/cruxos}{\footnotesize github.com/nbui23/cruxos}}
-              \resumeItemListStart
-                  \resumeItem{Built CruxOS, a bouldering performance product with Expo session capture and Next.js analysis dashboard}
-                  \resumeItem{Implemented deterministic insight engine translating training, recovery, and workload signals into weekly recommendations}
-                  \resumeItem{Designed shared auth, Next.js API routes, and Prisma/SQLite persistence for mobile and web workflows}
-                  \resumeItem{Wrote unit tests for the deterministic insight engine and API route integration tests covering auth flows and Prisma/SQLite persistence}
-              \resumeItemListEnd
-        \fi\fi
+        \fi
+        \fi
 
     \resumeSubHeadingListEnd
 
 % Skills
 \section{Skills}
   \begin{itemize}[leftmargin=0.15in, label={}]
-    \small{
+    \normalsize{
     \item{
     \ifdefined\flagAIML
       \textbf{Languages}{: Python, TypeScript, JavaScript, C++, Java, SQL} \\
       \textbf{Frameworks \& Runtimes}{: Next.js, Node.js, Flask, Streamlit, Spring Boot} \\
-      \textbf{AI / ML / Data}{: LLMs, RAG, LangChain, FAISS, Ollama, SBERT, scikit-learn, IsolationForest, pandas, NumPy, matplotlib, PyTorch, ONNX Runtime} \\
+      \textbf{AI / ML / Data}{: LLMs, RAG, LangChain, FAISS, scikit-learn, pandas, NumPy, PyTorch} \\
       \textbf{Databases \& APIs}{: PostgreSQL, MySQL, SQLite, MongoDB, Firebase, Neo4j, Prisma, GraphQL} \\
       \textbf{Tools \& Practices}{: Git, CI/CD, TDD, pytest, unittest, BS4, lxml, Postman, Agile, SDLC} \\
     \else\ifdefined\flagQA
