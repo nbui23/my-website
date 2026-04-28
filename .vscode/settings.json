@@ -1,27 +1,17 @@
 {
   "files.watcherExclude": {
-    "**/.git/**": true,
-    "**/.omx/**": true,
-    "**/.omc/**": true,
+    "**/.*/**": true,
     "**/resume/**/*.aux": true,
     "**/resume/**/*.log": true,
     "**/resume/**/*.out": true,
     "**/resume/**/*.synctex.gz": true
   },
   "search.exclude": {
-    "**/.git": true,
-    "**/.omx": true,
-    "**/.omc": true
+    "**/.*": true
   },
   "liveServer.settings.ignoreFiles": [
-    ".vscode/**",
-    ".git/**",
-    ".omx/**",
-    ".omc/**",
-    "/Users/normanbui/Documents/my-website/.vscode/**",
-    "/Users/normanbui/Documents/my-website/.git/**",
-    "/Users/normanbui/Documents/my-website/.omx/**",
-    "/Users/normanbui/Documents/my-website/.omc/**",
+    ".*/**",
+    "/Users/normanbui/Documents/my-website/.*/**",
     "resume/**/*.aux",
     "resume/**/*.log",
     "resume/**/*.out",

@@ -220,17 +220,15 @@
 \section{Projects}
     \resumeSubHeadingListStart
 
-        \ifdefined\flagAIML\else
-          \resumeSubheading{Latch}{Electron, TypeScript, macOS, Native Helper, Chromium Extension}{\href{https://github.com/nbui23/latch}{\footnotesize github.com/nbui23/latch}}
-              \resumeItemListStart
-                  \resumeItem{Built Latch, a local-first macOS focus blocker with Electron, TypeScript, a privileged helper, Chromium extension, and bundled native messaging release flow}
-                  \resumeItem{Designed reliable focus sessions with a six-state session machine, write-ahead crash recovery, hosts-file ownership markers, and schema-validated IPC/helper boundaries}
-                  \resumeItem{Packaged the desktop app, helper resources, browser extension, and native messaging host into a unified macOS release artifact}
-                  \ifdefined\flagQA
-                  \resumeItem{Wrote integration tests covering all six session state transitions and schema-validated IPC boundaries, verifying crash recovery and hosts-file ownership invariants}
-                  \fi
-              \resumeItemListEnd
-        \fi
+        \resumeSubheading{Orbital Refueling Telemetry}{Python, Streamlit, scikit-learn, pytest}{\href{https://github.com/nbui23/orbital-refueling-telemetry-simulator}{\footnotesize github.com/nbui23/orbital-refueling}}
+            \resumeItemListStart
+                \resumeItem{Built a synthetic spacecraft refueling telemetry simulator with a 410-second mission timeline, nine mission phases, and six injected anomaly scenarios}
+                \resumeItem{Designed hybrid anomaly monitoring with deterministic engineering rules for hard-limit alerts and phase-aware IsolationForest models for advisory multivariate drift detection}
+                \resumeItem{Added perturbation-based feature attribution and a Streamlit dashboard for scenario exploration, signal glossary, and plain-English chart explanations}
+                \ifdefined\flagQA
+                \resumeItem{Wrote pytest regression coverage for telemetry generation, rule logic, anomaly scoring, and explanation behavior, plus scenario validation outputs for repeatable checks}
+                \fi
+            \resumeItemListEnd
 
         \ifdefined\flagQA\else
         \resumeSubheading{Riverbreak}{Python, PyTorch, U-Net, ONNX Runtime, JavaScript, HTML Canvas}{\href{https://github.com/nbui23/riverbreak}{\footnotesize github.com/nbui23/riverbreak}}
@@ -270,28 +268,28 @@
     \item{
     \ifdefined\flagAIML
       \textbf{Languages}{: Python, TypeScript, JavaScript, C++, Java, SQL} \\
-      \textbf{Frameworks \& Runtimes}{: Next.js, Node.js, Flask, Spring Boot} \\
-      \textbf{AI / ML / Data}{: LLMs, RAG, LangChain, FAISS, Ollama, SBERT, scikit-learn, pandas, NumPy, matplotlib, PyTorch, ONNX Runtime} \\
+      \textbf{Frameworks \& Runtimes}{: Next.js, Node.js, Flask, Streamlit, Spring Boot} \\
+      \textbf{AI / ML / Data}{: LLMs, RAG, LangChain, FAISS, Ollama, SBERT, scikit-learn, IsolationForest, pandas, NumPy, matplotlib, PyTorch, ONNX Runtime} \\
       \textbf{Databases \& APIs}{: PostgreSQL, MySQL, SQLite, MongoDB, Firebase, Neo4j, Prisma, GraphQL} \\
-      \textbf{Tools \& Practices}{: Git, CI/CD, TDD, unittest, BS4, lxml, Postman, Agile, SDLC} \\
+      \textbf{Tools \& Practices}{: Git, CI/CD, TDD, pytest, unittest, BS4, lxml, Postman, Agile, SDLC} \\
     \else\ifdefined\flagQA
       \textbf{Languages}{: Python, TypeScript, JavaScript, C++, C\#, Java, SQL, HTML/CSS} \\
-      \textbf{Frameworks \& Runtimes}{: Node.js, Express.js, Qt, Spring Boot, Flask, .NET, ASP.NET} \\
-      \textbf{AI / ML / Data}{: LLMs, pandas, NumPy} \\
+      \textbf{Frameworks \& Runtimes}{: Node.js, Express.js, Qt, Spring Boot, Flask, Streamlit, .NET, ASP.NET} \\
+      \textbf{AI / ML / Data}{: LLMs, scikit-learn, pandas, NumPy} \\
       \textbf{Databases \& APIs}{: PostgreSQL, MySQL, SQLite, MongoDB, Firebase, Neo4j, GraphQL} \\
-      \textbf{Tools \& Practices}{: Git, CI/CD, TDD, Mocha, Chai, Sinon, unittest, BS4, lxml, Selenium, Cucumber, PowerShell, Postman, Agile, SDLC} \\
+      \textbf{Tools \& Practices}{: Git, CI/CD, TDD, pytest, Mocha, Chai, Sinon, unittest, BS4, lxml, Selenium, Cucumber, PowerShell, Postman, Agile, SDLC} \\
     \else\ifdefined\flagSWE
       \textbf{Languages}{: Python, TypeScript, JavaScript, C++, C\#, Kotlin, Java, SQL, HTML/CSS, PHP} \\
-      \textbf{Frameworks \& Runtimes}{: Next.js, Node.js, Express.js, Electron, Qt, React Native, Expo, Spring Boot, Flask, .NET, ASP.NET} \\
-      \textbf{AI / ML / Data}{: LLMs, RAG, pandas, NumPy, PyTorch, scikit-learn} \\
+      \textbf{Frameworks \& Runtimes}{: Next.js, Node.js, Express.js, Electron, Qt, React Native, Expo, Spring Boot, Flask, Streamlit, .NET, ASP.NET} \\
+      \textbf{AI / ML / Data}{: LLMs, RAG, scikit-learn, pandas, NumPy, PyTorch} \\
       \textbf{Databases \& APIs}{: PostgreSQL, MySQL, SQLite, MongoDB, Firebase, Neo4j, Prisma, GraphQL} \\
-      \textbf{Tools \& Practices}{: Git, CI/CD, TDD, Mocha, Chai, Sinon, unittest, BS4, lxml, Selenium, Cucumber, PowerShell, Postman, Agile, SDLC} \\
+      \textbf{Tools \& Practices}{: Git, CI/CD, TDD, pytest, Mocha, Chai, Sinon, unittest, BS4, lxml, Selenium, Cucumber, PowerShell, Postman, Agile, SDLC} \\
     \else
       \textbf{Languages}{: Python, TypeScript, JavaScript, C++, C\#, Kotlin, Java, SQL, HTML/CSS, PHP} \\
-      \textbf{Frameworks \& Runtimes}{: Next.js, Node.js, Express.js, Electron, Qt, React Native, Expo, Spring Boot, Flask, .NET, ASP.NET} \\
-      \textbf{AI / ML / Data}{: LLMs, RAG, LangChain, FAISS, Ollama, SBERT, scikit-learn, pandas, NumPy, matplotlib, PyTorch, ONNX Runtime} \\
+      \textbf{Frameworks \& Runtimes}{: Next.js, Node.js, Express.js, Electron, Qt, React Native, Expo, Spring Boot, Flask, Streamlit, .NET, ASP.NET} \\
+      \textbf{AI / ML / Data}{: LLMs, RAG, LangChain, FAISS, Ollama, SBERT, scikit-learn, IsolationForest, pandas, NumPy, matplotlib, PyTorch, ONNX Runtime} \\
       \textbf{Databases \& APIs}{: PostgreSQL, MySQL, SQLite, MongoDB, Firebase, Neo4j, Prisma, GraphQL} \\
-      \textbf{Tools \& Practices}{: Git, CI/CD, TDD, Mocha, Chai, Sinon, unittest, BS4, lxml, Selenium, Cucumber, PowerShell, Postman, Agile, SDLC} \\
+      \textbf{Tools \& Practices}{: Git, CI/CD, TDD, pytest, Mocha, Chai, Sinon, unittest, BS4, lxml, Selenium, Cucumber, PowerShell, Postman, Agile, SDLC} \\
     \fi\fi\fi
     \textbf{Spoken Languages}{: English, French, Vietnamese} \\
     }}

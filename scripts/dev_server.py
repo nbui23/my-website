@@ -31,7 +31,7 @@ DEFAULT_WATCH_PATHS = (
     "images",
     "resume",
 )
-DEFAULT_IGNORE_DIRS = {".git", ".omx", ".omc", ".vscode", ".claude", "__pycache__"}
+DEFAULT_IGNORE_DIRS = {"__pycache__"}
 DEFAULT_IGNORE_SUFFIXES = {".aux", ".log", ".out", ".synctex.gz", ".pyc"}
 DEFAULT_POLL_INTERVAL_SECONDS = 0.35
 BODY_CLOSE_RE = re.compile(r"</body\s*>", re.IGNORECASE)
@@ -115,7 +115,7 @@ def should_ignore(
     ignore_dirs: frozenset[str] = frozenset(DEFAULT_IGNORE_DIRS),
     ignore_suffixes: tuple[str, ...] = tuple(DEFAULT_IGNORE_SUFFIXES),
 ) -> bool:
-    if any(part in ignore_dirs for part in relative_path.parts):
+    if any(part in ignore_dirs or part.startswith(".") for part in relative_path.parts):
         return True
 
     name = relative_path.name
@@ -151,7 +151,9 @@ def iter_watch_files(config: ServerConfig) -> Iterable[Path]:
 
         for current_root, dirnames, filenames in os.walk(target):
             dirnames[:] = [
-                dirname for dirname in dirnames if dirname not in config.ignore_dirs
+                dirname
+                for dirname in dirnames
+                if dirname not in config.ignore_dirs and not dirname.startswith(".")
             ]
             current_root_path = Path(current_root)
             for filename in filenames:
@@ -435,7 +437,7 @@ class LiveReloadHandler(SimpleHTTPRequestHandler):
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Repo-local static dev server with live reload that ignores OMX churn."
+        description="Repo-local static dev server with live reload that ignores local editor churn."
     )
     parser.add_argument("--host", default="127.0.0.1", help="Host to bind to.")
     parser.add_argument(

@@ -30,7 +30,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=b29ac0d3">
+    <link rel="stylesheet" href="styles.css?v=b1e08e4f">
     <script type="application/ld+json">
         {
             "@context": "https://schema.org",
@@ -83,7 +83,24 @@
                 <a href="mailto:normanbui23@gmail.com">Email</a>
                 <a href="https://www.linkedin.com/in/nbui23/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
                 <a href="https://github.com/nbui23" target="_blank" rel="noopener noreferrer">GitHub</a>
-                <a href="resume/Norman_Bui_Resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
+                <div class="resume-menu">
+                    <button class="resume-menu-button" type="button" aria-expanded="false"
+                        aria-controls="resume-menu-list">
+                        Resume
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M4 6l4 4 4-4"></path>
+                        </svg>
+                    </button>
+                    <div class="resume-menu-list" id="resume-menu-list">
+                        <a href="resume/Norman_Bui_Resume.pdf" target="_blank" rel="noopener noreferrer">General</a>
+                        <a href="resume/swe/Norman_Bui_Resume.pdf" target="_blank"
+                            rel="noopener noreferrer">Software Engineering</a>
+                        <a href="resume/aiml/Norman_Bui_Resume.pdf" target="_blank" rel="noopener noreferrer">AI /
+                            ML</a>
+                        <a href="resume/qa/Norman_Bui_Resume.pdf" target="_blank" rel="noopener noreferrer">QA</a>
+                    </div>
+                </div>
             </div>
 
             <p class="header-note">Seeking new grad software roles. I have worked across <strong>9 software
@@ -539,6 +556,7 @@
                             <li>React Native</li>
                             <li>Expo</li>
                             <li>Electron</li>
+                            <li>Streamlit</li>
                             <li>Qt</li>
                             <li>.NET</li>
                             <li>ASP.NET</li>
@@ -555,6 +573,9 @@
                             <li>Ollama</li>
                             <li>Sentence Transformers</li>
                             <li>scikit-learn</li>
+                            <li>IsolationForest</li>
+                            <li>Anomaly Detection</li>
+                            <li>Telemetry Simulation</li>
                             <li>pandas</li>
                             <li>NumPy</li>
                             <li>NLTK</li>
@@ -580,6 +601,7 @@
                             <li>Mocha</li>
                             <li>Chai</li>
                             <li>Sinon</li>
+                            <li>pytest</li>
                             <li>unittest</li>
                             <li>WCAG 2.1</li>
                             <li>Cloudflare Workers</li>
@@ -689,6 +711,47 @@
                 <div class="entry-card project-card">
                     <div class="entry-header">
                         <div class="entry-header-text">
+                            <h3 class="entry-company">Orbital Refueling Telemetry Simulator</h3>
+                            <p class="entry-role">Synthetic spacecraft telemetry and anomaly monitoring prototype</p>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://orbital-refueling-telemetry-simulator.streamlit.app/" target="_blank"
+                                rel="noopener noreferrer">Demo &rarr;</a>
+                            <a href="https://github.com/nbui23/orbital-refueling-telemetry-simulator" target="_blank"
+                                rel="noopener noreferrer">GitHub &rarr;</a>
+                        </div>
+                    </div>
+                    <p class="project-summary">Orbital Refueling Telemetry Simulator is a Python and Streamlit portfolio
+                        project that generates synthetic autonomous refueling telemetry, injects anomaly scenarios, and
+                        compares deterministic engineering rules with phase-aware ML anomaly scoring.</p>
+                    <ul class="project-tags"
+                        aria-label="Orbital Refueling Telemetry Simulator tech stack and product highlights">
+                        <li>Python</li>
+                        <li>Streamlit</li>
+                        <li>scikit-learn</li>
+                        <li>IsolationForest</li>
+                        <li>Telemetry simulation</li>
+                        <li>Regression tests</li>
+                    </ul>
+                    <div class="project-image">
+                        <img src="images/orbital-refueling-telemetry.png"
+                            alt="Orbital refueling telemetry dashboard preview with mission phase, scenario alerts, signal charts, and anomaly score">
+                    </div>
+                    <ul class="entry-bullets">
+                        <li><strong>Hybrid monitoring design:</strong> Kept hard-limit deterministic rules separate from
+                            advisory ML scoring so explicit threshold breaches and subtle multivariate drift are both
+                            visible</li>
+                        <li><strong>Scenario-driven simulation:</strong> Modeled a 410-second refueling mission across
+                            nine phases with nominal telemetry plus six injected anomaly cases</li>
+                        <li><strong>Explainable validation loop:</strong> Added perturbation-based signal attribution,
+                            beginner-friendly dashboard copy, and repeatable scenario validation for regression checks
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="entry-card project-card">
+                    <div class="entry-header">
+                        <div class="entry-header-text">
                             <h3 class="entry-company">Latch</h3>
                             <p class="entry-role">Local-first macOS focus blocker</p>
                         </div>
@@ -761,7 +824,8 @@
                             richer review and trend analysis on the web to support the full training loop</li>
                         <li><strong>Deterministic insight engine:</strong> Translated training, recovery, and workload
                             signals into clear weekly recommendations instead of opaque black-box outputs</li>
-                        <li><strong>Typed data model:</strong> Used Prisma and SQLite to keep sessions, recovery signals,
+                        <li><strong>Typed data model:</strong> Used Prisma and SQLite to keep sessions, recovery
+                            signals,
                             and reports consistent across mobile capture and web review</li>
                         <li><strong>Real-world usefulness:</strong> Built for intermediate climbers who need help
                             deciding when to push, recover, or adjust training to improve performance</li>
@@ -820,7 +884,7 @@
 
     </div>
 
-    <script src="scripts/main.js?v=20260417-goodreads-link" defer></script>
+    <script src="scripts/main.js?v=0698a567" defer></script>
 
 </body>
 

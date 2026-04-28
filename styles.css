@@ -96,6 +96,9 @@ body,
 .header-photo,
 .header-note,
 .contact-links a,
+.resume-menu-button,
+.resume-menu-list,
+.resume-menu-list a,
 .tab-bar,
 .tab,
 .tab-indicator,
@@ -171,6 +174,8 @@ dd {
 }
 
 .contact-links a,
+.resume-menu-button,
+.resume-menu-list a,
 .entry-link,
 .project-links a,
 .reading-intro a {
@@ -183,16 +188,95 @@ dd {
     align-items: center;
 }
 
-.contact-links a {
+.contact-links a,
+.resume-menu-button {
     font-size: 1rem;
     font-weight: 500;
 }
 
 .contact-links a:hover,
+.resume-menu-button:hover,
+.resume-menu-list a:hover,
 .entry-link:hover,
 .project-links a:hover,
 .reading-intro a:hover {
     text-decoration: underline;
+}
+
+.resume-menu {
+    position: relative;
+    display: inline-flex;
+}
+
+.resume-menu-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    border: 0;
+    background: transparent;
+    font-family: inherit;
+    line-height: inherit;
+    cursor: pointer;
+    padding: 0;
+}
+
+.resume-menu-button svg {
+    width: 0.9rem;
+    height: 0.9rem;
+    transition: transform var(--theme-motion-duration-fast) var(--theme-motion-ease);
+}
+
+.resume-menu.open .resume-menu-button svg {
+    transform: rotate(180deg);
+}
+
+.resume-menu-list {
+    position: absolute;
+    top: calc(100% + 0.45rem);
+    right: 0;
+    z-index: 20;
+    display: grid;
+    min-width: 13rem;
+    padding: 0.35rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface-raised);
+    box-shadow: var(--shadow-soft);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-0.25rem);
+    pointer-events: none;
+    transition:
+        opacity var(--theme-motion-duration-fast) var(--theme-motion-ease),
+        visibility var(--theme-motion-duration-fast) var(--theme-motion-ease),
+        transform var(--theme-motion-duration-fast) var(--theme-motion-ease),
+        background-color var(--theme-motion-duration) var(--theme-motion-ease),
+        border-color var(--theme-motion-duration) var(--theme-motion-ease),
+        box-shadow var(--theme-motion-duration) var(--theme-motion-ease);
+}
+
+.resume-menu.open .resume-menu-list {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.resume-menu-list a {
+    display: block;
+    padding: 0.45rem 0.6rem;
+    border-radius: 6px;
+    color: var(--text);
+    font-size: 0.95rem;
+    line-height: 1.35;
+}
+
+.resume-menu-list a:hover,
+.resume-menu-list a:focus-visible {
+    background: var(--accent-soft-bg);
+    color: var(--accent-soft-fg);
+    text-decoration: none;
+    outline: none;
 }
 
 .header-note {

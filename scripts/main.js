@@ -1,6 +1,8 @@
 const tabs = [...document.querySelectorAll('.tab')];
 const tabContents = [...document.querySelectorAll('.tab-content')];
 const tabIndicator = document.querySelector('.tab-indicator');
+const resumeMenu = document.querySelector('.resume-menu');
+const resumeMenuButton = document.querySelector('.resume-menu-button');
 
 const BOOK_PROXY_PREFIXES = [
     'https://cold-flower-83d6.normanbui23.workers.dev/?url=',
@@ -87,6 +89,39 @@ function initTabs() {
     window.addEventListener('resize', () => {
         const currentTab = document.querySelector('.tab.active');
         if (currentTab) updateTabIndicator(currentTab);
+    });
+}
+
+function closeResumeMenu() {
+    if (!resumeMenu || !resumeMenuButton) return;
+    resumeMenu.classList.remove('open');
+    resumeMenuButton.setAttribute('aria-expanded', 'false');
+}
+
+function initResumeMenu() {
+    if (!resumeMenu || !resumeMenuButton) return;
+
+    resumeMenuButton.addEventListener('click', event => {
+        event.stopPropagation();
+        const isOpen = resumeMenu.classList.toggle('open');
+        resumeMenuButton.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    document.addEventListener('click', event => {
+        if (!resumeMenu.contains(event.target)) {
+            closeResumeMenu();
+        }
+    });
+
+    document.addEventListener('keydown', event => {
+        if (event.key === 'Escape') {
+            closeResumeMenu();
+            resumeMenuButton.focus();
+        }
+    });
+
+    resumeMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeResumeMenu);
     });
 }
 
@@ -396,5 +431,6 @@ function initThemeToggle() {
 
 window.addEventListener('load', () => {
     initTabs();
+    initResumeMenu();
     initThemeToggle();
 });

@@ -9,8 +9,8 @@ import dev_server
 
 
 class DevServerTests(unittest.TestCase):
-    def test_should_ignore_omx_and_temp_files(self) -> None:
-        self.assertTrue(dev_server.should_ignore(Path(".omx/state/session.json")))
+    def test_should_ignore_hidden_and_temp_files(self) -> None:
+        self.assertTrue(dev_server.should_ignore(Path(".local-state/session.json")))
         self.assertTrue(dev_server.should_ignore(Path("resume/Norman_Bui_Resume.log")))
         self.assertTrue(dev_server.should_ignore(Path("styles.css~")))
         self.assertFalse(dev_server.should_ignore(Path("styles.css")))
@@ -47,12 +47,12 @@ class DevServerTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             dev_server.resolve_watch_paths(dev_server.ROOT, ("../outside",))
 
-    def test_snapshot_files_ignores_omx_tree(self) -> None:
+    def test_snapshot_files_ignores_hidden_tree(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
             root = Path(temp_dir).resolve()
             (root / "index.html").write_text("ok", encoding="utf-8")
-            (root / ".omx").mkdir()
-            (root / ".omx" / "state.json").write_text("ignore me", encoding="utf-8")
+            (root / ".local-state").mkdir()
+            (root / ".local-state" / "state.json").write_text("ignore me", encoding="utf-8")
             (root / "styles.css").write_text("body {}", encoding="utf-8")
 
             config = dev_server.ServerConfig(
@@ -60,7 +60,7 @@ class DevServerTests(unittest.TestCase):
                 host="127.0.0.1",
                 port=5501,
                 poll_interval_seconds=0.1,
-                watch_paths=dev_server.resolve_watch_paths(root, ("index.html", "styles.css", ".omx")),
+                watch_paths=dev_server.resolve_watch_paths(root, ("index.html", "styles.css", ".local-state")),
                 ignore_dirs=frozenset(dev_server.DEFAULT_IGNORE_DIRS),
                 ignore_suffixes=tuple(dev_server.DEFAULT_IGNORE_SUFFIXES),
                 open_browser=False,
