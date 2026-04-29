@@ -153,14 +153,14 @@
                                         <span>Desktop focus blocker with system-level enforcement</span>
                                     </span>
                                 </a>
-                                <a class="showcase-project" href="riverbreak-case-study.html">
+                                <a class="showcase-project" href="orbital-refueling-case-study.html">
                                     <span class="showcase-project-image">
-                                        <img src="images/riverbreak.png"
-                                            alt="Riverbreak project card showing justified text with detected whitespace rivers">
+                                        <img src="images/orbital-refueling-telemetry.png"
+                                            alt="Orbital refueling telemetry dashboard preview with mission phase, scenario alerts, signal charts, and anomaly score">
                                     </span>
                                     <span class="showcase-project-copy">
-                                        <strong>Riverbreak</strong>
-                                        <span>Typographic river detector with browser ML and layout scoring</span>
+                                        <strong>Orbital Refueling</strong>
+                                        <span>Spacecraft telemetry simulator with hybrid anomaly monitoring</span>
                                     </span>
                                 </a>
                             </div>
@@ -670,6 +670,48 @@
                 <div class="entry-card project-card project-card-featured">
                     <div class="entry-header">
                         <div class="entry-header-text">
+                            <h3 class="entry-company">Orbital Refueling Simulator</h3>
+                            <p class="entry-role">Synthetic spacecraft telemetry and anomaly monitoring prototype</p>
+                        </div>
+                        <div class="project-links">
+                            <a href="orbital-refueling-case-study.html">Case Study &rarr;</a>
+                            <a href="https://orbital-refueling-telemetry-simulator.streamlit.app/" target="_blank"
+                                rel="noopener noreferrer">Demo &rarr;</a>
+                            <a href="https://github.com/nbui23/orbital-refueling" target="_blank"
+                                rel="noopener noreferrer">GitHub &rarr;</a>
+                        </div>
+                    </div>
+                    <p class="project-summary">Orbital Refueling Simulator generates synthetic autonomous refueling
+                        telemetry, injects anomaly scenarios, and
+                        compares deterministic engineering rules with phase-aware ML anomaly scoring.</p>
+                    <ul class="project-tags"
+                        aria-label="Orbital Refueling Telemetry Simulator tech stack and product highlights">
+                        <li>Python</li>
+                        <li>Streamlit</li>
+                        <li>scikit-learn</li>
+                        <li>IsolationForest</li>
+                        <li>Telemetry simulation</li>
+                        <li>Regression tests</li>
+                    </ul>
+                    <div class="project-image">
+                        <img src="images/orbital-refueling-telemetry.png"
+                            alt="Orbital refueling telemetry dashboard preview with mission phase, scenario alerts, signal charts, and anomaly score">
+                    </div>
+                    <ul class="entry-bullets">
+                        <li><strong>Hybrid monitoring design:</strong> Kept hard-limit deterministic rules separate from
+                            advisory ML scoring so explicit threshold breaches and subtle multivariate drift are both
+                            visible</li>
+                        <li><strong>Scenario-driven simulation:</strong> Modeled a 410-second refueling mission across
+                            nine phases with nominal telemetry plus six injected anomaly cases</li>
+                        <li><strong>Explainable validation loop:</strong> Added perturbation-based signal attribution,
+                            beginner-friendly dashboard copy, and repeatable scenario validation for regression checks
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="entry-card project-card">
+                    <div class="entry-header">
+                        <div class="entry-header-text">
                             <h3 class="entry-company">Riverbreak</h3>
                             <p class="entry-role">Typographic river detection and layout demo</p>
                         </div>
@@ -704,47 +746,6 @@
                             it against the heuristic baseline on hand-labeled validation and test samples</li>
                         <li><strong>End-to-end artifacts:</strong> Shipped the ONNX browser model, precomputed sample
                             overlays, benchmark reports, and reproducible repository checks</li>
-                    </ul>
-                </div>
-
-                <div class="entry-card project-card">
-                    <div class="entry-header">
-                        <div class="entry-header-text">
-                            <h3 class="entry-company">Orbital Refueling Simulator</h3>
-                            <p class="entry-role">Synthetic spacecraft telemetry and anomaly monitoring prototype</p>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://orbital-refueling-telemetry-simulator.streamlit.app/" target="_blank"
-                                rel="noopener noreferrer">Demo &rarr;</a>
-                            <a href="https://github.com/nbui23/orbital-refueling" target="_blank"
-                                rel="noopener noreferrer">GitHub &rarr;</a>
-                        </div>
-                    </div>
-                    <p class="project-summary">Orbital Refueling Simulator generates synthetic autonomous refueling
-                        telemetry, injects anomaly scenarios, and
-                        compares deterministic engineering rules with phase-aware ML anomaly scoring.</p>
-                    <ul class="project-tags"
-                        aria-label="Orbital Refueling Telemetry Simulator tech stack and product highlights">
-                        <li>Python</li>
-                        <li>Streamlit</li>
-                        <li>scikit-learn</li>
-                        <li>IsolationForest</li>
-                        <li>Telemetry simulation</li>
-                        <li>Regression tests</li>
-                    </ul>
-                    <div class="project-image">
-                        <img src="images/orbital-refueling-telemetry.png"
-                            alt="Orbital refueling telemetry dashboard preview with mission phase, scenario alerts, signal charts, and anomaly score">
-                    </div>
-                    <ul class="entry-bullets">
-                        <li><strong>Hybrid monitoring design:</strong> Kept hard-limit deterministic rules separate from
-                            advisory ML scoring so explicit threshold breaches and subtle multivariate drift are both
-                            visible</li>
-                        <li><strong>Scenario-driven simulation:</strong> Modeled a 410-second refueling mission across
-                            nine phases with nominal telemetry plus six injected anomaly cases</li>
-                        <li><strong>Explainable validation loop:</strong> Added perturbation-based signal attribution,
-                            beginner-friendly dashboard copy, and repeatable scenario validation for regression checks
-                        </li>
                     </ul>
                 </div>
 

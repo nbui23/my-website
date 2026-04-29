@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        (function () {
+            try {
+                var stored = localStorage.getItem('theme');
+                var theme = stored === 'light' || stored === 'dark' ? stored : 'dark';
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+    <title>Orbital Refueling Case Study - Norman Bui</title>
+    <meta name="description"
+        content="Orbital Refueling Simulator case study: a synthetic spacecraft telemetry project combining phase-aware anomaly detection, deterministic engineering rules, attribution, and scenario validation.">
+    <meta property="og:title" content="Orbital Refueling Case Study - Norman Bui">
+    <meta property="og:description"
+        content="How I designed a hybrid monitoring architecture for synthetic spacecraft refueling telemetry with deterministic rules and phase-aware ML scoring.">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Orbital Refueling Case Study - Norman Bui">
+    <meta name="twitter:description"
+        content="A technical case study on synthetic telemetry generation, rule-based monitoring, phase-aware anomaly detection, and validation.">
+    <link rel="icon" type="image/jpeg" href="images/logos/baby.jpeg?v=41bb1200">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=b29ac0d3">
+</head>
+
+<body>
+    <button class="theme-toggle" type="button" aria-label="Toggle color theme" title="Toggle theme">
+        <svg class="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path
+                d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41">
+            </path>
+        </svg>
+        <svg class="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+    </button>
+
+    <div class="container case-study-page">
+        <a class="case-study-back" href="index.html#projects">&larr; Back to portfolio</a>
+
+        <main class="case-study-content">
+            <section class="entry-card case-study-hero">
+                <div class="case-study-hero-copy">
+                    <p class="overview-kicker">Project Case Study</p>
+                    <h1 class="case-study-title">Orbital Refueling Simulator</h1>
+                    <p class="case-study-subtitle">A synthetic spacecraft telemetry system for testing hybrid anomaly
+                        monitoring across mission phases.</p>
+                    <p class="case-study-lede">Autonomous propellant transfer is a useful monitoring problem because
+                        several subsystems move at the same time: robotic alignment, docking loads, seal pressure,
+                        transfer pressure, flow rate, pump behavior, thermal state, and spacecraft attitude. Some faults
+                        are obvious threshold violations. Others only look suspicious when multiple signals drift
+                        together.</p>
+                    <p class="case-study-lede">I built this project around that split. The simulator generates a
+                        complete 410-second refueling mission, deterministic rules own the hard-limit safety checks, and
+                        a phase-aware anomaly detector provides advisory scoring for multivariate drift. The result is a
+                        small but complete telemetry pipeline with scenario generation, scoring, attribution, regression
+                        tests, and a model card that clearly states the limits of synthetic evaluation.</p>
+                    <ul class="project-tags" aria-label="Orbital refueling technologies and themes">
+                        <li>Python</li>
+                        <li>scikit-learn</li>
+                        <li>IsolationForest</li>
+                        <li>pandas</li>
+                        <li>pytest</li>
+                        <li>Telemetry Simulation</li>
+                    </ul>
+                    <div class="project-links overview-links">
+                        <a href="https://orbital-refueling-telemetry-simulator.streamlit.app/" target="_blank"
+                            rel="noopener noreferrer">Demo &rarr;</a>
+                        <a href="https://github.com/nbui23/orbital-refueling" target="_blank"
+                            rel="noopener noreferrer">GitHub &rarr;</a>
+                        <a href="index.html#projects">Portfolio Overview &rarr;</a>
+                    </div>
+                </div>
+                <div class="case-study-hero-visual">
+                    <div class="case-study-image-shell">
+                        <img src="images/orbital-refueling-telemetry.png"
+                            alt="Orbital refueling telemetry dashboard preview with mission phase, scenario alerts, signal charts, and anomaly score">
+                    </div>
+                </div>
+            </section>
+
+            <section class="proof-strip case-study-proof" aria-label="Orbital refueling outcomes and qualities">
+                <div class="proof-item">
+                    <span class="proof-value">410 s</span>
+                    <span class="proof-label">Synthetic mission timeline sampled at 2 Hz across nine operating
+                        phases</span>
+                </div>
+                <div class="proof-item">
+                    <span class="proof-value">17</span>
+                    <span class="proof-label">Numeric telemetry features scored by phase-specific anomaly models</span>
+                </div>
+                <div class="proof-item">
+                    <span class="proof-value">7</span>
+                    <span class="proof-label">Scenarios: nominal plus six injected anomaly cases for repeatable
+                        checks</span>
+                </div>
+                <div class="proof-item">
+                    <span class="proof-value">Hybrid</span>
+                    <span class="proof-label">Hard-limit rules stay separate from advisory ML drift detection</span>
+                </div>
+            </section>
+
+            <section class="entry-card case-study-section">
+                <div class="section-lead">
+                    <h2 class="section-title">Problem</h2>
+                    <p class="section-copy">A single anomaly detector is the wrong mental model for this domain. During
+                        approach, zero propellant flow is normal. During main transfer, zero flow is suspicious. A
+                        pressure value that looks reasonable in one phase can be wrong in another. The monitoring system
+                        needs phase context before it can decide whether telemetry is nominal.</p>
+                    <p class="section-copy">The other constraint is authority. If bus voltage drops too low, pump
+                        current spikes, or seal pressure falls after the seal is established, a deterministic rule
+                        should fire regardless of what an ML model thinks. The model can help surface softer patterns,
+                        but it should not override hard engineering checks.</p>
+                </div>
+                <div class="case-study-grid">
+                    <article class="case-study-note">
+                        <h3>Detection challenge</h3>
+                        <p>Represent faults that are clear threshold breaches, such as leak-check flow, and faults that
+                            are mainly multivariate drift, such as pressure sensor bias or propellant slosh.</p>
+                    </article>
+                    <article class="case-study-note">
+                        <h3>Design principle</h3>
+                        <p>Keep deterministic safety rules independent from ML scoring. Rules make explicit engineering
+                            checks; ML provides advisory pattern recognition and supporting evidence.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="entry-card case-study-section">
+                <div class="section-lead">
+                    <h2 class="section-title">Simulator Design</h2>
+                    <p class="section-copy">The core of the project is <code>simulator.py</code>. It creates a
+                        reproducible mission timeline with phase-specific nominal behavior, then injects scenario
+                        anomalies at the operational phase where they make sense.</p>
+                </div>
+                <ul class="case-study-list">
+                    <li><strong>Phase model:</strong> the mission moves through approach, arm alignment, docking, seal
+                        check, pressure equalization, main transfer, leak check, disconnect, and retreat.</li>
+                    <li><strong>Physical consistency:</strong> the generator tracks mass transfer and updates donor
+                        pressure, receiver pressure, line pressure, flow rate, pump current, temperatures, attitude, arm
+                        state, and interface loads with phase-specific behavior.</li>
+                    <li><strong>Scenario injection:</strong> each anomaly modifies the signals it should affect:
+                        partial blockage lowers flow while raising line pressure and pump current, arm misalignment
+                        raises end-effector error and interface loads, and unstable slosh oscillates flow, pressure, and
+                        propellant temperature.</li>
+                    <li><strong>Reproducibility:</strong> fixed seeds make the scenarios stable enough for tests and
+                        validation reports while still preserving realistic noise.</li>
+                </ul>
+            </section>
+
+            <section class="entry-card case-study-section">
+                <div class="section-lead">
+                    <h2 class="section-title">Hybrid Monitoring Architecture</h2>
+                    <p class="section-copy">I split monitoring into two independent layers so the behavior is easier to
+                        reason about and safer to explain.</p>
+                </div>
+                <div class="case-study-grid">
+                    <article class="case-study-note">
+                        <h3>Deterministic rule engine</h3>
+                        <p><code>rules.py</code> defines explicit warning and critical thresholds for attitude error,
+                            bus voltage, seal pressure, leak-check flow, line pressure, pump current, interface force,
+                            and arm position. Rules can be scoped to phases so expected ramps do not create false
+                            alerts.</p>
+                    </article>
+                    <article class="case-study-note">
+                        <h3>Event grouping</h3>
+                        <p>Raw timestamp-level alerts are grouped into event windows by rule and phase. This prevents
+                            oscillating signals from flooding the operator view with dozens of nearly identical rows.
+                        </p>
+                    </article>
+                    <article class="case-study-note">
+                        <h3>Phase-aware ML detector</h3>
+                        <p><code>detector.py</code> trains one IsolationForest per phase on nominal telemetry. At
+                            inference time, each row is scored against the model for its current phase instead of a
+                            global baseline.</p>
+                    </article>
+                    <article class="case-study-note">
+                        <h3>Score normalization</h3>
+                        <p>The detector maps threshold-relative IsolationForest outputs into a 0 to 1 anomaly score with
+                            a sigmoid transform. The score is useful for ranking and inspection, not as a calibrated
+                            probability.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="entry-card case-study-section">
+                <div class="section-lead">
+                    <h2 class="section-title">Explainability And Validation</h2>
+                    <p class="section-copy">Because this is a monitoring system, a high score by itself is not enough.
+                        The project includes a lightweight explanation method and a repeatable validation script so each
+                        scenario has inspectable evidence.</p>
+                </div>
+                <ul class="case-study-list">
+                    <li><strong>Perturbation attribution:</strong> for anomalous rows, <code>explainer.py</code>
+                        replaces each feature with that phase's nominal mean and measures how much the anomaly score
+                        drops. Large drops identify the signals pushing the score upward.</li>
+                    <li><strong>Scenario validation:</strong> <code>scripts/validate_scenarios.py</code> trains or loads
+                        the default detector, evaluates every scenario, and writes a compact CSV with max score, mean
+                        score, anomaly rate, rule alert counts, highest severity, and top contributing signal.</li>
+                    <li><strong>Regression tests:</strong> pytest coverage checks telemetry generation, rule behavior,
+                        detector scoring, phase handling, and explanation output, including cases like unknown phases
+                        scoring to zero.</li>
+                    <li><strong>Model card:</strong> <code>MODEL_CARD.md</code> documents training data, intended use,
+                        score interpretation, limitations, and the validation needed before anything like this could be
+                        considered for real telemetry.</li>
+                </ul>
+            </section>
+
+            <section class="entry-card case-study-section">
+                <div class="section-lead">
+                    <h2 class="section-title">Scenario Results</h2>
+                    <p class="section-copy">The validation story is designed to show why both monitoring layers exist.
+                        Some injected faults trigger explicit rules. Others stay under hard thresholds but still look
+                        unusual to the phase-aware detector.</p>
+                </div>
+                <div class="case-study-callout">
+                    <p><strong>Key pattern:</strong> partial blockage triggers both deterministic pressure/current rules
+                        and elevated ML scores, while sensor drift and unstable slosh can raise ML anomaly rates without
+                        grouped rule alerts. That is the architectural point of the project.</p>
+                </div>
+                <div class="case-study-grid">
+                    <article class="case-study-note">
+                        <h3>Nominal</h3>
+                        <p>The baseline stays quiet, with no grouped rule alerts and low average anomaly scoring. This
+                            gives the validation script a stable control case.</p>
+                    </article>
+                    <article class="case-study-note">
+                        <h3>Partial blockage</h3>
+                        <p>Flow drops while line pressure and pump current rise, so both the rule engine and ML detector
+                            have reason to flag the scenario.</p>
+                    </article>
+                    <article class="case-study-note">
+                        <h3>Sensor drift</h3>
+                        <p>Pressure readings drift upward over the mission. The model sees the pattern, but hard rules
+                            can remain quiet because no explicit threshold is crossed.</p>
+                    </article>
+                    <article class="case-study-note">
+                        <h3>Unstable slosh</h3>
+                        <p>Flow, line pressure, and propellant temperature oscillate together during transfer, making
+                            the
+                            drift multivariate rather than a single obvious hard-limit breach.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="entry-card case-study-section">
+                <div class="section-lead">
+                    <h2 class="section-title">Engineering Takeaways</h2>
+                    <p class="section-copy">The strongest part of the project is not the dashboard. It is the system
+                        boundary between simulation, rule authority, advisory ML, explanation, and validation.</p>
+                </div>
+                <ul class="case-study-list">
+                    <li><strong>Phase conditioning matters:</strong> telemetry should be scored against the correct
+                        operating context, especially when signals intentionally change meaning between phases.</li>
+                    <li><strong>Rules and ML have different jobs:</strong> hard-limit alerts are transparent and
+                        deterministic, while the ML layer is useful for surfacing softer patterns that deserve review.
+                    </li>
+                    <li><strong>Validation should be explicit:</strong> synthetic projects need scenario-level evidence,
+                        repeatable seeds, regression tests, and clear limitations so the reader can separate demo value
+                        from real-world claims.</li>
+                    <li><strong>Explainability can be lightweight:</strong> perturbation-based attribution is not causal
+                        proof, but it gives users a useful first answer to "which signals made this look anomalous?"
+                    </li>
+                </ul>
+            </section>
+
+            <section class="entry-card case-study-section">
+                <div class="section-lead">
+                    <h2 class="section-title">Limitations</h2>
+                    <p class="section-copy">This is an educational prototype. It is not flight software, not an
+                        autonomous abort system, and not based on real spacecraft telemetry. The important engineering
+                        habit here is being explicit about those boundaries.</p>
+                </div>
+                <ul class="case-study-list">
+                    <li>Synthetic data comes from one simplified generator, so results do not imply real-world
+                        generalization.</li>
+                    <li>IsolationForest scores each timestep independently and does not model temporal sequences
+                        directly.</li>
+                    <li>Rule thresholds are illustrative, not derived from spacecraft engineering documentation.</li>
+                    <li>The attribution method assumes feature independence and should be treated as approximate
+                        inspection support, not a diagnosis.</li>
+                </ul>
+            </section>
+        </main>
+    </div>
+
+    <script src="scripts/main.js?v=20260417-goodreads-link" defer></script>
+</body>
+
+</html>
