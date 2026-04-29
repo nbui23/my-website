@@ -975,6 +975,35 @@ dd {
 }
 
 /* Project card extras */
+.project-category {
+    margin: 1.8rem 0 0.8rem;
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--border);
+}
+
+.project-category:first-child {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+}
+
+.project-category-kicker {
+    margin: 0 0 0.25rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.project-category-title {
+    margin: 0;
+    font-size: 1.08rem;
+    font-weight: 600;
+    line-height: 1.45;
+    color: var(--text);
+}
+
 .project-card .project-image {
     margin: 1rem -1.5rem;
     height: 230px;
