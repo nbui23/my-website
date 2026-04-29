@@ -276,20 +276,21 @@
               \resumeItemListStart
                   \resumeItem{Built \textbf{2-client} bouldering product with Expo session capture, Next.js dashboard, and shared TypeScript logic}
                   \resumeItem{Implemented deterministic insight engine translating \textbf{3} signal groups into weekly recommendations}
-                  \resumeItem{Designed shared auth, Next.js API routes, and Prisma/SQLite persistence for \textbf{mobile/web} workflows}
+                  \resumeItem{Designed shared auth, Next.js API routes, and Prisma/SQLite persistence for mobile/web workflows}
                   \resumeItem{Wrote tests around insight logic and API flows to protect \textbf{2-client} data contracts}
               \resumeItemListEnd
         \else
-        \resumeSubheading{Orbital Refueling Simulator}{Python, Streamlit, scikit-learn, pytest}{\href{https://github.com/nbui23/orbital-refueling}{\footnotesize github.com/nbui23/orbital-refueling}}
+        \resumeSubheading{Orbital Refueling Simulator}{Python, Streamlit, scikit-learn\ifdefined\flagAIML, Qwen LoRA\fi, pytest}{\href{https://github.com/nbui23/orbital-refueling}{\footnotesize github.com/nbui23/orbital-refueling}}
             \resumeItemListStart
-                \resumeItem{Modeled \textbf{410-second} refueling mission across \textbf{9} phases, \textbf{6} anomaly classes, and deterministic generation}
+                \resumeItem{Modeled \textbf{410-second} refueling mission across \textbf{9} phases, \textbf{9} anomaly classes, and deterministic generation}
                 \resumeItem{Separated hard-limit engineering rules from \textbf{9} phase-aware IsolationForest drift models}
                 \ifdefined\flagQA
                 \resumeItem{Wrote pytest coverage across \textbf{5} surfaces: telemetry generation, rules, scoring, phase handling, and explanations}
                 \else\ifdefined\flagAIML
                 \resumeItem{Benchmarked deterministic rule alerts against \textbf{0-1} advisory ML drift scores across anomaly scenarios}
+                \resumeItem{Fine-tuned Qwen LoRA explainer on synthetic telemetry instructions, improving held-out rubric score to \textbf{4.86/5}}
                 \else
-                \resumeItem{Implemented perturbation-based attribution to rank telemetry channels driving each \textbf{phase-specific} alert}
+                \resumeItem{Implemented perturbation-based attribution to rank telemetry channels driving each phase-specific alert}
                 \fi\fi
             \resumeItemListEnd
 
@@ -327,7 +328,7 @@
     \ifdefined\flagAIML
       \textbf{Languages}{: Python, TypeScript, JavaScript, C++, Java, SQL} \\
       \textbf{Frameworks \& Runtimes}{: Next.js, Node.js, Flask, Streamlit, Spring Boot} \\
-      \textbf{AI / ML / Data}{: LLMs, RAG, LangChain, FAISS, scikit-learn, pandas, NumPy, PyTorch} \\
+      \textbf{AI / ML / Data}{: LLMs, Qwen LoRA, scikit-learn, anomaly detection, synthetic telemetry, pandas, NumPy, PyTorch} \\
       \textbf{Databases \& APIs}{: PostgreSQL, MySQL, SQLite, MongoDB, Firebase, Neo4j, Prisma, GraphQL} \\
       \textbf{Tools \& Practices}{: Git, CI/CD, Docker, Docker Compose, Ubuntu, TDD, pytest, unittest, BS4, lxml, Postman, Agile, SDLC} \\
     \else\ifdefined\flagQA

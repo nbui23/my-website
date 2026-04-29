@@ -17,15 +17,15 @@
     </script>
     <title>Orbital Refueling Case Study - Norman Bui</title>
     <meta name="description"
-        content="Orbital Refueling Simulator case study: a synthetic spacecraft telemetry project combining phase-aware anomaly detection, deterministic engineering rules, attribution, and scenario validation.">
+        content="Orbital Refueling Simulator case study: a synthetic spacecraft telemetry project combining phase-aware anomaly detection, deterministic engineering rules, attribution, scenario validation, and a fine-tuned LLM explainer.">
     <meta property="og:title" content="Orbital Refueling Case Study - Norman Bui">
     <meta property="og:description"
-        content="How I designed a hybrid monitoring architecture for synthetic spacecraft refueling telemetry with deterministic rules and phase-aware ML scoring.">
+        content="How I designed a hybrid monitoring architecture for synthetic spacecraft refueling telemetry with deterministic rules, phase-aware ML scoring, and a fine-tuned LLM explanation layer.">
     <meta property="og:type" content="article">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Orbital Refueling Case Study - Norman Bui">
     <meta name="twitter:description"
-        content="A technical case study on synthetic telemetry generation, rule-based monitoring, phase-aware anomaly detection, and validation.">
+        content="A technical case study on synthetic telemetry generation, rule-based monitoring, phase-aware anomaly detection, LLM fine-tuning, and validation.">
     <link rel="icon" type="image/jpeg" href="images/logos/baby.jpeg?v=41bb1200">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -57,7 +57,7 @@
                     <p class="overview-kicker">Project Case Study</p>
                     <h1 class="case-study-title">Orbital Refueling Simulator</h1>
                     <p class="case-study-subtitle">A synthetic spacecraft telemetry system for testing hybrid anomaly
-                        monitoring across mission phases.</p>
+                        monitoring and grounded LLM explanations across mission phases.</p>
                     <p class="case-study-lede">Autonomous propellant transfer is a useful monitoring problem because
                         several subsystems move at the same time: robotic alignment, docking loads, seal pressure,
                         transfer pressure, flow rate, pump behavior, thermal state, and spacecraft attitude. Some faults
@@ -65,13 +65,17 @@
                         together.</p>
                     <p class="case-study-lede">I built this project around that split. The simulator generates a
                         complete 410-second refueling mission, deterministic rules own the hard-limit safety checks, and
-                        a phase-aware anomaly detector provides advisory scoring for multivariate drift. The result is a
-                        small but complete telemetry pipeline with scenario generation, scoring, attribution, regression
-                        tests, and a model card that clearly states the limits of synthetic evaluation.</p>
+                        a phase-aware anomaly detector provides advisory scoring for multivariate drift. I then added
+                        RefuelGuard-LM, a fine-tuned explainer layer that turns grounded rule, score, and attribution
+                        outputs into concise operator-facing explanations. The result is a small but complete telemetry
+                        pipeline with scenario generation, scoring, attribution, LLM fine-tuning, regression tests, and
+                        model cards that clearly state the limits of synthetic evaluation.</p>
                     <ul class="project-tags" aria-label="Orbital refueling technologies and themes">
                         <li>Python</li>
                         <li>scikit-learn</li>
                         <li>IsolationForest</li>
+                        <li>LLM Fine-Tuning</li>
+                        <li>LoRA</li>
                         <li>pandas</li>
                         <li>pytest</li>
                         <li>Telemetry Simulation</li>
@@ -103,13 +107,14 @@
                     <span class="proof-label">Numeric telemetry features scored by phase-specific anomaly models</span>
                 </div>
                 <div class="proof-item">
-                    <span class="proof-value">7</span>
-                    <span class="proof-label">Scenarios: nominal plus six injected anomaly cases for repeatable
+                    <span class="proof-value">10</span>
+                    <span class="proof-label">Scenarios: nominal plus nine injected anomaly cases for repeatable
                         checks</span>
                 </div>
                 <div class="proof-item">
-                    <span class="proof-value">Hybrid</span>
-                    <span class="proof-label">Hard-limit rules stay separate from advisory ML drift detection</span>
+                    <span class="proof-value">4.86/5</span>
+                    <span class="proof-label">Fine-tuned explainer score on 100 held-out synthetic instruction
+                        examples</span>
                 </div>
             </section>
 
@@ -200,8 +205,8 @@
                 <div class="section-lead">
                     <h2 class="section-title">Explainability And Validation</h2>
                     <p class="section-copy">Because this is a monitoring system, a high score by itself is not enough.
-                        The project includes a lightweight explanation method and a repeatable validation script so each
-                        scenario has inspectable evidence.</p>
+                        The project includes lightweight attribution, an optional fine-tuned explanation model, and a
+                        repeatable validation script so each scenario has inspectable evidence.</p>
                 </div>
                 <ul class="case-study-list">
                     <li><strong>Perturbation attribution:</strong> for anomalous rows, <code>explainer.py</code>
@@ -213,10 +218,43 @@
                     <li><strong>Regression tests:</strong> pytest coverage checks telemetry generation, rule behavior,
                         detector scoring, phase handling, and explanation output, including cases like unknown phases
                         scoring to zero.</li>
-                    <li><strong>Model card:</strong> <code>MODEL_CARD.md</code> documents training data, intended use,
-                        score interpretation, limitations, and the validation needed before anything like this could be
-                        considered for real telemetry.</li>
+                    <li><strong>Model cards:</strong> <code>MODEL_CARD.md</code> and the RefuelGuard-LM model card
+                        document training data, intended use, score interpretation, limitations, and the validation
+                        needed before anything like this could be considered for real telemetry.</li>
                 </ul>
+            </section>
+
+            <section class="entry-card case-study-section">
+                <div class="section-lead">
+                    <h2 class="section-title">Fine-Tuned Explainer Layer</h2>
+                    <p class="section-copy">RefuelGuard-LM is an optional research extension under <code>llm/</code>.
+                        It fine-tunes a small open-source instruction model to explain synthetic telemetry anomalies
+                        from structured monitoring outputs rather than raw, unconstrained prompts.</p>
+                </div>
+                <div class="case-study-grid">
+                    <article class="case-study-note">
+                        <h3>Grounded inputs</h3>
+                        <p>The prompt payload includes mission phase, scenario context, deterministic rule alerts,
+                            advisory ML score, top attribution signals, and current telemetry values. The LLM does not
+                            detect anomalies or set alert severity.</p>
+                    </article>
+                    <article class="case-study-note">
+                        <h3>Instruction data</h3>
+                        <p><code>llm/data/generate_instruction_data.py</code> creates deterministic JSONL examples for
+                            explanation, classification, attribution, rule-vs-ML distinction, and uncertainty wording
+                            tasks.</p>
+                    </article>
+                    <article class="case-study-note">
+                        <h3>LoRA training</h3>
+                        <p>The training path uses Hugging Face Transformers and PEFT to tune a Qwen2.5-0.5B-Instruct
+                            adapter, with optional 4-bit loading for constrained GPU environments.</p>
+                    </article>
+                    <article class="case-study-note">
+                        <h3>Evaluation result</h3>
+                        <p>On 100 held-out synthetic examples, the fine-tuned adapter scored 4.86 out of 5 on a
+                            deterministic rubric, compared with 3.69 out of 5 for the base model.</p>
+                    </article>
+                </div>
             </section>
 
             <section class="entry-card case-study-section">
@@ -268,6 +306,9 @@
                     <li><strong>Rules and ML have different jobs:</strong> hard-limit alerts are transparent and
                         deterministic, while the ML layer is useful for surfacing softer patterns that deserve review.
                     </li>
+                    <li><strong>LLMs need grounded authority boundaries:</strong> the fine-tuned explainer consumes
+                        upstream rule and ML outputs, but it does not replace detection, severity assignment, or safety
+                        decisions.</li>
                     <li><strong>Validation should be explicit:</strong> synthetic projects need scenario-level evidence,
                         repeatable seeds, regression tests, and clear limitations so the reader can separate demo value
                         from real-world claims.</li>
@@ -289,6 +330,8 @@
                         generalization.</li>
                     <li>IsolationForest scores each timestep independently and does not model temporal sequences
                         directly.</li>
+                    <li>RefuelGuard-LM was trained and evaluated on template-generated synthetic explanations, not
+                        human-validated spacecraft operations data.</li>
                     <li>Rule thresholds are illustrative, not derived from spacecraft engineering documentation.</li>
                     <li>The attribution method assumes feature independence and should be treated as approximate
                         inspection support, not a diagnosis.</li>

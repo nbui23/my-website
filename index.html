@@ -566,15 +566,22 @@
                         <h3 class="skills-category">AI / ML / Data</h3>
                         <ul class="project-tags skills-tags" aria-label="AI, ML, and data">
                             <li>LLMs</li>
+                            <li>LLM fine-tuning</li>
                             <li>RAG</li>
                             <li>LangChain</li>
                             <li>FAISS</li>
                             <li>Ollama</li>
+                            <li>Qwen</li>
+                            <li>LoRA</li>
+                            <li>Hugging Face</li>
+                            <li>PEFT</li>
                             <li>Sentence Transformers</li>
                             <li>scikit-learn</li>
                             <li>IsolationForest</li>
                             <li>Anomaly Detection</li>
                             <li>Telemetry Simulation</li>
+                            <li>Synthetic Data</li>
+                            <li>Feature Attribution</li>
                             <li>pandas</li>
                             <li>NumPy</li>
                             <li>NLTK</li>
@@ -600,6 +607,11 @@
                             <li>Docker</li>
                             <li>Docker Compose</li>
                             <li>Ubuntu</li>
+                            <li>Linux CLI</li>
+                            <li>Grafana</li>
+                            <li>Observability</li>
+                            <li>Networking</li>
+                            <li>Backup Automation</li>
                             <li>Mocha</li>
                             <li>Chai</li>
                             <li>Sinon</li>
@@ -679,7 +691,7 @@
                     <div class="entry-header">
                         <div class="entry-header-text">
                             <h3 class="entry-company">Orbital Refueling Simulator</h3>
-                            <p class="entry-role">Synthetic spacecraft telemetry and anomaly monitoring prototype</p>
+                            <p class="entry-role">Synthetic spacecraft telemetry, anomaly monitoring, and LLM explainer prototype</p>
                         </div>
                         <div class="project-links">
                             <a href="orbital-refueling-case-study.html">Case Study &rarr;</a>
@@ -690,14 +702,16 @@
                         </div>
                     </div>
                     <p class="project-summary">Orbital Refueling Simulator generates synthetic autonomous refueling
-                        telemetry, injects anomaly scenarios, and
-                        compares deterministic engineering rules with phase-aware ML anomaly scoring.</p>
+                        telemetry, injects anomaly scenarios, compares deterministic engineering rules with phase-aware
+                        ML anomaly scoring, and fine-tunes an LLM explainer over grounded monitoring outputs.</p>
                     <ul class="project-tags"
                         aria-label="Orbital Refueling Telemetry Simulator tech stack and product highlights">
                         <li>Python</li>
                         <li>Streamlit</li>
                         <li>scikit-learn</li>
                         <li>IsolationForest</li>
+                        <li>LLM fine-tuning</li>
+                        <li>LoRA</li>
                         <li>Telemetry simulation</li>
                         <li>Regression tests</li>
                     </ul>
@@ -710,9 +724,9 @@
                             advisory ML scoring so explicit threshold breaches and subtle multivariate drift are both
                             visible</li>
                         <li><strong>Scenario-driven simulation:</strong> Modeled a 410-second refueling mission across
-                            nine phases with nominal telemetry plus six injected anomaly cases</li>
-                        <li><strong>Explainable validation loop:</strong> Added perturbation-based signal attribution,
-                            beginner-friendly dashboard copy, and repeatable scenario validation for regression checks
+                            nine phases with nominal telemetry plus nine injected anomaly cases</li>
+                        <li><strong>Fine-tuned explainer layer:</strong> Trained a small Qwen LoRA adapter to explain
+                            grounded rule alerts, advisory ML scores, and top contributing telemetry signals
                         </li>
                     </ul>
                 </div>
