@@ -49,8 +49,8 @@
 %----------------------------------------------------------------------------------------
 
 \titleformat{\section}{
-  \vspace{-8pt}\bfseries\scshape\raggedright\large
-}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+  \vspace{-6pt}\bfseries\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-4pt}]
 
 \newcommand{\resumeItem}[1]{
   \item\normalsize{
@@ -64,7 +64,7 @@
     \item
     \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
       \textbf{#1} $|$ \textit{ #2} & #3 \\
-    \end{tabular*}\vspace{-3pt}
+    \end{tabular*}\vspace{-2pt}
 }
 
 \newcommand{\resumeSubSubheading}[2]{
@@ -83,8 +83,8 @@
 
 \newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
 \newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
-\newcommand{\resumeItemListStart}{\begin{itemize}[topsep=1.5pt, itemsep=0pt, parsep=0pt, partopsep=0pt]}
-\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-1pt}}
+\newcommand{\resumeItemListStart}{\begin{itemize}[topsep=2pt, itemsep=1pt, parsep=0pt, partopsep=0pt]}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{0pt}}
 
 \renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
 
@@ -231,7 +231,7 @@
     \ifdefined\flagAIML
     \resumeSubheading{Department of National Defence}{Data Scientist Intern}{Jun 2023 - Nov 2023}
       \resumeItemListStart
-        \resumeItem{Built GPT-3.5 and Flask RAG system for querying \textbf{20+} government tax documents}
+        \resumeItem{Built GPT-3.5 and Flask RAG system for querying \textbf{thousands of government tax document pages}}
         \resumeItem{Engineered vector search pipeline with FAISS and SQLite for embedding storage and real-time retrieval}
         \resumeItem{Developed NLTK pipeline for tokenization, NER, and contextual information extraction}
       \resumeItemListEnd
@@ -267,29 +267,29 @@
           \resumeSubheading{Latch}{Electron, TypeScript, Swift, Chrome Extension, Native Messaging}{\href{https://github.com/nbui23/latch}{\footnotesize github.com/nbui23/latch}}
               \resumeItemListStart
                   \resumeItem{Built local-first macOS focus blocker with Electron UI, privileged helper, Chromium extension, and native messaging}
-                  \resumeItem{Implemented six-state session machine, crash recovery, hosts markers, and helper availability handling}
-                  \resumeItem{Packaged app, helper, extension bundle, and native messaging host into a signed macOS release flow}
-                  \resumeItem{Validated native messaging manifest repair, helper install state, and blocked-page synchronization paths}
+                  \resumeItem{Implemented \textbf{6-state} session machine covering \textbf{4} crash windows, hosts markers, and helper availability handling}
+                  \resumeItem{Packaged \textbf{4-part} macOS release with app, helper, extension bundle, and native messaging host}
+                  \resumeItem{Validated \textbf{7-row} recovery table plus manifest repair, helper install state, and blocked-page synchronization paths}
               \resumeItemListEnd
 
           \resumeSubheading{CruxOS}{Next.js, TypeScript, Prisma, SQLite, Expo, React Native}{\href{https://github.com/nbui23/cruxos}{\footnotesize github.com/nbui23/cruxos}}
               \resumeItemListStart
-                  \resumeItem{Built bouldering product with Expo session capture, Next.js analysis dashboard, and shared TypeScript logic}
-                  \resumeItem{Implemented deterministic insight engine translating training and recovery signals into weekly recommendations}
-                  \resumeItem{Designed shared auth, Next.js API routes, and Prisma/SQLite persistence for mobile and web workflows}
-                  \resumeItem{Wrote tests around insight logic and API flows to protect mobile/web data contracts}
+                  \resumeItem{Built \textbf{2-client} bouldering product with Expo session capture, Next.js dashboard, and shared TypeScript logic}
+                  \resumeItem{Implemented deterministic insight engine translating \textbf{3} signal groups into weekly recommendations}
+                  \resumeItem{Designed shared auth, Next.js API routes, and Prisma/SQLite persistence for \textbf{mobile/web} workflows}
+                  \resumeItem{Wrote tests around insight logic and API flows to protect \textbf{2-client} data contracts}
               \resumeItemListEnd
         \else
         \resumeSubheading{Orbital Refueling Simulator}{Python, Streamlit, scikit-learn, pytest}{\href{https://github.com/nbui23/orbital-refueling}{\footnotesize github.com/nbui23/orbital-refueling}}
             \resumeItemListStart
-                \resumeItem{Modeled spacecraft refueling telemetry with \textbf{9} phases, \textbf{6} anomaly classes, and deterministic generation}
-                \resumeItem{Separated hard-limit engineering rules from phase-aware IsolationForest drift detection}
+                \resumeItem{Modeled \textbf{410-second} refueling mission across \textbf{9} phases, \textbf{6} anomaly classes, and deterministic generation}
+                \resumeItem{Separated hard-limit engineering rules from \textbf{9} phase-aware IsolationForest drift models}
                 \ifdefined\flagQA
-                \resumeItem{Wrote pytest coverage for telemetry generation, rule logic, anomaly scoring, and scenario validation}
+                \resumeItem{Wrote pytest coverage across \textbf{5} surfaces: telemetry generation, rules, scoring, phase handling, and explanations}
                 \else\ifdefined\flagAIML
-                \resumeItem{Benchmarked deterministic rule alerts against advisory ML drift scores across anomaly scenarios}
+                \resumeItem{Benchmarked deterministic rule alerts against \textbf{0-1} advisory ML drift scores across anomaly scenarios}
                 \else
-                \resumeItem{Implemented perturbation-based attribution to identify telemetry channels driving each alert}
+                \resumeItem{Implemented perturbation-based attribution to rank telemetry channels driving each \textbf{phase-specific} alert}
                 \fi\fi
             \resumeItemListEnd
 
@@ -309,10 +309,10 @@
         \ifdefined\flagQA
           \resumeSubheading{CruxOS}{Next.js, TypeScript, Prisma, SQLite, Expo, React Native}{\href{https://github.com/nbui23/cruxos}{\footnotesize github.com/nbui23/cruxos}}
               \resumeItemListStart
-                  \resumeItem{Built CruxOS bouldering app with Expo session capture and Next.js analysis dashboard}
-                  \resumeItem{Implemented deterministic insight engine for training and recovery recommendations}
+                  \resumeItem{Built \textbf{2-client} CruxOS bouldering app with Expo session capture and Next.js analysis dashboard}
+                  \resumeItem{Implemented deterministic insight engine translating \textbf{3} signal groups into training and recovery recommendations}
                   \resumeItem{Wrote unit and API integration tests for insight logic, auth flows, and Prisma/SQLite persistence}
-                  \resumeItem{Covered typed data contracts across mobile capture, web review, and SQLite persistence}
+                  \resumeItem{Covered typed data contracts across mobile/web capture, review, and SQLite persistence}
               \resumeItemListEnd
         \fi
         \fi
@@ -329,25 +329,25 @@
       \textbf{Frameworks \& Runtimes}{: Next.js, Node.js, Flask, Streamlit, Spring Boot} \\
       \textbf{AI / ML / Data}{: LLMs, RAG, LangChain, FAISS, scikit-learn, pandas, NumPy, PyTorch} \\
       \textbf{Databases \& APIs}{: PostgreSQL, MySQL, SQLite, MongoDB, Firebase, Neo4j, Prisma, GraphQL} \\
-      \textbf{Tools \& Practices}{: Git, CI/CD, TDD, pytest, unittest, BS4, lxml, Postman, Agile, SDLC} \\
+      \textbf{Tools \& Practices}{: Git, CI/CD, Docker, Docker Compose, Ubuntu, TDD, pytest, unittest, BS4, lxml, Postman, Agile, SDLC} \\
     \else\ifdefined\flagQA
       \textbf{Languages}{: Python, TypeScript, JavaScript, C++, C\#, Java, SQL, HTML/CSS} \\
       \textbf{Frameworks \& Runtimes}{: Node.js, Express.js, Qt, Spring Boot, Flask, Streamlit, .NET, ASP.NET} \\
       \textbf{AI / ML / Data}{: LLMs, scikit-learn, pandas, NumPy} \\
       \textbf{Databases \& APIs}{: PostgreSQL, MySQL, SQLite, MongoDB, Firebase, Neo4j, GraphQL} \\
-      \textbf{Tools \& Practices}{: Git, CI/CD, TDD, pytest, Mocha, Chai, Sinon, unittest, BS4, lxml, Selenium, Cucumber, PowerShell, Postman, Agile, SDLC} \\
+      \textbf{Tools \& Practices}{: Git, CI/CD, Docker, Docker Compose, Ubuntu, TDD, pytest, Mocha, Chai, Sinon, unittest, BS4, lxml, Selenium, Cucumber, PowerShell, Postman, Agile, SDLC} \\
     \else\ifdefined\flagSWE
       \textbf{Languages}{: Python, TypeScript, JavaScript, C++, C\#, Kotlin, Java, SQL, HTML/CSS, PHP} \\
       \textbf{Frameworks \& Runtimes}{: Next.js, Node.js, Express.js, Electron, Qt, React Native, Expo, Spring Boot, Flask, Streamlit, .NET, ASP.NET} \\
       \textbf{AI / ML / Data}{: LLMs, RAG, scikit-learn, pandas, NumPy, PyTorch} \\
       \textbf{Databases \& APIs}{: PostgreSQL, MySQL, SQLite, MongoDB, Firebase, Neo4j, Prisma, GraphQL} \\
-      \textbf{Tools \& Practices}{: Git, CI/CD, TDD, pytest, Mocha, Chai, Sinon, unittest, BS4, lxml, Selenium, Cucumber, PowerShell, Postman, Agile, SDLC} \\
+      \textbf{Tools \& Practices}{: Git, CI/CD, Docker, Docker Compose, Ubuntu, TDD, pytest, Mocha, Chai, Sinon, unittest, BS4, lxml, Selenium, Cucumber, PowerShell, Postman, Agile, SDLC} \\
     \else
       \textbf{Languages}{: Python, TypeScript, JavaScript, C++, C\#, Kotlin, Java, SQL, HTML/CSS, PHP} \\
       \textbf{Frameworks \& Runtimes}{: Next.js, Node.js, Express.js, Electron, Qt, React Native, Expo, Spring Boot, Flask, Streamlit, .NET, ASP.NET} \\
       \textbf{AI / ML / Data}{: LLMs, RAG, LangChain, FAISS, Ollama, SBERT, scikit-learn, IsolationForest, pandas, NumPy, matplotlib, PyTorch, ONNX Runtime} \\
       \textbf{Databases \& APIs}{: PostgreSQL, MySQL, SQLite, MongoDB, Firebase, Neo4j, Prisma, GraphQL} \\
-      \textbf{Tools \& Practices}{: Git, CI/CD, TDD, pytest, Mocha, Chai, Sinon, unittest, BS4, lxml, Selenium, Cucumber, PowerShell, Postman, Agile, SDLC} \\
+      \textbf{Tools \& Practices}{: Git, CI/CD, Docker, Docker Compose, Ubuntu, TDD, pytest, Mocha, Chai, Sinon, unittest, BS4, lxml, Selenium, Cucumber, PowerShell, Postman, Agile, SDLC} \\
     \fi\fi\fi
     \textbf{Spoken Languages}{: English, French, Vietnamese} \\
     }}
