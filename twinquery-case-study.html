@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        (function () {
+            try {
+                var stored = localStorage.getItem('theme');
+                var theme = stored === 'light' || stored === 'dark' ? stored : 'dark';
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+    <title>TwinQuery Case Study - Norman Bui</title>
+    <meta name="description"
+        content="TwinQuery case study: an agentic Text-to-SQL and RAG assistant for querying building-stock digital twin datasets in plain English.">
+    <meta property="og:title" content="TwinQuery Case Study - Norman Bui">
+    <meta property="og:description"
+        content="How I designed a safe Text-to-SQL pipeline with local RAG over retrofit guidance, backed by PostgreSQL/PostGIS and served through a FastAPI and Streamlit/PyDeck interface.">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="TwinQuery Case Study - Norman Bui">
+    <meta name="twitter:description"
+        content="A technical case study on agentic Text-to-SQL, local RAG, geospatial visualization, and hallucination guardrails for a building-stock digital twin platform.">
+    <link rel="icon" type="image/jpeg" href="images/logos/baby.jpeg?v=41bb1200">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=b29ac0d3">
+</head>
+
+<body>
+    <button class="theme-toggle" type="button" aria-label="Toggle color theme" title="Toggle theme">
+        <svg class="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path
+                d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41">
+            </path>
+        </svg>
+        <svg class="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+    </button>
+
+    <div class="container case-study-page">
+        <a class="case-study-back" href="index.html#projects">&larr; Back to portfolio</a>
+
+        <main class="case-study-content">
+            <section class="entry-card case-study-hero">
+                <div class="case-study-hero-copy">
+                    <p class="overview-kicker">Project Case Study</p>
+                    <h1 class="case-study-title">TwinQuery</h1>
+                    <p class="case-study-subtitle">An agentic assistant for querying building-stock digital
+                        twin datasets in plain English, without SQL expertise.</p>
+                    <p class="case-study-lede">Building-stock datasets for energy retrofit planning are rich but
+                        inaccessible. The data lives in PostgreSQL with PostGIS geometry — useful for engineers and data
+                        scientists, opaque for everyone else. Non-technical users working with retrofit programs,
+                        municipal planners, and community organizations have legitimate questions: which buildings in a
+                        neighbourhood are the worst-performing? How many pre-1980 homes lack adequate insulation? What
+                        does the retrofit guidance say about that building type?</p>
+                    <p class="case-study-lede">TwinQuery closes that gap. It accepts a plain-English question, routes it
+                        through a safe Text-to-SQL pipeline backed by deterministic guardrails, executes PostGIS queries
+                        over Ottawa building-footprint geometry, and synthesizes the answer with retrieved retrofit
+                        guidance from a local RAG system. The result is a response grounded in both database rows and
+                        document sources, with the SQL shown so users can verify what was actually run.</p>
+                    <ul class="project-tags" aria-label="TwinQuery technologies and themes">
+                        <li>Python</li>
+                        <li>LangGraph</li>
+                        <li>FastAPI</li>
+                        <li>Streamlit</li>
+                        <li>PostgreSQL/PostGIS</li>
+                        <li>Ollama</li>
+                        <li>RAG</li>
+                        <li>Docker</li>
+                    </ul>
+                    <div class="project-links overview-links">
+                        <a href="https://github.com/nbui23/twinquery" target="_blank" rel="noopener noreferrer">GitHub
+                            &rarr;</a>
+                        <a href="index.html#projects">Portfolio Overview &rarr;</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="proof-strip case-study-proof" aria-label="TwinQuery outcomes and qualities">
+                <div class="proof-item">
+                    <span class="proof-value">Local</span>
+                    <span class="proof-label">Fully offline inference via Ollama — no API keys, no data sent to third
+                        parties</span>
+                </div>
+                <div class="proof-item">
+                    <span class="proof-value">PostGIS</span>
+                    <span class="proof-label">Geospatial queries over Ottawa building-footprint polygons with 2D/3D
+                        PyDeck visualization</span>
+                </div>
+                <div class="proof-item">
+                    <span class="proof-value">Hybrid</span>
+                    <span class="proof-label">Answers grounded in both database rows and retrieved retrofit guidance
+                        documents</span>
+                </div>
+                <div class="proof-item">
+                    <span class="proof-value">Transparent</span>
+                    <span class="proof-label">Generated SQL shown to users alongside every answer for
+                        auditability</span>
+                </div>
+            </section>
+
+            <section class="entry-card case-study-section">
+                <div class="section-lead">
+                    <h2 class="section-title">Problem</h2>
+                    <p class="section-copy">Retrofit planning tools are built for specialists. A planner who wants to
+                        know which census tracts have the highest concentration of pre-1980 residential buildings cannot
+                        easily get that answer without writing a PostGIS spatial join. A community advocate asking about
+                        insulation upgrade pathways for a specific building archetype needs to search retrofit documents
+                        manually. Neither person should have to learn SQL or dig through PDFs.</p>
+                    <p class="section-copy">The technical challenge is not just generating SQL from text. It is
+                        generating SQL that is safe to run, correct against a specific schema, and paired with document
+                        context that makes the answer actually useful. LLMs hallucinate table names, invent columns, and
+                        produce queries that fail silently or return misleading results. Any system intended for
+                        non-technical users has to treat SQL generation as an untrusted output that needs
+                        validation.</p>
+                </div>
+                <div class="case-study-grid">
+                    <article class="case-study-note">
+                        <h3>Accessibility gap</h3>
+                        <p>Building-stock datasets are in relational databases with spatial geometry. Non-technical
+                            users cannot query them without specialized tools or SQL knowledge.</p>
+                    </article>
+                    <article class="case-study-note">
+                        <h3>Hallucination risk</h3>
+                        <p>LLMs generating SQL against unfamiliar schemas produce plausible-looking queries that
+                            reference wrong columns, wrong tables, or apply incorrect filters.</p>
+                    </article>
+                    <article class="case-study-note">
+                        <h3>Context gap</h3>
+                        <p>Database rows answer what. Retrofit guidance documents answer why and how. A useful response
+                            needs both, synthesized coherently.</p>
+                    </article>
+                    <article class="case-study-note">
+                        <h3>Privacy and cost</h3>
+                        <p>Building-stock data can contain sensitive property information. Local inference removes the
+                            need to send queries or data to external APIs.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="entry-card case-study-section">
+                <div class="section-lead">
+                    <h2 class="section-title">Agent Architecture</h2>
+                    <p class="section-copy">TwinQuery uses LangGraph to orchestrate a multi-step agent pipeline. Rather
+                        than a single prompt-to-answer flow, the pipeline separates query interpretation, SQL
+                        generation, validation, execution, RAG retrieval, and synthesis into discrete nodes. This
+                        makes each step inspectable and replaceable independently.</p>
+                </div>
+                <ul class="case-study-list">
+                    <li><strong>Intent routing:</strong> the pipeline first classifies whether the question needs
+                        structured data, document retrieval, or both. Questions about building counts or geometry go
+                        through the SQL path; questions about retrofit strategies or policy go through RAG; most
+                        questions use both.</li>
+                    <li><strong>Schema injection:</strong> the SQL generation node receives the full schema definition
+                        as context, including column names, types, and PostGIS geometry fields. This grounds generation
+                        against the actual database rather than a hallucinated schema.</li>
+                    <li><strong>Validation gate:</strong> generated SQL is validated before execution. The guardrail
+                        checks for prohibited operations, verifies referenced tables and columns exist, and rejects
+                        queries that do not conform to the allowed pattern.</li>
+                    <li><strong>Parallel retrieval:</strong> while the SQL path executes, the RAG path retrieves
+                        relevant retrofit guidance chunks. Both results are passed to the synthesis node together.</li>
+                    <li><strong>Grounded synthesis:</strong> the final response cites which database rows and document
+                        passages informed the answer, rather than producing a fluent summary with no traceable
+                        source.</li>
+                </ul>
+            </section>
+
+            <section class="entry-card case-study-section">
+                <div class="section-lead">
+                    <h2 class="section-title">Text-to-SQL Pipeline</h2>
+                    <p class="section-copy">SQL generation for non-technical users requires more than a prompt. The
+                        pipeline implements several layers of defense against the common failure modes of LLM-generated
+                        SQL.</p>
+                </div>
+                <div class="case-study-grid">
+                    <article class="case-study-note">
+                        <h3>Deterministic guardrails</h3>
+                        <p>Before any query reaches the database, a rule-based validator checks that it is a
+                            <code>SELECT</code> statement, references only schema-known tables and columns, and does
+                            not contain destructive clauses. Queries failing validation are rejected with an
+                            explanation rather than silently returning empty results.</p>
+                    </article>
+                    <article class="case-study-note">
+                        <h3>Fallback templates</h3>
+                        <p>For common question patterns — nearest buildings, buildings by type within an area,
+                            retrofit priority ranking — the pipeline matches against a library of pre-validated query
+                            templates with slot-filled parameters. Template hits bypass LLM generation entirely.</p>
+                    </article>
+                    <article class="case-study-note">
+                        <h3>PostGIS execution</h3>
+                        <p>Validated queries run against a PostgreSQL database with PostGIS extension over Ottawa
+                            building-footprint geometry. Spatial queries use <code>ST_Within</code>,
+                            <code>ST_DWithin</code>, and <code>ST_Intersects</code> to answer location-relative
+                            questions.</p>
+                    </article>
+                    <article class="case-study-note">
+                        <h3>SQL transparency</h3>
+                        <p>Every answer surfaces the generated SQL in an expandable panel. Non-technical users can
+                            ignore it; technical users can verify it. This makes the system auditable without forcing
+                            users to engage with the query.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="entry-card case-study-section">
+                <div class="section-lead">
+                    <h2 class="section-title">Local RAG Over Retrofit Guidance</h2>
+                    <p class="section-copy">The RAG component retrieves relevant passages from retrofit guidance
+                        documents and building-code references. Everything runs locally through Ollama, with no
+                        external embedding or inference API calls.</p>
+                </div>
+                <ul class="case-study-list">
+                    <li><strong>Document ingestion:</strong> retrofit guidance PDFs and policy materials are chunked,
+                        embedded with a local embedding model via Ollama, and stored in a vector index for retrieval.
+                    </li>
+                    <li><strong>Hybrid retrieval:</strong> the RAG node combines vector similarity search with keyword
+                        fallback to handle both semantic queries and specific terminology lookups that embeddings
+                        sometimes miss.</li>
+                    <li><strong>Source grounding:</strong> retrieved chunks are passed to the synthesis node with their
+                        document and page provenance. The final response attributes claims to specific source passages
+                        rather than synthesizing anonymously.</li>
+                    <li><strong>Local inference:</strong> the full pipeline — embedding, retrieval, SQL generation, and
+                        synthesis — runs through Ollama with locally hosted models. No user query or building data
+                        leaves the deployment environment.</li>
+                </ul>
+            </section>
+
+            <section class="entry-card case-study-section">
+                <div class="section-lead">
+                    <h2 class="section-title">Interface and Geospatial Visualization</h2>
+                    <p class="section-copy">The frontend is a Streamlit application backed by a FastAPI service layer.
+                        The architecture keeps the agent pipeline independent of the interface so the API can be
+                        consumed by other frontends or integrated into broader platforms.</p>
+                </div>
+                <div class="case-study-grid">
+                    <article class="case-study-note">
+                        <h3>FastAPI service layer</h3>
+                        <p>The agent pipeline is exposed through a FastAPI backend with typed request and response
+                            schemas. Endpoint contracts are tested independently of the Streamlit interface so the API
+                            remains a stable integration surface.</p>
+                    </article>
+                    <article class="case-study-note">
+                        <h3>2D/3D PyDeck maps</h3>
+                        <p>Building query results are rendered on a PyDeck map with togglable 2D polygon and 3D
+                            extruded views. Buildings matching the query are highlighted so users can immediately see
+                            the spatial distribution of results.</p>
+                    </article>
+                    <article class="case-study-note">
+                        <h3>Result transparency</h3>
+                        <p>The interface surfaces the generated SQL, retrieved document sources, and the synthesized
+                            answer as separate panels. Users control how much of the pipeline they want to inspect.
+                        </p>
+                    </article>
+                    <article class="case-study-note">
+                        <h3>Docker deployment</h3>
+                        <p>The full stack — PostgreSQL/PostGIS, Ollama, FastAPI, and Streamlit — is containerized with
+                            Docker Compose. A single command starts the complete environment with no external
+                            dependencies.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="entry-card case-study-section">
+                <div class="section-lead">
+                    <h2 class="section-title">Engineering Takeaways</h2>
+                    <p class="section-copy">The core design tension in TwinQuery is between LLM flexibility and
+                        deterministic safety. The resolution is not to trust the LLM less, but to constrain its
+                        authority to the parts of the pipeline where flexibility is actually needed.</p>
+                </div>
+                <ul class="case-study-list">
+                    <li><strong>Treat SQL generation as untrusted output:</strong> a validator that checks schema
+                        conformance and blocks destructive operations is not optional when the query target is a
+                        real database with real data.</li>
+                    <li><strong>Template matching beats generation for common patterns:</strong> pre-validated query
+                        templates are faster, safer, and more predictable than LLM-generated SQL for the subset of
+                        questions they cover.</li>
+                    <li><strong>Grounding requires explicit source tracking:</strong> hybrid synthesis only works if
+                        the synthesis step knows which claims came from database rows and which came from documents.
+                        Mixing sources anonymously produces confident-sounding answers that are hard to audit.</li>
+                    <li><strong>Local inference is a design choice, not a constraint:</strong> running Ollama locally
+                        makes the system deployable in environments where data sovereignty or cost rules out cloud
+                        APIs. The architecture is the same either way.</li>
+                    <li><strong>API-first enables integration:</strong> building the agent as a FastAPI service before
+                        writing the Streamlit frontend meant the pipeline could be tested independently and is ready
+                        for integration into a larger digital twin platform.</li>
+                </ul>
+            </section>
+
+            <section class="entry-card case-study-section">
+                <div class="section-lead">
+                    <h2 class="section-title">Limitations</h2>
+                    <p class="section-copy">TwinQuery is a research prototype aimed at demonstrating agentic
+                        Text-to-SQL and RAG for building-stock data. Several limitations apply before it would be
+                        production-ready for a live municipal platform.</p>
+                </div>
+                <ul class="case-study-list">
+                    <li>SQL guardrails are rule-based and may not catch all adversarial or malformed LLM-generated
+                        queries. A production deployment would benefit from a formal query allow-list approach.</li>
+                    <li>Local embedding quality depends on the chosen Ollama model. Smaller models may miss semantic
+                        matches that a larger hosted embedding model would catch.</li>
+                    <li>The RAG system does not yet implement re-ranking. Retrieved chunks are returned by similarity
+                        score, which may surface less relevant passages for complex queries.</li>
+                    <li>Evaluation of answer quality is manual. A systematic RAG evaluation framework such as RAGAS
+                        or DeepEval would provide more rigorous accuracy and faithfulness measurement.</li>
+                    <li>The Ottawa building-footprint dataset is the primary test case. Generalization to other
+                        municipal datasets would require schema adaptation and template updates.</li>
+                </ul>
+            </section>
+        </main>
+    </div>
+
+    <script src="scripts/main.js?v=20260417-goodreads-link" defer></script>
+</body>
+
+</html>

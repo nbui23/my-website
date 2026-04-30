@@ -133,8 +133,8 @@
             \resumeItem{Reviewed automated game-testing architecture and recommended soak-test reliability improvements}
             \else
               \ifdefined\flagAIML
-              \resumeItem{Analyzed LLM-powered QA system by reviewing model behavior, architecture, and load/soak workflows}
-              \resumeItem{Evaluated automated playtesting failure modes to guide QA workflow and model-behavior improvements}
+              \resumeItem{Evaluated LLM-powered agentic QA system for reliability, failure modes, and model behavior across load/soak workflows}
+              \resumeItem{Documented failure taxonomy and evaluation findings to drive model-behavior improvements in automated playtesting pipeline}
               \else\ifdefined\flagQA
               \resumeItem{Developed load, soak, and regression plans for live game services across \textbf{10+} feature integrations}
               \resumeItem{Triaged load-test failures by isolating auth, environment, and feature regressions in CI}
@@ -180,9 +180,9 @@
     \ifdefined\flagAIML
     \resumeSubheading{Bedarra Corporation}{Student Researcher}{Aug 2024 - Oct 2024}
         \resumeItemListStart
-            \resumeItem{Researched and developed RAG systems to answer queries about obscure programming languages (Factor, K)}
-            \resumeItem{Benchmarked embedding models and chunking strategies for low-resource language corpora}
-            \resumeItem{Integrated LangChain retrieval over code examples and docs for context-aware query responses}
+            \resumeItem{Researched and developed agentic RAG systems to answer queries over obscure programming language corpora (Factor, K)}
+            \resumeItem{Benchmarked embedding models and chunking strategies for retrieval quality over low-resource language corpora}
+            \resumeItem{Implemented LangChain tool-use and retrieval patterns for context-aware, grounded query responses}
         \resumeItemListEnd
     \fi
 
@@ -228,14 +228,6 @@
     \fi
     \fi\fi
 
-    \ifdefined\flagAIML
-    \resumeSubheading{Department of National Defence}{Data Scientist Intern}{Jun 2023 - Nov 2023}
-      \resumeItemListStart
-        \resumeItem{Built GPT-3.5 and Flask RAG system for querying \textbf{thousands of government tax document pages}}
-        \resumeItem{Engineered vector search pipeline with FAISS and SQLite for embedding storage and real-time retrieval}
-        \resumeItem{Developed NLTK pipeline for tokenization, NER, and contextual information extraction}
-      \resumeItemListEnd
-    \fi
 
     \ifdefined\flagAIML\else\ifdefined\flagQA\else
     \resumeSubheading{NAV CANADA}{Software Developer Intern}{May 2023 - Aug 2023}
@@ -295,15 +287,11 @@
             \resumeItemListEnd
 
         \ifdefined\flagQA\else
-        \resumeSubheading{Riverbreak}{Python, PyTorch, U-Net, ONNX Runtime, JavaScript, HTML Canvas}{\href{https://github.com/nbui23/riverbreak}{\footnotesize github.com/nbui23/riverbreak}}
+        \resumeSubheading{TwinQuery}{Python, LangGraph, FastAPI, Streamlit, PostgreSQL/PostGIS, Ollama, RAG, Docker}{\href{https://github.com/nbui23/twinquery}{\footnotesize github.com/nbui23/twinquery}}
             \resumeItemListStart
-                \resumeItem{Built browser-first typographic river detector combining line breaking, whitespace-corridor detection, and layout reranking}
-                \resumeItem{Trained focal-loss Small U-Net on weak labels, improving test Dice from \textbf{0.4182 to 0.5018} over heuristic baseline}
-                \ifdefined\flagAIML
-                \resumeItem{Designed weak-label data pipeline with programmatic river injection for annotation-free training data}
-                \else
-                \resumeItem{Exported ONNX model for local browser inference over rendered paragraph layouts}
-                \fi
+                \resumeItem{Built open-source digital-twin query assistant enabling non-technical users to ask plain-English questions over building-stock and retrofit datasets}
+                \resumeItem{Implemented safe Text-to-SQL pipeline with deterministic guardrails, fallback query templates, and PostgreSQL/PostGIS execution over Ottawa building-footprint geometry}
+                \resumeItem{Integrated local RAG over retrofit guidance with hybrid synthesis, grounding LLM answers in both database rows and retrieved document sources}
             \resumeItemListEnd
         \fi
 
@@ -327,28 +315,28 @@
     \item{
     \ifdefined\flagAIML
       \textbf{Languages}{: Python, TypeScript, JavaScript, C++, Java, SQL} \\
-      \textbf{Frameworks \& Runtimes}{: Next.js, Node.js, Flask, Streamlit, Spring Boot} \\
-      \textbf{AI / ML / Data}{: LLMs, Qwen LoRA, scikit-learn, anomaly detection, synthetic telemetry, pandas, NumPy, PyTorch} \\
-      \textbf{Databases \& APIs}{: PostgreSQL, MySQL, SQLite, MongoDB, Firebase, Neo4j, Prisma, GraphQL} \\
-      \textbf{Tools \& Practices}{: Git, CI/CD, Docker, Docker Compose, Ubuntu, TDD, pytest, unittest, BS4, lxml, Postman, Agile, SDLC} \\
+      \textbf{Frameworks \& Runtimes}{: FastAPI, Flask, Streamlit, LangGraph, LangChain, Next.js, Node.js, Spring Boot} \\
+      \textbf{AI / ML / Data}{: LLMs, RAG, LangGraph, LangChain, Ollama, Qwen LoRA, scikit-learn, pandas, NumPy, PyTorch, FAISS} \\
+      \textbf{Databases \& APIs}{: PostgreSQL/PostGIS, pgvector, MySQL, SQLite, MongoDB, Firebase, Neo4j, GraphQL} \\
+      \textbf{Tools \& Practices}{: Git, Docker, Docker Compose, AWS, CI/CD, Ubuntu, TDD, pytest, unittest, Postman, Agile, SDLC} \\
     \else\ifdefined\flagQA
       \textbf{Languages}{: Python, TypeScript, JavaScript, C++, C\#, Java, SQL, HTML/CSS} \\
       \textbf{Frameworks \& Runtimes}{: Node.js, Express.js, Qt, Spring Boot, Flask, Streamlit, .NET, ASP.NET} \\
       \textbf{AI / ML / Data}{: LLMs, scikit-learn, pandas, NumPy} \\
       \textbf{Databases \& APIs}{: PostgreSQL, MySQL, SQLite, MongoDB, Firebase, Neo4j, GraphQL} \\
-      \textbf{Tools \& Practices}{: Git, CI/CD, Docker, Docker Compose, Ubuntu, TDD, pytest, Mocha, Chai, Sinon, unittest, BS4, lxml, Selenium, Cucumber, PowerShell, Postman, Agile, SDLC} \\
+      \textbf{Tools \& Practices}{: Git, AWS, CI/CD, Docker, Docker Compose, Ubuntu, TDD, pytest, Mocha, Chai, Sinon, unittest, BS4, Selenium, Cucumber, PowerShell, Postman, Agile, SDLC} \\
     \else\ifdefined\flagSWE
       \textbf{Languages}{: Python, TypeScript, JavaScript, C++, C\#, Kotlin, Java, SQL, HTML/CSS, PHP} \\
       \textbf{Frameworks \& Runtimes}{: Next.js, Node.js, Express.js, Electron, Qt, React Native, Expo, Spring Boot, Flask, Streamlit, .NET, ASP.NET} \\
       \textbf{AI / ML / Data}{: LLMs, RAG, scikit-learn, pandas, NumPy, PyTorch} \\
       \textbf{Databases \& APIs}{: PostgreSQL, MySQL, SQLite, MongoDB, Firebase, Neo4j, Prisma, GraphQL} \\
-      \textbf{Tools \& Practices}{: Git, CI/CD, Docker, Docker Compose, Ubuntu, TDD, pytest, Mocha, Chai, Sinon, unittest, BS4, lxml, Selenium, Cucumber, PowerShell, Postman, Agile, SDLC} \\
+      \textbf{Tools \& Practices}{: Git, AWS, CI/CD, Docker, Docker Compose, Ubuntu, TDD, pytest, Mocha, Chai, Sinon, unittest, BS4, Selenium, Cucumber, PowerShell, Postman, Agile, SDLC} \\
     \else
       \textbf{Languages}{: Python, TypeScript, JavaScript, C++, C\#, Kotlin, Java, SQL, HTML/CSS, PHP} \\
-      \textbf{Frameworks \& Runtimes}{: Next.js, Node.js, Express.js, Electron, Qt, React Native, Expo, Spring Boot, Flask, Streamlit, .NET, ASP.NET} \\
-      \textbf{AI / ML / Data}{: LLMs, RAG, LangChain, FAISS, Ollama, SBERT, scikit-learn, IsolationForest, pandas, NumPy, matplotlib, PyTorch, ONNX Runtime} \\
-      \textbf{Databases \& APIs}{: PostgreSQL, MySQL, SQLite, MongoDB, Firebase, Neo4j, Prisma, GraphQL} \\
-      \textbf{Tools \& Practices}{: Git, CI/CD, Docker, Docker Compose, Ubuntu, TDD, pytest, Mocha, Chai, Sinon, unittest, BS4, lxml, Selenium, Cucumber, PowerShell, Postman, Agile, SDLC} \\
+      \textbf{Frameworks \& Runtimes}{: Next.js, Node.js, Express.js, Electron, Qt, React Native, Expo, Spring Boot, FastAPI, Flask, Streamlit, .NET, ASP.NET} \\
+      \textbf{AI / ML / Data}{: LLMs, RAG, LangGraph, LangChain, FAISS, Ollama, SBERT, scikit-learn, IsolationForest, pandas, NumPy, matplotlib, PyTorch, ONNX Runtime} \\
+      \textbf{Databases \& APIs}{: PostgreSQL/PostGIS, pgvector, MySQL, SQLite, MongoDB, Firebase, Neo4j, Prisma, GraphQL} \\
+      \textbf{Tools \& Practices}{: Git, AWS, CI/CD, Docker, Docker Compose, Ubuntu, TDD, pytest, Mocha, Chai, Sinon, unittest, BS4, Selenium, Cucumber, PowerShell, Postman, Agile, SDLC} \\
     \fi\fi\fi
     \textbf{Spoken Languages}{: English, French, Vietnamese} \\
     }}

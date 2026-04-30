@@ -552,6 +552,8 @@
                             <li>Next.js</li>
                             <li>Node.js</li>
                             <li>Express.js</li>
+                            <li>FastAPI</li>
+                            <li>Flask</li>
                             <li>React Native</li>
                             <li>Expo</li>
                             <li>Electron</li>
@@ -566,8 +568,10 @@
                         <h3 class="skills-category">AI / ML / Data</h3>
                         <ul class="project-tags skills-tags" aria-label="AI, ML, and data">
                             <li>LLMs</li>
+                            <li>Agentic AI</li>
                             <li>LLM fine-tuning</li>
                             <li>RAG</li>
+                            <li>LangGraph</li>
                             <li>LangChain</li>
                             <li>FAISS</li>
                             <li>Ollama</li>
@@ -591,6 +595,11 @@
                     <div class="skills-group">
                         <h3 class="skills-category">Databases &amp; APIs</h3>
                         <ul class="project-tags skills-tags" aria-label="Databases and APIs">
+                            <li>PostgreSQL</li>
+                            <li>PostGIS</li>
+                            <li>pgvector</li>
+                            <li>MySQL</li>
+                            <li>MongoDB</li>
                             <li>SQLite</li>
                             <li>Prisma</li>
                             <li>Neo4j</li>
@@ -691,7 +700,8 @@
                     <div class="entry-header">
                         <div class="entry-header-text">
                             <h3 class="entry-company">Orbital Refueling Simulator</h3>
-                            <p class="entry-role">Synthetic spacecraft telemetry, anomaly monitoring, and LLM explainer prototype</p>
+                            <p class="entry-role">Synthetic spacecraft telemetry, anomaly monitoring, and LLM explainer
+                                prototype</p>
                         </div>
                         <div class="project-links">
                             <a href="orbital-refueling-case-study.html">Case Study &rarr;</a>
@@ -728,6 +738,44 @@
                         <li><strong>Fine-tuned explainer layer:</strong> Trained a small Qwen LoRA adapter to explain
                             grounded rule alerts, advisory ML scores, and top contributing telemetry signals
                         </li>
+                    </ul>
+                </div>
+
+                <div class="entry-card project-card">
+                    <div class="entry-header">
+                        <div class="entry-header-text">
+                            <h3 class="entry-company">TwinQuery</h3>
+                            <p class="entry-role">Agentic Text-to-SQL and RAG assistant for building-stock digital twins
+                            </p>
+                        </div>
+                        <div class="project-links">
+                            <a href="twinquery-case-study.html">Case Study &rarr;</a>
+                            <a href="https://github.com/nbui23/twinquery" target="_blank"
+                                rel="noopener noreferrer">GitHub &rarr;</a>
+                        </div>
+                    </div>
+                    <p class="project-summary">TwinQuery is an digital-twin query assistant that lets
+                        non-technical users ask plain-English questions over building-stock and retrofit datasets.
+                        It combines a safe Text-to-SQL pipeline with local RAG over retrofit guidance, serving answers
+                        grounded in both database rows and retrieved documents through a FastAPI backend and
+                        Streamlit/PyDeck interface.</p>
+                    <ul class="project-tags" aria-label="TwinQuery tech stack and product highlights">
+                        <li>Python</li>
+                        <li>LangGraph</li>
+                        <li>FastAPI</li>
+                        <li>Streamlit</li>
+                        <li>PostgreSQL/PostGIS</li>
+                        <li>Ollama</li>
+                        <li>RAG</li>
+                        <li>Docker</li>
+                    </ul>
+                    <ul class="entry-bullets">
+                        <li><strong>Safe Text-to-SQL:</strong> Deterministic guardrails, fallback query templates, and
+                            PostgreSQL/PostGIS execution over Ottawa building-footprint geometry</li>
+                        <li><strong>Hybrid RAG synthesis:</strong> Local retrieval over retrofit guidance grounded LLM
+                            answers in both database rows and retrieved document sources</li>
+                        <li><strong>Geospatial interface:</strong> 2D/3D PyDeck visualization with highlighted building
+                            polygons, SQL transparency panel, and tested API response schemas</li>
                     </ul>
                 </div>
 
