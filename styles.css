@@ -757,6 +757,18 @@ dd {
     display: block;
 }
 
+.case-study-screenshot {
+    margin-top: 1.5rem;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+}
+
+.case-study-screenshot img {
+    width: 100%;
+    display: block;
+}
+
 .case-study-proof {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     width: 100%;
