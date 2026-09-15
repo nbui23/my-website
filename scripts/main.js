@@ -1,436 +1,161 @@
-const tabs = [...document.querySelectorAll('.tab')];
-const tabContents = [...document.querySelectorAll('.tab-content')];
-const tabIndicator = document.querySelector('.tab-indicator');
-const resumeMenu = document.querySelector('.resume-menu');
-const resumeMenuButton = document.querySelector('.resume-menu-button');
-
-const BOOK_PROXY_PREFIXES = [
+const GOODREADS_USER_ID = '166643433';
+const GOODREADS_PROFILE_URL = 'https://www.goodreads.com/user/show/166643433-norman';
+const BOOKS_TO_SHOW = 8;
+const BAR_WIDTH = 24;
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const PROXY_PREFIXES = [
     'https://cold-flower-83d6.normanbui23.workers.dev/?url=',
     'https://corsproxy.io/?url=',
     'https://api.allorigins.win/raw?url='
 ];
-const GOODREADS_USER_ID = '166643433';
-const GOODREADS_PROFILE_URL = 'https://www.goodreads.com/user/show/166643433-norman';
-const BOOKS_TO_SHOW = 5;
-const RECENT_PAGE_BOOKS_TO_SHOW = 6;
-const MONTH_NAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-const domParser = new DOMParser();
 
-function getShelfUrl(shelf) {
-    return `https://www.goodreads.com/review/list_rss/${GOODREADS_USER_ID}?shelf=${shelf}${shelf === 'read' ? '&sort=date_read&order=d' : ''}`;
+const domParser = typeof DOMParser === 'undefined' ? null : new DOMParser();
+
+function shelfUrl(shelf) {
+    const sort = shelf === 'read' ? '&sort=date_read&order=d' : '';
+    return `https://www.goodreads.com/review/list_rss/${GOODREADS_USER_ID}?shelf=${shelf}${sort}`;
 }
 
-function updateTabIndicator(activeTab) {
-    if (!tabIndicator) return;
-    if (!activeTab || activeTab.offsetWidth === 0) {
-        tabIndicator.style.width = '0px';
-        return;
-    }
-    tabIndicator.style.left = `${activeTab.offsetLeft}px`;
-    tabIndicator.style.width = `${activeTab.offsetWidth}px`;
-}
-
-let booksLoaded = false;
-
-function setActiveSection(sectionId, pushState = false) {
-    const targetSection = document.getElementById(sectionId);
-    if (!targetSection) return;
-    const activeTab = tabs.find(tab => tab.dataset.tab === sectionId) || null;
-
-    tabs.forEach(button => button.classList.remove('active'));
-    tabContents.forEach(section => section.classList.remove('active'));
-
-    if (activeTab) {
-        activeTab.classList.add('active');
-    }
-    targetSection.classList.add('active');
-    updateTabIndicator(activeTab);
-
-    const hash = `#${sectionId}`;
-    if (pushState) {
-        history.pushState(null, '', hash);
-    } else {
-        history.replaceState(null, '', hash);
-    }
-
-    if (sectionId === 'reading' && !booksLoaded) {
-        booksLoaded = true;
-        loadBooks();
-    }
-}
-
-function getTabByHash() {
-    const hash = window.location.hash.slice(1);
-    return tabs.find(t => t.dataset.tab === hash) || null;
-}
-
-function initTabs() {
-    if (!tabs.length || !tabIndicator) return;
-
-    tabs.forEach(tab => {
-        tab.addEventListener('click', () => setActiveSection(tab.dataset.tab, true));
-    });
-
-    const activeTab = getTabByHash() || document.querySelector('.tab.active') || tabs[0];
-    const activeSection = window.location.hash.slice(1) || activeTab?.dataset.tab;
-    if (activeSection && document.getElementById(activeSection)) {
-        setActiveSection(activeSection);
-    } else if (activeTab) {
-        setActiveSection(activeTab.dataset.tab);
-    }
-
-    window.addEventListener('hashchange', () => {
-        const activeSectionId = window.location.hash.slice(1);
-        if (activeSectionId && document.getElementById(activeSectionId)) {
-            setActiveSection(activeSectionId);
-        }
-    });
-
-    window.addEventListener('resize', () => {
-        const currentTab = document.querySelector('.tab.active');
-        if (currentTab) updateTabIndicator(currentTab);
-    });
-}
-
-function closeResumeMenu() {
-    if (!resumeMenu || !resumeMenuButton) return;
-    resumeMenu.classList.remove('open');
-    resumeMenuButton.setAttribute('aria-expanded', 'false');
-}
-
-function initResumeMenu() {
-    if (!resumeMenu || !resumeMenuButton) return;
-
-    resumeMenuButton.addEventListener('click', event => {
-        event.stopPropagation();
-        const isOpen = resumeMenu.classList.toggle('open');
-        resumeMenuButton.setAttribute('aria-expanded', String(isOpen));
-    });
-
-    document.addEventListener('click', event => {
-        if (!resumeMenu.contains(event.target)) {
-            closeResumeMenu();
-        }
-    });
-
-    document.addEventListener('keydown', event => {
-        if (event.key === 'Escape') {
-            closeResumeMenu();
-            resumeMenuButton.focus();
-        }
-    });
-
-    resumeMenu.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', closeResumeMenu);
-    });
-}
-
-function escapeHtml(value) {
-    return String(value)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;');
-}
-
-async function fetchRssFeed(url) {
-    for (const proxyPrefix of BOOK_PROXY_PREFIXES) {
+async function fetchFeed(url) {
+    for (const prefix of PROXY_PREFIXES) {
         try {
-            const response = await fetch(proxyPrefix + encodeURIComponent(url));
+            const response = await fetch(prefix + encodeURIComponent(url));
             if (response.ok) return await response.text();
-        } catch (_) {}
+        } catch (_) { /* try next proxy */ }
     }
-
     throw new Error('All proxies failed');
 }
 
-function getTagText(item, tagName) {
+function tagText(item, tagName) {
     const element = item.getElementsByTagName(tagName)[0];
     return element ? element.textContent.trim() : '';
 }
 
-function normalizeCoverUrl(url) {
-    return url.replace(/\._S[XY]\d+_(?=\.jpg)/i, '');
+function parseItems(xml, status) {
+    return [...domParser.parseFromString(xml, 'text/xml').getElementsByTagName('item')].map(item => {
+        const bookId = tagText(item, 'book_id');
+        return {
+            title: tagText(item, 'title'),
+            author: tagText(item, 'author_name'),
+            url: bookId ? `https://www.goodreads.com/book/show/${bookId}` : GOODREADS_PROFILE_URL,
+            pages: Number.parseInt(tagText(item, 'num_pages'), 10) || 0,
+            rating: Number.parseInt(tagText(item, 'user_rating'), 10) || 0,
+            publishedYear: Number.parseInt(tagText(item, 'book_published'), 10) || null,
+            readAt: tagText(item, 'user_read_at'),
+            status
+        };
+    });
 }
 
-function getBookUrl(item) {
-    const description = getTagText(item, 'description');
-    if (description) {
-        const descriptionDocument = domParser.parseFromString(description, 'text/html');
-        const link = descriptionDocument.querySelector('a[href]');
-        if (link?.href) return link.href;
-    }
+/** One text bar chart: rows of `label  ####  value`, sized against the largest row. */
+export function chartText(title, rows) {
+    const max = Math.max(...rows.map(row => row.value), 1);
+    const labelWidth = Math.max(...rows.map(row => row.label.length));
+    const body = rows.map(row => {
+        const filled = row.value ? Math.max(1, Math.round((row.value / max) * BAR_WIDTH)) : 0;
+        const bar = '#'.repeat(filled).padEnd(BAR_WIDTH);
+        return `${row.label.padEnd(labelWidth)}  ${bar}  ${row.value.toLocaleString()}`;
+    }).join('\n');
 
-    const bookId = getTagText(item, 'book_id');
-    return bookId ? `https://www.goodreads.com/book/show/${bookId}` : GOODREADS_PROFILE_URL;
+    return `${title}\n\n${body}`;
 }
 
-function dedupeBooks(books) {
-    const booksById = new Map();
+function barChart(title, rows) {
+    if (!rows.length) return null;
 
-    books.forEach(book => {
-        const key = book.bookId || `${book.title}::${book.author}`;
-        if (!booksById.has(key)) {
-            booksById.set(key, book);
-        }
+    const chart = document.createElement('pre');
+    chart.textContent = chartText(title, rows);
+    return chart;
+}
+
+function truncate(text, limit) {
+    return text.length > limit ? `${text.slice(0, limit - 1)}…` : text;
+}
+
+function buildCharts(finished, allBooks, year) {
+    const readThisYear = finished.filter(book => book.readAt && new Date(book.readAt).getFullYear() === year);
+
+    const monthly = new Array(12).fill(0);
+    readThisYear.forEach(book => {
+        const month = new Date(book.readAt).getMonth();
+        if (!Number.isNaN(month)) monthly[month] += 1;
     });
 
-    return [...booksById.values()];
+    const rated = finished.filter(book => book.rating > 0);
+    const ratings = rated.length
+        ? [5, 4, 3, 2, 1].map(stars => ({
+            label: `${stars} star`,
+            value: rated.filter(book => book.rating === stars).length
+        }))
+        : [];
+
+    const decades = Object.entries(allBooks.reduce((counts, book) => {
+        if (!book.publishedYear) return counts;
+        const decade = Math.floor(book.publishedYear / 10) * 10;
+        counts[decade] = (counts[decade] || 0) + 1;
+        return counts;
+    }, {}))
+        .sort(([left], [right]) => Number(left) - Number(right))
+        .map(([decade, count]) => ({ label: `${decade}s`, value: count }));
+
+    const recentPages = finished
+        .filter(book => book.pages > 0)
+        .slice(0, 6)
+        .map(book => ({ label: truncate(book.title, 28), value: book.pages }));
+
+    return [
+        barChart(`Books read by month, ${year}`, monthly.map((count, index) => ({ label: MONTHS[index], value: count }))),
+        barChart('Ratings given', ratings),
+        barChart('Publication decade', decades),
+        barChart('Pages per recent read', recentPages)
+    ].filter(Boolean);
 }
 
-function renderMonthlyChart(monthlyCounts, currentYear, currentMonth) {
-    const maxCount = Math.max(...monthlyCounts, 1);
-
-    return `
-        <section class="chart-card chart-card-wide">
-            <div class="chart-title">Books Read by Month — ${currentYear}</div>
-            <div class="chart-bars">
-                ${monthlyCounts.map((count, index) => {
-                    const height = count ? Math.max((count / maxCount) * 100, 6) : 0;
-                    const futureClass = index > currentMonth ? ' chart-future' : '';
-
-                    return `
-                        <div class="chart-col${futureClass}">
-                            <div class="chart-bar-wrap">
-                                <div class="chart-bar" style="height:${height}%"></div>
-                            </div>
-                            <div class="chart-count">${count || ''}</div>
-                            <div class="chart-month">${MONTH_NAMES[index]}</div>
-                        </div>
-                    `;
-                }).join('')}
-            </div>
-        </section>
-    `;
-}
-
-function renderHorizontalBarChart({
-    title,
-    items,
-    valueFormatter = value => value,
-    wide = false,
-    rowClass = '',
-    linkRows = false,
-    emptyMessage = 'No data yet.'
-}) {
-    const maxValue = Math.max(...items.map(item => item.value), 1);
-
-    return `
-        <section class="chart-card${wide ? ' chart-card-wide' : ''}">
-            <div class="chart-title">${title}</div>
-            ${items.length ? `
-                <div class="horizontal-bars">
-                    ${items.map(item => {
-                        const isLinkRow = linkRows && item.url;
-                        const width = item.value ? Math.max((item.value / maxValue) * 100, 6) : 0;
-                        const rowTag = isLinkRow ? 'a' : 'div';
-                        const rowClasses = ['horizontal-row', rowClass, isLinkRow ? 'horizontal-row-link' : '']
-                            .filter(Boolean)
-                            .join(' ');
-                        const rowAttributes = isLinkRow
-                            ? ` href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer"`
-                            : '';
-
-                        return `
-                            <${rowTag} class="${rowClasses}"${rowAttributes}>
-                                <div class="horizontal-label" title="${escapeHtml(item.label)}">${escapeHtml(item.label)}</div>
-                                <div class="horizontal-track">
-                                    <div class="horizontal-fill" style="width:${width}%"></div>
-                                </div>
-                                <div class="horizontal-value">${escapeHtml(valueFormatter(item.value, item))}</div>
-                            </${rowTag}>
-                        `;
-                    }).join('')}
-                </div>
-            ` : `<div class="chart-empty">${emptyMessage}</div>`}
-        </section>
-    `;
-}
-
-function parseFeedItems(xmlDocument, status) {
-    return [...xmlDocument.getElementsByTagName('item')].map(item => ({
-        bookId: getTagText(item, 'book_id'),
-        title: getTagText(item, 'title'),
-        author: getTagText(item, 'author_name'),
-        cover: normalizeCoverUrl(getTagText(item, 'book_image_url')),
-        url: getBookUrl(item),
-        pages: Number.parseInt(getTagText(item, 'num_pages'), 10) || 0,
-        rating: Number.parseInt(getTagText(item, 'user_rating'), 10) || 0,
-        publishedYear: Number.parseInt(getTagText(item, 'book_published'), 10) || null,
-        readAt: getTagText(item, 'user_read_at'),
-        status
-    }));
-}
-
-function renderReadingStats(statsElement, currentYearBooks, currentYear, currentYearPages, averageRating) {
-    statsElement.innerHTML = [
-        { value: currentYearBooks.length, label: `Books in ${currentYear}` },
-        currentYearPages > 0 ? { value: currentYearPages.toLocaleString(), label: `Pages in ${currentYear}` } : null,
-        averageRating ? { value: `${averageRating} / 5`, label: 'Avg. Rating' } : null
-    ]
-        .filter(Boolean)
-        .map(stat => `
-            <div class="stat-item">
-                <span class="stat-value">${stat.value}</span>
-                <span class="stat-label">${stat.label}</span>
-            </div>
-        `)
-        .join('');
+function bookListItem(book) {
+    const item = document.createElement('li');
+    const link = document.createElement('a');
+    link.href = book.url;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.textContent = book.title;
+    item.append(link, ` by ${book.author} (${book.status})`);
+    return item;
 }
 
 async function loadBooks() {
     const statsElement = document.getElementById('reading-stats');
     const chartsElement = document.getElementById('reading-charts');
-    const booksGrid = document.getElementById('books-grid');
-
-    if (!statsElement || !chartsElement || !booksGrid) return;
-
-    booksGrid.innerHTML = '<p class="reading-loading">Loading books\u2026</p>';
+    const list = document.getElementById('books');
+    if (!statsElement || !chartsElement || !list) return;
 
     try {
-        const [currentlyReadingXml, readShelfXml] = await Promise.all([
-            fetchRssFeed(getShelfUrl('currently-reading')),
-            fetchRssFeed(getShelfUrl('read'))
+        const [readingXml, readXml] = await Promise.all([
+            fetchFeed(shelfUrl('currently-reading')),
+            fetchFeed(shelfUrl('read'))
         ]);
 
-        const currentlyReadingBooks = parseFeedItems(domParser.parseFromString(currentlyReadingXml, 'text/xml'), 'reading');
-        const finishedBooks = parseFeedItems(domParser.parseFromString(readShelfXml, 'text/xml'), 'read');
-        const currentDate = new Date();
-        const currentYear = currentDate.getFullYear();
-        const currentYearBooks = finishedBooks.filter(book => book.readAt && new Date(book.readAt).getFullYear() === currentYear);
-        const currentYearPages = currentYearBooks.reduce((pageTotal, book) => pageTotal + book.pages, 0);
-        const ratedCurrentYearBooks = currentYearBooks.filter(book => book.rating > 0);
-        const averageRating = ratedCurrentYearBooks.length
-            ? (ratedCurrentYearBooks.reduce((ratingTotal, book) => ratingTotal + book.rating, 0) / ratedCurrentYearBooks.length).toFixed(1)
+        const reading = parseItems(readingXml, 'Reading');
+        const finished = parseItems(readXml, 'Read');
+        const year = new Date().getFullYear();
+        const readThisYear = finished.filter(book => book.readAt && new Date(book.readAt).getFullYear() === year);
+        const pagesThisYear = readThisYear.reduce((total, book) => total + book.pages, 0);
+        const ratedThisYear = readThisYear.filter(book => book.rating > 0);
+        const averageRating = ratedThisYear.length
+            ? (ratedThisYear.reduce((total, book) => total + book.rating, 0) / ratedThisYear.length).toFixed(1)
             : null;
 
-        renderReadingStats(statsElement, currentYearBooks, currentYear, currentYearPages, averageRating);
+        statsElement.textContent = [
+            `${readThisYear.length} books in ${year}`,
+            pagesThisYear ? `${pagesThisYear.toLocaleString()} pages` : null,
+            averageRating ? `avg. rating ${averageRating}/5` : null
+        ].filter(Boolean).join(' · ');
 
-        const monthlyCounts = new Array(12).fill(0);
-        currentYearBooks.forEach(book => {
-            const month = new Date(book.readAt).getMonth();
-            if (!Number.isNaN(month)) monthlyCounts[month] += 1;
-        });
-
-        const currentMonth = currentDate.getMonth();
-        const ratedAllTimeBooks = finishedBooks.filter(book => book.rating > 0);
-        const ratingDistribution = ratedAllTimeBooks.length
-            ? [5, 4, 3, 2, 1].map(stars => ({
-                label: `${stars}★`,
-                value: ratedAllTimeBooks.filter(book => book.rating === stars).length
-            }))
-            : [];
-
-        const publicationDecades = Object.entries(
-            dedupeBooks([...currentlyReadingBooks, ...finishedBooks]).reduce((counts, book) => {
-                if (!book.publishedYear) return counts;
-                const decade = Math.floor(book.publishedYear / 10) * 10;
-                counts[decade] = (counts[decade] || 0) + 1;
-                return counts;
-            }, {})
-        )
-            .sort((left, right) => Number(left[0]) - Number(right[0]))
-            .map(([decade, count]) => ({
-                label: `${decade}s`,
-                value: count
-            }));
-
-        const recentPageBooks = finishedBooks
-            .filter(book => book.pages > 0)
-            .slice(0, RECENT_PAGE_BOOKS_TO_SHOW)
-            .map(book => ({
-                label: book.title,
-                value: book.pages,
-                url: book.url
-            }));
-
-        chartsElement.innerHTML = [
-            renderMonthlyChart(monthlyCounts, currentYear, currentMonth),
-            renderHorizontalBarChart({
-                title: 'Rating Distribution — All Time',
-                items: ratingDistribution
-            }),
-            renderHorizontalBarChart({
-                title: 'Publication Decade',
-                items: publicationDecades
-            }),
-            renderHorizontalBarChart({
-                title: `Pages per Recent Read${recentPageBooks.length ? ` — Last ${recentPageBooks.length}` : ''}`,
-                items: recentPageBooks,
-                valueFormatter: value => `${value.toLocaleString()} pp`,
-                wide: true,
-                linkRows: true,
-                rowClass: 'book-row'
-            })
-        ].join('');
-
-        const visibleBooks = [...currentlyReadingBooks, ...finishedBooks].slice(0, BOOKS_TO_SHOW);
-        if (!visibleBooks.length) return;
-
-        booksGrid.innerHTML = visibleBooks.map(book => `
-            <a href="${escapeHtml(book.url)}" target="_blank" rel="noopener noreferrer" class="book-card">
-                <div class="book-cover">
-                    <img src="${escapeHtml(book.cover)}" alt="${escapeHtml(book.title)}" loading="lazy">
-                </div>
-                <div class="book-info">
-                    <span class="book-status ${book.status}">${book.status === 'reading' ? 'Reading' : 'Read'}</span>
-                    <p class="book-title">${escapeHtml(book.title)}</p>
-                    <p class="book-author">${escapeHtml(book.author)}</p>
-                </div>
-            </a>
-        `).join('');
+        chartsElement.replaceChildren(...buildCharts(finished, [...reading, ...finished], year));
+        list.replaceChildren(...[...reading, ...finished].slice(0, BOOKS_TO_SHOW).map(bookListItem));
     } catch (error) {
         console.error('Failed to load books from Goodreads:', error);
-        booksGrid.innerHTML = `<p class="reading-error">Could not load reading data. <a href="${GOODREADS_PROFILE_URL}" target="_blank" rel="noopener noreferrer">View on Goodreads \u2192</a></p>`;
+        statsElement.textContent = 'Could not load reading data.';
     }
 }
 
-function initThemeToggle() {
-    const btn = document.querySelector('.theme-toggle');
-    if (!btn) return;
-
-    const root = document.documentElement;
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-    function getTheme() {
-        return root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
-    }
-
-    function syncThemeButton(theme) {
-        const nextTheme = theme === 'light' ? 'dark' : 'light';
-        const label = `Switch to ${nextTheme} mode`;
-        btn.setAttribute('aria-label', label);
-        btn.setAttribute('title', label);
-        btn.setAttribute('aria-pressed', String(theme === 'light'));
-    }
-
-    function commitTheme(theme) {
-        root.setAttribute('data-theme', theme);
-        syncThemeButton(theme);
-        try {
-            localStorage.setItem('theme', theme);
-        } catch (e) { /* storage disabled */ }
-    }
-
-    syncThemeButton(getTheme());
-
-    btn.addEventListener('click', () => {
-        const current = getTheme();
-        const next = current === 'light' ? 'dark' : 'light';
-
-        if (!document.startViewTransition || prefersReducedMotion.matches) {
-            commitTheme(next);
-            return;
-        }
-
-        document.startViewTransition(() => {
-            commitTheme(next);
-        });
-    });
-}
-
-window.addEventListener('load', () => {
-    initTabs();
-    initResumeMenu();
-    initThemeToggle();
-});
+if (typeof document !== 'undefined') loadBooks();

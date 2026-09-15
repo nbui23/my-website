@@ -1,23 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script>
-        (function () {
-            try {
-                var stored = localStorage.getItem('theme');
-                var theme = stored === 'light' || stored === 'dark' ? stored : 'dark';
-                document.documentElement.setAttribute('data-theme', theme);
-            } catch (e) {
-                document.documentElement.setAttribute('data-theme', 'dark');
-            }
-        })();
-    </script>
     <title>Norman Bui</title>
     <meta name="description"
-        content="Norman Bui — Software Developer at Canadian Tire Corporation and Carleton University Computer Science graduate. Backend systems, data tools, and AI-powered workflows.">
+        content="Norman Bui, Software Developer at Canadian Tire Corporation and Carleton University Computer Science graduate. Backend systems, data tools, and AI-powered workflows.">
     <meta property="og:title" content="Norman Bui">
     <meta property="og:description"
         content="Software Developer at Canadian Tire Corporation. Backend systems, data tools, and AI-powered workflows.">
@@ -27,10 +16,7 @@
     <meta name="twitter:description"
         content="Software Developer at Canadian Tire Corporation. Backend systems, data tools, and AI-powered workflows.">
     <link rel="icon" type="image/jpeg" href="images/logos/baby.jpeg?v=41bb1200">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=b1e08e4f">
+    <link rel="stylesheet" href="styles.css?v=235e159c">
     <script type="application/ld+json">
         {
             "@context": "https://schema.org",
@@ -60,974 +46,158 @@
 </head>
 
 <body>
-    <button class="theme-toggle" type="button" aria-label="Toggle color theme" title="Toggle theme">
-        <svg class="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="4"></circle>
-            <path
-                d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41">
-            </path>
-        </svg>
-        <svg class="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-        </svg>
-    </button>
-    <div class="container">
 
-        <header class="header">
-            <div class="header-top">
-                <img class="header-photo" src="images/logos/baby.jpeg" alt="Baby photo of Norman Bui">
-                <div class="header-main">
-                    <h1 class="name">Norman Bui</h1>
-                    <p class="tagline">Computer Science Graduate from Carleton University</p>
-                </div>
-            </div>
+    <h1>Norman Bui</h1>
+    <p class="meta">Software Developer at Canadian Tire Corporation &middot; Computer Science (Honours), Carleton
+        University</p>
 
-            <div class="contact-links">
-                <a href="mailto:normanbui23@gmail.com">Email</a>
-                <a href="https://www.linkedin.com/in/nbui23/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                <a href="https://github.com/nbui23" target="_blank" rel="noopener noreferrer">GitHub</a>
-                <div class="resume-menu">
-                    <button class="resume-menu-button" type="button" aria-expanded="false"
-                        aria-controls="resume-menu-list">
-                        Resume
-                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"
-                            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <path d="M4 6l4 4 4-4"></path>
-                        </svg>
-                    </button>
-                    <div class="resume-menu-list" id="resume-menu-list">
-                        <a href="resume/swe/Norman_Bui_Resume.pdf" target="_blank" rel="noopener noreferrer">Software
-                            Engineering</a>
-                        <a href="resume/aiml/Norman_Bui_Resume.pdf" target="_blank" rel="noopener noreferrer">AI /
-                            ML</a>
-                        <a href="resume/qa/Norman_Bui_Resume.pdf" target="_blank" rel="noopener noreferrer">QA</a>
-                    </div>
-                </div>
-            </div>
+    <p>
+        <a href="mailto:normanbui23@gmail.com">Email</a> &middot;
+        <a href="https://www.linkedin.com/in/nbui23/" target="_blank" rel="noopener noreferrer">LinkedIn</a> &middot;
+        <a href="https://github.com/nbui23" target="_blank" rel="noopener noreferrer">GitHub</a> &middot;
+        <a href="https://www.goodreads.com/user/show/166643433-norman" target="_blank"
+            rel="noopener noreferrer">Goodreads</a> &middot;
+        <a href="resume/swe/Norman_Bui_Resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
+    </p>
 
-            <p class="header-note">Software Developer at Canadian Tire Corporation. I have worked across <strong>10 software
-                    teams</strong> building backend systems, AI tooling, data workflows, and developer productivity
-                software
-                across retail, games, design software, health, geospatial, and public-sector environments.</p>
+    <p>10 software teams across retail, games, design software, health, geospatial, and the public sector. Backend
+        systems, AI tooling, data workflows, developer productivity.</p>
 
-            <div class="status-strip" role="note" aria-label="Current role">
-                <span class="status-item status-item-primary">
-                    <span class="status-dot" aria-hidden="true"></span>
-                    <strong>Software Developer at Canadian Tire Corporation</strong>
-                </span>
-                <p class="status-meta">Building end-to-end agentic software development lifecycles</p>
-            </div>
-        </header>
+    <hr>
 
-        <div class="tab-bar">
-            <button class="tab active" type="button" data-tab="overview">Overview</button>
-            <button class="tab" type="button" data-tab="projects">Projects</button>
-            <button class="tab" type="button" data-tab="experience">Experience</button>
-            <button class="tab" type="button" data-tab="skills">Skills</button>
-            <button class="tab" type="button" data-tab="education">Education</button>
-            <button class="tab" type="button" data-tab="reading">Goodreads</button>
-            <div class="tab-indicator"></div>
-        </div>
+    <h2 id="value">Where I bring the most value</h2>
+    <ul>
+        <li><strong>Backend and data infrastructure</strong>: production systems with real reliability
+            constraints</li>
+        <li><strong>Developer tooling</strong>: internal tools and CI that make a team faster</li>
+        <li><strong>Applied AI</strong>: agentic and RAG features that still need predictable, grounded
+            behavior</li>
+    </ul>
 
-        <main>
-            <section id="overview" class="tab-content active">
-                <div class="entry-card overview-card">
-                    <div class="overview-hero">
-                        <div class="overview-copy">
-                            <p class="overview-kicker">Software Engineering</p>
-                            <h2 class="overview-title">Backend systems, AI tooling, and product-minded engineering for
-                                teams that care about shipping well.</h2>
-                            <p class="overview-summary">Best fit for backend, developer tooling, and applied AI roles.
-                                Recent work spans agentic software development lifecycles at Canadian Tire, EA
-                                infrastructure reliability, and Autodesk repair workflows.</p>
-                        </div>
+    <hr>
 
-                        <div class="showcase-panel showcase-panel-projects">
-                            <p class="showcase-label">Selected Work</p>
-                            <div class="showcase-projects">
-                                <a class="showcase-project" href="latch-case-study.html">
-                                    <span class="showcase-project-image">
-                                        <img src="images/latch-case-study-focus.svg"
-                                            alt="Latch focus session screen showing timer, active blocklist, and session controls">
-                                    </span>
-                                    <span class="showcase-project-copy">
-                                        <strong>Latch</strong>
-                                        <span>Desktop focus blocker with system-level enforcement</span>
-                                    </span>
-                                </a>
-                                <a class="showcase-project" href="orbital-refueling-case-study.html">
-                                    <span class="showcase-project-image">
-                                        <img src="images/orbital-refueling-telemetry.png"
-                                            alt="Orbital refueling telemetry dashboard preview with mission phase, scenario alerts, signal charts, and anomaly score">
-                                    </span>
-                                    <span class="showcase-project-copy">
-                                        <strong>Orbital Refueling</strong>
-                                        <span>Spacecraft telemetry simulator with hybrid anomaly monitoring</span>
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
+    <h2 id="about">Outside of that</h2>
 
-                        <div class="proof-strip" aria-label="Recruiter quick facts">
-                            <div class="proof-item">
-                                <span class="proof-value">10</span>
-                                <span class="proof-label">software teams</span>
-                            </div>
-                            <div class="proof-item">
-                                <span class="proof-value">6</span>
-                                <span class="proof-label">internships</span>
-                            </div>
-                            <div class="proof-item">
-                                <span class="proof-value">3</span>
-                                <span class="proof-label">part-time roles</span>
-                            </div>
-                            <div class="proof-item">
-                                <span class="proof-value">3.9</span>
-                                <span class="proof-label">GPA</span>
-                            </div>
-                        </div>
+    <p>i've consumed all types of media all my life. lately i'm trying to distance myself from social media, so i've gotten into reading a lot more and even flashed crosspoint onto a xteink x4 so i can always have a dedicated e-reader in my pocket. my favourites so far have been murakami's <span class="g-hbw">hard-boiled wonderland and the end of the world</span> and sanderson's <span class="g-mistborn">mistborn</span>. since moving to toronto i've also been watching a lot of shows and movies with my girlfriend (recently we've liked <span class="g-invite">the invite</span> and currently getting through <span class="g-silo">silo s3</span>).</p>
 
-                        <div class="showcase-panel showcase-panel-teams">
-                            <p class="showcase-label">Recent Teams</p>
-                            <div class="showcase-logo-row" aria-label="Recent employers">
-                                <span class="showcase-logo"><img src="images/logos/canadian-tire.png"
-                                        alt="Canadian Tire Corporation"></span>
-                                <span class="showcase-logo"><img src="images/logos/ea.png" alt="Electronic Arts"></span>
-                                <span class="showcase-logo"><img src="images/logos/autodesk.png" alt="Autodesk"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <p>i've been bouldering on and off for over four years and despite tearing my rotator cuff, a subluxed shoulder, and perpetually tweaky finger tendons, i keep coming back just to climb <span class="g-v4">v4</span>.</p>
 
-                <div class="overview-grid">
-                    <article class="entry-card spotlight-card">
-                        <p class="spotlight-label">Role Fit</p>
-                        <h3 class="spotlight-title">Where I add value fastest</h3>
-                        <ul class="project-tags" aria-label="Best-fit roles and domains">
-                            <li>Backend Engineering</li>
-                            <li>Developer Tools</li>
-                            <li>Applied AI</li>
-                            <li>Data Infrastructure</li>
-                        </ul>
-                        <ul class="spotlight-list compact-list">
-                            <li>Production systems with real reliability constraints</li>
-                            <li>Internal tooling that improves developer speed</li>
-                            <li>Applied AI features that still need predictable behavior</li>
-                        </ul>
-                    </article>
+    <p>i completely stepped away from competitive fps after moving to toronto, but i spent a looong time near the top of the ladder: between the top 1% and top 0.1% in <span class="g-val">val</span>, <span class="g-ow"><span class="g-ow-o">o</span>w</span>, <span class="g-cs">cs</span>, and <span class="g-kvks">kvks</span>.</p>
 
-                    <article class="entry-card spotlight-card">
-                        <p class="spotlight-label">Recent Work</p>
-                        <h3 class="spotlight-title">Three quick signals</h3>
-                        <div class="overview-signal-list" aria-label="Recent work highlights">
-                            <div class="overview-signal">
-                                <strong>Canadian Tire Corporation</strong>
-                                <span>End-to-end agentic software development lifecycles</span>
-                            </div>
-                            <div class="overview-signal">
-                                <strong>Electronic Arts</strong>
-                                <span>CI and load-testing reliability, plus agentic QA work</span>
-                            </div>
-                            <div class="overview-signal">
-                                <strong>Autodesk</strong>
-                                <span>Repair flows for Fusion manufacturing data</span>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            </section>
+    <p>i get pretty obsessive about whatever i'm into at the time and usually stick with it for a long time until i get good at, which is more or less how i got into software too.</p>
 
-            <section id="experience" class="tab-content">
+    <hr>
 
-                <div class="entry-card">
-                    <div class="entry-header">
-                        <img class="company-logo" src="images/logos/canadian-tire.png" alt="Canadian Tire Corporation">
-                        <div class="entry-header-text">
-                            <h3 class="entry-company">Canadian Tire Corporation</h3>
-                            <p class="entry-title">Software Developer</p>
-                            <p class="entry-summary">Working on end-to-end agentic software development lifecycles</p>
-                        </div>
-                        <div class="entry-meta">
-                            <span class="entry-dates">July 2026 &ndash; Present</span>
-                            <a class="entry-link" href="https://corp.canadiantire.ca" target="_blank"
-                                rel="noopener noreferrer">Canadian Tire Corporation &rarr;</a>
-                        </div>
-                    </div>
-                    <ul class="project-tags" aria-label="Canadian Tire Corporation focus areas">
-                        <li>Agentic Software Development</li>
-                        <li>Developer Workflows</li>
-                    </ul>
-                </div>
+    <h2 id="experience">Recent experience</h2>
 
-                <div class="entry-card">
-                    <div class="entry-header">
-                        <img class="company-logo" src="images/logos/ea.png" alt="EA">
-                        <div class="entry-header-text">
-                            <h3 class="entry-company">Electronic Arts</h3>
-                            <p class="entry-title">Software Developer Intern</p>
-                            <p class="entry-summary">Built AI-assisted testing and load-testing workflows for The Sims
-                            </p>
-                        </div>
-                        <div class="entry-meta">
-                            <span class="entry-dates">May 2025 &ndash; Aug 2025</span>
-                            <a class="entry-link" href="https://www.ea.com/games/the-sims" target="_blank"
-                                rel="noopener noreferrer">The Sims &rarr;</a>
-                        </div>
-                    </div>
-                    <ul class="project-tags" aria-label="Electronic Arts tools and technologies">
-                        <li>Kotlin</li>
-                        <li>AI Agents</li>
-                        <li>Automated Testing</li>
-                    </ul>
-                    <ul class="entry-bullets">
-                        <li>Analyzed Servo (LLM-powered automated game testing system) by evaluating model performance,
-                            reviewing codebase architecture, and providing technical recommendations for system
-                            optimization and soak testing workflows</li>
-                        <li>Debugged authentication failures in CI/CD load testing pipeline and improved test coverage,
-                            increasing infrastructure reliability from <strong>35% to 100%</strong> success rate</li>
-                        <li>Integrated <strong>10+</strong> new game features into load testing frameworks, implementing
-                            automated test coverage and tracking performance metrics to ensure accurate testing under
-                            high-traffic conditions</li>
-                    </ul>
-                </div>
+    <h3>Canadian Tire Corporation, Software Developer</h3>
+    <p class="meta">July 2026 &ndash; Present</p>
+    <ul>
+        <li>Built an agentic documentation pipeline: a model-free static analysis pass extracts a fact sheet from a
+            service repo, then an LLM writes every page from that sheet alone, so the output cannot invent APIs the
+            code does not have</li>
+        <li>Writes three documents for three audiences off the same facts: a developer guide, an architecture page
+            with generated diagrams, and a business page for people who do not read code, naming who owns the service,
+            what it connects to, and what recent work changed</li>
+        <li>Wrote the rules that keep the business page honest: never expand an abbreviation the record does not
+            expand, never name a company the facts do not name, and write "not on the record" instead of guessing a
+            direction. A wrong company name is the worst error on the page a non-technical reader trusts</li>
+        <li>Extended parsing to <strong>eleven language ecosystems</strong> (Java, Kotlin, TypeScript, PHP, C/C++,
+            Ruby, and more) on tree-sitter, with route, dependency, and configuration extraction per language</li>
+        <li>Cut model cost per run <strong>38x</strong> by benchmarking candidates over judged repository checkouts
+            instead of guessing, holding output quality at zero invented names</li>
+        <li>Shipped it as an internal coding-agent plugin that writes the whole docs tree and opens the pull request,
+            and publishes to Confluence and the team wiki with generated Mermaid architecture diagrams</li>
+    </ul>
 
-                <div class="entry-card">
-                    <div class="entry-header">
-                        <img class="company-logo" src="images/logos/autodesk.png" alt="Autodesk">
-                        <div class="entry-header-text">
-                            <h3 class="entry-company">Autodesk</h3>
-                            <p class="entry-title">Software Developer Intern</p>
-                            <p class="entry-summary">Built validation and repair systems for Fusion manufacturing data
-                            </p>
-                        </div>
-                        <div class="entry-meta">
-                            <span class="entry-dates">Jan 2025 &ndash; Apr 2025</span>
-                            <a class="entry-link" href="https://www.autodesk.com/ca-en/products/fusion-360/overview"
-                                target="_blank" rel="noopener noreferrer">Fusion 360 &rarr;</a>
-                        </div>
-                    </div>
-                    <ul class="project-tags" aria-label="Autodesk tools and technologies">
-                        <li>TypeScript</li>
-                        <li>Java</li>
-                        <li>GraphQL</li>
-                    </ul>
-                    <ul class="entry-bullets">
-                        <li>Built data validation and repair infrastructure for Fusion platform, establishing
-                            foundational framework to prevent missing manufacturing data across cloud workflows</li>
-                        <li>Developed an <strong>O(n)</strong> algorithm with intelligent concurrency controls to repair
-                            missing primary relationships, achieving <strong>8x</strong> throughput through optimized
-                            parallel processing</li>
-                        <li>Designed and deployed API endpoints to automate data validation and repair operations in
-                            manufacturing workflows, reducing production failures through proactive issue detection</li>
-                        <li>Implemented permission validation and error handling protocols, eliminating existing
-                            security vulnerabilities for sensitive data</li>
-                        <li>Maintained <strong>100% test coverage</strong> across all code changes using Mocha, Chai,
-                            and Sinon</li>
-                    </ul>
-                </div>
+    <h3>Electronic Arts, Software Developer Intern</h3>
+    <p class="meta">May &ndash; Aug 2025 &middot; The Sims &middot; Kotlin, AI agents, automated testing</p>
+    <ul>
+        <li>CI/CD load-testing reliability from <strong>35% to 100%</strong> success rate</li>
+        <li>Integrated <strong>10+</strong> game features into load-testing frameworks</li>
+        <li>Evaluated Servo, an LLM-powered game testing system, and recommended soak-testing changes</li>
+    </ul>
 
-                <div class="entry-card">
-                    <div class="entry-header">
-                        <img class="company-logo" src="images/logos/phac.png" alt="PHAC">
-                        <div class="entry-header-text">
-                            <h3 class="entry-company">Public Health Agency of Canada</h3>
-                            <p class="entry-title">Data Scientist Intern</p>
-                            <p class="entry-summary">Built literature-review and data pipelines for epidemiology
-                                research</p>
-                        </div>
-                        <div class="entry-meta">
-                            <span class="entry-dates">Sep 2024 &ndash; Dec 2024</span>
-                            <a class="entry-link"
-                                href="https://who-collaboratory.github.io/collaboratory-epiparameter-community/#/"
-                                target="_blank" rel="noopener noreferrer">Epiparameter Community &rarr;</a>
-                        </div>
-                    </div>
-                    <ul class="project-tags" aria-label="Public Health Agency of Canada tools and technologies">
-                        <li>Python</li>
-                        <li>LLM</li>
-                        <li>RAG</li>
-                        <li>MDM</li>
-                    </ul>
-                    <ul class="entry-bullets">
-                        <li>Developed LLM-powered literature review workflow for epidemiological research in
-                            collaboration with Imperial College London and WHO, building MDM infrastructure to enable
-                            standardized global health data access</li>
-                        <li>Conducted embedding model evaluation using Ollama to validate RAG system performance,
-                            confirming optimal model configuration and establishing baseline metrics for future
-                            improvements</li>
-                        <li>Designed automated academic paper collection pipeline using GPT-4o, developing
-                            proof-of-concept for scalable PDF retrieval and metadata extraction</li>
-                    </ul>
-                </div>
+    <h3>Autodesk, Software Developer Intern</h3>
+    <p class="meta">Jan &ndash; Apr 2025 &middot; Fusion 360 &middot; TypeScript, Java, GraphQL</p>
+    <ul>
+        <li>Data validation and repair infrastructure for missing manufacturing data</li>
+        <li><strong>O(n)</strong> repair algorithm with concurrency controls, <strong>8x</strong> throughput</li>
+        <li><strong>100% test coverage</strong>; closed permission-handling security gaps</li>
+    </ul>
 
-                <div class="entry-card">
-                    <div class="entry-header">
-                        <div class="company-logo company-logo-fallback" aria-hidden="true">BD</div>
-                        <div class="entry-header-text">
-                            <h3 class="entry-company">Bedarra Corporation</h3>
-                            <p class="entry-title">Student Researcher</p>
-                            <p class="entry-summary">Researched RAG systems for obscure programming language support</p>
-                        </div>
-                        <div class="entry-meta">
-                            <span class="entry-dates">Aug 2024 &ndash; Oct 2024</span>
-                            <a class="entry-link" href="https://www.bedarra.com/" target="_blank"
-                                rel="noopener noreferrer">Bedarra.com &rarr;</a>
-                        </div>
-                    </div>
-                    <ul class="project-tags" aria-label="Bedarra Corporation tools and technologies">
-                        <li>Python</li>
-                        <li>RAG</li>
-                        <li>LangChain</li>
-                        <li>FAISS</li>
-                        <li>Sentence Transformers</li>
-                    </ul>
-                    <ul class="entry-bullets">
-                        <li>Researched and developed RAG systems to answer queries about obscure programming languages
-                            (Factor, K)</li>
-                        <li>Integrated LangChain orchestration to retrieve relevant code examples and documentation,
-                            providing context-aware responses for obscure language queries</li>
-                    </ul>
-                </div>
+    <p class="meta">Earlier: Public Health Agency of Canada, Bedarra, Kongsberg Geospatial, Health Canada, Department of
+        National Defence, NAV CANADA, Correctional Service Canada. Details in the resume.</p>
 
-                <div class="entry-card">
-                    <div class="entry-header">
-                        <img class="company-logo" src="images/logos/kongsberg.png" alt="Kongsberg Geospatial">
-                        <div class="entry-header-text">
-                            <h3 class="entry-company">Kongsberg Geospatial</h3>
-                            <p class="entry-title">Software Developer Intern</p>
-                            <p class="entry-summary">Built real-time geospatial demo apps and automation workflows</p>
-                        </div>
-                        <div class="entry-meta">
-                            <span class="entry-dates">May 2024 &ndash; Aug 2024</span>
-                            <a class="entry-link" href="https://www.kongsberggeospatial.com/products/terralens"
-                                target="_blank" rel="noopener noreferrer">TerraLens &rarr;</a>
-                        </div>
-                    </div>
-                    <ul class="project-tags" aria-label="Kongsberg Geospatial tools and technologies">
-                        <li>C++</li>
-                        <li>Qt</li>
-                        <li>Python</li>
-                        <li>GIS</li>
-                    </ul>
-                    <ul class="entry-bullets">
-                        <li>Developed demo apps using TerraLens SDK as the sole developer on the Solutions Engineering
-                            team, successfully delivering custom solutions to major clients in aviation, defense, and
-                            government sectors</li>
-                        <li>Integrated LiDAR, WMTS, and S-57 data and optimized render pipeline to achieve
-                            <strong>consistent 60+ FPS</strong> with real-time object tracking, while implementing
-                            system monitoring (GPU, CPU, RAM) and modernizing Qt UI/UX</li>
-                        <li>Developed automated airspace classification framework, removing manual processing and
-                            standardizing data categorization</li>
-                        <li>Automated VFR and terrain data processing workflows, reducing aggregating time by more than
-                            <strong>40%</strong></li>
-                    </ul>
-                </div>
+    <hr>
 
-                <div class="entry-card">
-                    <div class="entry-header">
-                        <img class="company-logo" src="images/logos/health-canada.png" alt="Health Canada">
-                        <div class="entry-header-text">
-                            <h3 class="entry-company">Health Canada</h3>
-                            <p class="entry-title">Data Scientist Intern</p>
-                            <p class="entry-summary">Built chemical data and modeling pipelines for risk assessment</p>
-                        </div>
-                        <div class="entry-meta">
-                            <span class="entry-dates">Sep 2023 &ndash; Dec 2023</span>
-                            <a class="entry-link"
-                                href="https://www.canada.ca/en/health-canada/services/chemical-substances/fact-sheets/use-new-approach-methods-risk-assessment.html"
-                                target="_blank" rel="noopener noreferrer">New Approach Methods &rarr;</a>
-                        </div>
-                    </div>
-                    <ul class="project-tags" aria-label="Health Canada tools and technologies">
-                        <li>Python</li>
-                        <li>ML</li>
-                        <li>NLP</li>
-                        <li>ETL</li>
-                    </ul>
-                    <ul class="entry-bullets">
-                        <li>Rebuilt organization-wide federated chemical search system using BS4 and lxml, implementing
-                            automated fault tolerance and rate limiting that increased query success rate by
-                            <strong>20%</strong></li>
-                        <li>Architected scalable web scraping framework using TDD practices and unittest, expanding
-                            accessible chemical data sources by <strong>113%</strong> and achieving <strong>100% test
-                                coverage</strong></li>
-                        <li>Built random forest classifiers with pandas, NumPy, SciPy, and scikit-learn to accurately
-                            predict chemical toxicity</li>
-                        <li>Engineered automated knowledge graph pipeline using Neo4j, CoreNLP, and Stanza to extract
-                            semantic triples from medical literature, streamlining chemical assessment workflows</li>
-                    </ul>
-                </div>
+    <h2 id="projects">Projects</h2>
+    <ul>
+        <li><strong>Orbital Refuelling Simulator</strong>: synthetic spacecraft telemetry with rule-based and ML
+            anomaly monitoring, plus a fine-tuned LLM explainer.
+            <a href="https://orbital-refueling-telemetry-simulator.streamlit.app/" target="_blank"
+                rel="noopener noreferrer">Demo</a> &middot;
+            <a href="https://github.com/nbui23/orbital-refuelling" target="_blank"
+                rel="noopener noreferrer">GitHub</a></li>
+        <li><strong>TwinQuery</strong>: agentic Text-to-SQL and RAG over building-stock digital twins.
+            <a href="https://github.com/nbui23/twinquery" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        <li><strong>Riverbreak</strong>: typographic river detection, heuristics vs. a small U-Net in the browser.
+            <a href="https://nbui23.github.io/riverbreak/" target="_blank" rel="noopener noreferrer">Demo</a> &middot;
+            <a href="https://github.com/nbui23/riverbreak" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        <li><strong>Latch</strong>: local-first macOS focus blocker with a privileged helper for system-level
+            enforcement.
+            <a href="https://github.com/nbui23/latch/releases" target="_blank"
+                rel="noopener noreferrer">Download</a> &middot;
+            <a href="https://github.com/nbui23/latch" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        <li><strong>CruxOS</strong>: mobile + web training system turning climbing data into deterministic weekly
+            guidance.
+            <a href="https://github.com/nbui23/cruxos" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        <li><strong>SocialSaplings</strong>: 1st place at KuriusHacks; reforestation platform recommending tree
+            species from location data.
+            <a href="https://devpost.com/software/socialsaplings" target="_blank"
+                rel="noopener noreferrer">Devpost</a> &middot;
+            <a href="https://github.com/nbui23/socialsaplings" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        <li><strong>ThinkPad home lab</strong>: Ubuntu media and automation stack on a decade-old X220, run as real
+            infrastructure. Docker Compose services plus native systemd ones over a single-mount disk layout so
+            hardlinks work across libraries; split-tunnel VPN so only the download client leaves through it, after
+            tracing Cloudflare challenge failures to a clearance cookie bound to the exit IP; Tailscale and a
+            ufw ruleset for remote access; push health alerts and daily off-box config backups; whole-system power
+            measured at <strong>9.4 W</strong>, about $12 a year.</li>
+    </ul>
 
-                <div class="entry-card">
-                    <div class="entry-header">
-                        <img class="company-logo" src="images/logos/dnd.png" alt="DND">
-                        <div class="entry-header-text">
-                            <h3 class="entry-company">Department of National Defence</h3>
-                            <p class="entry-title">Data Scientist Intern</p>
-                            <p class="entry-summary">Built a RAG chatbot for querying complex tax documentation</p>
-                        </div>
-                        <div class="entry-meta">
-                            <span class="entry-dates">Jun 2023 &ndash; Nov 2023</span>
-                            <a class="entry-link"
-                                href="https://research.ibm.com/blog/retrieval-augmented-generation-RAG" target="_blank"
-                                rel="noopener noreferrer">What Is RAG? &rarr;</a>
-                        </div>
-                    </div>
-                    <ul class="project-tags" aria-label="Department of National Defence tools and technologies">
-                        <li>Python</li>
-                        <li>LLM</li>
-                        <li>RAG</li>
-                        <li>NLP</li>
-                    </ul>
-                    <ul class="entry-bullets">
-                        <li>Built chatbot implementing RAG architecture to enable intelligent querying across
-                            <strong>20+</strong> tax documents</li>
-                        <li>Developed NLP pipeline using NLTK, integrating tokenization, contextual analysis, and NER to
-                            enhance text understanding and information extraction accuracy</li>
-                        <li>Architected vector search system using FAISS and SQLite3, optimizing embedding storage and
-                            retrieval for queries</li>
-                    </ul>
-                </div>
+    <hr>
 
-                <div class="entry-card">
-                    <div class="entry-header">
-                        <img class="company-logo" src="images/logos/navcanada.png" alt="NAV CANADA">
-                        <div class="entry-header-text">
-                            <h3 class="entry-company">NAV CANADA</h3>
-                            <p class="entry-title">Software Developer Intern</p>
-                            <p class="entry-summary">Improved ATC tooling performance and deployment automation</p>
-                        </div>
-                        <div class="entry-meta">
-                            <span class="entry-dates">May 2023 &ndash; Aug 2023</span>
-                            <a class="entry-link"
-                                href="https://www.aviationtoday.com/2015/12/23/nav-canada-launches-project-to-modernize-airport-radar-systems/"
-                                target="_blank" rel="noopener noreferrer">Radar Modernization &rarr;</a>
-                        </div>
-                    </div>
-                    <ul class="project-tags" aria-label="NAV CANADA tools and technologies">
-                        <li>C++</li>
-                        <li>Qt</li>
-                        <li>PowerShell</li>
-                        <li>GIS</li>
-                    </ul>
-                    <ul class="entry-bullets">
-                        <li>Optimized data management algorithm for internal data tool, resulting in a <strong>60%
-                                decrease</strong> in storage utilization and <strong>30% boost</strong> in automated
-                            data analysis performance</li>
-                        <li>Resolved multiple bugs in ATC software, achieving an overall <strong>16%
-                                improvement</strong> in frame rate</li>
-                        <li>Automated network configurations with PowerShell, reducing manual work and setup time by
-                            more than <strong>95%</strong></li>
-                    </ul>
-                </div>
+    <h2 id="skills">Skills</h2>
+    <p><strong>Languages:</strong> Python, TypeScript, JavaScript, C++, C#, Kotlin, Java</p>
+    <p><strong>AI / ML:</strong> LLMs, agentic AI, fine-tuning (LoRA/PEFT), RAG, LangGraph, LangChain, FAISS, Ollama,
+        scikit-learn, pandas, NumPy, tree-sitter static analysis</p>
+    <p><strong>Backend &amp; data:</strong> FastAPI, Node.js, Express, .NET, GraphQL, PostgreSQL/PostGIS, pgvector,
+        MongoDB, SQLite, Prisma, Neo4j</p>
+    <p><strong>Infra &amp; practices:</strong> Docker, Docker Compose, CI/CD, TDD, Grafana, observability, Linux, systemd, networking and VPN routing, Tailscale, Cloudflare Workers</p>
 
-                <div class="entry-card">
-                    <div class="entry-header">
-                        <img class="company-logo" src="images/logos/csc.png" alt="CSC">
-                        <div class="entry-header-text">
-                            <h3 class="entry-company">Correctional Service Canada</h3>
-                            <p class="entry-title">Software Developer Intern</p>
-                            <p class="entry-summary">Improved accessibility and UX for a public victim services portal
-                            </p>
-                        </div>
-                        <div class="entry-meta">
-                            <span class="entry-dates">May 2022 &ndash; Apr 2023</span>
-                            <a class="entry-link" href="https://victimsportal-portailvictimes.csc-scc.gc.ca/Main/Home"
-                                target="_blank" rel="noopener noreferrer">Victims Portal &rarr;</a>
-                        </div>
-                    </div>
-                    <ul class="project-tags" aria-label="Correctional Service Canada tools and technologies">
-                        <li>C#</li>
-                        <li>.NET</li>
-                        <li>JavaScript</li>
-                        <li>ASP.NET</li>
-                    </ul>
-                    <ul class="entry-bullets">
-                        <li>Improved web accessibility using the WET framework to ensure WCAG 2.1 Level AA compliance,
-                            enhancing UX for <strong>100+ daily users</strong> in victim services application</li>
-                        <li>Developed ASP.NET solutions to resolve UI bugs and implement frontend improvements for
-                            victim info delivery application</li>
-                    </ul>
-                </div>
+    <hr>
 
-            </section>
+    <h2 id="education">Education</h2>
+    <p><strong>Carleton University</strong>: Bachelor of Computer Science (Honours), 3.9/4.0 GPA, graduated
+        Spring 2026.</p>
+    <p class="meta">President's Scholarship, Henry Marshall Tory Scholarship, Chalmers Jack MacKenzie Scholarship, Harry
+        S. Southam Scholarship, Dean's Honour List every year.</p>
 
-            <section id="skills" class="tab-content">
+    <hr>
 
-                <div class="entry-card">
-                    <div class="skills-group">
-                        <h3 class="skills-category">Languages</h3>
-                        <ul class="project-tags skills-tags" aria-label="Languages">
-                            <li>Python</li>
-                            <li>TypeScript</li>
-                            <li>JavaScript</li>
-                            <li>C++</li>
-                            <li>C#</li>
-                            <li>Kotlin</li>
-                            <li>Java</li>
-                        </ul>
-                    </div>
+    <h2 id="reading">Goodreads</h2>
+    <p><a href="https://www.goodreads.com/user/show/166643433-norman" target="_blank" rel="noopener noreferrer">Judge my
+            taste in books &rarr;</a></p>
 
-                    <div class="skills-group">
-                        <h3 class="skills-category">Frameworks &amp; Runtimes</h3>
-                        <ul class="project-tags skills-tags" aria-label="Frameworks and runtimes">
-                            <li>Next.js</li>
-                            <li>Node.js</li>
-                            <li>Express.js</li>
-                            <li>FastAPI</li>
-                            <li>Flask</li>
-                            <li>React Native</li>
-                            <li>Expo</li>
-                            <li>Electron</li>
-                            <li>Streamlit</li>
-                            <li>Qt</li>
-                            <li>.NET</li>
-                            <li>ASP.NET</li>
-                        </ul>
-                    </div>
+    <p id="reading-stats" class="meta"></p>
+    <div id="reading-charts"></div>
+    <ul id="books"></ul>
 
-                    <div class="skills-group">
-                        <h3 class="skills-category">AI / ML / Data</h3>
-                        <ul class="project-tags skills-tags" aria-label="AI, ML, and data">
-                            <li>LLMs</li>
-                            <li>Agentic AI</li>
-                            <li>LLM fine-tuning</li>
-                            <li>RAG</li>
-                            <li>LangGraph</li>
-                            <li>LangChain</li>
-                            <li>FAISS</li>
-                            <li>Ollama</li>
-                            <li>Qwen</li>
-                            <li>LoRA</li>
-                            <li>Hugging Face</li>
-                            <li>PEFT</li>
-                            <li>Sentence Transformers</li>
-                            <li>scikit-learn</li>
-                            <li>IsolationForest</li>
-                            <li>Anomaly Detection</li>
-                            <li>Telemetry Simulation</li>
-                            <li>Synthetic Data</li>
-                            <li>Feature Attribution</li>
-                            <li>pandas</li>
-                            <li>NumPy</li>
-                            <li>NLTK</li>
-                        </ul>
-                    </div>
+    <hr>
 
-                    <div class="skills-group">
-                        <h3 class="skills-category">Databases &amp; APIs</h3>
-                        <ul class="project-tags skills-tags" aria-label="Databases and APIs">
-                            <li>PostgreSQL</li>
-                            <li>PostGIS</li>
-                            <li>pgvector</li>
-                            <li>MySQL</li>
-                            <li>MongoDB</li>
-                            <li>SQLite</li>
-                            <li>Prisma</li>
-                            <li>Neo4j</li>
-                            <li>Firebase</li>
-                            <li>GraphQL</li>
-                        </ul>
-                    </div>
+    <p class="meta">Last updated: September 2026</p>
 
-                    <div class="skills-group">
-                        <h3 class="skills-category">Tools &amp; Practices</h3>
-                        <ul class="project-tags skills-tags" aria-label="Tools and practices">
-                            <li>CI/CD</li>
-                            <li>TDD</li>
-                            <li>Docker</li>
-                            <li>Docker Compose</li>
-                            <li>Ubuntu</li>
-                            <li>Linux CLI</li>
-                            <li>Grafana</li>
-                            <li>Observability</li>
-                            <li>Networking</li>
-                            <li>Backup Automation</li>
-                            <li>Mocha</li>
-                            <li>Chai</li>
-                            <li>Sinon</li>
-                            <li>pytest</li>
-                            <li>unittest</li>
-                            <li>WCAG 2.1</li>
-                            <li>Cloudflare Workers</li>
-                            <li>PowerShell</li>
-                        </ul>
-                    </div>
-                </div>
-
-            </section>
-
-            <section id="education" class="tab-content">
-
-                <div class="entry-card">
-                    <div class="entry-header">
-                        <img class="company-logo" src="images/logos/carleton.png" alt="Carleton University">
-                        <div class="entry-header-text">
-                            <h3 class="entry-company">Carleton University</h3>
-                            <p class="entry-role">Bachelor of Computer Science (Honours) &middot; 3.9/4.0 GPA</p>
-                        </div>
-                        <div class="entry-meta">
-                            <span class="entry-dates">Graduated Spring 2026</span>
-                            <a class="entry-link" href="https://admissions.carleton.ca/programs/computer-science/"
-                                target="_blank" rel="noopener noreferrer">Program &rarr;</a>
-                        </div>
-                    </div>
-                    <ul class="entry-bullets">
-                        <li class="coursework-item"><strong>Relevant coursework:</strong>
-                            <dl class="course-groups">
-                                <div class="course-group">
-                                    <dt>Theory &amp; Algorithms</dt>
-                                    <dd>Algorithms I &amp; II, Discrete Structures I &amp; II, Graph Analytics</dd>
-                                </div>
-
-                                <div class="course-group">
-                                    <dt>Systems &amp; Security</dt>
-                                    <dd>Operating Systems, Systems Programming, Applied Cryptography</dd>
-                                </div>
-
-                                <div class="course-group">
-                                    <dt>Software Engineering</dt>
-                                    <dd>Software Engineering, Object-Oriented Programming, Software Quality Assurance,
-                                        Programming Paradigms, Data Structures, Human-Computer Interaction (UI/UX)</dd>
-                                </div>
-
-                                <div class="course-group">
-                                    <dt>Data &amp; Applications</dt>
-                                    <dd>Database Management Systems, Web Development, Mobile Multimedia</dd>
-                                </div>
-
-                                <div class="course-group">
-                                    <dt>Math &amp; Stats</dt>
-                                    <dd>Calculus I &amp; II, Linear Algebra, Statistical Modeling</dd>
-                                </div>
-                            </dl>
-                        </li>
-                        <li class="awards-item"><strong>Awards:</strong> President's Scholarship, Henry Marshall Tory
-                            Scholarship, Chalmers
-                            Jack MacKenzie Scholarship, Harry S. Southam Scholarship, Dean's Honour List (2022, 2023,
-                            2024, 2025)</li>
-                    </ul>
-                </div>
-
-            </section>
-
-            <section id="projects" class="tab-content">
-
-                <div class="project-category">
-                    <p class="project-category-kicker">AI/ML</p>
-                    <h2 class="project-category-title">Telemetry, detection, and applied model evaluation</h2>
-                </div>
-
-                <div class="entry-card project-card project-card-featured">
-                    <div class="entry-header">
-                        <div class="entry-header-text">
-                            <h3 class="entry-company">Orbital Refueling Simulator</h3>
-                            <p class="entry-role">Synthetic spacecraft telemetry, anomaly monitoring, and LLM explainer
-                                prototype</p>
-                        </div>
-                        <div class="project-links">
-                            <a href="orbital-refueling-case-study.html">Case Study &rarr;</a>
-                            <a href="https://orbital-refueling-telemetry-simulator.streamlit.app/" target="_blank"
-                                rel="noopener noreferrer">Demo &rarr;</a>
-                            <a href="https://github.com/nbui23/orbital-refueling" target="_blank"
-                                rel="noopener noreferrer">GitHub &rarr;</a>
-                        </div>
-                    </div>
-                    <p class="project-summary">Orbital Refueling Simulator generates synthetic autonomous refueling
-                        telemetry, injects anomaly scenarios, compares deterministic engineering rules with phase-aware
-                        ML anomaly scoring, and fine-tunes an LLM explainer over grounded monitoring outputs.</p>
-                    <ul class="project-tags"
-                        aria-label="Orbital Refueling Telemetry Simulator tech stack and product highlights">
-                        <li>Python</li>
-                        <li>Streamlit</li>
-                        <li>scikit-learn</li>
-                        <li>IsolationForest</li>
-                        <li>LLM fine-tuning</li>
-                        <li>LoRA</li>
-                        <li>Telemetry simulation</li>
-                        <li>Regression tests</li>
-                    </ul>
-                    <div class="project-image">
-                        <img src="images/orbital-refueling-telemetry.png"
-                            alt="Orbital refueling telemetry dashboard preview with mission phase, scenario alerts, signal charts, and anomaly score">
-                    </div>
-                    <ul class="entry-bullets">
-                        <li><strong>Hybrid monitoring design:</strong> Kept hard-limit deterministic rules separate from
-                            advisory ML scoring so explicit threshold breaches and subtle multivariate drift are both
-                            visible</li>
-                        <li><strong>Scenario-driven simulation:</strong> Modeled a 410-second refueling mission across
-                            nine phases with nominal telemetry plus nine injected anomaly cases</li>
-                        <li><strong>Fine-tuned explainer layer:</strong> Trained a small Qwen LoRA adapter to explain
-                            grounded rule alerts, advisory ML scores, and top contributing telemetry signals
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="entry-card project-card">
-                    <div class="entry-header">
-                        <div class="entry-header-text">
-                            <h3 class="entry-company">TwinQuery</h3>
-                            <p class="entry-role">Agentic Text-to-SQL and RAG assistant for building-stock digital twins
-                            </p>
-                        </div>
-                        <div class="project-links">
-                            <a href="twinquery-case-study.html">Case Study &rarr;</a>
-                            <a href="https://github.com/nbui23/twinquery" target="_blank"
-                                rel="noopener noreferrer">GitHub &rarr;</a>
-                        </div>
-                    </div>
-                    <p class="project-summary">TwinQuery is an digital-twin query assistant that lets
-                        non-technical users ask plain-English questions over building-stock and retrofit datasets.
-                        It combines a safe Text-to-SQL pipeline with local RAG over retrofit guidance, serving answers
-                        grounded in both database rows and retrieved documents through a FastAPI backend and
-                        Streamlit/PyDeck interface.</p>
-                    <ul class="project-tags" aria-label="TwinQuery tech stack and product highlights">
-                        <li>Python</li>
-                        <li>LangGraph</li>
-                        <li>FastAPI</li>
-                        <li>Streamlit</li>
-                        <li>PostgreSQL/PostGIS</li>
-                        <li>Ollama</li>
-                        <li>RAG</li>
-                        <li>Docker</li>
-                    </ul>
-                    <ul class="entry-bullets">
-                        <li><strong>Safe Text-to-SQL:</strong> Deterministic guardrails, fallback query templates, and
-                            PostgreSQL/PostGIS execution over Ottawa building-footprint geometry</li>
-                        <li><strong>Hybrid RAG synthesis:</strong> Local retrieval over retrofit guidance grounded LLM
-                            answers in both database rows and retrieved document sources</li>
-                        <li><strong>Geospatial interface:</strong> 2D/3D PyDeck visualization with highlighted building
-                            polygons, SQL transparency panel, and tested API response schemas</li>
-                    </ul>
-                    <div class="project-image">
-                        <img src="images/twinquery-screenshot.png" alt="TwinQuery interface showing map query mode with 3D building extrusion over Ottawa and generated SQL">
-                    </div>
-                </div>
-
-                <div class="entry-card project-card">
-                    <div class="entry-header">
-                        <div class="entry-header-text">
-                            <h3 class="entry-company">Riverbreak</h3>
-                            <p class="entry-role">Typographic river detection and layout demo</p>
-                        </div>
-                        <div class="project-links">
-                            <a href="riverbreak-case-study.html">Case Study &rarr;</a>
-                            <a href="https://nbui23.github.io/riverbreak/" target="_blank"
-                                rel="noopener noreferrer">Demo &rarr;</a>
-                            <a href="https://github.com/nbui23/riverbreak" target="_blank"
-                                rel="noopener noreferrer">GitHub &rarr;</a>
-                        </div>
-                    </div>
-                    <p class="project-summary">Riverbreak detects typographic rivers in justified text and compares
-                        heuristic detection with a small U-Net segmentation model. The project combines a browser
-                        line-breaking demo, synthetic data generation, hand-labeled evaluation data, and a prototype
-                        reranker that scores layouts by river severity.</p>
-                    <ul class="project-tags" aria-label="Riverbreak tech stack and product highlights">
-                        <li>Python</li>
-                        <li>PyTorch</li>
-                        <li>U-Net</li>
-                        <li>ONNX Runtime</li>
-                        <li>JavaScript</li>
-                        <li>HTML Canvas</li>
-                    </ul>
-                    <div class="project-image">
-                        <img src="images/riverbreak.png"
-                            alt="Riverbreak project card showing justified text with detected whitespace rivers">
-                    </div>
-                    <ul class="entry-bullets">
-                        <li><strong>Browser-first demo:</strong> Built an inspectable text layout simulator with
-                            real-time heuristic overlays and detector-guided line-break comparison</li>
-                        <li><strong>ML benchmark:</strong> Trained a small U-Net on synthetic weak labels, then compared
-                            it against the heuristic baseline on hand-labeled validation and test samples</li>
-                        <li><strong>End-to-end artifacts:</strong> Shipped the ONNX browser model, precomputed sample
-                            overlays, benchmark reports, and reproducible repository checks</li>
-                    </ul>
-                </div>
-
-                <div class="project-category">
-                    <p class="project-category-kicker">SWE</p>
-                    <h2 class="project-category-title">Full-stack products, desktop apps, and shipped tools</h2>
-                </div>
-
-                <div class="entry-card project-card">
-                    <div class="entry-header">
-                        <div class="entry-header-text">
-                            <h3 class="entry-company">Latch</h3>
-                            <p class="entry-role">Local-first macOS focus blocker</p>
-                        </div>
-                        <div class="project-links">
-                            <a href="latch-case-study.html">Case Study &rarr;</a>
-                            <a href="https://github.com/nbui23/latch/releases" target="_blank"
-                                rel="noopener noreferrer">Download &rarr;</a>
-                            <a href="https://github.com/nbui23/latch" target="_blank" rel="noopener noreferrer">GitHub
-                                &rarr;</a>
-                        </div>
-                    </div>
-                    <p class="project-summary">Latch is a local-first macOS focus blocker built with Electron. It
-                        blocks distracting sites with a privileged helper, keeps blocklists on-device, and optionally
-                        uses a Chromium extension for a friendlier blocked-page experience.</p>
-                    <ul class="project-tags" aria-label="Latch tech stack and product highlights">
-                        <li>Electron</li>
-                        <li>TypeScript</li>
-                        <li>macOS</li>
-                        <li>Local-first</li>
-                        <li>Native helper</li>
-                        <li>Chromium extension</li>
-                    </ul>
-                    <div class="project-image">
-                        <img src="images/latch-case-study-focus.svg"
-                            alt="Latch focus session screen showing timer, active blocklist, and session controls">
-                    </div>
-                    <ul class="entry-bullets">
-                        <li><strong>Local-first architecture:</strong> Kept blocklists and session state on-device with
-                            no account system or cloud dependency</li>
-                        <li><strong>System-level enforcement:</strong> Paired the Electron app with a one-time
-                            privileged helper to block distracting sites across Chromium browsers</li>
-                        <li><strong>Focus-session reliability:</strong> Supported timed sessions, always-on blocking,
-                            and crash recovery so active sessions survive interruptions</li>
-                        <li><strong>Practical distribution:</strong> Packaged the desktop app, helper, Chromium
-                            extension bundle, and native messaging host into a single macOS release flow</li>
-                    </ul>
-                </div>
-
-                <div class="entry-card project-card">
-                    <div class="entry-header">
-                        <div class="entry-header-text">
-                            <h3 class="entry-company">CruxOS</h3>
-                            <p class="entry-role">Full-stack product for climbing performance decisions</p>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/nbui23/cruxos" target="_blank" rel="noopener noreferrer">GitHub
-                                &rarr;</a>
-                        </div>
-                    </div>
-                    <p class="project-summary">CruxOS is a full-stack decision-support system for intermediate
-                        climbers, combining fast mobile session logging with a web app for analysis, reports, and
-                        weekly training guidance. It turns training and recovery data into deterministic,
-                        explainable insights that support better performance decisions.</p>
-                    <ul class="project-tags" aria-label="CruxOS tech stack and product highlights">
-                        <li>Next.js</li>
-                        <li>TypeScript</li>
-                        <li>Prisma</li>
-                        <li>SQLite</li>
-                        <li>Mobile + Web</li>
-                        <li>Deterministic insights</li>
-                    </ul>
-                    <div class="project-image">
-                        <img src="images/cruxos.svg" alt="CruxOS product card showing web analysis and mobile logging">
-                    </div>
-                    <ul class="entry-bullets">
-                        <li><strong>Full-stack system design:</strong> Structured CruxOS as a product, not just a
-                            tracker, with shared data flowing from fast session capture into deeper analysis and
-                            reporting workflows</li>
-                        <li><strong>Mobile + web architecture:</strong> Separated low-friction logging on mobile from
-                            richer review and trend analysis on the web to support the full training loop</li>
-                        <li><strong>Deterministic insight engine:</strong> Translated training, recovery, and workload
-                            signals into clear weekly recommendations instead of opaque black-box outputs</li>
-                        <li><strong>Typed data model:</strong> Used Prisma and SQLite to keep sessions, recovery
-                            signals,
-                            and reports consistent across mobile capture and web review</li>
-                        <li><strong>Real-world usefulness:</strong> Built for intermediate climbers who need help
-                            deciding when to push, recover, or adjust training to improve performance</li>
-                    </ul>
-                </div>
-
-                <div class="entry-card project-card">
-                    <div class="entry-header">
-                        <div class="entry-header-text">
-                            <h3 class="entry-company">SocialSaplings</h3>
-                            <p class="entry-role">Hackathon-winning reforestation platform</p>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://devpost.com/software/socialsaplings" target="_blank"
-                                rel="noopener noreferrer">Devpost &rarr;</a>
-                            <a href="https://github.com/nbui23/socialsaplings" target="_blank"
-                                rel="noopener noreferrer">GitHub &rarr;</a>
-                        </div>
-                    </div>
-                    <p class="project-summary">SocialSaplings is a hackathon-winning reforestation platform that
-                        recommends suitable tree species from location data and visualizes planting impact for users.
-                    </p>
-                    <ul class="project-tags" aria-label="SocialSaplings tech stack and product highlights">
-                        <li>HTML/SCSS</li>
-                        <li>JavaScript</li>
-                        <li>Bootstrap</li>
-                        <li>Node.js</li>
-                        <li>Express.js</li>
-                        <li>Firebase</li>
-                    </ul>
-                    <div class="project-image">
-                        <img src="images/socialsaplings.png" alt="SocialSaplings screenshot">
-                    </div>
-                    <ul class="entry-bullets">
-                        <li><strong>Hackathon outcome:</strong> Won 1st Place at KuriusHacks while leading a
-                            cross-functional team building a reforestation platform</li>
-                        <li><strong>Recommendation engine:</strong> Integrated location and environmental APIs to
-                            analyze user geodata and suggest suitable tree species for planting</li>
-                        <li><strong>Impact visualization:</strong> Built a Google Maps dashboard for reforestation
-                            metrics and global environmental impact data</li>
-                    </ul>
-                </div>
-
-                <div class="project-category">
-                    <p class="project-category-kicker">Miscellaneous</p>
-                    <h2 class="project-category-title">Self-hosted operations and reliability work</h2>
-                </div>
-
-                <div class="entry-card project-card">
-                    <div class="entry-header">
-                        <div class="entry-header-text">
-                            <h3 class="entry-company">ThinkPad Home Lab</h3>
-                            <p class="entry-role">Ubuntu home lab for containerized services</p>
-                        </div>
-                    </div>
-                    <p class="project-summary">Ubuntu home lab
-                        running containerized media and automation services with persistent storage, segmented
-                        networking, observability, and automated operations for reliable 24/7 use.</p>
-                    <ul class="project-tags"
-                        aria-label="Self-Hosted Infrastructure Platform tech stack and product highlights">
-                        <li>Ubuntu</li>
-                        <li>Docker</li>
-                        <li>Docker Compose</li>
-                        <li>CI/CD</li>
-                        <li>Grafana</li>
-                        <li>Linux CLI</li>
-                        <li>Networking</li>
-                    </ul>
-                    <div class="project-image">
-                        <img src="images/thinkpad.jpeg" alt="My ThinkPad">
-                    </div>
-                    <ul class="entry-bullets">
-                        <li><strong>Platform engineering:</strong> Engineered containerized media and automation
-                            services with persistent storage, segmented networking, and automated deployments</li>
-                        <li><strong>Observability:</strong> Implemented monitoring for uptime, disk forecasting, service
-                            health, and incident recovery across 24/7 Linux infrastructure</li>
-                        <li><strong>Operations automation:</strong> Automated updates, backups, permission repair, and
-                            container lifecycle management through scripts and CI/CD workflows</li>
-                    </ul>
-                </div>
-
-            </section>
-
-            <section id="reading" class="tab-content">
-                <p class="reading-intro"><a href="https://www.goodreads.com/user/show/166643433-norman" target="_blank"
-                        rel="noopener noreferrer">Judge My Taste in Books &rarr;</a></p>
-                <div class="reading-stats" id="reading-stats"></div>
-                <div class="reading-charts" id="reading-charts"></div>
-                <div class="books-grid" id="books-grid"></div>
-            </section>
-
-        </main>
-
-        <footer class="footer">
-            Last updated: April 2026
-        </footer>
-
-    </div>
-
-    <script src="scripts/main.js?v=0698a567" defer></script>
+    <script type="module" src="scripts/main.js?v=e044f11d"></script>
 
 </body>
 
