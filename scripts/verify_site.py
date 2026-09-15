@@ -6,7 +6,7 @@ from urllib.parse import urlparse
 
 
 ROOT = Path(__file__).resolve().parent.parent
-INDEX = ROOT / "index.html"
+PAGES = [ROOT / "index.html", ROOT / "detailed.html"]
 EXPECTED_SECTION_IDS = {"value", "experience", "projects", "skills", "education", "reading"}
 
 
@@ -45,9 +45,27 @@ class SiteParser(HTMLParser):
             self.local_assets.append(path)
 
 
-def main() -> None:
+def check(page: Path) -> SiteParser:
     parser = SiteParser()
-    parser.feed(INDEX.read_text(encoding="utf-8"))
+    parser.feed(page.read_text(encoding="utf-8"))
+
+    broken_anchors = sorted({a for a in parser.anchor_targets if a and a not in parser.element_ids})
+    if broken_anchors:
+        raise SystemExit(f"{page.name}: anchors pointing at missing ids: {broken_anchors}")
+
+    missing_assets = sorted({a for a in parser.local_assets if not (ROOT / a).exists()})
+    if missing_assets:
+        raise SystemExit(f"{page.name}: missing local assets: {missing_assets}")
+
+    if parser.target_blank_missing_rel:
+        raise SystemExit(f"{page.name}: missing rel on target=_blank links: {parser.target_blank_missing_rel}")
+
+    return parser
+
+
+def main() -> None:
+    parsers = [check(page) for page in PAGES]
+    parser = parsers[0]
 
     missing_sections = sorted(EXPECTED_SECTION_IDS - parser.element_ids)
     if missing_sections:
@@ -56,19 +74,9 @@ def main() -> None:
     if "books" not in parser.element_ids:
         raise SystemExit("Missing Goodreads list container: books")
 
-    broken_anchors = sorted({a for a in parser.anchor_targets if a and a not in parser.element_ids})
-    if broken_anchors:
-        raise SystemExit(f"Anchors pointing at missing ids: {broken_anchors}")
-
-    missing_assets = sorted({a for a in parser.local_assets if not (ROOT / a).exists()})
-    if missing_assets:
-        raise SystemExit(f"Missing local assets: {missing_assets}")
-
-    if parser.target_blank_missing_rel:
-        raise SystemExit(f"Missing rel on target=_blank links: {parser.target_blank_missing_rel}")
-
     print("Site structure OK")
-    print(f"Local assets checked: {len(parser.local_assets)}")
+    print(f"Pages checked: {len(PAGES)}")
+    print(f"Local assets checked: {sum(len(p.local_assets) for p in parsers)}")
 
 
 if __name__ == "__main__":
