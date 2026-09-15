@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Norman Bui, in detail</title>
+    <meta name="description"
+        content="A long version of Norman Bui's resume: what each role and project involved, the decisions behind them, and what the results were.">
+    <meta property="og:title" content="Norman Bui, in detail">
+    <meta property="og:description"
+        content="A long version of Norman Bui's resume, with the detail a one-page resume leaves out.">
+    <meta property="og:type" content="article">
+    <link rel="icon" type="image/jpeg" href="images/logos/baby.jpeg?v=41bb1200">
+    <link rel="stylesheet" href="styles.css?v=0fe238a8">
+</head>
+
+<body>
+
+    <p><a href="index.html">&larr; back to the short version</a></p>
+
+    <h1>Norman Bui, in detail</h1>
+    <p class="meta">The long version, with the detail a one-page resume leaves out.</p>
+
+    <p>A resume line says what happened. It has no room for what the work started from, what I tried, or how much the
+        numbers actually prove. That is what this page is for.</p>
+
+    <p>
+        <a href="index.html">Short version</a> &middot;
+        <a href="resume/swe/Norman_Bui_Resume.pdf" target="_blank" rel="noopener noreferrer">Resume PDF</a> &middot;
+        <a href="mailto:normanbui23@gmail.com">Email</a> &middot;
+        <a href="https://github.com/nbui23" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </p>
+
+    <hr>
+
+    <h2 id="contents">Contents</h2>
+    <ul>
+        <li><a href="#experience">Experience</a>:
+            <a href="#ctc">Canadian Tire</a>,
+            <a href="#ea">Electronic Arts</a>,
+            <a href="#autodesk">Autodesk</a>,
+            <a href="#phac">Public Health Agency of Canada</a>,
+            <a href="#bedarra">Bedarra</a>,
+            <a href="#kongsberg">Kongsberg Geospatial</a>,
+            <a href="#health-canada">Health Canada</a>,
+            <a href="#dnd">National Defence</a>,
+            <a href="#navcan">NAV CANADA</a>,
+            <a href="#csc">Correctional Service Canada</a>
+        </li>
+        <li><a href="#projects">Projects</a>:
+            <a href="#latch">Latch</a>,
+            <a href="#orbital">Orbital Refuelling Simulator</a>,
+            <a href="#twinquery">TwinQuery</a>,
+            <a href="#riverbreak">Riverbreak</a>,
+            <a href="#cruxos">CruxOS</a>,
+            <a href="#homelab">ThinkPad home lab</a>,
+            <a href="#socialsaplings">SocialSaplings</a>
+        </li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#skills">Skills</a></li>
+    </ul>
+
+    <hr>
+
+    <h2 id="experience">Experience</h2>
+
+    <h3 id="ctc">Canadian Tire Corporation</h3>
+    <p class="meta">Software Developer &middot; July 2026 to present &middot; Toronto</p>
+
+    <p>I work on agentic software development lifecycles. Most of my time has gone to an internal documentation
+        generator.</p>
+
+    <p>Service documentation goes stale in a predictable way. Someone writes it once, moves teams, and the service
+        changes underneath it. After that nobody trusts it, so nobody updates it. The tool regenerates documentation
+        from the code on every run, so there is nothing to keep up to date by hand.</p>
+
+    <p>The pipeline has two halves. The first is static analysis with no model in it. A pass over the repository
+        produces a fact sheet, where each fact is a structured record carrying the file and line it came from: routes,
+        module dependencies, configuration keys, service catalog entries, tracker items attached to recent changes. The
+        second half is the model. It writes prose from the fact sheet and never sees the repository, so it has nothing
+        to draw an invented endpoint from.</p>
+
+    <p>The same sheet produces three documents, because the people who need to understand a service want different
+        things from it. A developer guide with entry points, checks, and the paths through the code. An architecture
+        page with generated Mermaid diagrams. A business page for readers who never open the repository, covering who
+        owns the service, what it talks to, and what recent work changed.</p>
+
+    <p>The business page took the most work. Early drafts expanded a banner code into the name of a real company that
+        had nothing to do with the system, listed downstream services that did not exist, and stated the direction of an
+        integration the facts did not cover. I wrote the rules that page runs under: do not expand an abbreviation the
+        record does not expand, do not name a counterparty the facts do not name, give a direction only where the facts
+        give one and write "not on the record" otherwise. They live in the prompt rather than in a review checklist, so
+        swapping the model does not lose them. Over a run set across three models, fresh pages came back clean on every
+        signal we check for.</p>
+
+    <p>The analysis pass covers eleven language ecosystems on tree-sitter, including Java, Kotlin, TypeScript, PHP, C
+        and C++, and Ruby. Each one needed its own extraction rules for routes, imports, dependencies, and
+        configuration, and most of them turned up a shared rule that needed fixing rather than a special case.</p>
+
+    <p>Model cost per run came down <strong>38x</strong>. I ran candidates over judged repository checkouts and compared
+        the pages they produced against the same signals, instead of picking a model on reputation. The cheap one held
+        at zero invented names across all three checkouts. I measured prompt structure the same way and found that
+        caching the fact sheet halves cold-start cost, but at the volume we run, the choice of model was worth roughly
+        twenty times more than the caching.</p>
+
+    <p>It ships as a plugin teammates run from their own editor. It writes the documentation tree, commits it, opens the
+        pull request, and publishes finished pages to Confluence and the team wiki.</p>
+
+    <h3 id="ea">Electronic Arts</h3>
+    <p class="meta">Software Developer Intern &middot; May 2025 to August 2025 &middot; The Sims &middot; Kotlin, AI
+        agents, automated testing</p>
+
+    <p>I worked on the infrastructure that tests the game under load, so the team can tell whether a feature still holds
+        up when a lot of people use it at once.</p>
+
+    <p>The load-testing pipeline was passing about <strong>35%</strong> of its runs when I started, and people had
+        mostly stopped reading the results. Almost none of the failures were about the game. They were authentication
+        failures against backend services and environment setup problems on the CI runners. I worked through them and
+        got the pipeline to a <strong>100%</strong> pass rate.</p>
+
+    <p>I also integrated <strong>10 or more</strong> new game features into the load-testing frameworks, with automated
+        coverage and performance metrics tracked per feature, so the suite kept testing the current game rather than
+        last quarter's.</p>
+
+    <p>Separately, I analyzed Servo, an LLM-powered system that plays the game to find bugs. I measured model
+        performance, read through the architecture, and wrote up recommendations for optimization and for soak testing,
+        where the failures only appear after hours of continuous play.</p>
+
+    <h3 id="autodesk">Autodesk</h3>
+    <p class="meta">Software Developer Intern &middot; January 2025 to April 2025 &middot; Fusion &middot; TypeScript,
+        Java, GraphQL</p>
+
+    <p>Fusion keeps manufacturing data in the cloud, and some of it loses the relationships that tie a part back to the
+        design it came from. Nothing looks broken at that point. The failure shows up later in a workflow that depended
+        on the relationship, which makes it awkward to trace back.</p>
+
+    <p>I built the validation and repair infrastructure for that: detection of missing manufacturing data across cloud
+        workflows, and the repair path behind it. The repair algorithm is <strong>O(n)</strong> with concurrency
+        controls and runs <strong>8x</strong> faster than the approach it replaced, with the parallelism tuned so a
+        large repair could not overwhelm the services it called.</p>
+
+    <p>I deployed GraphQL endpoints so validation and repair run on their own rather than after someone reports a
+        problem, closed permission and error-handling gaps in workflows carrying sensitive customer data, and fixed
+        part-numbering errors that only appeared in uncommon configurations. Every change kept
+        <strong>100%</strong> test coverage under Mocha, Chai, and Sinon.</p>
+
+    <h3 id="phac">Public Health Agency of Canada</h3>
+    <p class="meta">Data Scientist Intern &middot; September 2024 to December 2024 &middot; Python, LLMs, RAG, master
+        data management</p>
+
+    <p>Epidemiological research runs on literature review, and literature review is slow enough to limit which
+        questions get asked at all. I built an LLM-assisted workflow for it with Imperial College London and the World
+        Health Organization, along with the master data management infrastructure meant to make global health data
+        available in a standard shape.</p>
+
+    <p>I evaluated embedding models with Ollama to check retrieval quality in the RAG system. That gave the team a
+        baseline to tune against, which they did not have before, so changes could be compared instead of argued
+        about.</p>
+
+    <p>I also prototyped a paper collection pipeline with GPT-4o, as a proof of concept for PDF retrieval and metadata
+        extraction at a scale nobody wanted to do by hand.</p>
+
+    <h3 id="bedarra">Bedarra Corporation</h3>
+    <p class="meta">Student Researcher &middot; August 2024 to October 2024 &middot; Python, RAG, LangChain, FAISS</p>
+
+    <p>Language models handle common languages well because the training data is full of them, and handle obscure ones
+        badly for the same reason. This was research into whether retrieval could close that gap for Factor and K, where
+        documentation exists but is sparse and idiosyncratic.</p>
+
+    <p>I built the RAG systems, benchmarked embedding models and chunking strategies against retrieval quality (the
+        usual defaults are tuned for prose, and these corpora are mostly code and terse reference material), and used
+        LangChain to pull real code examples and documentation into each answer rather than letting the model recall
+        something from a language that merely looks similar.</p>
+
+    <h3 id="kongsberg">Kongsberg Geospatial</h3>
+    <p class="meta">Software Developer Intern &middot; May 2024 to August 2024 &middot; TerraLens &middot; C++, Qt,
+        Python, GIS</p>
+
+    <p>I was the only developer on the Solutions Engineering team, building the demo applications that show clients in
+        aviation, defense, and government what the TerraLens SDK does with their own data. These get shown live, so
+        performance counted as a product requirement.</p>
+
+    <p>I integrated LiDAR, WMTS, and S-57 data into a single view and optimized the render pipeline to a
+        <strong>consistent 60 or more frames per second</strong> with real-time object tracking, added system monitoring
+        for GPU, CPU, and RAM, and modernized the Qt interface.</p>
+
+    <p>I also built an automated airspace classification framework that removed a manual categorization step, and
+        automated VFR and terrain data processing, cutting aggregation time by more than <strong>40%</strong>.</p>
+
+    <h3 id="health-canada">Health Canada</h3>
+    <p class="meta">Data Scientist Intern &middot; September 2023 to December 2023 &middot; Python, ML, NLP, ETL</p>
+
+    <p>Chemical risk assessment pulls data from a lot of sources, and the system doing the pulling was failing often
+        enough that analysts had started working around it.</p>
+
+    <p>I rebuilt the organization-wide federated chemical search with BS4 and lxml, adding fault tolerance and rate
+        limiting, which raised the query success rate by <strong>20%</strong>. The failures were mostly source sites
+        throttling or rejecting requests, so the work was in how the system behaved as a client rather than in
+        parsing.</p>
+
+    <p>On top of that I built a scraping framework with unittest and test-driven development, expanding accessible data
+        sources by <strong>113%</strong> at <strong>100%</strong> coverage. Source sites change shape without warning,
+        and the tests are what tell you which one broke.</p>
+
+    <p>I also built random forest classifiers with pandas, NumPy, SciPy, and scikit-learn to predict chemical toxicity,
+        and a knowledge graph pipeline using Neo4j, CoreNLP, and Stanza that extracts semantic triples from medical
+        literature.</p>
+
+    <h3 id="dnd">Department of National Defence</h3>
+    <p class="meta">Data Scientist Intern &middot; June 2023 to November 2023 &middot; Python, LLMs, RAG, NLP</p>
+
+    <p>Tax documentation is long, heavily cross-referenced, and unpleasant to search, which made it a reasonable target
+        for retrieval. I built a chatbot on a RAG architecture that answers questions across <strong>20 or more</strong>
+        tax documents.</p>
+
+    <p>The NLP pipeline used NLTK for tokenization, contextual analysis, and named entity recognition. Vector search ran
+        on FAISS with SQLite3 behind it for embedding storage and retrieval.</p>
+
+    <h3 id="navcan">NAV CANADA</h3>
+    <p class="meta">Software Developer Intern &middot; May 2023 to August 2023 &middot; C++, Qt, PowerShell, GIS</p>
+
+    <p>Air traffic control software has an unusual performance profile. The average case being fast counts for little
+        when a controller is watching the screen in real time and notices every stall.</p>
+
+    <p>I optimized the data management algorithm in an internal data tool, cutting storage use by <strong>60%</strong>
+        and improving automated analysis performance by <strong>30%</strong>. I fixed several rendering bugs in the ATC
+        software, worth <strong>16%</strong> on frame rate overall, and improved how geospatial data is imported and
+        validated.</p>
+
+    <p>I also automated network configuration with PowerShell, which cut manual setup work by more than
+        <strong>95%</strong>.</p>
+
+    <h3 id="csc">Correctional Service Canada</h3>
+    <p class="meta">Software Developer Intern &middot; May 2022 to April 2023 &middot; C#, .NET, ASP.NET,
+        JavaScript</p>
+
+    <p>My first software job, on a public-facing victim services portal. The people using it are often in difficult
+        circumstances, and the service is a government obligation, so accessibility work came first.</p>
+
+    <p>I brought the application up to WCAG 2.1 Level AA using the WET framework, for a service with <strong>100 or
+            more daily users</strong>, and built ASP.NET fixes for interface defects in the victim information delivery
+        application.</p>
+
+    <p class="meta"><a href="#contents">Back to contents</a></p>
+
+    <hr>
+
+    <h2 id="projects">Projects</h2>
+
+    <h3 id="latch">Latch</h3>
+    <p class="meta">Local-first macOS focus blocker &middot; Electron, TypeScript, Swift, Chromium extension, native
+        messaging &middot;
+        <a href="https://github.com/nbui23/latch" target="_blank" rel="noopener noreferrer">GitHub</a> &middot;
+        <a href="https://github.com/nbui23/latch/releases" target="_blank" rel="noopener noreferrer">Download</a>
+    </p>
+
+    <p>Most focus apps are easy to get around because they only exist at the UI layer. I wanted one where starting a
+        session meant the blocking held through a browser restart, a crash, or a casual attempt to work around it, while
+        still behaving like a normal Mac app.</p>
+
+    <p>An Electron app owns session control, blocklists, and the interface. A one-time privileged helper written in
+        Swift does the system-level enforcement. Electron itself stays unprivileged and talks to the helper over a local
+        socket, which keeps the privileged code small and easy to audit. An optional Chromium extension gives the
+        blocked page an intentional look instead of a browser error, and a native messaging host connects the two.</p>
+
+    <p>Most of the engineering went into what happens when something goes wrong, since a blocker that quietly stops
+        working is worse than no blocker at all:</p>
+    <ul>
+        <li>Starting a session writes the intent to disk first, then calls the helper, then marks the session active.
+            Stopping runs the same steps in reverse. Because the on-disk state always records what was being attempted,
+            recovery can be mechanical rather than a guess.</li>
+        <li>Recovery itself is a policy table over session state and hosts-file markers, covering all four crash windows
+            around writes and removals. The unit tests exercise all seven rows of that table.</li>
+        <li>Latch wraps its edits to the system hosts file in start and end markers, so it can tell whether its own
+            block is still in place and clean up only its own lines.</li>
+        <li>The helper reads newline-terminated JSON with a size cap and a socket receive timeout, so a stalled or
+            malformed client cannot hold up its single-threaded accept loop.</li>
+        <li>Shared Zod schemas across IPC, helper responses, native messaging, and app config reject malformed payloads
+            at each boundary instead of letting them through to the runtime.</li>
+        <li>The app checks the Chrome native messaging manifest and rewrites it when it is missing or wrong, which
+            removes an entire category of confusing bug report.</li>
+    </ul>
+
+    <p>The desktop app, helper, extension bundle, and native messaging host are packaged into one macOS release, so
+        installing four cooperating pieces feels like installing one thing.</p>
+
+    <h3 id="orbital">Orbital Refuelling Simulator</h3>
+    <p class="meta">Synthetic spacecraft telemetry with hybrid anomaly monitoring &middot; Python, Streamlit,
+        scikit-learn, IsolationForest, LoRA fine-tuning, pytest &middot;
+        <a href="https://github.com/nbui23/orbital-refuelling" target="_blank" rel="noopener noreferrer">GitHub</a>
+        &middot;
+        <a href="https://orbital-refueling-telemetry-simulator.streamlit.app/" target="_blank"
+            rel="noopener noreferrer">Demo</a>
+    </p>
+
+    <p>Autonomous propellant transfer makes a good monitoring problem because several subsystems move at once: robotic
+        alignment, docking loads, seal pressure, transfer pressure, flow rate, pump behavior, thermal state, attitude.
+        A few faults are plain threshold violations. Most of the interesting ones only look wrong once you notice
+        several signals drifting together.</p>
+
+    <p>Mission phase is what makes that judgement possible. During approach, zero propellant flow is expected. During
+        main transfer, zero flow means something has gone badly wrong. The same pressure reading can be normal in one
+        phase and a problem in another, so the system has to know where in the mission it is before scoring
+        anything.</p>
+
+    <p>The simulator generates a reproducible <strong>410-second</strong> mission at 2 Hz across nine phases: approach,
+        arm alignment, docking, seal check, pressure equalization, main transfer, leak check, disconnect, retreat. It
+        tracks mass transfer and updates donor and receiver pressure, line pressure, flow rate, pump current,
+        temperatures, attitude, arm state, and interface loads as the phase changes. Nine anomaly scenarios are injected
+        where they physically make sense, and each perturbs the signals it should: partial blockage drops flow while
+        raising line pressure and pump current, arm misalignment raises end-effector error and interface loads, unstable
+        slosh oscillates flow, pressure, and propellant temperature together. Fixed seeds keep every scenario stable
+        enough to test against.</p>
+
+    <p>Monitoring runs in two layers that stay out of each other's way. Deterministic rules own the hard limits, with
+        warning and critical thresholds scoped per phase so an expected ramp does not fire an alert, and raw alerts
+        grouped into event windows so an oscillating signal does not fill the operator view with near-identical rows.
+        Alongside them, one IsolationForest per phase scores <strong>17</strong> numeric features against nominal
+        behavior for that phase and produces an advisory score from 0 to 1. If bus voltage drops too far or seal
+        pressure falls after the seal is established, the rule fires whatever the model thinks of it.</p>
+
+    <p>A score on its own does not tell an operator much, so there is attribution underneath it. For anomalous rows, the
+        explainer replaces each feature with that phase's nominal mean and measures how far the anomaly score falls,
+        which ranks the signals pushing it up. Above that sits a fine-tuned explainer: a Qwen2.5-0.5B LoRA adapter
+        trained on deterministic synthetic instruction data, which turns rule alerts, advisory scores, and attribution
+        output into a short written explanation. It scored <strong>4.86 out of 5</strong> on a deterministic rubric over
+        100 held-out examples, against 3.69 for the base model. It reads the monitoring output and never produces it, so
+        it cannot detect an anomaly or set a severity.</p>
+
+    <p>The scenarios show why both layers exist. Partial blockage trips the rules and the model together. Sensor drift
+        and unstable slosh raise the model's anomaly rate while staying under every hard threshold, so the rules have
+        nothing to say about them.</p>
+
+    <p>This is a learning project rather than flight software, and the model cards say so. The data comes from one
+        simplified generator. IsolationForest scores each timestep on its own with no temporal model. The thresholds are
+        illustrative and not taken from spacecraft engineering documentation. The explainer was trained and evaluated on
+        template-generated text, not real operations data.</p>
+
+    <h3 id="twinquery">TwinQuery</h3>
+    <p class="meta">Agentic Text-to-SQL and RAG over building-stock digital twins &middot; Python, LangGraph, FastAPI,
+        Streamlit, PostgreSQL/PostGIS, Ollama, Docker &middot;
+        <a href="https://github.com/nbui23/twinquery" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </p>
+
+    <p>Building-stock data for energy retrofit planning sits in PostgreSQL with PostGIS geometry, which suits engineers
+        and shuts out the municipal planners and community groups who have real questions about it: which buildings in
+        this neighbourhood perform worst, how many pre-1980 homes lack insulation, what the retrofit guidance says about
+        a given building type.</p>
+
+    <p>Generating SQL from a question is the easy half. Generating SQL that is safe to run and correct against this
+        particular schema is the part that takes work, because a model will happily invent a column, join the wrong
+        table, or return rows that look reasonable and are not. Anything aimed at non-technical users has to treat
+        generated SQL as untrusted.</p>
+
+    <p>LangGraph runs the pipeline as separate nodes rather than one hop from prompt to answer, so each step can be
+        inspected or swapped. Intent routing decides whether a question needs the database, the documents, or both.
+        Schema injection gives the generation step the real schema, PostGIS geometry fields included. A validation gate
+        then checks that the query is a SELECT, that every table and column it names exists, and that it carries no
+        destructive clause, and rejects it with an explanation rather than returning an empty result. Common question
+        shapes skip generation altogether and match against pre-validated templates with slots filled in. Document
+        retrieval runs in parallel with the query.</p>
+
+    <p>Synthesis says which database rows and which document passages each claim came from, rather than blending them
+        into one confident-sounding paragraph. Every answer also shows the SQL it ran, in a panel a technical user can
+        open and everyone else can ignore. Results render on a PyDeck map with 2D polygons and 3D extrusions, with
+        matching buildings highlighted.</p>
+
+    <p>Embedding, retrieval, generation, and synthesis all run through Ollama on local models, so no query and no
+        building data leaves the deployment. The whole stack, database included, comes up under Docker Compose in one
+        command.</p>
+
+    <p>Where it falls short: the guardrails are rule-based, and a production deployment would want a formal allow-list.
+        Retrieval has no re-ranking, so chunks arrive in similarity order. Answer quality is judged by hand rather than
+        with something like RAGAS. And it is built around the Ottawa footprint dataset, so another municipality's schema
+        would need adaptation.</p>
+
+    <h3 id="riverbreak">Riverbreak</h3>
+    <p class="meta">Typographic river detection and layout reranking &middot; Python, PyTorch, U-Net, ONNX Runtime,
+        JavaScript, HTML Canvas &middot;
+        <a href="https://github.com/nbui23/riverbreak" target="_blank" rel="noopener noreferrer">GitHub</a> &middot;
+        <a href="https://nbui23.github.io/riverbreak/" target="_blank" rel="noopener noreferrer">Demo</a>
+    </p>
+
+    <p>Typographic rivers are the whitespace channels that appear when justified text stretches word gaps into
+        accidental vertical or diagonal paths. A reader spots one immediately. A layout engine has a harder time,
+        because a river emerges across lines and line-breaking is normally optimized one line at a time. Every line can
+        score well on its own while the paragraph has a channel running down it.</p>
+
+    <p>The project has four parts. A Knuth-Plass-style line breaker with beam search, implemented in the browser so
+        per-line spacing is available as data instead of being hidden inside browser text layout. A geometric detector
+        that traces whitespace corridors by gap-center alignment, diagonal drift tolerance, and chain length, fast
+        enough to update while a slider moves. A small U-Net that takes a 256 by 256 grayscale paragraph render and
+        returns a per-pixel probability map. And a reranker that turns detection into a layout decision.</p>
+
+    <p>I wrote the geometric detector first because the demo needed to respond instantly to a dragged slider, which
+        rules out a model that takes a second. It also generated the weak labels that trained the first models. It is
+        still in the demo and still in the benchmark reports now that the neural detector exists, so the comparison
+        stays visible.</p>
+
+    <p>Training used 128 synthetic weak-label paragraphs with focal loss, chosen because river pixels are a sparse
+        minority class. Evaluation used <strong>24 hand-labeled validation and 24 hand-labeled test images</strong>,
+        kept away from the synthetic data, since otherwise the benchmark would only measure agreement with the label
+        generator. Thresholds were picked on validation and applied unchanged to test. The focal-loss SmallUNet reached
+        <strong>test Dice 0.5018 and IoU 0.3349</strong>, against 0.4182 and 0.2644 for the heuristic baseline. That is
+        a small benchmark, so I read the numbers as direction and failure-analysis material rather than a statistical
+        result.</p>
+
+    <p>The checkpoint exports to a single ONNX model that runs in the browser as an optional overlay, with ONNX Runtime
+        Web loaded only when the toggle is switched on and inference running on CPU WASM against the rasterized
+        paragraph canvas. The file is around 30 MB and a pass takes hundreds of milliseconds to seconds, so live neural
+        stays opt-in while the geometric overlay stays instant.</p>
+
+    <p>The reranker generates a bounded set of candidate layouts around the current settings, scores each as classical
+        demerits plus a weighted river-severity term, and shows the baseline and the winner side by side with changed
+        lines flagged. Severity comes from the geometric detector rather than a live U-Net pass, because six forward
+        passes per rerank would make the interaction sluggish. The scoring function is isolated, so swapping in the
+        model later touches one place.</p>
+
+    <h3 id="cruxos">CruxOS</h3>
+    <p class="meta">Full-stack decision support for climbing &middot; Next.js, TypeScript, Prisma, SQLite, Expo, React
+        Native &middot;
+        <a href="https://github.com/nbui23/cruxos" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </p>
+
+    <p>Training logs are easy to build and rarely get used, because logging was never the hard part. Working out what to
+        do next week is. CruxOS is built around that question.</p>
+
+    <p>There are two clients with different jobs. An Expo mobile app handles session capture, where speed is the only
+        thing that matters, since logging has to happen at the gym or it does not happen. A Next.js web app handles
+        review, analysis, and reports, where there is more screen and more patience. They share TypeScript logic.</p>
+
+    <p>Training, recovery, and workload signals turn into weekly recommendations through explicit rules rather than a
+        model. When the system says to back off, it can point at the signals that led there, and a climber is far more
+        likely to follow advice they can check.</p>
+
+    <p>Prisma and SQLite keep sessions, recovery signals, and reports consistent across mobile capture and web review,
+        with tests around the recommendation logic and the API flows carrying data between the two clients.</p>
+
+    <h3 id="homelab">ThinkPad home lab</h3>
+    <p class="meta">Ubuntu media and automation stack on an X220 &middot; Docker Compose, systemd, gluetun, Tailscale,
+        ufw, Grafana</p>
+
+    <p>A decade-old ThinkPad X220 running Ubuntu, treated as real infrastructure rather than a toy. Most of what I have
+        learned from it has been operational.</p>
+    <ul>
+        <li>Media lives on a dedicated disk mounted into every container at the same path, so hardlinks work across
+            libraries and an import does not duplicate the file.</li>
+        <li>Only the download client routes through the VPN container. Working that out took a while: Cloudflare-gated
+            sources kept failing because the service solving the challenge and the client replaying its cookie have to
+            share one exit IP, since the clearance cookie is bound to the address that solved it. Putting both behind
+            the VPN fixed the mismatch and broke it differently, because Cloudflare will not hand a solvable challenge
+            to a datacenter IP at all. Moving both outside and leaving only the traffic that needs the tunnel inside it
+            was the answer.</li>
+        <li>Tailscale handles access from outside the house, with ufw denying incoming by default and allowing the local
+            subnet and the tailnet interface. Turning a firewall on over SSH, on a machine I am usually not near, means
+            arming a timed rollback first and then verifying on a fresh connection, because the session you are already
+            in survives on the established-connection rule and proves nothing.</li>
+        <li>Push alerts cover service health and disk space, and every app's config backups sync off the box daily to
+            another machine. That job runs under launchd rather than cron, so a run missed while the laptop is asleep
+            fires on wake instead of being skipped.</li>
+        <li>The X220 exposes a force-discharge control, which gives whole-system watts off the battery gauge while still
+            on AC. The machine draws <strong>9.4 W</strong>, about $12 a year, and the backlight accounts for 0.77 W of
+            it. Measuring first saved me from optimizing the wrong thing.</li>
+    </ul>
+
+    <h3 id="socialsaplings">SocialSaplings</h3>
+    <p class="meta">Hackathon-winning reforestation platform &middot; HTML/SCSS, JavaScript, Bootstrap, Node.js,
+        Express, Firebase &middot;
+        <a href="https://devpost.com/software/socialsaplings" target="_blank" rel="noopener noreferrer">Devpost</a>
+        &middot;
+        <a href="https://github.com/nbui23/socialsaplings" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </p>
+
+    <p>First place at KuriusHacks, leading a cross-functional team. The platform reads a user's location, pulls
+        environmental data for it, and recommends tree species suited to where they actually are, with a Google Maps
+        dashboard showing reforestation metrics and global impact data.</p>
+
+    <p class="meta"><a href="#contents">Back to contents</a></p>
+
+    <hr>
+
+    <h2 id="education">Education</h2>
+
+    <h3>Carleton University</h3>
+    <p class="meta">Bachelor of Computer Science (Honours) &middot; 3.9/4.0 GPA &middot; Graduated Spring 2026</p>
+
+    <p><strong>Coursework</strong></p>
+    <ul>
+        <li><strong>Theory and algorithms:</strong> Algorithms I and II, Discrete Structures I and II, Graph
+            Analytics</li>
+        <li><strong>Systems and security:</strong> Operating Systems, Systems Programming, Applied Cryptography</li>
+        <li><strong>Software engineering:</strong> Software Engineering, Object-Oriented Programming, Software Quality
+            Assurance, Programming Paradigms, Data Structures, Human-Computer Interaction</li>
+        <li><strong>Data and applications:</strong> Database Management Systems, Web Development, Mobile
+            Multimedia</li>
+        <li><strong>Math and statistics:</strong> Calculus I and II, Linear Algebra, Statistical Modeling</li>
+    </ul>
+
+    <p><strong>Awards:</strong> Dean's Honour List every year, President's Scholarship, Henry Marshall Tory
+        Scholarship, Chalmers Jack MacKenzie Scholarship, Harry S. Southam Scholarship.</p>
+
+    <p class="meta"><a href="#contents">Back to contents</a></p>
+
+    <hr>
+
+    <h2 id="skills">Skills</h2>
+
+    <p><strong>Languages:</strong> Python, TypeScript, JavaScript, C++, C#, Kotlin, Java, SQL, PHP, HTML/CSS</p>
+    <p><strong>AI and ML:</strong> LLMs, agentic AI, fine-tuning with LoRA and PEFT, RAG, LangGraph, LangChain, FAISS,
+        Ollama, Hugging Face, Sentence Transformers, scikit-learn, IsolationForest, PyTorch, ONNX Runtime, pandas,
+        NumPy, NLTK, tree-sitter static analysis</p>
+    <p><strong>Backend and data:</strong> FastAPI, Node.js, Express, Flask, Spring Boot, .NET, ASP.NET, GraphQL,
+        PostgreSQL, PostGIS, pgvector, MySQL, MongoDB, SQLite, Prisma, Neo4j, Firebase</p>
+    <p><strong>Frontend and apps:</strong> Next.js, React Native, Expo, Electron, Qt, Streamlit</p>
+    <p><strong>Infrastructure and practices:</strong> Docker, Docker Compose, CI/CD, TDD, Grafana, observability,
+        Linux, systemd, networking and VPN routing, Tailscale, Cloudflare Workers, PowerShell, pytest, unittest, Mocha,
+        Chai, Sinon, Selenium, WCAG 2.1, Agile</p>
+    <p><strong>Spoken languages:</strong> English, French, Vietnamese</p>
+
+    <hr>
+
+    <p><a href="index.html">&larr; back to the short version</a> &middot; <a href="#contents">back to contents</a></p>
+
+</body>
+
+</html>
