@@ -96,21 +96,26 @@
     <h3>Canadian Tire Corporation, Software Developer</h3>
     <p class="meta">July 2026 &ndash; Present</p>
     <ul>
-        <li>Built an agentic documentation pipeline: a model-free static analysis pass extracts a fact sheet from a
-            service repo, then an LLM writes every page from that sheet alone, so the output cannot invent APIs the
-            code does not have</li>
-        <li>Writes three documents for three audiences off the same facts: a developer guide, an architecture page
-            with generated diagrams, and a business page for people who do not read code, naming who owns the service,
-            what it connects to, and what recent work changed</li>
-        <li>Wrote the rules that page runs under after early drafts named a real company the facts never
-            mentioned: never expand an abbreviation the record does not expand, never name a counterparty the facts do
-            not name, and write "not on the record" rather than guess a direction</li>
-        <li>Extended parsing to <strong>eleven language ecosystems</strong> (Java, Kotlin, TypeScript, PHP, C/C++,
-            Ruby, and more) on tree-sitter, with route, dependency, and configuration extraction per language</li>
-        <li>Cut model cost per run <strong>38x</strong> by benchmarking candidates over judged repository checkouts
-            instead of guessing, holding output quality at zero invented names</li>
-        <li>Shipped it as an internal coding-agent plugin that writes the whole docs tree and opens the pull request,
-            and publishes to Confluence and the team wiki with generated Mermaid architecture diagrams</li>
+        <li>Built an agentic documentation pipeline that teammates run from GitHub Copilot. A model-free static
+            analysis pass extracts a fact sheet from the repository, each fact tied to a file and line. A planner agent
+            then picks the repository's topic pages, and a writer for each page reads the code with the sheet as its
+            map</li>
+        <li>Extended the analysis to <strong>ten language ecosystems</strong> (Java, Kotlin, TypeScript, Python, C#,
+            Go, PHP, C/C++, Ruby) on tree-sitter, plus iOS, Android, and Flutter build files, with routes,
+            dependencies, configuration, and messaging extracted per language</li>
+        <li>Every page gets a second pass that checks its claims against the code, and the ones that fail go into the
+            pull request for the reviewer. Re-runs edit only the pages whose code moved, so a reviewer's edits
+            survive, and a code-review plugin flags the pages a change makes stale</li>
+        <li>Built the evaluation behind every change: frozen rubrics, an LLM judge calibrated against human grades
+            with its own noise measured (<strong>&plusmn;0.03</strong>), and a check that asks questions the pages must
+            answer. Graded A/B tests across <strong>4</strong> production repositories decide what ships</li>
+        <li>Built a multi-agent stage on the GitHub Copilot SDK that ranks a repository's most important components
+            before planning: one session per module, four at a time, then a reconcile pass, with a model-free citation
+            check that took dead citations from <strong>10 to 0</strong> across 2,100. It stays behind a flag until a
+            live read is in</li>
+        <li>It opens a draft pull request in Azure DevOps and publishes to Confluence with generated Mermaid
+            diagrams. Benchmarking models over judged repositories cut the pipeline's model cost per run
+            <strong>38x</strong></li>
     </ul>
 
     <h3>Electronic Arts, Software Developer Intern</h3>

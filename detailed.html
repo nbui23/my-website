@@ -68,44 +68,67 @@
     <h3 id="ctc">Canadian Tire Corporation</h3>
     <p class="meta">Software Developer &middot; July 2026 to present &middot; Toronto</p>
 
-    <p>I work on agentic software development lifecycles. Most of my time has gone to an internal documentation
-        generator.</p>
+    <p>I work on agentic software development lifecycles. Most of my time goes to an internal documentation
+        generator that teammates run from GitHub Copilot.</p>
 
     <p>Service documentation goes stale in a predictable way. Someone writes it once, moves teams, and the service
         changes underneath it. After that nobody trusts it, so nobody updates it. The tool regenerates documentation
-        from the code on every run, so there is nothing to keep up to date by hand.</p>
+        from the code, and on every later run it edits only the pages the code has moved under.</p>
 
-    <p>The pipeline has two halves. The first is static analysis with no model in it. A pass over the repository
-        produces a fact sheet, where each fact is a structured record carrying the file and line it came from: routes,
-        module dependencies, configuration keys, service catalog entries, tracker items attached to recent changes. The
-        second half is the model. It writes prose from the fact sheet and never sees the repository, so it has nothing
-        to draw an invented endpoint from.</p>
+    <p>It has a model-free half and a model half. The first is static analysis over one commit. It produces a fact
+        sheet, where each fact is a structured record carrying the file and line it came from: routes, module
+        dependencies, configuration keys, messaging, service catalog entries, and, from the git history, who owns
+        which parts and what recent work changed. It covers ten language ecosystems on tree-sitter (Java, Kotlin,
+        TypeScript and JavaScript, Python, C#, Go, PHP, C and C++, Ruby), plus iOS, Android, and Flutter build files.
+        Each one needed its own extraction rules, and most of them turned up a shared rule that needed fixing rather
+        than a special case. The same half writes the reference pages, with no model at all.</p>
 
-    <p>The same sheet produces three documents, because the people who need to understand a service want different
-        things from it. A developer guide with entry points, checks, and the paths through the code. An architecture
-        page with generated Mermaid diagrams. A business page for readers who never open the repository, covering who
-        owns the service, what it talks to, and what recent work changed.</p>
+    <p>The model half starts with a planner agent. It reads the fact sheet and the code, and decides which topic pages
+        this repository needs, with one brief per page. The plan is kept in the repository, so a developer can edit it
+        and later runs don't reshuffle pages a reviewer has already read. Then each page gets a writer of its own,
+        which reads the code with the fact sheet as its map. An earlier version gave the model the fact sheet alone.
+        Today the writers read the code too, and every claim still points at a file and line.</p>
 
-    <p>The business page took the most work. Early drafts expanded a banner code into the name of a real company that
-        had nothing to do with the system, listed downstream services that did not exist, and stated the direction of an
-        integration the facts did not cover. I wrote the rules that page runs under: do not expand an abbreviation the
-        record does not expand, do not name a counterparty the facts do not name, give a direction only where the facts
-        give one and write "not on the record" otherwise. They live in the prompt rather than in a review checklist, so
-        swapping the model does not lose them. Over a run set across three models, fresh pages came back clean on every
-        signal we check for.</p>
+    <p>The result is a documentation tree: an overview, an architecture page with generated Mermaid diagrams, an API
+        surface, the planned topic pages, and a glossary for developers, plus a page for analysts who never open the
+        repository. That last one took the most work. Early drafts expanded a banner code into the name of a real
+        company that had nothing to do with the system, listed downstream services that did not exist, and stated the
+        direction of an integration the facts did not cover. I wrote the rules it runs under: do not expand an
+        abbreviation the record does not expand, do not name a counterparty the facts do not name, and write "not on
+        the record" rather than guess a direction. They live in the prompt rather than in a review checklist, so
+        swapping the model does not lose them.</p>
 
-    <p>The analysis pass covers eleven language ecosystems on tree-sitter, including Java, Kotlin, TypeScript, PHP, C
-        and C++, and Ruby. Each one needed its own extraction rules for routes, imports, dependencies, and
-        configuration, and most of them turned up a shared rule that needed fixing rather than a special case.</p>
+    <p>Nothing a model writes goes straight to a reader. Once a page is written, a second pass checks its claims
+        against the code one at a time, and anything that does not hold goes into the pull request's description for
+        the reviewer. Model-free checks catch dead links, and versions the build files pin, like SDK levels and
+        runtime versions, stated differently on a page. The run commits in two parts, the pages a person reads and the
+        generated reference, and opens a draft pull request in Azure DevOps. A page whose evidence has not moved gets
+        no new ask, and a stale one is edited rather than rewritten. A companion code-review plugin flags the pages a
+        change under review makes stale. Finished pages publish to Confluence when a team asks.</p>
 
-    <p>Model cost per run came down <strong>38x</strong>. I ran candidates over judged repository checkouts and compared
-        the pages they produced against the same signals, instead of picking a model on reputation. The cheap one held
-        at zero invented names across all three checkouts. I measured prompt structure the same way and found that
-        caching the fact sheet halves cold-start cost, but at the volume we run, the choice of model was worth roughly
-        twenty times more than the caching.</p>
+    <p>Most of my recent time has gone to measuring it. A change that makes one page better can make another worse,
+        and reading a few pages by eye does not tell the two apart. So every change runs against a fixed set of
+        production repositories, and a judge model grades the output against a rubric frozen before the first draw.
+        I calibrated the judge against my own grades until we agreed, then measured how much it moves when it grades
+        identical output twice (about <strong>&plusmn;0.03</strong>). A difference smaller than that does not count.
+        A second check asks the pages a fixed set of questions written from the code, and a fresh model answers from
+        the pages alone. That one showed the pages kept ownership and structure but lost the business terms a reader
+        most needed.</p>
 
-    <p>It ships as a plugin teammates run from their own editor. It writes the documentation tree, commits it, opens the
-        pull request, and publishes finished pages to Confluence and the team wiki.</p>
+    <p>That finding led to a new stage. Before any page is planned, one agent session per module, running on the
+        GitHub Copilot SDK, reads only that module and writes down what matters in it, four sessions at a time. A final
+        pass reconciles them into a ranked record that the planner and every writer read. I picked it over three
+        other designs in a graded A/B test across four repositories. The agents' citations sometimes ran a few lines
+        past the end of a file, so a model-free check clamps or drops each one; dead citations went from
+        <strong>10 to 0</strong> across 2,100. It ships behind a flag until a live read shows it moves the pages. I
+        also tested whether Confluence could add to the record. Its claims checked out, but they moved nothing the
+        judge grades, so it stayed out.</p>
+
+    <p>For runs where the pipeline brings its own model, cost per run came down <strong>38x</strong>. I ran candidates
+        over judged repository checkouts and compared their pages against the same signals, instead of picking a model
+        on reputation. The cheap one held at zero invented names. I measured prompt structure the same way. Caching the
+        fact sheet halves cold-start cost, but at the volume we run, the choice of model was worth roughly twenty
+        times more.</p>
 
     <h3 id="ea">Electronic Arts</h3>
     <p class="meta">Software Developer Intern &middot; May 2025 to August 2025 &middot; The Sims &middot; Kotlin, AI

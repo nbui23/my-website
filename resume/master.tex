@@ -115,7 +115,7 @@
             \else\ifdefined\flagAIML
               \resumeItem{Coursework: Statistical Modeling, Data Structures \& Algorithms, Database Management Systems, Linear Algebra}
             \else
-              \resumeItem{Coursework: Data Structures \& Algorithms, Operating Systems, OOP, Programming Paradigms, DBMS, Web Development}
+              \resumeItem{Coursework: Data Structures \& Algorithms, Operating Systems, OOP, Programming Paradigms, DBMS}
             \fi\fi
             \resumeItem{Awards: Dean's Honour List every year; President's, Henry Marshall Tory, and Harry S. Southam Scholarships}
           \resumeItemListEnd
@@ -130,27 +130,36 @@
             \ifdefined\flagAIML
             \resumeItem{Built an internal tool that turns a service's source code into written documentation}
             \resumeItem{Grounded every page in facts pulled from the code, so it cannot describe features that do not exist}
-            \resumeItem{Writes for \textbf{3} audiences off the same facts, including a business page whose rules stop the model guessing a company name or an abbreviation}
             \resumeItem{Cut the cost of each run \textbf{38x} by testing candidate AI models on real projects, with no loss in accuracy}
+            \resumeItem{Built an AI grader calibrated against human grades, and used it to A/B test \textbf{4} designs on \textbf{4} real projects}
             \else\ifdefined\flagQA
             \resumeItem{Built an internal tool that reads a service's source code and writes its technical documentation automatically}
             \resumeItem{Grounded every page in facts taken from the code, so it cannot describe features that do not exist}
             \resumeItem{Checked \textbf{3} audience-specific documents per service against rules that forbid guessing a name, a direction, or an abbreviation}
             \resumeItem{Measured output quality across repeated runs to compare AI models and catch quality drops before release}
+            \else\ifdefined\flagSWE
+            \resumeItem{Architected an LLM documentation generator in TypeScript (\textbf{40k} LOC, \textbf{1,000+} tests): tree-sitter static analysis over \textbf{10} language ecosystems and iOS/Android/Flutter manifests emits a fact sheet citing \texttt{file:line} per fact}
+            \resumeItem{Designed a multi-agent stage on the GitHub Copilot SDK (one session per module, \textbf{4} concurrent, then a reconcile pass) with a model-free citation checker that cut dead citations from \textbf{10} to \textbf{0} of \textbf{2,100}}
+            \resumeItem{Built LLM evaluation infrastructure: frozen rubrics, an LLM judge calibrated against human grades with measured noise of \textbf{$\pm$0.03}, and graded A/B tests of \textbf{4} architectures across \textbf{4} production repositories}
+            \resumeItem{Shipped it as a GitHub Copilot plugin that opens Azure DevOps pull requests and publishes to Confluence with generated Mermaid diagrams; cut model cost per run \textbf{38x} through benchmarked model selection}
             \else
             \resumeItem{Built an internal tool that reads a service's source code and writes its documentation, across \textbf{11} languages}
             \resumeItem{Writes \textbf{3} documents off the same facts: a developer guide, an architecture page, and a plain-language page for non-engineers}
             \resumeItem{Cut the cost of each run \textbf{38x} by testing candidate AI models against real projects instead of estimating}
             \resumeItem{Shipped it as a plugin teammates run themselves, which writes the pages and opens the pull request for review}
-            \fi\fi
+            \fi\fi\fi
         \resumeItemListEnd
 
     \resumeSubheading{Electronic Arts (EA)}{Software Developer Intern}{May 2025 - Aug 2025}
         \resumeItemListStart
-            \resumeItem{Raised automated performance test pass rates from \textbf{35\% to 100\%} by fixing broken logins and setup steps}
             \ifdefined\flagSWE
-            \resumeItem{Added \textbf{10+} new game features to the performance test suite so results stayed accurate as the game grew}
-            \resumeItem{Reviewed an AI system that plays the game to find bugs, recommending fixes for long test-run reliability}
+            \resumeItem{Raised CI/CD load-test pass rate from \textbf{35\% to 100\%} by root-causing backend auth failures and CI runner drift}
+            \resumeItem{Integrated \textbf{10+} game features into the Kotlin load-testing framework with per-feature metrics}
+            \resumeItem{Evaluated an LLM-driven playtesting system's architecture and model behavior; recommended soak-test fixes}
+            \else
+            \resumeItem{Raised automated performance test pass rates from \textbf{35\% to 100\%} by fixing broken logins and setup steps}
+            \fi
+            \ifdefined\flagSWE
             \else
               \ifdefined\flagAIML
               \resumeItem{Evaluated an AI system that plays the game to find bugs, measuring how reliably it worked}
@@ -167,10 +176,14 @@
 
     \resumeSubheading{Autodesk}{Software Developer Intern}{Jan 2025 - Apr 2025}
         \resumeItemListStart
-            \resumeItem{Built systems that find and fix missing manufacturing data in Autodesk Fusion, with a repair step \textbf{8x} faster}
             \ifdefined\flagSWE
-            \resumeItem{Shipped services that check and repair customer data automatically, with \textbf{100\%} test coverage}
-            \resumeItem{Closed security gaps in how sensitive customer manufacturing data was accessed}
+            \resumeItem{Built TypeScript/Java validation and repair infrastructure for Fusion manufacturing data, including an \textbf{O(n)} repair algorithm with concurrency controls that raised throughput \textbf{8x}}
+            \resumeItem{Shipped GraphQL validation and repair endpoints with \textbf{100\%} test coverage (Mocha, Chai, Sinon)}
+            \resumeItem{Closed permission and error-handling gaps in sensitive manufacturing-data workflows}
+            \else
+            \resumeItem{Built systems that find and fix missing manufacturing data in Autodesk Fusion, with a repair step \textbf{8x} faster}
+            \fi
+            \ifdefined\flagSWE
             \else\ifdefined\flagQA
             \resumeItem{Shipped services that check and repair customer data automatically, with \textbf{100\%} test coverage}
             \resumeItem{Expanded testing to cover bad input, denied access, and unusual repair cases}
@@ -206,11 +219,15 @@
     \ifdefined\flagAIML\else
     \resumeSubheading{Kongsberg Geospatial}{Software Developer Intern}{May 2024 - Aug 2024}
       \resumeItemListStart
+        \ifdefined\flagSWE
+        \resumeItem{Built client-facing C++/Qt geospatial apps for aviation, defense, and government as the sole developer}
+        \resumeItem{Integrated LiDAR, WMTS, and S-57 data into a real-time mapping and object-tracking pipeline}
+        \resumeItem{Optimized the render pipeline to a consistent \textbf{60+ FPS} and cut terrain processing time \textbf{40\%+}}
+        \else
         \resumeItem{Built live mapping demos for aviation, defense, and government clients as the only developer on the team}
         \resumeItem{Combined several terrain and mapping data formats into one live view with real-time object tracking}
+        \fi
         \ifdefined\flagSWE
-        \resumeItem{Automated airspace classification, removing a manual sorting step}
-        \resumeItem{Kept the maps running smoothly at \textbf{60+ frames per second} and cut terrain data preparation time by over \textbf{40\%}}
         \else\ifdefined\flagQA
         \resumeItem{Checked that unusual terrain and mapping data loaded and displayed correctly}
         \resumeItem{Created repeatable checks for map loading, tracking, and display speed before each client demo}
@@ -248,9 +265,15 @@
     \ifdefined\flagAIML\else\ifdefined\flagQA\else
     \resumeSubheading{NAV CANADA}{Software Developer Intern}{May 2023 - Aug 2023}
       \resumeItemListStart
+        \ifdefined\flagSWE
+        \resumeItem{Optimized a C++/Qt GIS tool, cutting storage \textbf{60\%} and speeding up analysis \textbf{30\%}}
+        \resumeItem{Fixed rendering bugs in air traffic control software, raising frame rate \textbf{16\%}}
+        \resumeItem{Automated network provisioning with PowerShell, eliminating \textbf{95\%+} of manual configuration}
+        \else
         \resumeItem{Reworked an internal mapping tool to use \textbf{60\%} less storage and analyze data \textbf{30\%} faster}
         \resumeItem{Fixed display bugs in air traffic control software, making it \textbf{16\%} smoother to use}
         \resumeItem{Automated network setup, cutting manual configuration work by more than \textbf{95\%}}
+        \fi
       \resumeItemListEnd
     \fi\fi
 
@@ -272,18 +295,16 @@
         \ifdefined\flagSWE
           \resumeSubheading{Latch}{Electron, TypeScript, Swift, Chrome Extension, Native Messaging}{\href{https://github.com/nbui23/latch}{\footnotesize github.com/nbui23/latch}}
               \resumeItemListStart
-                  \resumeItem{Built a Mac app that blocks distracting websites during focus sessions, with all data kept on the machine}
-                  \resumeItem{Designed sessions to survive crashes and restarts, so blocking cannot be dodged by quitting the app}
-                  \resumeItem{Packaged the app, its browser extension, and background components into a single Mac install}
-                  \resumeItem{Tested every recovery path so an interrupted session restores correctly}
+                  \resumeItem{Built a local-first macOS focus blocker: Electron UI, Swift privileged helper, Chromium extension, native messaging}
+                  \resumeItem{Implemented a \textbf{6-state} session state machine covering \textbf{4} crash windows, hosts-file markers, and helper availability}
+                  \resumeItem{Tested every row of a \textbf{7-case} recovery table, plus manifest repair and helper install state}
               \resumeItemListEnd
 
           \resumeSubheading{Orbital Refuelling Simulator}{Python, Streamlit, scikit-learn, pytest}{\href{https://github.com/nbui23/orbital-refuelling}{\footnotesize github.com/nbui23/orbital-refuelling}}
               \resumeItemListStart
-                  \resumeItem{Simulated a \textbf{410-second} spacecraft refuelling mission across \textbf{9} phases, with \textbf{9} kinds of failure to catch}
-                  \resumeItem{Combined fixed safety limits with machine learning that flags subtler drift, keeping the two clearly separate}
-                  \resumeItem{Ranked which sensor readings drove each alert, so an operator can see why it fired}
-                  \resumeItem{Shipped it as a live dashboard anyone can open and replay a failure scenario in}
+                  \resumeItem{Modeled a \textbf{410-second} refuelling mission: \textbf{9} phases, \textbf{9} injectable anomaly classes, deterministic replay}
+                  \resumeItem{Separated hard-limit engineering rules from \textbf{9} phase-aware IsolationForest drift models}
+                  \resumeItem{Ranked the telemetry channels behind each alert with perturbation-based attribution}
               \resumeItemListEnd
         \else
         \resumeSubheading{Orbital Refuelling Simulator}{Python, Streamlit, scikit-learn\ifdefined\flagAIML, Qwen LoRA\fi, pytest}{\href{https://github.com/nbui23/orbital-refuelling}{\footnotesize github.com/nbui23/orbital-refuelling}}
@@ -339,11 +360,11 @@
       \textbf{Databases \& APIs}{: PostgreSQL, MySQL, SQLite, MongoDB, Firebase, Neo4j, GraphQL} \\
       \textbf{Tools \& Practices}{: Git, AWS, CI/CD, Docker, Docker Compose, Ubuntu, TDD, pytest, Mocha, Chai, Sinon, unittest, BS4, Selenium, Cucumber, PowerShell, Postman, Agile, SDLC} \\
     \else\ifdefined\flagSWE
-      \textbf{Languages}{: Python, TypeScript, JavaScript, C++, C\#, Kotlin, Java, SQL, HTML/CSS, PHP} \\
-      \textbf{Frameworks \& Runtimes}{: Next.js, Node.js, Express.js, Electron, Qt, React Native, Expo, Spring Boot, Flask, Streamlit, .NET, ASP.NET} \\
-      \textbf{AI / ML / Data}{: LLMs, RAG, scikit-learn, pandas, NumPy, PyTorch} \\
-      \textbf{Databases \& APIs}{: PostgreSQL, MySQL, SQLite, MongoDB, Firebase, Neo4j, Prisma, GraphQL} \\
-      \textbf{Tools \& Practices}{: Git, AWS, CI/CD, Docker, Docker Compose, Ubuntu, TDD, pytest, Mocha, Chai, Sinon, unittest, BS4, Selenium, Cucumber, PowerShell, Postman, Agile, SDLC} \\
+      \textbf{Languages}{: TypeScript, Python, Java, Kotlin, C++, C\#, JavaScript, SQL, Swift, PHP} \\
+      \textbf{Systems \& Frameworks}{: Node.js, Next.js, Express.js, Electron, Qt, React Native, Spring Boot, FastAPI, Flask, .NET} \\
+      \textbf{LLMs \& Agents}{: GitHub Copilot SDK, multi-agent orchestration, LLM-as-judge evals, RAG, LangGraph, tree-sitter} \\
+      \textbf{Data \& APIs}{: PostgreSQL/PostGIS, MySQL, SQLite, MongoDB, Neo4j, Prisma, GraphQL, REST} \\
+      \textbf{Infrastructure}{: Azure DevOps Pipelines, GitHub Actions, Docker, AWS, Linux, Git, CI/CD, TDD (Vitest, pytest, Mocha)} \\
     \else
       \textbf{Languages}{: Python, TypeScript, JavaScript, C++, C\#, Kotlin, Java, SQL, HTML/CSS, PHP} \\
       \textbf{Frameworks \& Runtimes}{: Next.js, Node.js, Express.js, Electron, Qt, React Native, Expo, Spring Boot, FastAPI, Flask, Streamlit, .NET, ASP.NET} \\
