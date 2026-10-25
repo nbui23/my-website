@@ -79,7 +79,7 @@
 
     <h2 id="about">Outside of that</h2>
 
-    <p>lately i'm trying to distance myself from social media, so i've gotten into reading a lot more and even flashed crosspoint onto a xteink x4 so i can always have a dedicated e-reader in my pocket. my favourites so far have been murakami's <span class="g-hbw">hard-boiled wonderland and the end of the world</span> and sanderson's <span class="g-mistborn">mistborn</span>.</p>
+    <p>lately i'm trying to distance myself from social media, so i've gotten into reading a lot more and i run crosspoint on an xteink x4 so i always have a dedicated e-reader in my pocket. my favourites so far have been murakami's <span class="g-hbw">hard-boiled wonderland and the end of the world</span> and sanderson's <span class="g-mistborn">mistborn</span>.</p>
 
     <p>since moving to toronto i've also been watching a lot of shows and movies with my girlfriend (recently we've liked <span class="g-invite">the invite</span> and currently getting through <span class="g-silo">silo s3</span>).</p>
 
@@ -100,22 +100,28 @@
             analysis pass extracts a fact sheet from the repository, each fact tied to a file and line. A planner agent
             then picks the repository's topic pages, and a writer for each page reads the code with the sheet as its
             map</li>
-        <li>Extended the analysis to <strong>ten language ecosystems</strong> (Java, Kotlin, TypeScript, Python, C#,
-            Go, PHP, C/C++, Ruby) on tree-sitter, plus iOS, Android, and Flutter build files, with routes,
-            dependencies, configuration, and messaging extracted per language</li>
+        <li>Extended the analysis to <strong>twelve languages</strong> (Java, Kotlin, TypeScript, JavaScript,
+            Python, C#, Go, PHP, C/C++, Ruby, Dart, Rust) on tree-sitter, plus iOS, Android, and Flutter build files,
+            with routes, dependencies, configuration, and messaging extracted per language</li>
+        <li>Rewrote the whole tool from TypeScript to Rust (<strong>100k+</strong> lines, <strong>1,100+</strong>
+            tests), holding each part byte-identical to the TypeScript output against recorded results before
+            cutting over. It now ships as one executable for <strong>six</strong> platforms with no Node at run
+            time</li>
         <li>Every page gets a second pass that checks its claims against the code, and the ones that fail go into the
             pull request for the reviewer. Re-runs edit only the pages whose code moved, so a reviewer's edits
             survive, and a code-review plugin flags the pages a change makes stale</li>
         <li>Built the evaluation behind every change: frozen rubrics, an LLM judge calibrated against human grades
             with its own noise measured (<strong>&plusmn;0.03</strong>), and a check that asks questions the pages must
-            answer. Graded A/B tests across <strong>4</strong> production repositories decide what ships</li>
+            answer. Graded A/B tests across <strong>4</strong> production repositories decide what ships, and a
+            claim-by-claim audit of one 22-page set found <strong>1.9%</strong> of 1,694 claims wrong or
+            misleading</li>
         <li>Built a multi-agent stage on the GitHub Copilot SDK that ranks a repository's most important components
             before planning: one session per module, four at a time, then a reconcile pass, with a model-free citation
-            check that took dead citations from <strong>10 to 0</strong> across 2,100. It stays behind a flag until a
-            live read is in</li>
+            check that took dead citations from <strong>10 to 0</strong> across 2,100. It now runs by default</li>
         <li>It opens a draft pull request in Azure DevOps and publishes to Confluence with generated Mermaid
             diagrams. Benchmarking models over judged repositories cut the pipeline's model cost per run
-            <strong>38x</strong></li>
+            <strong>38x</strong>, and checking only the lines a re-run changed cut re-run cost about
+            <strong>40%</strong></li>
     </ul>
 
     <h3>Electronic Arts, Software Developer Intern</h3>
@@ -123,7 +129,7 @@
     <ul>
         <li>CI/CD load-testing reliability from <strong>35% to 100%</strong> success rate</li>
         <li>Integrated <strong>10+</strong> game features into load-testing frameworks</li>
-        <li>Evaluated Servo, an LLM-powered game testing system, and recommended soak-testing changes</li>
+        <li>Helped build Servo, an LLM-powered game testing system, including foundations for better soak testing</li>
     </ul>
 
     <h3>Autodesk, Software Developer Intern</h3>
@@ -147,8 +153,6 @@
                 rel="noopener noreferrer">Demo</a> &middot;
             <a href="https://github.com/nbui23/orbital-refuelling" target="_blank"
                 rel="noopener noreferrer">GitHub</a></li>
-        <li><strong>TwinQuery</strong>: agentic Text-to-SQL and RAG over building-stock digital twins.
-            <a href="https://github.com/nbui23/twinquery" target="_blank" rel="noopener noreferrer">GitHub</a></li>
         <li><strong>Riverbreak</strong>: typographic river detection, heuristics vs. a small U-Net in the browser.
             <a href="https://nbui23.github.io/riverbreak/" target="_blank" rel="noopener noreferrer">Demo</a> &middot;
             <a href="https://github.com/nbui23/riverbreak" target="_blank" rel="noopener noreferrer">GitHub</a></li>

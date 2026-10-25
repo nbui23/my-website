@@ -51,7 +51,6 @@
         <li><a href="#projects">Projects</a>:
             <a href="#latch">Latch</a>,
             <a href="#orbital">Orbital Refuelling Simulator</a>,
-            <a href="#twinquery">TwinQuery</a>,
             <a href="#riverbreak">Riverbreak</a>,
             <a href="#cruxos">CruxOS</a>,
             <a href="#homelab">ThinkPad home lab</a>,
@@ -78,8 +77,9 @@
     <p>It has a model-free half and a model half. The first is static analysis over one commit. It produces a fact
         sheet, where each fact is a structured record carrying the file and line it came from: routes, module
         dependencies, configuration keys, messaging, service catalog entries, and, from the git history, who owns
-        which parts and what recent work changed. It covers ten language ecosystems on tree-sitter (Java, Kotlin,
-        TypeScript and JavaScript, Python, C#, Go, PHP, C and C++, Ruby), plus iOS, Android, and Flutter build files.
+        which parts and what recent work changed. It covers twelve languages on tree-sitter (Java, Kotlin,
+        TypeScript, JavaScript, Python, C#, Go, PHP, C and C++, Ruby, Dart, Rust), plus iOS, Android, and Flutter
+        build files.
         Each one needed its own extraction rules, and most of them turned up a shared rule that needed fixing rather
         than a special case. The same half writes the reference pages, with no model at all.</p>
 
@@ -106,6 +106,15 @@
         no new ask, and a stale one is edited rather than rewritten. A companion code-review plugin flags the pages a
         change under review makes stale. Finished pages publish to Confluence when a team asks.</p>
 
+    <p>In October I rewrote the whole tool from TypeScript to Rust. The rewrite went one piece at a time against an
+        oracle: the TypeScript version's output recorded per language and per stage on a pinned set of public and internal repositories, and each Rust
+        piece had to match it byte for byte before it merged. Most of the work was in what the two runtimes disagree
+        on. Tree-sitter in Node counts columns in UTF-16 units, JavaScript sorts strings by code unit, and the YAML
+        and JSON readers accept different inputs, and each of those differences is now pinned by a test. Once every
+        piece matched, the TypeScript was deleted. It is now about 100,000 lines of Rust with over 1,100 tests,
+        built in Azure DevOps as one executable for six platforms, with nothing to install at run time. Dart and
+        Rust support came in during the same stretch.</p>
+
     <p>Most of my recent time has gone to measuring it. A change that makes one page better can make another worse,
         and reading a few pages by eye does not tell the two apart. So every change runs against a fixed set of
         production repositories, and a judge model grades the output against a rubric frozen before the first draw.
@@ -120,7 +129,7 @@
         pass reconciles them into a ranked record that the planner and every writer read. I picked it over three
         other designs in a graded A/B test across four repositories. The agents' citations sometimes ran a few lines
         past the end of a file, so a model-free check clamps or drops each one; dead citations went from
-        <strong>10 to 0</strong> across 2,100. It ships behind a flag until a live read shows it moves the pages. I
+        <strong>10 to 0</strong> across 2,100. It shipped behind a flag at first, and now runs by default. I
         also tested whether Confluence could add to the record. Its claims checked out, but they moved nothing the
         judge grades, so it stayed out.</p>
 
@@ -129,6 +138,14 @@
         on reputation. The cheap one held at zero invented names. I measured prompt structure the same way. Caching the
         fact sheet halves cold-start cost, but at the volume we run, the choice of model was worth roughly twenty
         times more.</p>
+
+    <p>The judge and the question check measure what a page set leaves out, not what it gets wrong. So I checked one
+        22-page technical set against the code, claim by claim. <strong>32 of 1,694</strong> claims were wrong or
+        misleading (<strong>1.9%</strong>), against a bar of 15% I set before starting. No page went above 8%, and
+        every quoted snippet matched its cited lines. The weaker half was citations: 142 correct claims cited lines
+        that did not quite show them. Re-runs got cheaper too. The checker used to re-check every claim on a page
+        after a one-line edit, and now checks only the lines the run changed, which cut a re-run's cost by about
+        <strong>40%</strong>, while still catching a wrong line planted by hand.</p>
 
     <h3 id="ea">Electronic Arts</h3>
     <p class="meta">Software Developer Intern &middot; May 2025 to August 2025 &middot; The Sims &middot; Kotlin, AI
@@ -146,9 +163,9 @@
         coverage and performance metrics tracked per feature, so the suite kept testing the current game rather than
         last quarter's.</p>
 
-    <p>Separately, I analyzed Servo, an LLM-powered system that plays the game to find bugs. I measured model
-        performance, read through the architecture, and wrote up recommendations for optimization and for soak testing,
-        where the failures only appear after hours of continuous play.</p>
+    <p>Separately, I helped build Servo, an LLM-powered system that plays the game to find bugs. I measured model
+        performance and built foundations for better soak testing, where the failures only appear after hours of
+        continuous play.</p>
 
     <h3 id="autodesk">Autodesk</h3>
     <p class="meta">Software Developer Intern &middot; January 2025 to April 2025 &middot; Fusion &middot; TypeScript,
@@ -359,44 +376,6 @@
         simplified generator. IsolationForest scores each timestep on its own with no temporal model. The thresholds are
         illustrative and not taken from spacecraft engineering documentation. The explainer was trained and evaluated on
         template-generated text, not real operations data.</p>
-
-    <h3 id="twinquery">TwinQuery</h3>
-    <p class="meta">Agentic Text-to-SQL and RAG over building-stock digital twins &middot; Python, LangGraph, FastAPI,
-        Streamlit, PostgreSQL/PostGIS, Ollama, Docker &middot;
-        <a href="https://github.com/nbui23/twinquery" target="_blank" rel="noopener noreferrer">GitHub</a>
-    </p>
-
-    <p>Building-stock data for energy retrofit planning sits in PostgreSQL with PostGIS geometry, which suits engineers
-        and shuts out the municipal planners and community groups who have real questions about it: which buildings in
-        this neighbourhood perform worst, how many pre-1980 homes lack insulation, what the retrofit guidance says about
-        a given building type.</p>
-
-    <p>Generating SQL from a question is the easy half. Generating SQL that is safe to run and correct against this
-        particular schema is the part that takes work, because a model will happily invent a column, join the wrong
-        table, or return rows that look reasonable and are not. Anything aimed at non-technical users has to treat
-        generated SQL as untrusted.</p>
-
-    <p>LangGraph runs the pipeline as separate nodes rather than one hop from prompt to answer, so each step can be
-        inspected or swapped. Intent routing decides whether a question needs the database, the documents, or both.
-        Schema injection gives the generation step the real schema, PostGIS geometry fields included. A validation gate
-        then checks that the query is a SELECT, that every table and column it names exists, and that it carries no
-        destructive clause, and rejects it with an explanation rather than returning an empty result. Common question
-        shapes skip generation altogether and match against pre-validated templates with slots filled in. Document
-        retrieval runs in parallel with the query.</p>
-
-    <p>Synthesis says which database rows and which document passages each claim came from, rather than blending them
-        into one confident-sounding paragraph. Every answer also shows the SQL it ran, in a panel a technical user can
-        open and everyone else can ignore. Results render on a PyDeck map with 2D polygons and 3D extrusions, with
-        matching buildings highlighted.</p>
-
-    <p>Embedding, retrieval, generation, and synthesis all run through Ollama on local models, so no query and no
-        building data leaves the deployment. The whole stack, database included, comes up under Docker Compose in one
-        command.</p>
-
-    <p>Where it falls short: the guardrails are rule-based, and a production deployment would want a formal allow-list.
-        Retrieval has no re-ranking, so chunks arrive in similarity order. Answer quality is judged by hand rather than
-        with something like RAGAS. And it is built around the Ottawa footprint dataset, so another municipality's schema
-        would need adaptation.</p>
 
     <h3 id="riverbreak">Riverbreak</h3>
     <p class="meta">Typographic river detection and layout reranking &middot; Python, PyTorch, U-Net, ONNX Runtime,
