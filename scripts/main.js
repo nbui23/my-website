@@ -16,14 +16,32 @@ function shelfUrl(shelf) {
     return `https://www.goodreads.com/review/list_rss/${GOODREADS_USER_ID}?shelf=${shelf}${sort}`;
 }
 
+const PROXY_TIMEOUT_MS = 10000;
+
+function isRssFeed(text) {
+    if (!/<rss[\s>]/i.test(text)) return false;
+    if (!domParser) return true;
+    return !domParser.parseFromString(text, 'text/xml').getElementsByTagName('parsererror').length;
+}
+
+async function fetchViaProxy(prefix, url) {
+    const response = await fetch(prefix + encodeURIComponent(url), {
+        signal: AbortSignal.timeout(PROXY_TIMEOUT_MS)
+    });
+    if (!response.ok) throw new Error(`${prefix} responded ${response.status}`);
+    const text = await response.text();
+    // Proxies sometimes answer 200 with an error or bot-check page instead of the feed.
+    if (!isRssFeed(text)) throw new Error(`${prefix} did not return an RSS feed`);
+    return text;
+}
+
+/** Ask every proxy at once and take the first valid feed, so one hung or broken proxy can't block the rest. */
 async function fetchFeed(url) {
-    for (const prefix of PROXY_PREFIXES) {
-        try {
-            const response = await fetch(prefix + encodeURIComponent(url));
-            if (response.ok) return await response.text();
-        } catch (_) { /* try next proxy */ }
+    try {
+        return await Promise.any(PROXY_PREFIXES.map(prefix => fetchViaProxy(prefix, url)));
+    } catch (error) {
+        throw new Error(`All proxies failed for ${url}`, { cause: error });
     }
-    throw new Error('All proxies failed');
 }
 
 function tagText(item, tagName) {
@@ -128,6 +146,8 @@ async function loadBooks() {
     const list = document.getElementById('books');
     if (!statsElement || !chartsElement || !list) return;
 
+    statsElement.textContent = 'Loading reading data\u2026';
+
     try {
         const [readingXml, readXml] = await Promise.all([
             fetchFeed(shelfUrl('currently-reading')),
@@ -154,7 +174,12 @@ async function loadBooks() {
         list.replaceChildren(...[...reading, ...finished].slice(0, BOOKS_TO_SHOW).map(bookListItem));
     } catch (error) {
         console.error('Failed to load books from Goodreads:', error);
-        statsElement.textContent = 'Could not load reading data.';
+        const link = document.createElement('a');
+        link.href = GOODREADS_PROFILE_URL;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.textContent = 'see Goodreads';
+        statsElement.replaceChildren('Could not load reading data right now \u2014 ', link, '.');
     }
 }
 
