@@ -4,10 +4,15 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlparse
 
+import build
+
 
 ROOT = Path(__file__).resolve().parent.parent
-PAGES = [ROOT / "index.html", ROOT / "detailed.html"]
-EXPECTED_SECTION_IDS = {"value", "experience", "projects", "skills", "education", "reading"}
+PAGES = [ROOT / "index.html", ROOT / "work.html", ROOT / "detailed.html"]
+EXPECTED_SECTION_IDS = {
+    "index.html": {"about", "reading", "work", "books"},
+    "work.html": {"value", "experience", "projects", "skills", "education"},
+}
 
 
 class SiteParser(HTMLParser):
@@ -64,15 +69,16 @@ def check(page: Path) -> SiteParser:
 
 
 def main() -> None:
+    stale = build.build_all(check=True)
+    if stale:
+        raise SystemExit(f"Out of date with content/: {stale} (run python3 scripts/build.py)")
+
     parsers = [check(page) for page in PAGES]
-    parser = parsers[0]
 
-    missing_sections = sorted(EXPECTED_SECTION_IDS - parser.element_ids)
-    if missing_sections:
-        raise SystemExit(f"Missing sections: {missing_sections}")
-
-    if "books" not in parser.element_ids:
-        raise SystemExit("Missing Goodreads list container: books")
+    for page, parser in zip(PAGES, parsers):
+        missing_sections = sorted(EXPECTED_SECTION_IDS.get(page.name, set()) - parser.element_ids)
+        if missing_sections:
+            raise SystemExit(f"{page.name}: missing sections: {missing_sections}")
 
     print("Site structure OK")
     print(f"Pages checked: {len(PAGES)}")

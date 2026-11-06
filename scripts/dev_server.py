@@ -22,10 +22,15 @@ from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Iterable
 
+import build
+
 
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_WATCH_PATHS = (
     "index.html",
+    "work.html",
+    "detailed.html",
+    "content",
     "styles.css",
     "scripts",
     "images",
@@ -35,6 +40,45 @@ DEFAULT_IGNORE_DIRS = {"__pycache__"}
 DEFAULT_IGNORE_SUFFIXES = {".aux", ".log", ".out", ".synctex.gz", ".pyc"}
 DEFAULT_POLL_INTERVAL_SECONDS = 0.35
 BODY_CLOSE_RE = re.compile(r"</body\s*>", re.IGNORECASE)
+EDITOR_PAGE = ROOT / "scripts" / "editor.html"
+IMAGES_DIR = ROOT / "images"
+UPLOAD_SUFFIXES = {".jpg", ".jpeg", ".png", ".gif", ".webp", ".avif", ".svg"}
+MAX_UPLOAD_BYTES = 20 * 1024 * 1024
+MAX_PAGE_BYTES = 2 * 1024 * 1024
+# Anything that feeds into the generated pages: a change here means rebuild.
+BUILD_INPUTS = ("content/", "styles.css", "scripts/main.js", "scripts/build.py", "images/logos/baby.jpeg")
+NEW_PAGE_TEMPLATE = """---
+title: {title}
+description: One sentence about this page, for search results and link previews.
+---
+
+[← home](index.html)
+
+# {title}
+
+Start writing here.
+"""
+_build_lock = threading.Lock()
+
+
+def run_build() -> str | None:
+    """Rebuild every page. Returns an error message, or None if the build worked."""
+    with _build_lock:
+        try:
+            changed = build.build_all()
+        except build.BuildError as error:
+            print(f"[dev-server] build failed: {error}")
+            return str(error)
+        except Exception as error:  # a half-written file should never kill the server
+            print(f"[dev-server] build crashed: {error!r}")
+            return f"build crashed: {error!r}"
+    if changed:
+        print(f"[dev-server] built {', '.join(changed)}")
+    return None
+
+
+def needs_build(paths: Iterable[str]) -> bool:
+    return any(path == prefix or path.startswith(prefix) for path in paths for prefix in BUILD_INPUTS)
 
 LIVE_RELOAD_SNIPPET = """<script>
 (() => {
@@ -254,6 +298,12 @@ def watch_for_changes(config: ServerConfig, reload_state: ReloadState) -> None:
         time.sleep(config.poll_interval_seconds)
         current = snapshot_files(config)
         changed_paths = detect_changed_paths(previous, current, config.root)
+        if changed_paths and needs_build(changed_paths):
+            # Rebuild first so the browser reloads once, onto the new HTML.
+            run_build()
+            rebuilt = snapshot_files(config)
+            changed_paths = tuple(sorted(set(changed_paths) | set(detect_changed_paths(current, rebuilt, config.root))))
+            current = rebuilt
         if changed_paths:
             previous = current
             print(f"[dev-server] change detected: {', '.join(changed_paths)}")
@@ -288,6 +338,16 @@ class LiveReloadHandler(SimpleHTTPRequestHandler):
         return str(resolved)
 
     def do_GET(self) -> None:
+        route = urllib.parse.urlsplit(self.path).path
+        if route in ("/__editor", "/__editor/"):
+            self.send_bytes(EDITOR_PAGE.read_bytes(), "text/html; charset=utf-8")
+            return
+        if route == "/__api/pages":
+            self.send_json({"pages": self.page_list()})
+            return
+        if route == "/__api/page":
+            self.handle_get_page()
+            return
         if self.path.startswith("/__live"):
             self.handle_live_reload_stream()
             return
@@ -295,6 +355,140 @@ class LiveReloadHandler(SimpleHTTPRequestHandler):
             self.handle_health()
             return
         super().do_GET()
+
+    # ------------------------------------------------------------------ editor API
+
+    def send_bytes(self, body: bytes, content_type: str, status: HTTPStatus = HTTPStatus.OK) -> None:
+        self.send_response(status)
+        self.send_header("Content-Type", content_type)
+        self.send_header("Content-Length", str(len(body)))
+        self.send_header("Cache-Control", "no-store")
+        self.end_headers()
+        self.wfile.write(body)
+
+    def send_json(self, payload: dict, status: HTTPStatus = HTTPStatus.OK) -> None:
+        self.send_bytes(json.dumps(payload).encode("utf-8"), "application/json; charset=utf-8", status)
+
+    def page_list(self) -> list[dict[str, str]]:
+        pages = []
+        for name in build.page_names():
+            meta, _ = {}, ""
+            try:
+                meta, _ = build.parse_front_matter((build.CONTENT_DIR / f"{name}.md").read_text(encoding="utf-8"))
+            except build.BuildError:
+                pass
+            pages.append({"name": name, "title": meta.get("title", name)})
+        return pages
+
+    @staticmethod
+    def page_path(name: str) -> Path | None:
+        if not isinstance(name, str) or not build.PAGE_NAME_RE.match(name):
+            return None
+        return build.CONTENT_DIR / f"{name}.md"
+
+    @staticmethod
+    def version_of(path: Path) -> str:
+        return str(path.stat().st_mtime_ns) if path.exists() else ""
+
+    def handle_get_page(self) -> None:
+        query = urllib.parse.parse_qs(urllib.parse.urlsplit(self.path).query)
+        path = self.page_path(query.get("name", [""])[0])
+        if path is None or not path.exists():
+            self.send_json({"error": "no such page"}, HTTPStatus.NOT_FOUND)
+            return
+        self.send_json({"text": path.read_text(encoding="utf-8"), "version": self.version_of(path)})
+
+    def same_origin(self) -> bool:
+        # Only the editor page itself may write files: refuse requests from any other site.
+        origin = self.headers.get("Origin")
+        return origin is not None and origin == f"http://{self.headers.get('Host')}"
+
+    def read_body(self, limit: int) -> bytes | None:
+        length = int(self.headers.get("Content-Length") or 0)
+        if length > limit:
+            self.send_json({"error": f"too large (limit {limit // (1024 * 1024)} MB)"}, HTTPStatus.REQUEST_ENTITY_TOO_LARGE)
+            return None
+        return self.rfile.read(length)
+
+    def do_POST(self) -> None:
+        if not self.same_origin():
+            self.send_json({"error": "cross-origin request refused"}, HTTPStatus.FORBIDDEN)
+            return
+        route = urllib.parse.urlsplit(self.path).path
+        if route == "/__api/page":
+            self.handle_save_page()
+        elif route == "/__api/new-page":
+            self.handle_new_page()
+        elif route == "/__api/upload":
+            self.handle_upload()
+        else:
+            self.send_json({"error": "not found"}, HTTPStatus.NOT_FOUND)
+
+    def handle_save_page(self) -> None:
+        body = self.read_body(MAX_PAGE_BYTES)
+        if body is None:
+            return
+        try:
+            payload = json.loads(body)
+        except json.JSONDecodeError:
+            self.send_json({"error": "bad JSON"}, HTTPStatus.BAD_REQUEST)
+            return
+        path = self.page_path(payload.get("name"))
+        text = payload.get("text")
+        if path is None or not path.exists() or not isinstance(text, str):
+            self.send_json({"error": "no such page"}, HTTPStatus.NOT_FOUND)
+            return
+        current = self.version_of(path)
+        if payload.get("version") != current and not payload.get("force"):
+            # Edited somewhere else (another tab, VS Code) since the editor loaded it.
+            self.send_json(
+                {"error": "changed on disk", "text": path.read_text(encoding="utf-8"), "version": current},
+                HTTPStatus.CONFLICT,
+            )
+            return
+        path.write_text(text, encoding="utf-8")
+        self.send_json({"version": self.version_of(path), "buildError": run_build()})
+
+    def handle_new_page(self) -> None:
+        body = self.read_body(64 * 1024)
+        if body is None:
+            return
+        try:
+            name = str(json.loads(body).get("name", "")).strip().lower()
+        except (json.JSONDecodeError, AttributeError):
+            self.send_json({"error": "bad JSON"}, HTTPStatus.BAD_REQUEST)
+            return
+        name = re.sub(r"[^a-z0-9]+", "-", name).strip("-")
+        path = self.page_path(name)
+        if path is None:
+            self.send_json({"error": "use letters, numbers and dashes"}, HTTPStatus.BAD_REQUEST)
+            return
+        if path.exists() or (self.config.root / f"{name}.html").exists():
+            self.send_json({"error": f"{name} already exists"}, HTTPStatus.CONFLICT)
+            return
+        path.write_text(NEW_PAGE_TEMPLATE.format(title=name.replace("-", " ").capitalize()), encoding="utf-8")
+        self.send_json({"name": name, "buildError": run_build()})
+
+    def handle_upload(self) -> None:
+        query = urllib.parse.parse_qs(urllib.parse.urlsplit(self.path).query)
+        original = Path(query.get("filename", ["image"])[0]).name
+        suffix = Path(original).suffix.lower()
+        if suffix not in UPLOAD_SUFFIXES:
+            self.send_json({"error": f"only {', '.join(sorted(UPLOAD_SUFFIXES))} files"}, HTTPStatus.BAD_REQUEST)
+            return
+        body = self.read_body(MAX_UPLOAD_BYTES)
+        if body is None:
+            return
+        stem = re.sub(r"[^a-z0-9]+", "-", Path(original).stem.lower()).strip("-") or "image"
+        target = IMAGES_DIR / f"{stem}{suffix}"
+        n = 2
+        while target.exists():
+            target = IMAGES_DIR / f"{stem}-{n}{suffix}"
+            n += 1
+        target.write_bytes(body)
+        self.send_json({"path": target.relative_to(self.config.root).as_posix()})
+
+    # ------------------------------------------------------------------ health
 
     def handle_health(self) -> None:
         payload = {
@@ -533,7 +727,9 @@ def main() -> None:
 
     server = bind_server(config, reload_state)
     active_config = server.config
+    run_build()
     print(f"Serving {active_config.root} at {active_config.url}")
+    print(f"[dev-server] editor: http://{active_config.host}:{active_config.port}/__editor")
     print(
         "[dev-server] watching:",
         ", ".join(path.relative_to(active_config.root).as_posix() for path in active_config.watch_paths),
